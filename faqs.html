@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | TechSupport de Mini Bruno Sucesores C.A</title>
+
+    <link rel="stylesheet" href="css/faqs.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+    <!-- Header (encabezado) -->
+    <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="100">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3" data-aos="fade-down" data-aos-delay="100">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                    <img src="img_Ref\bd_Brunito\logo_Glow.svg" alt="Logo MiniBruno" class="w-full h-full object-contain" />
+                    <a href="index.html" class="absolute inset-0"></a>
+                </div>
+                <span class="text-xl font-bold text-gray-800 font-tech">MiniBruno TechSupport</span>
+            </div>
+        </div>
+        <div class="rgb-divider"></div>
+    </header>
+
+    <!-- Hero Banner -->
+    <div class="contenedor matrix-bg" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="FAQs Banner" class="imagen">
+        
+        <!-- Mensaje flotante tipo burbuja de ayuda -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4">
+            <div class="bg-black/70 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto shadow-2xl border border-blue-500/30 floating-animation">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center neon-glow">
+                            <i data-feather="help-circle" class="w-6 h-6 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-xl font-bold text-white font-tech">Preguntas Frecuentes</p>
+                        <p class="text-gray-300 mt-2">Encuentra respuestas a las consultas más comunes sobre seguridad y operaciones en la planta.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pregunta flotante vertical -->
+    <div class="floating-question rounded-lg py-4 px-2 cursor-pointer" onclick="scrollToFAQ()">
+        <span class="text-white font-tech text-sm font-bold">¿Cómo acceder a áreas restringidas?</span>
+    </div>
+
+    <!-- Sección de FAQs -->
+    <section class="py-16 flex-grow cyber-grid" data-aos="fade-up" data-aos-delay="200">
+        <div class="container mx-auto px-4 w-full max-w-4xl">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-800 font-tech mb-4 gradient-text">Preguntas Frecuentes</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Consulta las preguntas más frecuentes sobre seguridad, protocolos y procedimientos en la planta de producción de alimentos para animales domésticos.</p>
+            </div>
+            
+            <div class="form-container rounded-2xl p-8 scan-line" data-aos="fade-up" data-aos-delay="100">
+                <div class="grid gap-6">
+                    <!-- FAQ Items -->
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué debo hacer al ingresar a la planta por primera vez?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Debes presentarte en vigilancia para que notifiquen a la persona interesada en recibirte, firmar el registro de entrada,
+                               recibir la inducción de seguridad básica y ser acompañado por un supervisor autorizado en todo momento durante tu visita.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuáles son los Equipos de Protección Personal (EPP) obligatorios en la planta?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Los EPP obligatorios incluyen: casco de seguridad, calzado industrial con puntera reforzada, overol o mono desechable o 
+                               chemise o camisa de la empresa. Si el trabajo lo amerita: guantes de nitrilo, mascarilla N95 y gafas de seguridad. 
+                               En áreas específicas pueden requerirse EPP adicionales. Puedes preguntarle a <a href="soporte.html" class="text-blue-400">Brunito</a> 
+                               sobre el departamento de Seguridad Laboral.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo acceder a áreas restringidas?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>El acceso a áreas restringidas requiere autorización previa del supervisor de turno, presentación de motivo justificado
+                               y acompañamiento obligatorio por personal autorizado. Algunas áreas requieren capacitación específica previa, por ende,
+                               siempre debes de consultar con tu supervisor directo e ir de la mano con Vigilancia y Seguridad.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer en caso de derrame de materia prima?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Evacuar inmediatamente el área, activar la alarma de emergencia, notificar al supervisor de turno y al departamento de
+                               Seguridad Laboral. <strong>No intentar limpiar el derrame sin autorización</strong>. Seguir el protocolo específico según 
+                               el tipo de materia prima derramada. Asistir a los cursos dictados por el cuerpo de brigadistas para estar siempre preparados.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Dónde se encuentran las salidas de emergencia?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Las salidas de emergencia están claramente señalizadas con luces y pictogramas. Hay salidas en cada extremo de los pasillos 
+                               principales de la planta en PSC, junto a las escaleras de emergencia y en las puertas de acceso a áreas críticas. En tu debida
+                               inducción, se te mostrará el recorrido de evacuación.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si detecto un olor extraño en alguna área?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Detener inmediatamente actividades en el área, salir del lugar con precaución, notificar al supervisor de turno y al departamento 
+                               de Calidad. No regresar al área hasta recibir autorización. El olor puede indicar problemas de ventilación o contaminación de productos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el protocolo para el uso de equipos eléctricos?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Verificar que el equipo tenga certificación de seguridad, inspeccionar cables y enchufes antes de usar, conectar solo en tomas autorizadas,
+                               no sobrecargar circuitos y reportar inmediatamente cualquier anomalía. Los equipos deben ser operados solo por personal capacitado.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si un equipo presenta fallas durante la operación?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Detener inmediatamente el equipo usando el botón de emergencia, desconectar la energía, notificar al supervisor de turno y al departamento
+                               de mantenimiento. No intentar reparaciones sin autorización. Completar el reporte de falla con descripción detallada del problema. Si tu
+                               falla es de indole sistematica, puedes probar el sistema de soporte que gestionamos desde <a href="soporte.html" class="text-blue-400">aquí</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se manejan los residuos en la planta?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Los residuos se clasifican en orgánicos, inorgánicos y peligrosos. Cada tipo tiene contenedores específicos 
+                               con señalización clara. Los residuos peligrosos deben ser manejados por personal especializado y registrados 
+                               en el sistema de gestión ambiental. No mezclar diferentes tipos de residuos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se rompe un recipiente con materia prima?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Evacuar el área inmediatamente, notificar al supervisor de turno, evitar el contacto con la materia prima derramada,
+                               activar el protocolo de contaminación cruzada si es necesario y esperar la intervención del personal de limpieza autorizado 
+                               con EPP adecuado.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el procedimiento para el lavado de manos?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Mojar manos con agua tibia, aplicar jabón antibacterial, frotar durante 20 segundos incluyendo uñas y entre dedos,
+                               enjuagar completamente, secar con toallas desechables y aplicar gel antibacterial. Este procedimiento es obligatorio
+                               antes de iniciar actividades y después de cualquier contacto con superficies no sanitarias.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta un corte o herida menor?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Detener la hemorragia aplicando presión directa, limpiar con agua potable, aplicar antiséptico, cubrir con 
+                               vendaje estéril y notificar a Servicio Medico. Si la herida es profunda o sangra abundantemente,
+                               buscar atención médica inmediata <a href="https://venemergencia.com/" class="text-blue-400">Venemergencia</a>. 
+                               Reportar cualquier accidente en el sistema de seguridad.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se identifican las zonas de mayor riesgo?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Las zonas de mayor riesgo están señalizadas con pictogramas de color rojo, cintas de seguridad amarillas 
+                               y rojas, y luces de advertencia. Incluyen áreas con maquinaria pesada, zonas de almacenamiento de productos
+                               químicos, cámaras frigoríficas y áreas con riesgo biológico. El acceso requiere autorización especial.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se detecta una fuga de gas?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Evacuar inmediatamente el área, no usar dispositivos electrónicos, activar la alarma de emergencia, 
+                               cerrar válvulas si es seguro hacerlo, notificar al departamento de seguridad y al proveedor del servicio.
+                               No regresar hasta recibir autorización del departamento de mantenimiento.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el protocolo para el manejo de productos químicos?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Utilizar siempre EPP adecuado, leer las hojas de seguridad antes de usar, almacenar en áreas designadas con ventilación 
+                               adecuada, etiquetar correctamente los recipientes, no mezclar productos químicos y seguir las instrucciones del fabricante. 
+                               Reportar cualquier derrame o accidente inmediatamente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta un apagón eléctrico?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Mantener la calma, activar las luces de emergencia, no usar dispositivos electrónicos no esenciales, seguir las rutas de 
+                               evacuación si el apagón es prolongado, notificar al departamento de mantenimiento y esperar instrucciones del supervisor 
+                               de turno. Los equipos críticos tienen sistemas de respaldo.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Como es el sistema de tickets para comunicarme con soporte?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Para comunicarte con soporte, debes ingresar al sistema de tickets a través del <a href="soporte.html" class="text-blue-400">Portal de Soporte</a>. 
+                               Una vez allí, podrás crear un nuevo ticket describiendo tu problema o consulta en el formulario que veras en la seccion de soporte.
+                               Asegúrate de incluir toda la información relevante, como tu nombre, departamento y una descripción detallada del problema. El equipo de soporte revisará 
+                               tu ticket y te dará seguimiento a la brevedad. De cualquier forma en esa seccion te encontraras por primera vez con Brunito, tu asistente virtual.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se detecta una plaga en el área de producción?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>No intentar eliminar la plaga por cuenta propia, notificar inmediatamente al departamento de control de plagas y 
+                               al supervisor de calidad, evitar el contacto con el área afectada, cerrar puertas y ventanas si es posible, y seguir 
+                               las instrucciones del personal especializado para contener la situación.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el procedimiento para el uso de montacargas?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Solo personal autorizado y capacitado puede operar montacargas. Verificar inspección diaria, usar arnés de seguridad cuando 
+                               se trabaje a más de 1.5 metros de altura, no sobrepasar la capacidad máxima de carga, mantener distancia segura de personas 
+                               y objetos, y reportar cualquier anomalía mecánica inmediatamente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta un incendio?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Activar inmediatamente la alarma de incendios, evacuar siguiendo las rutas designadas, no usar ascensores, reunirse en el punto de
+                               encuentro designado, notificar a bomberos y personal de seguridad, y no regresar al edificio hasta recibir autorización. 
+                               Conocer la ubicación de extintores y manteles de fuego y emplearlos si es necesario. El Equipo de brigadistas está capacitado para 
+                               actuar en estas situaciones. Antes de cualquier acción, evaluar la situación y asegurarse de que sea seguro intervenir.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo solicitar un nuevo producto?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>
+                               Para solicitar un nuevo producto, debes completar el formulario de solicitud (vale) disponible en el sistema interno de la empresa. 
+                               Proporciona detalles como el nombre del producto, cantidad requerida, especificaciones técnicas y el motivo de la solicitud. 
+                               Una vez enviado, el departamento de compras revisará la solicitud y te dará seguimiento. Puedes contactar a <a href="mailto:soporte@minibruno.com">soporte@minibruno.com</a> si tienes 
+                               dudas sobre el proceso o necesitas asistencia adicional.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una emergencia médica?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Activar inmediatamente el botiquín de primeros auxilios más cercano, notificar al Servicio Médico, mantener al paciente estable,
+                               no administrar medicamentos sin autorización, y si es grave, llamar a servicios de <a href="https://www.venemergencia.com">emergencia</a> 
+                               y seguir instrucciones del personal médico hasta su llegada.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el protocolo para el uso de herramientas manuales?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Inspeccionar herramientas antes de usar, usar EPP adecuado (guantes, gafas), mantener herramientas en buen estado, usar la herramienta 
+                               adecuada para cada tarea, no modificar herramientas originales, y almacenar en lugares designados después de uso. Reportar herramientas 
+                               defectuosas inmediatamente al departamento de mantenimiento o a su supervisor.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una tormenta eléctrica?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Mantenerse alejado de ventanas y puertas metálicas, desconectar equipos electrónicos no esenciales, evitar el uso de teléfonos fijos, 
+                               no trabajar en áreas exteriores, y seguir instrucciones del supervisor de turno. Los sistemas críticos tienen protección contra 
+                               sobretensiones.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se maneja la higiene personal en áreas de producción?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Mantener uñas cortas y limpias, no usar joyas ni accesorios, cabello recogido bajo gorro, no comer, beber ni fumar en áreas de producción,
+                               lavar manos frecuentemente, y reportar cualquier enfermedad contagiosa. El personal que trabaje directamente en produccion tiene que ducharse
+                               antes de entrar y al salir de la planta. Asi como tambien antes de ingresar al transporte de la empresa.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una fuga de agua?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Localizar la fuente de la fuga si es seguro hacerlo, cerrar válvulas principales, notificar al departamento de mantenimiento, proteger equipos 
+                               eléctricos, evitar el contacto con agua en áreas con electricidad, y seguir instrucciones del supervisor para contener daños y reanudar operaciones.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el procedimiento para el uso de maquinaria pesada?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Solo personal certificado puede operar maquinaria pesada. Realizar inspección previa al uso, usar EPP específico, mantener comunicación constante con el 
+                               supervisor, no realizar modificaciones sin autorización, y reportar cualquier anomalía mecánica. Las áreas de operación deben estar delimitadas y señalizadas.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta un derrame biológico?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Evacuar inmediatamente el área, activar protocolo de bioseguridad, notificar al departamento de seguridad y calidad, no intentar limpiar sin autorización, usar EPP 
+                               de nivel 3 (bata, mascarilla N95, guantes dobles), y esperar la intervención del equipo especializado de descontaminación.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se manejan los productos alérgenos?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Almacenar en áreas separadas con señalización específica, usar EPP adicional, limpiar equipos completamente entre lotes, etiquetar claramente todos los contenedores, 
+                               y personal con alergias conocidas no debe trabajar en áreas de manipulación de alérgenos. Seguir protocolo de cambio de ropa y lavado de manos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de ventilación?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de mantenimiento, abrir ventanas y puertas si es seguro hacerlo, evacuar áreas críticas si la calidad del aire se ve comprometida, 
+                               no realizar actividades que generen polvo o vapores, y esperar autorización para reanudar operaciones normales.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el protocolo para el transporte interno de materiales?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Usar carros y contenedores adecuados para el tipo de material, mantener cargas balanceadas y aseguradas, respetar límites 
+                               de velocidad (5 km/h en interiores), ceder el paso a peatones, y no transportar materiales incompatibles en el mismo vehículo. 
+                               Reportar cualquier accidente de transporte inmediatamente.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el algun punto que cuente con aire acondicionado?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de mantenimiento, abrir ventanas y puertas si es seguro hacerlo, evacuar áreas críticas si la calidad 
+                               del aire se ve comprometida, no realizar actividades que generen polvo o vapores (especialmente en zonas con aparatos de sistema), y esperar 
+                               autorización para reanudar operaciones normales. En zonas comunes, áreas administrativas y trailers, pueden seguir sus labores de oficina.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se manejan los residuos peligrosos?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Almacenar en contenedores específicos con etiquetado adecuado, mantener SDS actualizadas, no mezclar diferentes tipos de residuos peligrosos, 
+                               registrar cantidades y tipos de residuos generados, y coordinar con proveedores autorizados para la disposición final según normativas ambientales 
+                               locales y nacionales.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de iluminación?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Activar inmediatamente las luces de emergencia, no continuar actividades en áreas críticas sin iluminación adecuada, notificar al departamento de mantenimiento,
+                               usar linternas de emergencia si es necesario, y evacuar áreas si la iluminación de emergencia no es suficiente para operar con seguridad. La planta de la empresa
+                               debe ser evaluada para determinar el alcance de la falla y las acciones correctivas necesarias.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el procedimiento para el uso de equipos de limpieza?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Usar EPP adecuado (guantes, gafas, overol), leer instrucciones del fabricante, no mezclar productos químicos de limpieza, usar equipos en áreas bien ventiladas, 
+                               mantener productos fuera del alcance de niños, y almacenar en áreas designadas con candado después de uso. Reportar equipos defectuosos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de compresión de aire?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de mantenimiento, identificar equipos afectados por la falta de aire comprimido, detener operaciones críticas que dependan 
+                               de este sistema, y seguir instrucciones del supervisor para reprogramar actividades hasta la reparación del sistema.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se manejan los productos en cuarentena?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Almacenar en áreas designadas con señalización específica, no usar sin autorización del departamento de calidad, mantener registro de ingreso y salida, seguir 
+                                protocolo de inspección antes de liberar, y coordinar con el departamento de calidad para la disposición final según resultados de análisis.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de agua potable?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>La empresa cuenta con dispensadores de agua potable en áreas estratégicas para garantizar el acceso al agua. En caso de falla en el sistema, se debe notificar al
+                               departamento de mantenimiento y seguir las instrucciones del supervisor. Normalmente el departamento de limpieza proporciona apoyo en estas situaciones en conjunto
+                               con el departamento de mantenimiento.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el protocolo para el uso de equipos de medición?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Verificar calibración vigente, usar según instrucciones del fabricante, no modificar configuraciones sin autorización, mantener limpios y protegidos, reportar 
+                               desviaciones inmediatamente, y enviar a calibración periódica según programa establecido. Registrar lecturas en formatos designados.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de comunicación?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Usar radios de emergencia si están disponibles, notificar al departamento de Sistemas <a href="soporte.html" class="text-blue-400">aquí</a>, usar sistemas de 
+                            comunicación alternativos (teléfonos fijos, celulares personales si es permitido), y seguir instrucciones del supervisor de turno para coordinar actividades 
+                            mediante comunicación presencial o por radio.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se manejan los productos devueltos?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Recibir en área designada, inspeccionar inmediatamente, colocar en cuarentena, notificar al departamento de calidad, registrar motivo de devolución, seguir 
+                            protocolo de análisis de causa raíz, y coordinar con logística para la disposición final según resultados de inspección y políticas de la empresa.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de seguridad electrónica?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de Seguridad Laboral, aumentar vigilancia humana en áreas afectadas, verificar puertas y cerraduras manuales, 
+                            registrar cualquier anomalía de acceso, y no intentar reparaciones sin autorización del departamento de Sistemas y Seguridad Laboral.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el procedimiento para el uso de equipos de protección respiratoria?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Verificar inspección previa al uso, realizar prueba de ajuste, usar solo en áreas con concentraciones peligrosas de partículas o vapores, cambiar filtros 
+                            según indicaciones del fabricante, no modificar equipos originales, y registrar uso en bitácora de equipos de protección personal.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de energía de respaldo?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de mantenimiento, priorizar equipos críticos para operación de seguridad, coordinar con proveedor de energía de respaldo,
+                             activar protocolo de operación con energía limitada, y registrar todas las actividades afectadas para análisis posterior.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se manejan los productos con fecha de vencimiento próxima?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Identificar mediante sistema de alertas automáticas, priorizar para consumo inmediato, coordinar con ventas para promociones de liquidación, notificar al departamento 
+                            de calidad para análisis de extensión de vida útil si aplica, y seguir protocolo de disposición de productos vencidos según normativas sanitarias.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de monitoreo de temperatura?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de mantenimiento, usar termómetros manuales de respaldo, registrar temperaturas manualmente cada hora, no confiar en lecturas 
+                            automatizadas hasta la reparación, y coordinar con calidad para asegurar la integridad del producto durante el periodo de falla del sistema.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el protocolo para el uso de equipos de soldadura?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Solo personal certificado puede operar equipos de soldadura. Usar EPP específico (máscara de soldadura, guantes, overol), asegurar área de trabajo, verificar extintores
+                             cercanos, mantener ventilación adecuada, y notificar al departamento de seguridad antes de iniciar actividades. Registrar uso en bitácora de equipos especiales.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de control de acceso?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de seguridad, usar registro manual de acceso, aumentar vigilancia en puntos de entrada, verificar identificaciones manualmente, 
+                            y no intentar reparaciones sin autorización del departamento de Sistemas y Seguridad Laboral. Mantener comunicación constante con el centro de control.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cómo se manejan los productos importados?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Recibir en área de cuarentena aduanera, verificar documentación de importación, coordinar con autoridades sanitarias si es requerido, realizar inspección de calidad según 
+                            protocolo de productos importados, registrar en sistema de trazabilidad, y seguir protocolo específico para cada país de origen según normativas internacionales.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de dosificación automática?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Detener producción inmediatamente, notificar al departamento de mantenimiento y calidad, usar dosificación manual temporalmente, verificar calibración de equipos de medición,
+                             registrar desviaciones en producción, y no reanudar operación automática hasta recibir autorización del departamento de calidad y mantenimiento.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Cuál es el procedimiento para el uso de equipos de elevación?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Inspeccionar equipos antes de cada uso, verificar certificación de carga, usar EPP adecuado, mantener comunicación con operador, no sobrepasar límites de capacidad, y solo 
+                            personal autorizado puede operar. Registrar inspecciones y mantenimientos en bitácora de equipos de elevación.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item tech-card rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <h3 class="text-xl font-bold text-gray-800 font-tech">¿Qué hacer si se presenta una falla en el sistema de trazabilidad?</h3>
+                            <i data-feather="chevron-down" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="faq-answer mt-4 text-gray-600">
+                            <p>Notificar inmediatamente al departamento de Sistemas y Calidad, usar registros manuales temporales, coordinar con proveedores de sistema para diagnóstico, no destruir lotes 
+                            afectados hasta resolver la falla, y registrar manualmente toda la información requerida para mantener trazabilidad completa de productos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón para redirigir a soporte -->
+                <div class="mt-12 text-center">
+                    <a href="soporte.html" class="neon-button inline-flex items-center px-8 py-4 text-white font-tech text-lg rounded-full hover:scale-105 transition-transform duration-300">
+                        <i data-feather="headphones" class="w-5 h-5 mr-3"></i>
+                        Ir a Soporte Técnico
+                    </a>
+                    <p class="text-gray-600 mt-4">¿No encontraste la respuesta que buscabas? Nuestro equipo de soporte está listo para ayudarte.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Footer (Pie de Pagina)-->
+<footer class="relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+    <style>
+        /* Style separado para no confundirme con el chorizero de estilos que tengo inLine */
+        .footer-wave { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            overflow: hidden; 
+            transform: translateZ(0); 
+            z-index: -1;
+        }
+        .footer-wave svg { 
+            width: 100%; 
+            height: 100%; 
+            display: block; 
+        }
+        .footer-wave .wave-layer { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 200%; 
+            height: 100%; 
+        }
+        .footer-wave .wave-front { 
+            opacity: 0.65; 
+            animation: waveMove 6s linear infinite; 
+            transform: translateX(0); 
+        }
+        .footer-wave .wave-back  { 
+            opacity: 0.38; 
+            animation: waveMove 10s linear infinite reverse; 
+            transform: translateX(0); 
+            filter: blur(6px); 
+        }
+        @keyframes waveMove {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* Footer content styling */
+        footer > .container { 
+            position: relative; 
+            z-index: 10; 
+            padding: 2rem 1rem; 
+        }
+        /* Background for better readability */
+        .footer-content-bg {
+            background-color: rgba(243, 244, 246, 0.8);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+
+    <!-- Animated Wave (two layered SVGs for parallax effect) -->
+    <div class="footer-wave" aria-hidden="true">
+        <div class="wave-layer wave-back">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waveBackGrad" x1="0" x2="1">
+                        <stop offset="0%" stop-color="#e6f0ff" />
+                        <stop offset="100%" stop-color="#f8fbff" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,30 C150,90 350,0 600,30 C850,60 1050,10 1200,40 L1200,120 L0,120 Z" fill="url(#waveBackGrad)"></path>
+            </svg>
+        </div>
+        <div class="wave-layer wave-front">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waveFrontGrad" x1="0" x2="1">
+                        <stop offset="0%" stop-color="#cfe6ff" />
+                        <stop offset="100%" stop-color="#dfeeff" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,50 C200,10 350,90 600,50 C850,10 1000,80 1200,50 L1200,120 L0,120 Z" fill="url(#waveFrontGrad)"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-12 footer-content-bg rounded-lg" style="background-color: rgba(243, 244, 246, 0.45);">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div data-aos="fade-up" data-aos-delay="0">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                <img src="\img_Ref\bd_Brunito\logo_Glow.svg" alt="Logo MiniBruno" class="w-full h-full object-contain" />
+            </div>
+                    <span class="text-xl font-bold text-dark font-tech">MB TechSupport</span>
+                </div>
+                <p class="text-gray-600">Fase Beta.</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="50">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Secciones </h4>
+                <ul class="space-y-2">
+                    <li><a href="about_Us.html" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="monitor" class="w-4 h-4 mr-2"></i> Nosotros</a></li>
+                    <li><a href="news.html" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="tool" class="w-4 h-4 mr-2"></i> Noticias</a></li>
+                    <li><a href="https://www.brunopetgourmet.com/" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="refresh-cw" class="w-4 h-4 mr-2"></i> Mini Bruno - Pet Gourmet</a></li>
+                    <li><a href="faqs.html" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="hard-drive" class="w-4 h-4 mr-2"></i> FAQs</a></li>
+                </ul>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Contacto</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start text-gray-600">
+                        <i data-feather="globe" class="mr-3 w-4 h-4 mt-1 text-blue-600"></i>
+                        <span>https://www.minibruno.com</span>
+                    </li>
+                    <li class="flex items-center text-gray-600">
+                        <i data-feather="phone" class="mr-3 w-4 h-4 text-green-600"></i>
+                        <span>+58 414 4677046</span>
+                    </li>
+                    <li class="flex items-start text-gray-600">
+                        <i data-feather="map-pin" class="mr-3 w-4 h-4 mt-1 text-red-600"></i>
+                        <span>Carretera Vieja Caracas-Los Teques, Caracas, D.C., VE</span>
+                    </li>
+                </ul>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Síguenos</h4>
+                <div class="flex space-x-4 mb-6">
+                    <a href="https://www.facebook.com/profile.php?id=100081592345336&mibextid=ZbWKwL" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors neon-glow">
+                        <i data-feather="facebook" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://twitter.com/minibrunosucrs" class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors neon-glow">
+                        <i data-feather="twitter" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.instagram.com/mini_bruno_sucesores.ca?utm_source=qr&igsh=cWtrbng4dDY5MTU2" class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-colors neon-glow">
+                        <i data-feather="instagram" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mini-bruno-sucesores-c-a-1b4413246?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B6%2FAwlu9iQW2Q9LsuVukWow%3D%3D" class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors neon-glow">
+                        <i data-feather="linkedin" class="w-5 h-5 text-white"></i>
+                    </a>
+                </div>
+                <div class="bg-white/5 rounded-lg p-4 border border-gray-200">
+                    <p class="text-cyan-600 font-tech text-sm">Sistema 24/7</p>
+                    <p class="text-gray-600 text-xs mt-1">Soporte técnico disponible las 24 horas</p>
+                    <!-- Volver arriba de la pagina-->
+                    <div class="mt-4">
+                        <button onclick="scrollToTop()" class="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-tech text-sm flex items-center justify-center neon-glow">
+                            <i data-feather="arrow-up" class="w-4 h-4 mr-2"></i>Ir arriba
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+            <p class="text-gray-600 mb-2">Hecho por <strong class="text-blue-600">Luis Ruiz</strong></p>
+            <p class="text-gray-500 text-sm">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
+            <div class="mt-4 flex justify-center space-x-2">
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-600 rounded-full text-xs font-tech">v3.1</span>
+                <span class="px-3 py-1 bg-purple-500/20 text-purple-600 rounded-full text-xs font-tech">BETA</span>
+                <span class="px-3 py-1 bg-green-500/20 text-green-600 rounded-full text-xs font-tech">ONLINE</span>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Fin Footer -->
+ <script src="js/faqs.js"></script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herramientas | MiniBruno TechSupport</title>
+
+    <link rel="stylesheet" href="css/tools_Portal.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+    <!-- Header simplificado -->
+    <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                    <img src="img_Ref\bd_Brunito\logo_Glow.svg" alt="Logo MiniBruno" class="w-full h-full object-contain">
+                    <a href="index.html" class="absolute inset-0"></a>
+                </div>
+                <span class="text-xl font-bold text-[#213379] font-tech">MiniBruno TechSupport</span>
+            </div>
+        </div>
+        <div class="rgb-divider"></div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 py-12 min-h-screen cyber-grid relative z-0 scan-line">
+        <div class="text-center mb-12" data-aos="fade-down" data-aos-delay="100">
+            <h1 class="text-5xl font-bold text-[#213379] font-tech mb-4 gradient-text floating-animation">Herramientas Tecnológicas</h1>
+            <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mb-6"></div>
+            <p class="text-xl text-[#213379] max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Accede a nuestras herramientas especializadas para optimizar tu experiencia tecnológica.
+                <span class="hologram-text">Explora y descubre soluciones innovadoras.</span>
+            </p>
+        </div>
+        
+        <!-- Cuadrícula de Herramientas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" data-aos="fade-up" data-aos-delay="400" id="toolsGrid">
+            <!-- Generador QR -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick="window.location.href='/codigo_Qr_integrado.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="grid" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Generador QR</h3>
+                    <p class="text-[#213379] text-sm mb-4">Crea códigos QR personalizados para cualquier propósito</p>
+                </div>
+                <div class="bg-blue-500/10 rounded-lg p-3 border border-blue-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Versión</span>
+                        <span class="text-[#213379] text-sm font-tech">2.0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Juego Snake -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick="window.location.href='/snake.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="play" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Snake Game</h3>
+                    <p class="text-[#213379] text-sm mb-4">Clásico juego de serpiente con controles modernos</p>
+                </div>
+                <div class="bg-green-500/10 rounded-lg p-3 border border-green-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Dificultad</span>
+                        <span class="text-[#213379] text-sm font-tech">Media</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Juego Tetris -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick="window.location.href='/tetris.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-fuchsia-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="layers" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Tetris</h3>
+                    <p class="text-[#213379] text-sm mb-4">Versión clásica del famoso juego de bloques</p>
+                </div>
+                <div class="bg-purple-500/10 rounded-lg p-3 border border-purple-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Nivel</span>
+                        <span class="text-[#213379] text-sm font-tech">Avanzado</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Buscaminas -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick="window.location.href='/buscaminas.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="search" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Buscaminas</h3>
+                    <p class="text-[#213379] text-sm mb-4">Clásico juego de lógica y estrategia</p>
+                </div>
+                <div class="bg-orange-500/10 rounded-lg p-3 border border-orange-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Modo</span>
+                        <span class="text-[#213379] text-sm font-tech">Intermedio</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calculadora Científica -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick ="window.location.href='/calculator.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="calculator" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Calculadora</h3>
+                    <p class="text-[#213379] text-sm mb-4">Calculadora científica con funciones avanzadas</p>
+                </div>
+                <div class="bg-cyan-500/10 rounded-lg p-3 border border-cyan-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Tipo</span>
+                        <span class="text-[#213379] text-sm font-tech">Científica</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Convertidor de Unidades -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick="window.location.href='/convertidor_Unidades.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-green-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="refresh-cw" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Convertidor</h3>
+                    <p class="text-[#213379] text-sm mb-4">Convierte unidades de medida fácilmente</p>
+                </div>
+                <div class="bg-teal-500/10 rounded-lg p-3 border border-teal-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Categorías</span>
+                        <span class="text-[#213379] text-sm font-tech">12+</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Editor de Imágenes -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick="window.location.href='/img_Editor.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="image" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Editor de Imágenes</h3>
+                    <p class="text-[#213379] text-sm mb-4">Edita y mejora tus imágenes online</p>
+                </div>
+                <div class="bg-pink-500/10 rounded-lg p-3 border border-pink-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Efectos</span>
+                        <span class="text-[#213379] text-sm font-tech">25+</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Generador de Contraseñas -->
+            <div class="tool-card rounded-xl p-6 cursor-pointer slide-in" onclick="window.location.href='/password_Generator.php'">
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mb-4 neon-glow tool-icon">
+                        <i data-feather="key" class="text-white w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#213379] font-tech mb-2">Generador de Contraseñas</h3>
+                    <p class="text-[#213379] text-sm mb-4">Crea contraseñas seguras y personalizadas</p>
+                </div>
+                <div class="bg-indigo-500/10 rounded-lg p-3 border border-indigo-500/20">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-600">Seguridad</span>
+                        <span class="text-[#213379] text-sm font-tech">Alta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Próximamente -->
+        <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="600">
+            <h2 class="text-3xl font-bold text-[#213379] font-tech mb-6 gradient-text">Próximamente</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="tech-card rounded-xl p-6 border border-gray-300/50">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="clock" class="text-gray-500 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-600 font-tech mb-2">Analizador de Red</h3>
+                    <p class="text-gray-500 text-sm">Herramienta para monitorear y analizar el tráfico de red</p>
+                </div>
+                
+                <div class="tech-card rounded-xl p-6 border border-gray-300/50">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="database" class="text-gray-500 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-600 font-tech mb-2">Backup Automático</h3>
+                    <p class="text-gray-500 text-sm">Sistema de respaldo automático para tus archivos</p>
+                </div>
+                
+                <div class="tech-card rounded-xl p-6 border border-gray-300/50">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="shield" class="text-gray-500 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-600 font-tech mb-2">Escáner de Seguridad</h3>
+                    <p class="text-gray-500 text-sm">Detector de vulnerabilidades y amenazas de seguridad</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer simplificado -->
+    <footer class="bg-gray-200 backdrop-blur-lg border-t border-gray-300">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col items-center justify-center space-y-6">
+                <!-- Redes Sociales -->
+                <div class="flex space-x-6">
+                    <a href="https://www.facebook.com/profile.php?id=100081592345336&mibextid=ZbWKwL" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors neon-glow">
+                        <i data-feather="facebook" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://twitter.com/minibrunosucrs" class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors neon-glow">
+                        <i data-feather="twitter" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.instagram.com/mini_bruno_sucesores.ca?utm_source=qr&igsh=cWtrbng4dDY5MTU2" class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-colors neon-glow">
+                        <i data-feather="instagram" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mini-bruno-sucesores-c-a-1b4413246?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B6%2FAwlu9iQW2Q9LsuVukWow%3D%3D" class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors neon-glow">
+                        <i data-feather="linkedin" class="w-5 h-5 text-white"></i>
+                    </a>
+                </div>
+                
+                <!-- Créditos -->
+                <div class="text-center">
+                    <p class="text-[#213379] mb-2">Hecho por <strong class="text-blue-600">Luis Ruiz</strong></p>
+                    <p class="text-[#213379] text-sm">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/tools_Portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    
+    <link rel="stylesheet" href="css/contactar_Ahora.css">
+    <script src="_sdk/data_sdk.js"></script>
+    <script src="_sdk/element_sdk.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+    
+    
+</head>
+<body>
+    <div class="container floating-animation"><!-- Mensajes de notificación -->
+        <div id="successMessage" class="notification-message success-message"></div>
+        <div id="errorMessage" class="notification-message error-message"></div>
+        <div id="warningMessage" class="notification-message warning-message"></div>
+        <h1 id="formTitle">Contactar Soporte</h1>
+        <form id="contactForm" novalidate>
+            <div class="form-group"><label for="name"> Nombre Completo <span style="color: #ef4444;">*</span> </label> <input type="text" id="name" required minlength="2" maxlength="50" placeholder="Ingresa tu nombre completo"> <i data-feather="check-circle" class="validation-icon valid"></i> <i data-feather="x-circle" class="validation-icon invalid"></i>
+                <div class="char-counter"><span id="nameCounter">0</span>/50
+                </div>
+            </div>
+            <div class="form-group"><label for="email"> Correo (Empresa) <span style="color: #ef4444;">*</span> </label> <input type="email" id="email" required maxlength="100" placeholder="correo@empresa.com"> <i data-feather="check-circle" class="validation-icon valid"></i> <i data-feather="x-circle" class="validation-icon invalid"></i>
+                <div class="char-counter"><span id="emailCounter">0</span>/100
+                </div>
+            </div>
+            <div class="form-group"><label for="phone"> Número de Teléfono <span style="color: #ef4444;">*</span> </label> <input type="tel" id="phone" required pattern="[\+]?[0-9\s\-\(\)]+" minlength="10" maxlength="20" placeholder="+1 (555) 123-4567"> <i data-feather="check-circle" class="validation-icon valid"></i> <i data-feather="x-circle" class="validation-icon invalid"></i>
+                <div class="char-counter"><span id="phoneCounter">0</span>/20
+            </div>
+        </div><button type="submit" id="submitButton" class="submit-btn"> <span class="button-text"> <i data-feather="send" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;"></i> Enviar Solicitud </span> <span class="button-loading"> <span class="loading-spinner"></span> Enviando... </span> </button>
+   </form><!-- Información adicional -->
+   <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e1e5e9;">
+        <p style="font-size: 14px; color: #718096; text-align: center;"><i data-feather="shield" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: middle;"></i> Tus datos están protegidos y serán tratados con confidencialidad</p>
+   </div>
+</div>
+<script src="js/contactar_Ahora.js"></script>
+    </body>
+</html>

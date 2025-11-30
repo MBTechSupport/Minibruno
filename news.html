@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Noticias | MiniBruno TechSupport</title>
+<link rel="stylesheet" href="css/news.css"/>
+<link href="/static/favicon.ico" rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com">
+
+
+// ============================================================== //
+document.getElementById('sortFilter').addEventListener('change', function() {
+    const sortValue = this.value;
+    const newsGrid = document.getElementById('newsGrid');
+    const cards = Array.from(newsGrid.querySelectorAll('.news-card'));
+
+    let sortedCards = [];
+
+    if (sortValue === 'fecha') {
+        sortedCards = cards.sort((a, b) => {
+            const dateA = new Date(newsData[a.getAttribute('data-news-id')].date);
+            const dateB = new Date(newsData[b.getAttribute('data-news-id')].date);
+            return dateB - dateA;
+        });
+    } else if (sortValue === 'titulo') {
+        sortedCards = cards.sort((a, b) => {
+            const titleA = newsData[a.getAttribute('data-news-id')].title.toLowerCase();
+            const titleB = newsData[b.getAttribute('data-news-id')].title.toLowerCase();
+            return titleA.localeCompare(titleB);
+        });
+    }
+
+    sortedCards.forEach(card => newsGrid.appendChild(card));
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sortFilter = document.getElementById('sortFilter');
+    if (sortFilter) {
+        sortFilter.value = 'fecha';
+        const event = new Event('change');
+        sortFilter.dispatchEvent(event);
+    }
+});
+
+</script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+document.getElementById('sortFilter').addEventListener('change', function() {
+    const sortValue = this.value;
+    const newsGrid = document.getElementById('newsGrid');
+    const cards = Array.from(newsGrid.querySelectorAll('.news-card'));
+
+    let sortedCards = [];
+
+    if (sortValue === 'fecha') {
+        sortedCards = cards.sort((a, b) => {
+            const dateA = new Date(newsData[a.getAttribute('data-news-id')].date);
+            const dateB = new Date(newsData[b.getAttribute('data-news-id')].date);
+            return dateB - dateA;
+        });
+    } else if (sortValue === 'titulo') {
+        sortedCards = cards.sort((a, b) => {
+            const titleA = newsData[a.getAttribute('data-news-id')].title.toLowerCase();
+            const titleB = newsData[b.getAttribute('data-news-id')].title.toLowerCase();
+            return titleA.localeCompare(titleB);
+        });
+    }
+
+    sortedCards.forEach(card => newsGrid.appendChild(card));
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sortFilter = document.getElementById('sortFilter');
+    if (sortFilter) {
+        sortFilter.value = 'fecha';
+        const event = new Event('change');
+        sortFilter.dispatchEvent(event);
+    }
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js">
+document.getElementById('sortFilter').addEventListener('change', function() {
+    const sortValue = this.value;
+    const newsGrid = document.getElementById('newsGrid');
+    const cards = Array.from(newsGrid.querySelectorAll('.news-card'));
+
+    let sortedCards = [];
+
+    if (sortValue === 'fecha') {
+        sortedCards = cards.sort((a, b) => {
+            const dateA = new Date(newsData[a.getAttribute('data-news-id')].date);
+            const dateB = new Date(newsData[b.getAttribute('data-news-id')].date);
+            return dateB - dateA;
+        });
+    } else if (sortValue === 'titulo') {
+        sortedCards = cards.sort((a, b) => {
+            const titleA = newsData[a.getAttribute('data-news-id')].title.toLowerCase();
+            const titleB = newsData[b.getAttribute('data-news-id')].title.toLowerCase();
+            return titleA.localeCompare(titleB);
+        });
+    }
+
+    sortedCards.forEach(card => newsGrid.appendChild(card));
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sortFilter = document.getElementById('sortFilter');
+    if (sortFilter) {
+        sortFilter.value = 'fecha';
+        const event = new Event('change');
+        sortFilter.dispatchEvent(event);
+    }
+});
+// ==================================================== //======== //
+</script>
+
+</head>
+<body class="font-sans text-gray-900">
+    <!-- ============================================================== -->
+    <!-- HEADER SECTION -->
+    <!-- ============================================================== -->
+    <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                    <img src="img_Ref\bd_Brunito\logo_Glow.png" alt="Logo MiniBruno" class="w-full h-full object-contain" />
+                    <a class="absolute inset-0" href="index.html"></a>
+                </div>
+                <span class="text-xl font-bold text-gray-800 font-tech">MiniBruno TechSupport</span>
+            </div>
+            <!-- Botón para mostrar el formulario de creación de noticias -->
+             <!--
+            <button class="btn-primary flex items-center gap-2" id="toggleCreateForm">
+                <i data-feather="plus"></i>
+                Crear Noticia
+            </button>
+            -->
+        </div>
+        <div class="rgb-divider"></div>
+    </header>
+
+    <!-- ============================================================== -->
+    <!-- CREATE NEWS FORM -->
+    <!-- ============================================================== -->
+    <div class="create-news-form container mx-auto px-4 mt-6" id="createNewsForm">
+        <h2 class="text-2xl font-bold text-gray-800 font-tech mb-6">Crear Nueva Noticia</h2>
+        <form id="newsForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="form-group">
+                    <label class="form-label">Título</label>
+                    <input class="form-input" id="newsTitle" placeholder="Ingrese el título de la noticia" required="" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Fecha de Publicación</label>
+                    <input class="form-input" id="newsDate" name="newsDate" placeholder="Indique la Fecha" type="date"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Autor</label>
+                    <input class="form-input" id="newsAuthor" name="newsAuthor" placeholder="Nombre del autor" required="" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Rol del Autor</label>
+                    <input class="form-input" id="authorRole" name="authorRole" placeholder="Cargo o rol del autor" required="" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Imagen de Portada</label>
+                    <input accept="image/*" class="form-input" id="newsImage" name="newsImage" placeholder="file"/>
+                    <img alt="Vista previa" class="image-preview" id="imagePreview"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Avatar del Autor</label>
+                    <input accept="image/*" class="form-input" id="authorAvatarInput" name="authorAvatarInput" placeholder="Author Avatar"/>
+                    <img alt="Vista previa del avatar" class="image-preview" id="avatarPreview"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Resumen</label>
+                <textarea class="form-textarea" id="newsSummary" placeholder="Breve resumen de la noticia" required=""></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contenido Completo</label>
+                <textarea class="form-textarea" id="newsContent" placeholder="Contenido completo de la noticia" required=""></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Etiquetas</label>
+                <div class="tag-input">
+                    <input class="form-input" id="tagInput" placeholder="Agregar etiqueta" type="text"/>
+                    <button class="btn-secondary" id="addTagBtn" type="button">Agregar</button>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-2" id="tagsContainer"></div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Categoría</label>
+                <select class="form-select" id="newsCategory" name="newsCategory" title="Categoría de la Noticia" required="" > 
+                    <option value="">Seleccione una categoría</option>
+                    <option value="tecnologia">Tecnología</option>
+                    <option value="gaming">Gaming</option>
+                    <option value="software">Software</option>
+                    <option value="hardware">Hardware</option>
+                    <option value="seguridad">Seguridad</option>
+                    <option value="moviles">Móviles</option>
+                    <option value="internet">Internet</option>
+                    <option value="innovacion">Innovación</option>
+                    <option value="reviews">Reseñas</option>
+                    <option value="entrevistas">Entrevistas</option>
+                </select>
+            </div>
+            <div class="flex gap-4 mt-6">
+                <button class="btn-primary flex-1" type="submit">Publicar Noticia</button>
+                <button class="btn-secondary flex-1" id="cancelForm" type="button">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    <!-- ============================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================================== -->
+    <main class="container mx-auto px-4 py-12 min-h-screen cyber-grid">
+        <div class="text-center mb-12" data-aos="fade-down">
+            <h1 class="text-5xl font-bold text-gray-800 font-tech mb-4 gradient-text floating-animation">Noticias Tecnológicas</h1>
+            <div class="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full mb-6"></div>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Mantente al día con las últimas noticias del mundo tecnológico y de Mini Bruno. Desde Historias de nuestros cimientos
+                hasta innovaciones en el crecimiento de la empresa.
+                <span class="hologram-text">Descubre tendencias, lanzamientos y análisis exclusivos.</span>
+            </p>
+        </div>
+        <!-- Barra de búsqueda -->
+        <div class="search-container" data-aos="fade-up" data-aos-delay="300">
+            <div class="mx-auto w-full md:w-1/2 flex items-center">
+            <i data-feather="search" class="w-5 h-5 text-gray-600 mr-3"></i>
+            <input class="search-input flex-1" id="newsSearch" placeholder="Buscar noticias..." type="text"/>
+            </div>
+        </div>
+        <!-- Filtros de búsqueda (barra más grande) -->
+        <div class="search-filters bg-white/60 rounded-xl shadow-lg p-6 md:p-8 mx-auto w-full md:w-3/4" style="backdrop-filter: blur(8px);" data-aos="fade-up" data-aos-delay="400">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 w-full">
+            <div class="filter-group flex items-center gap-3 w-full md:w-auto">
+                <span class="filter-label text-lg font-medium">Categoría:</span>
+                <select class="custom-select" id="categoryFilter" name="categoryFilter" title="Categoría de la Noticia" style="min-width:220px; padding:0.9rem 1.1rem; font-size:1rem;">
+                <option value="">Todas</option>
+                <option value="tecnologia">Tecnología</option>
+                <option value="gaming">Gaming</option>
+                <option value="software">Software</option>
+                <option value="hardware">Hardware</option>
+                <option value="seguridad">Seguridad</option>
+                </select>
+            </div>
+            <div class="filter-group flex items-center gap-3 w-full md:w-auto">
+                <span class="filter-label text-lg font-medium">Ordenar por:</span>
+                <select class="custom-select" id="sortFilter" name="sortFilter" title="Ordenar Noticias" style="min-width:220px; padding:0.9rem 1.1rem; font-size:1rem;">
+                <option value="fecha">Fecha (más reciente)</option>
+                
+                <option value="titulo">Título (A-Z)</option>
+                </select>
+            </div>
+            </div>
+        </div>
+
+        <!-- Categorías de noticias (más grandes) -->
+        <div class="category-filter mt-4 flex-wrap gap-3 px-4 py-3 rounded-xl mx-auto w-full md:w-3/4 bg-white/30 shadow-sm" data-aos="fade-up" data-aos-delay="500">
+            <div class="category-item active px-5 py-3 text-base" data-category="todas">Todas</div>
+            <div class="category-item px-5 py-3 text-base" data-category="tecnologia">Tecnología</div>
+            <div class="category-item px-5 py-3 text-base" data-category="gaming">Juegos</div>
+            <div class="category-item px-5 py-3 text-base" data-category="software">Software</div>
+            <div class="category-item px-5 py-3 text-base" data-category="hardware">Hardware</div>
+            <div class="category-item px-5 py-3 text-base" data-category="seguridad">Seguridad</div>
+            <div class="category-item px-5 py-3 text-base" data-category="moviles">Móviles</div>
+            <div class="category-item px-5 py-3 text-base" data-category="internet">Internet</div>
+            <div class="category-item px-5 py-3 text-base" data-category="innovacion">Innovación</div>
+            <div class="category-item px-5 py-3 text-base" data-category="reviews">Reseñas</div>
+            <div class="category-item px-5 py-3 text-base" data-category="entrevistas">Entrevistas</div>
+        </div>
+        <!-- Resultados de búsqueda -->
+        <div class="results-info" data-aos="fade-up" data-aos-delay="600" id="resultsInfo">
+            <span id="resultsCount">Mostrando 2 de 16 noticias</span>
+            <span class="ml-4" id="currentFilters">Filtros activos: <strong>Ninguno</strong></span>
+        </div>
+        <!-- Cuadrícula de Noticias -->
+        <div class="news-grid" data-aos="fade-up" data-aos-delay="600" id="newsGrid">
+            <!-- Noticia 1 -->
+            <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up" data-aos-delay="100" data-news-id="1">
+                <div class="publish-date">02 Oct 2025</div>
+                <img alt="Noticia 1" class="featured-image object-contain" src="img_Ref/svgs/news_Card2.svg"/>
+                <h3 class="news-title font-tech">Bruno Mini y Luigia Crespi de Mini</h3>
+                <div style="text-align: justify;">
+                    <p class="news-summary">Esta historia narra el legado de Bruno Mini y Luigia Crespi de Mini, fundadores de Mini 
+                        Bruno Sucesores, desde la perspectiva de su nieta Gabriella Mini Arreaza. Es un homenaje a la tenacidad, 
+                        justicia y espíritu emprendedor que guiaron a esta familia desde sus orígenes en Italia hasta consolidarse 
+                        como líderes en Venezuela. Ideal para lectores interesados en historias de inmigración, emprendimiento y 
+                        legado familiar.</p>
+                </div>
+                <div class="news-author">
+                    <i class="w-4 h-4" data-feather="user"></i>
+                    <span>Gabriella Mini Arreaza</span>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag">Reseñas</span>
+                    <span class="news-tag">Entrevistas</span>
+                </div>
+                <div class="mt-4">
+                    <button class="read-more-btn" onclick="openNewsModal(1)">
+                        Leer más
+                        <i class="w-4 h-4" data-feather="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Noticia 2 -->
+        <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up" data-aos-delay="200" data-news-id="2">
+            <div class="publish-date">15 Oct 2025</div>
+                <img alt="Noticia 2" class="featured-image object-contain" src="img_Ref/svgs/news_Card1.svg"/>
+                <h3 class="news-title font-tech">Lavate las manos</h3>
+                <div style="text-align: justify;">
+                    <p class="news-summary">Estimado equipo de Mini Bruno Sucesores, Hoy, 15 de octubre, celebramos el Día Mundial 
+                        del Lavado de Manos 🌍. Es el momento perfecto para reafirmar nuestro compromiso con la salud 🩺, la inocuidad 
+                        🛡️ y la prevención 🛑, pilares fundamentales para garantizar la calidad de todo lo que hacemos.
+                    </p>
+                </div>
+                <div class="news-author">
+                    <i class="w-4 h-4" data-feather="user"></i>
+                    <span>Yosmary Nieves</span>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag">Reseñas</span>
+                    <span class="news-tag">Seguridad</span>
+                </div>
+                <div class="mt-4">
+                    <button class="read-more-btn" onclick="openNewsModal(2)">
+                        Leer más
+                        <i class="w-4 h-4" data-feather="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        <!-- Noticia 3 -->
+        <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up" data-aos-delay="200" data-news-id="3">
+            <div class="publish-date">17 Oct 2025</div>
+                <img alt="Noticia 3" class="featured-image object-contain" src="img_Ref/svgs/news_Card3.svg"/>
+                <h3 class="news-title font-tech">El Amor Propio Comienza con la Prevención</h3>
+                <div style="text-align: justify;">
+                    <p class="news-summary">En este mes de la sensibilización, nos detenemos
+                        para honrar la vida, el bien más preciado que poseemos. Recordamos
+                        que el cuidado personal es el primer y más grande acto de amor propio.
+                        Al priorizar nuestra salud y bienestar, no solo nos protegemos a
+                        nosotros mismos, sino que también cuidamos de quienes nos rodean.
+                        Este acto de amor propio se traduce en un compromiso con la prevención
+                        y el autocuidado, pilares fundamentales para una vida plena y saludable.
+                        Al cuidar de nosotros mismos, también estamos en la mejor posición para
+                        cuidar de los demás, creando un círculo virtuoso de bienestar y amor.
+                    </p>
+                </div>
+                <div class="news-author">
+                    <i class="w-4 h-4" data-feather="user"></i>
+                    <span>Yosmary Nieves</span>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag">Reseñas</span>
+                    <span class="news-tag">Seguridad</span>
+                </div>
+                <div class="mt-4">
+                    <button class="read-more-btn" onclick="openNewsModal(3)">
+                        Leer más
+                        <i class="w-4 h-4" data-feather="arrow-right"></i>
+                    </button>
+                </div>
+        </div>
+        <!-- Noticia 4 -->
+        <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up" data-aos-delay="200" data-news-id="4">
+            <div class="publish-date">21 Oct 2025</div>
+                <img alt="Noticia 4" class="featured-image object-contain" src="img_Ref/svgs/news_Card4.svg"/>
+                <h3 class="news-title font-tech">¡Un Puesto Limpio, un Trabajo Seguro!</h3>
+                <div style="text-align: justify;">
+                    <p class="news-summary">Un Entorno limpio evita la contaminación cruzada,
+                        reduce la propagación de enfermedades y crea un ambiente seguro
+                        para todos. En Mini Bruno Sucesores, nos comprometemos a mantener
+                        los más altos estándares de limpieza e higiene, protegiendo la salud
+                        de nuestros empleados y clientes. Juntos, construimos un entorno
+                        saludable y seguro para todos.
+                    </p>
+                </div>
+                <div class="news-author">
+                    <i class="w-4 h-4" data-feather="user"></i>
+                    <span>Yosmary Nieves</span>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag">Higiene</span>
+                    <span class="news-tag">Seguridad</span>
+                </div>
+                <div class="mt-4">
+                    <button class="read-more-btn" onclick="openNewsModal(4)">
+                        Leer más
+                        <i class="w-4 h-4" data-feather="arrow-right"></i>
+                    </button>
+                </div>   
+        </div>
+        <!-- Noticia 5 -->
+        <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up" data-aos-delay="200" data-news-id="5">
+            <div class="publish-date">23 Oct 2025</div>
+                <img alt="Noticia 5" class="featured-image object-contain" src="img_Ref/svgs/news_Card5.svg"/>
+                <h3 class="news-title font-tech">¡Plan Sol!</h3>
+                <div style="text-align: justify;">
+                    <p class="news-summary">¿EN QUÉ CONSISTE? El programa se basa en tres pilares fundamentales:
+                    Seguridad, Orden y Limpieza. Estos pilares son esenciales para crear un entorno de trabajo seguro y eficiente.
+                    Juntos, estos elementos crean un entorno de trabajo más seguro, eficiente y agradable para todos 
+                    en Mini Bruno Sucesores. 
+                    </p>
+                </div>
+                <div class="news-author">
+                    <i class="w-4 h-4" data-feather="user"></i>
+                    <span>Yosmary Nieves</span>
+                </div>
+                <div class="news-tags">
+                    <span class="news-tag">Higiene</span>
+                    <span class="news-tag">Seguridad</span>
+                </div>
+                <div class="mt-4">
+                    <button class="read-more-btn" onclick="openNewsModal(5)">
+                        Leer más
+                        <i class="w-4 h-4" data-feather="arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Paginación horizontal -->
+        <div class="pagination-container" data-aos="fade-up" data-aos-delay="1300">
+            <button class="nav-button" id="prevPage">
+                <i class="w-5 h-5" data-feather="chevron-left"></i>
+                Anterior
+            </button>
+            <div class="horizontal-pagination" id="pageNumbers">
+                <div class="page-item active" data-page="1">1</div>
+                <div class="page-item" data-page="2">2</div>
+                <div class="page-item" data-page="3">3</div>
+                <div class="page-item" data-page="4">4</div>
+                <div class="page-item">...</div>
+                <div class="page-item" data-page="8">8</div>
+            </div>
+            <button class="nav-button" id="nextPage">
+                Siguiente
+                <i class="w-5 h-5" data-feather="chevron-right"></i>
+            </button>
+        </div>
+        <!-- Indicador de página -->
+        <div class="text-center mt-4 " data-aos="fade-up" data-aos-delay="1400">
+            <div class="page-indicator inline-block px-4 py-2 bg-gray-200 rounded-lg">
+                Página 1 de 8
+            </div>
+        </div>
+    </main>
+
+
+    <!-- ============================================================== -->
+    <!-- NEWS MODAL -->
+    <!-- ============================================================== -->
+    <div class="news-modal" id="newsModal">
+        <div class="news-modal-content rounded-2xl p-6 relative">
+            <button class="close-modal" id="closeModal" title="Cerrar">
+                <i class="w-6 h-6" data-feather="x"></i>
+            </button>
+            <img alt="" class="modal-featured-image" id="modalFeaturedImage" src=""/>
+            <div class="modal-content">
+                <div class="modal-publish-date text-gray-500" id="modalPublishDate"></div>
+                <h2 class="modal-title font-tech text-xl font-bold" id="modalTitle"></h2>
+                <div class="modal-author mb-6 p-4 bg-blue-100 rounded-lg flex items-center gap-4">
+                    <img alt="" class="author-avatar" id="authorAvatarImg" src=""/>
+                    <div class="author-info">
+                        <div class="author-name" id="authorName"></div>
+                        <div class="author-role" id="authorRole"></div>
+                    </div>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                </div>
+                <div class="modal-tags" id="modalTags"></div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- FOOTER SECTION -->
+    <!-- ============================================================== -->
+     <!-- Footer (Pie de Pagina)-->
+<footer class="relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+    <style>
+        /* Style separado para no confundirme con el chorizero de estilos que tengo inLine */
+        .footer-wave { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            overflow: hidden; 
+            transform: translateZ(0); 
+            z-index: -1;
+        }
+        .footer-wave svg { 
+            width: 100%; 
+            height: 100%; 
+            display: block; 
+        }
+        .footer-wave .wave-layer { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 200%; 
+            height: 100%; 
+        }
+        .footer-wave .wave-front { 
+            opacity: 0.65; 
+            animation: waveMove 6s linear infinite; 
+            transform: translateX(0); 
+        }
+        .footer-wave .wave-back  { 
+            opacity: 0.38; 
+            animation: waveMove 10s linear infinite reverse; 
+            transform: translateX(0); 
+            filter: blur(6px); 
+        }
+        @keyframes waveMove {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* Footer content styling */
+        footer > .container { 
+            position: relative; 
+            z-index: 10; 
+            padding: 2rem 1rem; 
+        }
+        /* Background for better readability */
+        .footer-content-bg {
+            background-color: rgba(243, 244, 246, 0.8);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+
+    <!-- Animated Wave (two layered SVGs for parallax effect) -->
+    <div class="footer-wave" aria-hidden="true">
+        <div class="wave-layer wave-back">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waveBackGrad" x1="0" x2="1">
+                        <stop offset="0%" stop-color="#e6f0ff" />
+                        <stop offset="100%" stop-color="#f8fbff" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,30 C150,90 350,0 600,30 C850,60 1050,10 1200,40 L1200,120 L0,120 Z" fill="url(#waveBackGrad)"></path>
+            </svg>
+        </div>
+        <div class="wave-layer wave-front">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waveFrontGrad" x1="0" x2="1">
+                        <stop offset="0%" stop-color="#cfe6ff" />
+                        <stop offset="100%" stop-color="#dfeeff" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,50 C200,10 350,90 600,50 C850,10 1000,80 1200,50 L1200,120 L0,120 Z" fill="url(#waveFrontGrad)"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-12 footer-content-bg rounded-lg" style="background-color: rgba(243, 244, 246, 0.45);">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div data-aos="fade-up" data-aos-delay="0">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                <img src="\img_Ref\bd_Brunito\logo_Glow.svg" alt="Logo MiniBruno" class="w-full h-full object-contain" />
+            </div>
+                    <span class="text-xl font-bold text-dark font-tech">MB TechSupport</span>
+                </div>
+                <p class="text-gray-600">Fase Beta.</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="50">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Secciones </h4>
+                <ul class="space-y-2">
+                    <li><a href="about_Us.php" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="monitor" class="w-4 h-4 mr-2"></i> Nosotros</a></li>
+                    <li><a href="news.php" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="tool" class="w-4 h-4 mr-2"></i> Noticias</a></li>
+                    <li><a href="https://www.brunopetgourmet.com/" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="refresh-cw" class="w-4 h-4 mr-2"></i> Mini Bruno - Pet Gourmet</a></li>
+                    <li><a href="faqs.php" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="hard-drive" class="w-4 h-4 mr-2"></i> FAQs</a></li>
+                </ul>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Contacto</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start text-gray-600">
+                        <i data-feather="globe" class="mr-3 w-4 h-4 mt-1 text-blue-600"></i>
+                        <span>https://www.minibruno.com</span>
+                    </li>
+                    <li class="flex items-center text-gray-600">
+                        <i data-feather="phone" class="mr-3 w-4 h-4 text-green-600"></i>
+                        <span>+58 414 4677046</span>
+                    </li>
+                    <li class="flex items-start text-gray-600">
+                        <i data-feather="map-pin" class="mr-3 w-4 h-4 mt-1 text-red-600"></i>
+                        <span>Carretera Vieja Caracas-Los Teques, Caracas, D.C., VE</span>
+                    </li>
+                </ul>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Síguenos</h4>
+                <div class="flex space-x-4 mb-6">
+                    <a href="https://www.facebook.com/profile.php?id=100081592345336&mibextid=ZbWKwL" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors neon-glow">
+                        <i data-feather="facebook" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://twitter.com/minibrunosucrs" class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors neon-glow">
+                        <i data-feather="twitter" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.instagram.com/mini_bruno_sucesores.ca?utm_source=qr&igsh=cWtrbng4dDY5MTU2" class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-colors neon-glow">
+                        <i data-feather="instagram" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mini-bruno-sucesores-c-a-1b4413246?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B6%2FAwlu9iQW2Q9LsuVukWow%3D%3D" class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors neon-glow">
+                        <i data-feather="linkedin" class="w-5 h-5 text-white"></i>
+                    </a>
+                </div>
+                <div class="bg-white/5 rounded-lg p-4 border border-gray-200">
+                    <p class="text-cyan-600 font-tech text-sm">Sistema 24/7</p>
+                    <p class="text-gray-600 text-xs mt-1">Soporte técnico disponible las 24 horas</p>
+                    <!-- Volver arriba de la pagina-->
+                    <div class="mt-4">
+                        <button onclick="scrollToTop()" class="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-tech text-sm flex items-center justify-center neon-glow">
+                            <i data-feather="arrow-up" class="w-4 h-4 mr-2"></i>Ir arriba
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+            <p class="text-gray-600 mb-2">Hecho por <strong class="text-blue-600">Luis Ruiz</strong></p>
+            <p class="text-gray-500 text-sm">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
+            <div class="mt-4 flex justify-center space-x-2">
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-600 rounded-full text-xs font-tech">v3.1</span>
+                <span class="px-3 py-1 bg-purple-500/20 text-purple-600 rounded-full text-xs font-tech">BETA</span>
+                <span class="px-3 py-1 bg-green-500/20 text-green-600 rounded-full text-xs font-tech">ONLINE</span>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Fin Footer -->
+ <script src="/js/news.js"></script>
+    </body>
+</html>

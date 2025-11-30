@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte | TechSupport de Mini Bruno Sucesores C.A</title>
+
+    <link rel="stylesheet" href="css/soporte.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+    <!-- Header (encabezado) -->
+    <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="100">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3" data-aos="fade-down" data-aos-delay="100">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                    <img src="img_Ref\bd_Brunito\logo_Glow.svg" alt="Logo MiniBruno" class="w-full h-full object-contain" />
+                </div>
+                <span class="text-xl font-bold text-dark font-tech">MiniBruno TechSupport</span>
+            </div>
+            <nav class="hidden md:flex space-x-8" data-aos="fade-down" data-aos-delay="300">
+                <a href="index.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Inicio</a>
+                <a href="servicio.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Servicios</a>
+                <a href="contactos.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Contacto</a>
+                <a href="#" class="text-dark font-tech text-sm neon-glow rounded-lg">Soporte</a>
+            </nav>
+        </div>
+        <div class="rgb-divider"></div>
+    </header>
+
+    <!-- Hero Banner con imagen de fondo de tecnologia -->
+    <div class="contenedor matrix-bg" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="TechnologyBanner" class="imagen">
+        
+        <!-- Mensaje flotante tipo burbuja de ayuda -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4">
+            <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto shadow-2xl border border-blue-500/30 floating-animation">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center neon-glow">
+                            <i data-feather="help-circle" class="w-6 h-6 text-white"></i>
+                        </div>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-xl font-bold text-dark font-tech">¿Necesitas Ayuda?</p>
+                        <p class="text-gray-700 mt-2">Nuestro sistema de generación de Tickets te lo solventa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario de Soporte -->
+    <section class="py-16 flex-grow flex items-center justify-center cyber-grid" data-aos="fade-up" data-aos-delay="200">
+        <div class="container mx-auto px-4 w-full max-w-4xl">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-dark font-tech mb-4 gradient-text floating-animation">Formulario de Soporte Técnico</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="form-container rounded-2xl p-8 scan-line" data-aos="fade-up" data-aos-delay="100">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="tech-card rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-dark font-tech mb-6 text-center hologram-text">¿Como Funciona?</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white font-bold text-sm">1</span>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700">Completa el formulario con los datos solicitados: nombre, tipo de usuario, descripción del problema o consulta.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white font-bold text-sm">2</span>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700">Al enviar tu solicitud, el sistema generará automáticamente un número de ticket único.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                    <span class="text-white font-bold text-sm">3</span>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700">Nuestro equipo técnico evaluará tu caso y te contactará para brindarte una solución.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-dark font-tech mb-6 text-center hologram-text">Beneficios</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                                <i data-feather="check-circle" class="w-5 h-5 text-blue-600"></i>
+                                <span class="text-gray-700">Atención organizada y priorizada</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-3 bg-purple-500/10 rounded-lg border border-purple-500/20">
+                                <i data-feather="target" class="w-5 h-5 text-purple-600"></i>
+                                <span class="text-gray-700">Seguimiento claro de cada solicitud</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-3 bg-pink-500/10 rounded-lg border border-pink-500/20">
+                                <i data-feather="message-square" class="w-5 h-5 text-pink-600"></i>
+                                <span class="text-gray-700">Comunicación directa con el equipo</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-3 bg-cyan-500/10 rounded-lg border border-cyan-500/20">
+                                <i data-feather="clock" class="w-5 h-5 text-cyan-600"></i>
+                                <span class="text-gray-700">Respuesta en el menor tiempo posible</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 tech-card rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-dark font-tech mb-4 text-center">Formulario de Solicitud</h3>
+                    <iframe
+                        title="Formulario de Soporte" 
+                        class="freshwidget-embedded-form w-full rounded-lg border-0" 
+                        id="freshwidget-embedded-form" 
+                        src="https://minibruno.freshdesk.com/widgets/feedback_widget/new?&widgetType=embedded" 
+                        scrolling="no" 
+                        height="500px" 
+                        width="100%" 
+                        frameborder="0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Llamada a FreshChat -->
+<script src="js/freshchat-init.js"></script>
+    <!-- Fin Freshchat Messenger -->
+
+    <!-- Footer (Pie de Pagina)-->
+<footer class="relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+    <style>
+        /* Style separado para no confundirme con el chorizero de estilos que tengo inLine */
+        .footer-wave { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            overflow: hidden; 
+            transform: translateZ(0); 
+            z-index: -1;
+        }
+        .footer-wave svg { 
+            width: 100%; 
+            height: 100%; 
+            display: block; 
+        }
+        .footer-wave .wave-layer { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 200%; 
+            height: 100%; 
+        }
+        .footer-wave .wave-front { 
+            opacity: 0.65; 
+            animation: waveMove 6s linear infinite; 
+            transform: translateX(0); 
+        }
+        .footer-wave .wave-back  { 
+            opacity: 0.38; 
+            animation: waveMove 10s linear infinite reverse; 
+            transform: translateX(0); 
+            filter: blur(6px); 
+        }
+        @keyframes waveMove {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* Footer content styling */
+        footer > .container { 
+            position: relative; 
+            z-index: 10; 
+            padding: 2rem 1rem; 
+        }
+        /* Background for better readability */
+        .footer-content-bg {
+            background-color: rgba(243, 244, 246, 0.8);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+
+    <!-- Animated Wave (two layered SVGs for parallax effect) -->
+    <div class="footer-wave" aria-hidden="true">
+        <div class="wave-layer wave-back">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waveBackGrad" x1="0" x2="1">
+                        <stop offset="0%" stop-color="#e6f0ff" />
+                        <stop offset="100%" stop-color="#f8fbff" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,30 C150,90 350,0 600,30 C850,60 1050,10 1200,40 L1200,120 L0,120 Z" fill="url(#waveBackGrad)"></path>
+            </svg>
+        </div>
+        <div class="wave-layer wave-front">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waveFrontGrad" x1="0" x2="1">
+                        <stop offset="0%" stop-color="#cfe6ff" />
+                        <stop offset="100%" stop-color="#dfeeff" />
+                    </linearGradient>
+                </defs>
+                <path d="M0,50 C200,10 350,90 600,50 C850,10 1000,80 1200,50 L1200,120 L0,120 Z" fill="url(#waveFrontGrad)"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-12 footer-content-bg rounded-lg" style="background-color: rgba(243, 244, 246, 0.45);">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div data-aos="fade-up" data-aos-delay="0">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                <img src="img_Ref/bd_Brunito/logo_Glow.svg" alt="Logo MiniBruno" class="w-full h-full object-contain" />
+            </div>
+                    <span class="text-xl font-bold text-dark font-tech">MB TechSupport</span>
+                </div>
+                <p class="text-gray-600">Fase Beta.</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="50">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Secciones </h4>
+                <ul class="space-y-2">
+                    <li><a href="about_Us.html" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="monitor" class="w-4 h-4 mr-2"></i> Nosotros</a></li>
+                    <li><a href="news.html" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="tool" class="w-4 h-4 mr-2"></i> Noticias</a></li>
+                    <li><a href="https://www.brunopetgourmet.com/" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="refresh-cw" class="w-4 h-4 mr-2"></i> Mini Bruno - Pet Gourmet</a></li>
+                    <li><a href="faqs.html" class="text-gray-600 hover:text-dark transition-colors flex items-center"><i data-feather="hard-drive" class="w-4 h-4 mr-2"></i> FAQs</a></li>
+                </ul>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Contacto</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start text-gray-600">
+                        <i data-feather="globe" class="mr-3 w-4 h-4 mt-1 text-blue-600"></i>
+                        <span>https://www.minibruno.com</span>
+                    </li>
+                    <li class="flex items-center text-gray-600">
+                        <i data-feather="phone" class="mr-3 w-4 h-4 text-green-600"></i>
+                        <span>+58 414 4677046</span>
+                    </li>
+                    <li class="flex items-start text-gray-600">
+                        <i data-feather="map-pin" class="mr-3 w-4 h-4 mt-1 text-red-600"></i>
+                        <span>Carretera Vieja Caracas-Los Teques, Caracas, D.C., VE</span>
+                    </li>
+                </ul>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+                <h4 class="text-lg font-semibold text-dark font-tech mb-4">Síguenos</h4>
+                <div class="flex space-x-4 mb-6">
+                    <a href="https://www.facebook.com/profile.php?id=100081592345336&mibextid=ZbWKwL" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors neon-glow">
+                        <i data-feather="facebook" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://twitter.com/minibrunosucrs" class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors neon-glow">
+                        <i data-feather="twitter" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.instagram.com/mini_bruno_sucesores.ca?utm_source=qr&igsh=cWtrbng4dDY5MTU2" class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-colors neon-glow">
+                        <i data-feather="instagram" class="w-5 h-5 text-white"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mini-bruno-sucesores-c-a-1b4413246?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B6%2FAwlu9iQW2Q9LsuVukWow%3D%3D" class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors neon-glow">
+                        <i data-feather="linkedin" class="w-5 h-5 text-white"></i>
+                    </a>
+                </div>
+                <div class="bg-white/5 rounded-lg p-4 border border-gray-200">
+                    <p class="text-cyan-600 font-tech text-sm">Sistema 24/7</p>
+                    <p class="text-gray-600 text-xs mt-1">Soporte técnico disponible las 24 horas</p>
+                    <!-- Volver arriba de la pagina-->
+                    <div class="mt-4">
+                        <button onclick="scrollToTop()" class="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-tech text-sm flex items-center justify-center neon-glow">
+                            <i data-feather="arrow-up" class="w-4 h-4 mr-2"></i>Ir arriba
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+            <p class="text-gray-600 mb-2">Hecho por <strong class="text-blue-600">Luis Ruiz</strong></p>
+            <p class="text-gray-500 text-sm">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
+            <div class="mt-4 flex justify-center space-x-2">
+                <span class="px-3 py-1 bg-blue-500/20 text-blue-600 rounded-full text-xs font-tech">v3.1</span>
+                <span class="px-3 py-1 bg-purple-500/20 text-purple-600 rounded-full text-xs font-tech">BETA</span>
+                <span class="px-3 py-1 bg-green-500/20 text-green-600 rounded-full text-xs font-tech">ONLINE</span>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Fin Footer -->
+ <script src="js/soporte.js"></script>
+</body>
+</html>
