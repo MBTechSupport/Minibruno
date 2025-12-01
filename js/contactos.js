@@ -19,7 +19,7 @@
                 ext: "Ext.",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Responsable de supervisar y coordinar todas las actividades relacionadas con los sistemas informáticos y tecnológicos de la empresa.",
-                avatar: "img_Ref/user1_alves_neri.webp"
+                avatar: "img_ref/user1_alves_neri.webp"
             },
             {
                 id: 2,
@@ -32,7 +32,7 @@
                 ext: "Ext. 305",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Se encarga de monitorear y mantener la infraestructura de telecomunicaciones y redes de la empresa.",
-                avatar: "img_Ref/user6_luis_Ruiz.jpg"
+                avatar: "img_ref/user6_luis_ruiz.jpg"
             },
             {
                 id: 3,
@@ -45,7 +45,7 @@
                 ext: "Ext. ",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Es el representante del Departamento de Sistemas en ambas plantas, tanto en PSC y en PRC",
-                avatar: "img_Ref/user2_rommer_Coronado.webp"
+                avatar: "img_ref/user2_rommer_coronado.webp"
             },
             {
                 id: 4,
@@ -58,7 +58,7 @@
                 ext: "Ext. 305 ",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Responsable del análisis, diseño y mejora de los sistemas informáticos de la empresa.",
-                avatar: "img_Ref/user3_marbeth_Rodriguez.webp"
+                avatar: "img_ref/user3_marbeth_rodriguez.webp"
             },
             {
                 id: 5,
@@ -71,7 +71,7 @@
                 ext: "Ext. 128 ",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Responsable del análisis, diseño y mejora de los sistemas informáticos de la empresa.",
-                avatar: "img_Ref/user4_darwin_Navarro.webp"
+                avatar: "img_ref/user4_darwin_navarro.webp"
             },
             {
                 id: 6,
@@ -84,7 +84,7 @@
                 ext: "Ext. 305 ",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Responsable del análisis, diseño y mejora de los sistemas informáticos de la empresa.",
-                avatar: "img_Ref/user5_jagger_Nanes.webp"
+                avatar: "img_ref/user5_jagger_nanes.webp"
             },
             {
                 id: 7,
@@ -97,7 +97,7 @@
                 ext: "Ext. ",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Responsable del análisis, diseño y mejora de los sistemas informáticos de la empresa.",
-                avatar: "img_Ref/user7_betsimar_Montilla.webp"
+                avatar: "img_ref/user7_betsimar_montilla.webp"
             },
             {
                 id: 8,
@@ -110,7 +110,7 @@
                 ext: "Ext. ",
                 hours: "L-V 7:00am - 4:00pm",
                 notes: "Gerente del Departamento de Sistemas en la planta de PRC.",
-                avatar: "img_Ref/user8_luis_Guevara.webp"
+                avatar: "img_ref/user8_luis_guevara.webp"
             }
         ];
 
