@@ -36,6 +36,6 @@ onAuthStateChanged(auth, (user) => {
     userInfo.innerHTML = `
       <p class="text-dark font-tech text-sm">No hay usuario conectado</p>
     `;
-    window.location.href = "/main-index.html";
+    window.location.href = "/main_index.html";
   }
 });
