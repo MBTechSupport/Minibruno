@@ -19,14 +19,14 @@ onAuthStateChanged(auth, (user) => {
 
     // Listener para botón Inicio
     document.getElementById("homeBtn").addEventListener("click", () => {
-      window.location.href = "index.html";
+      window.location.href = "/index.html";
     });
     
     // Listener para botón Logout
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       try {
         await signOut(auth);
-        window.location.href = "logout.html"; // o "login.html"
+        window.location.href = "/logout.html"; // o "login.html"
       } catch (error) {
         alert("❌ Error al cerrar sesión: " + error.message);
       }
@@ -36,6 +36,6 @@ onAuthStateChanged(auth, (user) => {
     userInfo.innerHTML = `
       <p class="text-dark font-tech text-sm">No hay usuario conectado</p>
     `;
-    window.location.href = "main-index.html";
+    window.location.href = "/main-index.html";
   }
 });
