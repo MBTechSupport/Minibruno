@@ -102,7 +102,7 @@
             switch(productType) {
                 case 'harinas':
                     modalTitle.textContent = 'Harinas';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Harina.svg" alt="Harinas">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_harina.webp" alt="Harinas">';
                     modalContent.innerHTML = `
                         <div class="product-item">
                             <h4 class="font-tech">Harina de Carne y Hueso</h4>
@@ -120,7 +120,7 @@
                     break;
                 case 'sebos':
                     modalTitle.textContent = 'Sebos';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Sebo.svg" alt="Sebos">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_sebo.webp" alt="Sebos">';
                     modalContent.innerHTML = `
                         <div class="product-item">
                             <h4 class="font-tech">Sebo Blanco Especial</h4>
@@ -134,7 +134,7 @@
                     break;
                 case 'saborizantes':
                     modalTitle.textContent = 'Saborizantes';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Saborizante.svg" alt="Saborizantes">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_saborizante.webp" alt="Saborizantes">';
                     modalContent.innerHTML = `
                         <div class="product-item">
                             <h4 class="font-tech">Saborizante de Hígado de Pollo</h4>
@@ -148,7 +148,7 @@
                     break;
                 case 'petgourmet':
                     modalTitle.textContent = 'Mini Bruno Pet Gourmet';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Mbpg.svg" alt="Pet Gourmet">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_mbpg.webp" alt="Pet Gourmet">';
                     modalContent.innerHTML = `
                         <div class="product-item">
                             <h4 class="font-tech">Salsa Nutricional para Perros</h4>
@@ -181,7 +181,7 @@
             switch(aboutType) {
                 case 'historia':
                     modalTitle.textContent = 'Historia de la Empresa';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Historia.svg" alt="Historia">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_historia.webp" alt="Historia">';
                     modalContent.innerHTML = `
                         <div class="policy-item">
                             <h4 class="font-tech">Bruno Mini y Luigia Crespi de Mini</h4>
@@ -224,7 +224,7 @@
                     break;
                 case 'politicas':
                     modalTitle.textContent = 'Políticas de la Empresa';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Politicas.svg" alt="Políticas">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_politicas.webp" alt="Políticas">';
                     modalContent.innerHTML = `
                         <div class="policy-item">
                             <h4 class="font-tech">Política de Seguridad Laboral</h4>
@@ -253,7 +253,7 @@
                     break;
                 case 'mision':
                     modalTitle.textContent = 'Misión, Visión y Valores';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Valores.svg" alt="Misión Visión">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_valores.webp" alt="Misión Visión">';
                     modalContent.innerHTML = `
                         <div class="policy-item">
                             <h4 class="font-tech">Misión</h4>
@@ -271,7 +271,7 @@
                     break;
                 case 'departamentos':
                     modalTitle.textContent = 'Departamentos';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Departamentos.svg" alt="Departamentos">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_departamentos.webp" alt="Departamentos">';
                     modalContent.innerHTML = `
                         <div class="department-item">
                             <h4 class="font-tech">Control de Calidad</h4>
@@ -323,7 +323,7 @@
                     break;
                 case 'seguridad':
                     modalTitle.textContent = 'Seguridad y Salud Laboral';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Seguridad.svg" alt="Seguridad">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_seguridad.webp" alt="Seguridad">';
                     modalContent.innerHTML = `
                         <div class="department-item">
                             <h4 class="font-tech">Seguridad y Salud Laboral</h4>
@@ -353,7 +353,7 @@
                     break;
                 case 'transporte':
                     modalTitle.textContent = 'Transporte';
-                    modalImage.innerHTML = '<img src="img_Ref/svgs/modal_Transporte.svg" alt="Transporte">';
+                    modalImage.innerHTML = '<img src="img_ref/webp/modal_transporte.webp" alt="Transporte">';
                     modalContent.innerHTML = `
                         <div class="department-item">
                             <h4 class="font-tech">Recolección de Subproductos</h4>

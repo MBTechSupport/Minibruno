@@ -16,7 +16,7 @@
             1: {
                 title: "Bruno Mini y Luigia Crespi de Mini",
                 date: "02 Oct 2025",
-                image: "img_ref/flia_mini/subheader_news.svg",
+                image: "img_ref/webp/subheader_news.webp",
                 author: {
                     name: "Gabriella Mini Arreaza",
                     role: "Nieta de los Fundadores / Junta Directiva",
