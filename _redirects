@@ -1,5 +1,5 @@
-/index.html      /index.html      200
-/main-index.html /main-index.html 200
-/logout.html     /logout.html     200
-/login.html      /login.html      200
-/*               /index.html      200
+/index.html       /index.html       200
+/main_index.html  /main_index.html  200
+/logout.html      /logout.html      200
+/login.html       /login.html       200
+/*                /main_index.html  200
