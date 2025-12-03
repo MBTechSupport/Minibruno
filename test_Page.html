@@ -223,16 +223,6 @@
     </footer>
     <script src="js/test_page.js"></script>
         <script type="module" src="js/login.js"></script>
-        <script type="module">
-        import { auth } from "./firebase-init.js";
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-        onAuthStateChanged(auth, (user) => {
-        if (!user) {
-            // Si no hay sesión activa → enviar al not_log.html
-            window.location.href = "/not_log.html";
-        }
-    });
-    </script>
+<script type="module" src="js/auth-guard.js"></script>
 </body>
 </html>
