@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departamentos | Mini Bruno Sucesores C.A.</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/about_Us.css">
+    <link rel="stylesheet" href="../css/about_Us-extras.css">
+    <link rel="stylesheet" href="../css/about_Us-premium.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(33, 51, 121, 0.15);
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .article-title {
+            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .article-image {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 20px 60px rgba(33, 51, 121, 0.2);
+        }
+
+        .department-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .department-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(33, 51, 121, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .department-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(33, 51, 121, 0.3);
+        }
+
+        .department-item h3 {
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .department-item p,
+        .department-item ul {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .department-item ul {
+            margin-left: 2rem;
+        }
+
+        .department-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2.5rem;
+            }
+
+            .article-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="home-button-wrapper neon-glow">
+                <img src="../img_ref/bd_brunito/logo_glow.svg" alt="Logo" class="logo-image">
+                <span class="home-button-text font-tech">Volver al Inicio</span>
+                <i class="fas fa-arrow-left home-arrow-icon"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="article-header">
+            <h1 class="article-title gradient-text">Departamentos</h1>
+            <img src="../img_ref/webp/modal_departamentos.webp" alt="Departamentos" class="article-image">
+        </div>
+
+        <div class="department-grid">
+            <div class="department-item tech-card">
+                <h3 class="font-tech">Control de Calidad</h3>
+                <p>En Mini Bruno Sucesores garantizamos el cumplimiento de estrictos controles de calidad, y verificamos
+                    la conformidad de cada uno de los productos en nuestro Laboratorio de Control de Calidad.</p>
+                <p>El laboratorio de control de calidad cuenta con personal calificado y con equipos que nos permiten
+                    realizar las siguientes actividades:</p>
+                <ul>
+                    <li>Verificación de cumplimiento de especificaciones.</li>
+                    <li>Calibración de equipos de medición para la realización de análisis.</li>
+                    <li>Control microbiológico.</li>
+                    <li>Control estadístico de procesos.</li>
+                    <li>Diseño y desarrollo de nuevos productos.</li>
+                </ul>
+                <p>Realizamos los siguientes análisis a nuestros productos terminados:</p>
+                <ul>
+                    <li>Proteínas (COVENIN 1195-80 Método Kjeldahl).</li>
+                    <li>Humedad (COVENIN 705:1996).</li>
+                    <li>Acidez Oleica (COVENIN 325:2001).</li>
+                    <li>Calcio (COVENIN 1158:1982).</li>
+                    <li>Impurezas Insolubles (COVENIN 509:2001).</li>
+                    <li>Digestibilidad (COVENIN 1316:1981).</li>
+                    <li>Índice de Peróxidos (COVENIN 508:2001).</li>
+                    <li>Índice de Saponificación (COVENIN 323:1998).</li>
+                    <li>Cenizas totales (COVENIN 1155:1979).</li>
+                    <li>Grasa Cruda (COVENIN 1162:1979).</li>
+                    <li>Presencia de Salmonella (COVENIN 1291:2004).</li>
+                </ul>
+            </div>
+
+            <div class="department-item tech-card">
+                <h3 class="font-tech">Sistema, Diseño y Desarrollo</h3>
+                <p>Contamos con un departamento dedicado exclusivamente al mejoramiento de nuestros productos, al
+                    desarrollo de nuevas aplicaciones para nuestra materia prima y al empleo de las últimas tecnologías
+                    en la industria del procesamiento de sub-productos cárnicos.</p>
+                <p>Nuestro objetivo es satisfacer las necesidades crecientes de nuestros clientes con respecto a nuevas
+                    alternativas y usos de proteínas, grasas y sabores de origen animal. Inspirados por esta meta,
+                    diseñamos nuevos procesos siguiendo las más exigentes normas de manufactura y buscando que nuestros
+                    productos y procesos sean eficientes e innovadores.</p>
+            </div>
+
+            <div class="department-item tech-card">
+                <h3 class="font-tech">Producción</h3>
+                <p><strong>Misión Productiva:</strong></p>
+                <ul>
+                    <li>Uso de tecnología de punta para todos los procesos de producción.</li>
+                    <li>Mejora continua a través de la actualización de la tecnología utilizada de acuerdo a los
+                        estándares internacionales.</li>
+                    <li>Entrenamiento constante del personal en el uso de las instalaciones y el control de calidad de
+                        los parámetros de producción.</li>
+                </ul>
+                <p><strong>Tecnología, Concepto y Máquinas:</strong></p>
+                <p>La tecnología aplicada es "dry rendering" (recuperación en seco) de tipo continuo o por lote. El "dry
+                    rendering" consiste en la cocción controlada de las materias primas por intercambio indirecto de
+                    calor o inyección de vapor para los hidrolizados.</p>
+                <p>Los procesos continuos garantizan la máxima eficiencia de producción y permite que las materias
+                    primas se procesen frescas. El corazón de este proceso es un cocinador continuo. Los procesos por
+                    lote se usan para cantidades más pequeñas de materia prima con controles específicos sobre el lote.
+                    El corazón de este proceso es un reactor o cocinador.</p>
+                <p>Las máquinas principales de proceso son fabricadas por las empresas más reconocidas a nivel mundial y
+                    actualizadas constantemente.</p>
+                <p><strong>Control de Procesos:</strong></p>
+                <p>El control de los procesos se realiza por medio de dispositivos automáticos programables o PLC y
+                    tableros remotos de operación. Este sistema garantiza la mínima variabilidad de los parámetros de
+                    calidad de los productos terminados. Aparte, los parámetros de calidad se registran en cartas de
+                    control que son revisadas constantemente.</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

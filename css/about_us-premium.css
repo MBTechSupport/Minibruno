@@ -1,0 +1,403 @@
+/* =====================================================
+   ABOUT US PREMIUM - ANIMACIONES ESPECTACULARES
+   ===================================================== */
+
+/* VARIABLES PREMIUM */
+:root {
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --primary-glow: 0 0 40px rgba(66, 140, 226, 0.6);
+    --secondary-glow: 0 0 60px rgba(147, 51, 234, 0.4);
+}
+
+/* =====================================================
+   HEADER CON HEADER HERMOSO PARA VOLVER
+   ===================================================== */
+header {
+    transition: all 0.6s var(--ease-out-expo);
+    will-change: transform, box-shadow, padding;
+}
+
+header.scrolled {
+    padding: 0.75rem 0 !important;
+    box-shadow: 0 10px 40px rgba(33, 51, 121, 0.15),
+        0 0 80px rgba(66, 140, 226, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* BOTÓN DE RETORNO AL INICIO - MUY INTERACTIVO */
+.home-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, rgba(66, 140, 226, 0.1), rgba(147, 51, 234, 0.1));
+    border-radius: 50px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    transition: all 0.4s var(--ease-out-expo);
+    cursor: pointer;
+}
+
+.home-button-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    padding: 2px;
+    background: linear-gradient(135deg, #428ce2, #9333ea);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.home-button-wrapper:hover::before {
+    opacity: 1;
+}
+
+.home-button-wrapper:hover {
+    transform: translateX(-8px) scale(1.05);
+    box-shadow: 0 10px 40px rgba(66, 140, 226, 0.3),
+        0 0 60px rgba(147, 51, 234, 0.2);
+    background: linear-gradient(135deg, rgba(66, 140, 226, 0.2), rgba(147, 51, 234, 0.2));
+}
+
+/* Logo animado con pulse */
+.home-button-wrapper .neon-glow {
+    animation: logoPulse 3s ease-in-out infinite;
+    transition: all 0.4s var(--ease-elastic);
+}
+
+.home-button-wrapper:hover .neon-glow {
+    transform: scale(1.2) rotate(-10deg);
+    animation: none;
+}
+
+@keyframes logoPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(66, 140, 226, 0.7);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba(66, 140, 226, 0);
+        transform: scale(1.05);
+    }
+}
+
+/* Texto del botón con efecto shimmer */
+.home-button-text {
+    position: relative;
+    font-weight: 700;
+    background: linear-gradient(90deg, #1f2937, #428ce2, #9333ea, #1f2937);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.4s ease;
+}
+
+.home-button-wrapper:hover .home-button-text {
+    animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Icono de flecha animado */
+.home-arrow-icon {
+    display: inline-block;
+    transition: all 0.4s var(--ease-elastic);
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.home-button-wrapper:hover .home-arrow-icon {
+    opacity: 1;
+    transform: translateX(0);
+    animation: bounceArrow 1s ease-in-out infinite;
+}
+
+@keyframes bounceArrow {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-8px);
+    }
+}
+
+/* =====================================================
+   TECH CARDS - FLIP & ZOOM
+   ===================================================== */
+.tech-card {
+    transform-style: preserve-3d;
+    transition: all 0.6s var(--ease-out-expo);
+    will-change: transform, box-shadow;
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(66, 140, 226, 0.2),
+            transparent);
+    transition: left 0.8s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.tech-card:hover::before {
+    left: 100%;
+}
+
+.tech-card:hover {
+    transform: perspective(1000px) rotateY(3deg) rotateX(-2deg) scale(1.03) translateZ(15px);
+    box-shadow: 0 30px 80px rgba(33, 51, 121, 0.3),
+        0 0 40px rgba(66, 140, 226, 0.2);
+}
+
+/* Background gradient animado */
+.tech-card {
+    background: linear-gradient(135deg,
+            rgba(66, 140, 226, 0.05),
+            rgba(147, 51, 234, 0.05));
+    background-size: 200% 200%;
+    transition: background-position 0.8s ease;
+}
+
+.tech-card:hover {
+    background-position: 100% 100%;
+}
+
+/* =====================================================
+   SCROLL-TRIGGERED ANIMATIONS
+   ===================================================== */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s var(--ease-out-expo);
+}
+
+.scroll-animate.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =====================================================
+   SLIDER - HISTORY CAROUSEL
+   ===================================================== */
+.slider-nav {
+    transition: all 0.4s var(--ease-elastic);
+}
+
+.slider-nav:hover {
+    transform: scale(1.2);
+    background: rgba(66, 140, 226, 0.2) !important;
+    box-shadow: 0 0 20px rgba(66, 140, 226, 0.4);
+}
+
+.dot {
+    transition: all 0.4s var(--ease-out-expo);
+}
+
+.dot:hover {
+    transform: scale(1.3);
+}
+
+.dot.active {
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(66, 140, 226, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(66, 140, 226, 0);
+    }
+}
+
+/* =====================================================
+   FOOTER - APARICIÓN PROGRESIVA
+   ===================================================== */
+footer>.container>div>div {
+    animation: footerItemIn 0.8s var(--ease-out-expo) backwards;
+}
+
+footer>.container>div>div:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+footer>.container>div>div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+footer>.container>div>div:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+footer>.container>div>div:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes footerItemIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Social icons con bounce */
+footer .flex.space-x-4 a {
+    transition: transform 0.3s var(--ease-elastic);
+}
+
+footer .flex.space-x-4 a:hover {
+    animation: bounceIcon 0.6s var(--ease-elastic);
+}
+
+@keyframes bounceIcon {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    25% {
+        transform: translateY(-15px) scale(1.1);
+    }
+
+    50% {
+        transform: translateY(-7px) scale(1.05);
+    }
+
+    75% {
+        transform: translateY(-12px) scale(1.08);
+    }
+}
+
+/* Scroll-to-top con rotation */
+button[onclick="scrollToTop()"] i {
+    transition: transform 0.6s var(--ease-elastic);
+}
+
+button[onclick="scrollToTop()"]:hover i {
+    animation: rotateUp 0.8s var(--ease-elastic);
+}
+
+@keyframes rotateUp {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+button[onclick="scrollToTop()"]:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 10px 30px rgba(66, 140, 226, 0.5);
+}
+
+/* =====================================================
+   NEON BUTTON - CTA
+   ===================================================== */
+.neon-button {
+    position: relative;
+    background: linear-gradient(135deg, #428ce2, #9333ea);
+    animation: pulseGlow 2.5s infinite;
+    transition: all 0.4s var(--ease-out-expo);
+    will-change: transform, box-shadow;
+}
+
+.neon-button:hover {
+    transform: scale(1.08) translateY(-5px);
+    animation: none;
+    box-shadow: 0 20px 60px rgba(66, 140, 226, 0.6),
+        0 0 80px rgba(147, 51, 234, 0.4);
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 30px rgba(66, 140, 226, 0.4),
+            0 0 60px rgba(147, 51, 234, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(66, 140, 226, 0.6),
+            0 0 80px rgba(147, 51, 234, 0.4);
+    }
+}
+
+/* =====================================================
+   MICROINTERACCIONES
+   ===================================================== */
+button {
+    transition: transform 0.3s var(--ease-elastic),
+        box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* =====================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =====================================================
+   PERFORMANCE OPTIMIZATIONS
+   ===================================================== */
+.tech-card,
+.scroll-animate {
+    content-visibility: auto;
+    contain-intrinsic-size: 300px;
+}

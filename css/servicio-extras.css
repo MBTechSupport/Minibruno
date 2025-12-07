@@ -1,0 +1,112 @@
+/* =====================================================
+   SERVICIO EXTRAS - EFECTOS ADICIONALES
+   Ripple, Scroll Progress Bar, etc.
+   (Adaptado de index-extras.css)
+   ===================================================== */
+
+/* =====================================================
+   RIPPLE EFFECT
+   ===================================================== */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    animation: ripple-animation 0.6s;
+    opacity: 0;
+}
+
+@keyframes ripple-animation {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(10);
+    }
+}
+
+/* =====================================================
+   SCROLL PROGRESS BAR
+   ===================================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #428ce2, #9333ea);
+    z-index: 9999;
+    transition: width 0.2s ease-out;
+    box-shadow: 0 0 10px rgba(66, 140, 226, 0.6);
+}
+
+/* =====================================================
+   CUSTOM CURSOR (OPCIONAL)
+   ===================================================== */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #428ce2;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.1s ease;
+    transform: translate(-50%, -50%);
+}
+
+.custom-cursor.active {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: rgba(66, 140, 226, 0.2);
+}
+
+/* =====================================================
+   LAZY LOADING IMAGES
+   ===================================================== */
+img[data-src] {
+    opacity: 0;
+    transition: opacity 0.6s ease-in;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+/* =====================================================
+   CARD EFFECTS ESPECIALES
+   ===================================================== */
+.tech-card-hover-glow {
+    position: relative;
+}
+
+.tech-card-hover-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(45deg, #428ce2, #9333ea, #428ce2);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.tech-card-hover-glow:hover::after {
+    opacity: 1;
+}

@@ -5,14 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Contacto</title>
     
-    <link rel="stylesheet" href="css/contactar_ahora.css">
+    <link rel="stylesheet" href="css/contactar_Ahora.css">
     <script src="_sdk/data_sdk.js"></script>
     <script src="_sdk/element_sdk.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
     
+    
 </head>
 <body>
+    <div>
+        <a href="index_log.html" class="back-home-btn" title="Volver al inicio" aria-label="Volver al inicio">
+            <i data-feather="arrow-left" class="back-home-icon"></i>
+        </a>
+    </div> <!-- Boton para volver al inicio -->
     <div class="container floating-animation"><!-- Mensajes de notificación -->
         <div id="successMessage" class="notification-message success-message"></div>
         <div id="errorMessage" class="notification-message error-message"></div>
@@ -37,6 +43,6 @@
    </div>
 </div>
 <script src="js/contactar_ahora.js"></script>
-<script type="module" src="js/auth_guard.js"></script>
+    <script type="module" src="js/auth_guard.js"></script>
     </body>
 </html>

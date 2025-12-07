@@ -1,0 +1,582 @@
+/* =====================================================
+   FAQS PREMIUM - ANIMACIONES ESPECTACULARES
+   ===================================================== */
+
+/* VARIABLES PREMIUM */
+:root {
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --primary-glow: 0 0 40px rgba(66, 140, 226, 0.6);
+    --secondary-glow: 0 0 60px rgba(147, 51, 234, 0.4);
+}
+
+/* =====================================================
+   FLOATING QUESTION PREMIUM (HORIZONTAL E INTERACTIVO)
+   ===================================================== */
+.floating-question-premium {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    animation: float-bounce 3s ease-in-out infinite;
+}
+
+.question-bubble {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, #213379, #428ce2);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 10px 40px rgba(33, 51, 121, 0.4);
+    cursor: pointer;
+    transition: all 0.4s var(--ease-elastic);
+    max-width: 400px;
+}
+
+.question-bubble:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 50px rgba(33, 51, 121, 0.6);
+}
+
+.question-bubble::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.question-bubble:hover::before {
+    left: 100%;
+}
+
+.question-icon {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.8rem;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+}
+
+.question-content {
+    flex: 1;
+}
+
+.question-title {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.question-text {
+    font-size: 0.95rem;
+    color: white;
+    font-weight: 600;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+}
+
+.question-action {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.6rem;
+    border-radius: 50%;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.question-action:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(3px);
+}
+
+@keyframes float-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* =====================================================
+   ANIMACIONES ESPECTACULARES PARA MODALES FAQ
+   ===================================================== */
+.faq-item {
+    transition: all 0.4s var(--ease-elastic);
+    border-left: 4px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(66, 140, 226, 0.1), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.faq-item:hover::before {
+    left: 100%;
+}
+
+.faq-item:hover {
+    border-left-color: #428ce2;
+    transform: translateX(10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(33, 51, 121, 0.15);
+}
+
+.faq-item.opening {
+    animation: modalPulse 0.6s var(--ease-elastic);
+}
+
+@keyframes modalPulse {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.05) rotate(-2deg);
+    }
+
+    50% {
+        transform: scale(1.08) rotate(2deg);
+    }
+
+    75% {
+        transform: scale(1.05) rotate(-1deg);
+    }
+
+    100% {
+        transform: scale(1.02) rotate(0deg);
+    }
+}
+
+.faq-question {
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.faq-question h3 {
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover h3 {
+    color: #428ce2;
+    text-shadow: 0 0 15px rgba(66, 140, 226, 0.3);
+}
+
+.faq-question i {
+    transition: transform 0.6s var(--ease-elastic);
+}
+
+.faq-question.active i {
+    transform: rotate(180deg);
+    color: #428ce2;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.faq-answer.open {
+    max-height: 2000px;
+    opacity: 1;
+    transform: translateY(0);
+    animation: slideDownFade 0.6s ease-out;
+}
+
+@keyframes slideDownFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+
+    60% {
+        opacity: 0.8;
+        transform: translateY(5px) scale(1.01);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.faq-answer.open p {
+    animation: textGlow 1s ease-in-out;
+}
+
+@keyframes textGlow {
+
+    0%,
+    100% {
+        text-shadow: none;
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(66, 140, 226, 0.2);
+    }
+}
+
+/* =====================================================
+   HEADER CON BOTÓN HERMOSO PARA VOLVER
+   ===================================================== */
+header {
+    transition: all 0.6s var(--ease-out-expo);
+    will-change: transform, box-shadow, padding;
+}
+
+header.scrolled {
+    padding: 0.75rem 0 !important;
+    box-shadow: 0 10px 40px rgba(33, 51, 121, 0.15),
+        0 0 80px rgba(66, 140, 226, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* BOTÓN DE RETORNO AL INICIO - MUY INTERACTIVO */
+.home-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, rgba(66, 140, 226, 0.1), rgba(147, 51, 234, 0.1));
+    border-radius: 50px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    transition: all 0.4s var(--ease-out-expo);
+    cursor: pointer;
+}
+
+.home-button-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    padding: 2px;
+    background: linear-gradient(135deg, #428ce2, #9333ea);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.home-button-wrapper:hover::before {
+    opacity: 1;
+}
+
+.home-button-wrapper:hover {
+    transform: translateX(-8px) scale(1.05);
+    box-shadow: 0 10px 40px rgba(66, 140, 226, 0.3),
+        0 0 60px rgba(147, 51, 234, 0.2);
+    background: linear-gradient(135deg, rgba(66, 140, 226, 0.2), rgba(147, 51, 234, 0.2));
+}
+
+/* Logo animado con pulse */
+.home-button-wrapper .neon-glow {
+    animation: logoPulse 3s ease-in-out infinite;
+    transition: all 0.4s var(--ease-elastic);
+}
+
+.home-button-wrapper:hover .neon-glow {
+    transform: scale(1.2) rotate(-10deg);
+    animation: none;
+}
+
+@keyframes logoPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(66, 140, 226, 0.7);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba(66, 140, 226, 0);
+        transform: scale(1.05);
+    }
+}
+
+/* Texto del botón con efecto shimmer */
+.home-button-text {
+    position: relative;
+    font-weight: 700;
+    background: linear-gradient(90deg, #1f2937, #428ce2, #9333ea, #1f2937);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.4s ease;
+}
+
+.home-button-wrapper:hover .home-button-text {
+    animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Icono de flecha animado */
+.home-arrow-icon {
+    display: inline-block;
+    transition: all 0.4s var(--ease-elastic);
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.home-button-wrapper:hover .home-arrow-icon {
+    opacity: 1;
+    transform: translateX(0);
+    animation: bounceArrow 1s ease-in-out infinite;
+}
+
+@keyframes bounceArrow {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-8px);
+    }
+}
+
+/* =====================================================
+   TECH CARDS - FAQ ITEMS PREMIUM
+   ===================================================== */
+.tech-card {
+    transform-style: preserve-3d;
+    transition: all 0.6s var(--ease-out-expo);
+    will-change: transform, box-shadow;
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-card:hover {
+    transform: perspective(1000px) rotateY(2deg) rotateX(-1deg) scale(1.02);
+    box-shadow: 0 20px 60px rgba(33, 51, 121, 0.2);
+}
+
+/* =====================================================
+   NEON BUTTON - CTA
+   ===================================================== */
+.neon-button {
+    position: relative;
+    background: linear-gradient(135deg, #428ce2, #9333ea);
+    animation: pulseGlow 2.5s infinite;
+    transition: all 0.4s var(--ease-out-expo);
+    will-change: transform, box-shadow;
+}
+
+.neon-button:hover {
+    transform: scale(1.08) translateY(-5px);
+    animation: none;
+    box-shadow: 0 20px 60px rgba(66, 140, 226, 0.6),
+        0 0 80px rgba(147, 51, 234, 0.4);
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 30px rgba(66, 140, 226, 0.4),
+            0 0 60px rgba(147, 51, 234, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(66, 140, 226, 0.6),
+            0 0 80px rgba(147, 51, 234, 0.4);
+    }
+}
+
+/* =====================================================
+   FOOTER - APARICIÓN PROGRESIVA
+   ===================================================== */
+footer>.container>div>div {
+    animation: footerItemIn 0.8s var(--ease-out-expo) backwards;
+}
+
+footer>.container>div>div:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+footer>.container>div>div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+footer>.container>div>div:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+footer>.container>div>div:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes footerItemIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Social icons con bounce */
+footer .flex.space-x-4 a {
+    transition: transform 0.3s var(--ease-elastic);
+}
+
+footer .flex.space-x-4 a:hover {
+    animation: bounceIcon 0.6s var(--ease-elastic);
+}
+
+@keyframes bounceIcon {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    25% {
+        transform: translateY(-15px) scale(1.1);
+    }
+
+    50% {
+        transform: translateY(-7px) scale(1.05);
+    }
+
+    75% {
+        transform: translateY(-12px) scale(1.08);
+    }
+}
+
+/* Scroll-to-top con rotation */
+button[onclick="scrollToTop()"] i {
+    transition: transform 0.6s var(--ease-elastic);
+}
+
+button[onclick="scrollToTop()"]:hover i {
+    animation: rotateUp 0.8s var(--ease-elastic);
+}
+
+@keyframes rotateUp {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+button[onclick="scrollToTop()"]:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 10px 30px rgba(66, 140, 226, 0.5);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 768px) {
+    .floating-question-premium {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+    }
+
+    .question-bubble {
+        max-width: 100%;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .question-title {
+        font-size: 0.7rem;
+    }
+
+    .question-text {
+        font-size: 0.85rem;
+    }
+}
+
+/* Ocultar el floating-question antiguo */
+.floating-question {
+    display: none !important;
+}
+
+/* =====================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =====================================================
+   PERFORMANCE OPTIMIZATIONS
+   ===================================================== */
+.tech-card,
+.faq-item {
+    content-visibility: auto;
+    contain-intrinsic-size: 200px;
+}

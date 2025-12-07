@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saborizantes | Mini Bruno Sucesores C.A.</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/about_Us.css">
+    <link rel="stylesheet" href="../css/about_Us-extras.css">
+    <link rel="stylesheet" href="../css/about_Us-premium.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(33, 51, 121, 0.15);
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .article-title {
+            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .article-image {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 20px 60px rgba(33, 51, 121, 0.2);
+        }
+
+        .product-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .product-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(33, 51, 121, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(33, 51, 121, 0.3);
+        }
+
+        .product-item h3 {
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .product-item p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2.5rem;
+            }
+
+            .article-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="home-button-wrapper neon-glow">
+                <img src="../img_ref/bd_brunito/logo_glow.svg" alt="Logo" class="logo-image">
+                <span class="home-button-text font-tech">Volver al Inicio</span>
+                <i class="fas fa-arrow-left home-arrow-icon"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="article-header">
+            <h1 class="article-title gradient-text">Saborizantes</h1>
+            <img src="../img_ref/webp/modal_saborizante.webp" alt="Saborizantes" class="article-image">
+        </div>
+
+        <div class="product-grid">
+            <div class="product-item tech-card">
+                <h3 class="font-tech">Saborizante de Hígado de Pollo</h3>
+                <p style="text-align: justify;">Es un sistema de palatabilidad líquido para aplicación en alimentos para
+                    perros, formulado utilizando hígados de pollo y avanzadas tecnologías de sabor.</p>
+            </div>
+
+            <div class="product-item tech-card">
+                <h3 class="font-tech">Saborizante de Vísceras de Pollo</h3>
+                <p style="text-align: justify;">Sistema de palatabilidad líquido para aplicación en alimentos para
+                    perros, formulado utilizando vísceras de pollo y avanzadas tecnológicas de sabor.</p>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

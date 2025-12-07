@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transporte | Mini Bruno Sucesores C.A.</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="../css/about_Us.css">
+    <link rel="stylesheet" href="../css/about_Us-extras.css">
+    <link rel="stylesheet" href="../css/about_Us-premium.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(33, 51, 121, 0.15);
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-image {
+            height: 45px;
+            width: auto;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .article-title {
+            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .article-image {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 20px 60px rgba(33, 51, 121, 0.2);
+        }
+
+        .transport-grid {
+            display: grid;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .transport-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(33, 51, 121, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .transport-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(33, 51, 121, 0.3);
+        }
+
+        .transport-item h3 {
+            font-size: 1.75rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .transport-item p,
+        .transport-item ul {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        .transport-item ul {
+            margin-left: 2rem;
+        }
+
+        .transport-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2.5rem;
+            }
+
+            .article-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="../index.html" class="home-button-wrapper neon-glow">
+                <img src="../img_ref/bd_brunito/logo_glow.svg" alt="Logo" class="logo-image">
+                <span class="home-button-text font-tech">Volver al Inicio</span>
+                <i class="fas fa-arrow-left home-arrow-icon"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="article-header">
+            <h1 class="article-title gradient-text">Transporte</h1>
+            <img src="../img_ref/webp/modal_transporte.webp" alt="Transporte" class="article-image">
+        </div>
+
+        <div class="transport-grid">
+            <div class="transport-item tech-card">
+                <h3 class="font-tech">Recolección de Subproductos</h3>
+                <p>Para la recolección de subproductos, contamos con una flota propia de camiones (pequeños, medianos y
+                    gandolas) en excelente estado y equipados con cajones de recolección idóneos fabricados en aluminio.
+                    Prestan el servicio de recolección conductores y ayudantes entrenados, uniformados y con buena
+                    presencia.</p>
+            </div>
+
+            <div class="transport-item tech-card">
+                <h3 class="font-tech">Centros de Recolección</h3>
+                <ul>
+                    <li>Beneficiadoras de reses, aves y cerdos.</li>
+                    <li>Carnicerías.</li>
+                    <li>Plantas de embutidos.</li>
+                    <li>Cadenas de supermercados.</li>
+                    <li>Centros de despostes.</li>
+                </ul>
+            </div>
+
+            <div class="transport-item tech-card">
+                <h3 class="font-tech">Zonas Atendidas</h3>
+                <ul>
+                    <li>Gran Caracas: Zona Metropolitana, Valles del Tuy, Guatire, Litoral, Carayaca.</li>
+                    <li>Zona Central: Tejerías, Maracay, Valencia, resto de los estados Aragua y Carabobo.</li>
+                    <li>Zona Oriente: Estados Anzoátegui, Monagas, Sucre y Bolívar.</li>
+                    <li>Zona Occidente: Tinaquillo, Barquisimeto, resto de los Estados Lara y Yaracuy</li>
+                </ul>
+            </div>
+
+            <div class="transport-item tech-card">
+                <h3 class="font-tech">Distribución de Producto Terminado</h3>
+                <p>Despachamos nuestros productos a cualquier destino a nivel nacional.</p>
+                <ul>
+                    <li>Gandolas equipadas con bateas para el traslado de harina en sacos, tanques graneleros para el
+                        traslado de harina a granel, o tanques cisternas para traslado de sebos.</li>
+                    <li>Camiones medianos tipo plataforma para el traslado de harina en sacos.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

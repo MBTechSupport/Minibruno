@@ -1,0 +1,693 @@
+/* =====================================================
+   INDEX PREMIUM - ANIMACIONES ESPECTACULARES
+   Estilo Framer Motion / React Spring en CSS vanilla
+   ===================================================== */
+
+/* VARIABLES PREMIUM */
+:root {
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --primary-glow: 0 0 40px rgba(66, 140, 226, 0.6);
+    --secondary-glow: 0 0 60px rgba(147, 51, 234, 0.4);
+}
+
+/* =====================================================
+   HEADER STICKY CON TRANSFORMACIÓN AL SCROLL
+   ===================================================== */
+header {
+    transition: all 0.6s var(--ease-out-expo);
+    will-change: transform, box-shadow, padding;
+}
+
+header.scrolled {
+    padding: 0.75rem 0 !important;
+    box-shadow: 0 10px 40px rgba(33, 51, 121, 0.15),
+        0 0 80px rgba(66, 140, 226, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+}
+
+header.scrolled .logo-icon {
+    transform: scale(0.9) rotate(0deg);
+}
+
+/* Logo con animación de entrada */
+.logo-icon {
+    animation: logoEntrance 1.2s var(--ease-out-expo) backwards;
+    transition: transform 0.6s var(--ease-elastic);
+}
+
+@keyframes logoEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.logo-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 20px rgba(66, 140, 226, 0.8));
+}
+
+/* Nav links con underline animado */
+header nav a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #428ce2, #9333ea);
+    transition: all 0.4s var(--ease-out-expo);
+    transform: translateX(-50%);
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+/* =====================================================
+   HERO SECTION - FADE IN ESPECTACULAR
+   ===================================================== */
+.hero-content {
+    animation: heroBackgroundIn 1.5s var(--ease-out-expo) backwards;
+}
+
+@keyframes heroBackgroundIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+        filter: blur(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Título con entrada dramática */
+.hero-content h1 {
+    animation: heroTextIn 1.2s var(--ease-out-expo) 0.3s backwards;
+    will-change: transform, opacity;
+}
+
+@keyframes heroTextIn {
+    from {
+        opacity: 0;
+        transform: translateY(60px) rotate(3deg);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+        filter: blur(0);
+    }
+}
+
+/* Subtítulo con delay */
+.hero-content p {
+    animation: fadeInUp 1s var(--ease-out-expo) 0.6s backwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botones con entrada desde lados opuestos */
+.hero-cta a:nth-child(1),
+.hero-cta button:nth-child(1) {
+    animation: slideInLeft 1s var(--ease-out-expo) 0.9s backwards;
+}
+
+.hero-cta a:nth-child(2),
+.hero-cta button:nth-child(2) {
+    animation: slideInRight 1s var(--ease-out-expo) 0.9s backwards;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slider con transición suave */
+.slider-container {
+    animation: zoomIn 1.2s var(--ease-out-expo) 1.2s backwards;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =====================================================
+   CARDS DE SERVICIOS - FLIP & ZOOM
+   ===================================================== */
+.service-card,
+.swiper-slide,
+.feature-card {
+    transform-style: preserve-3d;
+    transition: all 0.6s var(--ease-out-expo);
+    will-change: transform, box-shadow;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before,
+.swiper-slide::before,
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(66, 140, 226, 0.2),
+            transparent);
+    transition: left 0.8s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.service-card:hover::before,
+.swiper-slide:hover::before,
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.service-card:hover,
+.swiper-slide:hover,
+.feature-card:hover {
+    transform: perspective(1000px) rotateY(5deg) rotateX(-2deg) scale(1.08) translateZ(20px);
+    box-shadow: 0 30px 80px rgba(33, 51, 121, 0.3),
+        0 0 40px rgba(66, 140, 226, 0.2);
+}
+
+/* Iconos con rotación continua al hover */
+.service-card:hover i,
+.feature-card:hover i {
+    animation: rotateIcon 1.5s var(--ease-elastic);
+}
+
+@keyframes rotateIcon {
+
+    0%,
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(360deg) scale(1.2);
+    }
+}
+
+/* Background gradient animado */
+.service-card,
+.swiper-slide {
+    background: linear-gradient(135deg,
+            rgba(66, 140, 226, 0.05),
+            rgba(147, 51, 234, 0.05));
+    background-size: 200% 200%;
+    transition: background-position 0.8s ease;
+}
+
+.service-card:hover,
+.swiper-slide:hover {
+    background-position: 100% 100%;
+}
+
+/* =====================================================
+   SCROLL-TRIGGERED ANIMATIONS
+   ===================================================== */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s var(--ease-out-expo);
+}
+
+.scroll-animate.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger children */
+.scroll-animate.animate-in>* {
+    animation: staggerFadeIn 0.8s var(--ease-out-expo) backwards;
+}
+
+.scroll-animate.animate-in>*:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.scroll-animate.animate-in>*:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.scroll-animate.animate-in>*:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.scroll-animate.animate-in>*:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.scroll-animate.animate-in>*:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.scroll-animate.animate-in>*:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+@keyframes staggerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =====================================================
+   TESTIMONIOS - CROSSFADE CAROUSEL
+   ===================================================== */
+
+/* Contenedor de testimonios con altura mínima */
+.testimonial-container {
+    position: relative;
+    min-height: 300px;
+}
+
+.testimonial {
+    animation: testimonialFade 35s infinite;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.testimonial:nth-child(1) {
+    animation-delay: 0s;
+    position: relative;
+}
+
+.testimonial:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.testimonial:nth-child(3) {
+    animation-delay: 10s;
+}
+
+.testimonial:nth-child(4) {
+    animation-delay: 15s;
+}
+
+.testimonial:nth-child(5) {
+    animation-delay: 20s;
+}
+
+.testimonial:nth-child(6) {
+    animation-delay: 25s;
+}
+
+.testimonial:nth-child(7) {
+    animation-delay: 30s;
+}
+
+@keyframes testimonialFade {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateX(50px) scale(0.95);
+    }
+
+    2%,
+    12% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    14.3% {
+        opacity: 0;
+        transform: translateX(-50px) scale(0.95);
+    }
+}
+
+/* Avatares con pulse */
+.testimonial .w-16 {
+    animation: avatarPulse 3s ease-in-out infinite;
+}
+
+@keyframes avatarPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(66, 140, 226, 0.4);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 20px rgba(66, 140, 226, 0);
+        transform: scale(1.05);
+    }
+}
+
+/* Estrellas con aparición secuencial */
+.testimonial i[data-feather="star"] {
+    animation: starPop 0.6s var(--ease-elastic) backwards;
+}
+
+.testimonial i[data-feather="star"]:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.testimonial i[data-feather="star"]:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.testimonial i[data-feather="star"]:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.testimonial i[data-feather="star"]:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.testimonial i[data-feather="star"]:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+@keyframes starPop {
+    from {
+        transform: scale(0) rotate(-180deg);
+    }
+
+    to {
+        transform: scale(1) rotate(0);
+    }
+}
+
+/* =====================================================
+   CTA BUTTON - PULSE & GLOW INTENSO
+   ===================================================== */
+.cta-button,
+.neon-button {
+    position: relative;
+    animation: pulseGlow 2.5s infinite;
+    transition: all 0.4s var(--ease-out-expo);
+    will-change: transform, box-shadow;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(66, 140, 226, 0.4),
+            0 10px 40px rgba(66, 140, 226, 0.2);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 50px rgba(66, 140, 226, 0.8),
+            0 20px 60px rgba(66, 140, 226, 0.4);
+        transform: scale(1.02);
+    }
+}
+
+.cta-button:hover,
+.neon-button:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 0 80px rgba(66, 140, 226, 1),
+        0 30px 100px rgba(66, 140, 226, 0.6);
+    animation: none;
+}
+
+/* Ripple effect */
+.cta-button::after,
+.neon-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.cta-button:active::after,
+.neon-button:active::after {
+    animation: ripple 0.8s ease-out;
+}
+
+@keyframes ripple {
+    from {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+        opacity: 1;
+    }
+
+    to {
+        box-shadow: 0 0 0 40px rgba(255, 255, 255, 0);
+        opacity: 0;
+    }
+}
+
+/* =====================================================
+   FOOTER - APARICIÓN PROGRESIVA
+   ===================================================== */
+footer>.container>div>div {
+    animation: footerItemIn 0.8s var(--ease-out-expo) backwards;
+}
+
+footer>.container>div>div:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+footer>.container>div>div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+footer>.container>div>div:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+footer>.container>div>div:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes footerItemIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Social icons con bounce */
+footer .flex.space-x-4 a {
+    transition: transform 0.3s var(--ease-elastic);
+}
+
+footer .flex.space-x-4 a:hover {
+    animation: bounceIcon 0.6s var(--ease-elastic);
+}
+
+@keyframes bounceIcon {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    25% {
+        transform: translateY(-15px) scale(1.1);
+    }
+
+    50% {
+        transform: translateY(-7px) scale(1.05);
+    }
+
+    75% {
+        transform: translateY(-12px) scale(1.08);
+    }
+}
+
+/* Scroll-to-top con rotation */
+button[onclick="scrollToTop()"] i {
+    transition: transform 0.6s var(--ease-elastic);
+}
+
+button[onclick="scrollToTop()"]:hover i {
+    animation: rotateUp 0.8s var(--ease-elastic);
+}
+
+@keyframes rotateUp {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+button[onclick="scrollToTop()"]:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 10px 30px rgba(66, 140, 226, 0.5);
+}
+
+/* =====================================================
+   PARALLAX ELEMENTS
+   ===================================================== */
+.parallax {
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+}
+
+/* =====================================================
+   MICROINTERACCIONES
+   ===================================================== */
+
+/* Botones con scale al hover */
+button,
+a.neon-button,
+.slider-dot,
+.slider-prev,
+.slider-next {
+    transition: transform 0.3s var(--ease-elastic),
+        box-shadow 0.3s ease;
+}
+
+button:hover,
+a.neon-button:hover,
+.slider-dot:hover {
+    transform: scale(1.1);
+}
+
+.slider-prev:hover,
+.slider-next:hover {
+    transform: scale(1.2);
+    box-shadow: 0 10px 30px rgba(33, 51, 121, 0.3);
+}
+
+/* Input focus con glow */
+input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 140, 226, 0.3),
+        0 10px 30px rgba(66, 140, 226, 0.1);
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+}
+
+/* =====================================================
+   GRADIENTES ANIMADOS
+   ===================================================== */
+.gradient-animated {
+    background: linear-gradient(270deg,
+            #213379,
+            #428ce2,
+            #9333ea,
+            #428ce2,
+            #213379);
+    background-size: 400% 400%;
+    animation: gradientFlow 8s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* =====================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* =====================================================
+   PERFORMANCE OPTIMIZATIONS
+   ===================================================== */
+.service-card,
+.feature-card,
+.swiper-slide,
+.scroll-animate {
+    content-visibility: auto;
+    contain-intrinsic-size: 300px;
+}

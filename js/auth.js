@@ -19,7 +19,7 @@ onAuthStateChanged(auth, (user) => {
 
     // Listener para botón Inicio
     document.getElementById("homeBtn").addEventListener("click", () => {
-      window.location.href = "/index.html";
+      window.location.href = "/index_log.html";
     });
     
     // Listener para botón Logout

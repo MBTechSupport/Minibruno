@@ -1,0 +1,81 @@
+/* =====================================================
+   FAQS EXTRAS - EFECTOS ADICIONALES
+   ===================================================== */
+
+/* =====================================================
+   RIPPLE EFFECT
+   ===================================================== */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    animation: ripple-animation 0.6s;
+    opacity: 0;
+}
+
+@keyframes ripple-animation {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(10);
+    }
+}
+
+/* =====================================================
+   SCROLL PROGRESS BAR
+   ===================================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #428ce2, #9333ea);
+    z-index: 9999;
+    transition: width 0.2s ease-out;
+    box-shadow: 0 0 10px rgba(66, 140, 226, 0.6);
+}
+
+/* =====================================================
+   BANNER IMAGE EFFECTS
+   ===================================================== */
+.imagen {
+    transition: all 0.5s var(--ease-out-expo);
+}
+
+.imagen:hover {
+    transform: scale(1.01);
+    filter: brightness(1.05) saturate(1.1);
+}
+
+/* =====================================================
+   FLOATING ANIMATION ENHANCEMENT
+   ===================================================== */
+.floating-animation {
+    animation: floatSmooth 6s ease-in-out infinite;
+}
+
+@keyframes floatSmooth {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}

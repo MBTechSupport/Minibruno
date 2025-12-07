@@ -1,28 +1,28 @@
         // ============================================================== //
-        // INICIANDO LIBRERIAS
-        // ============================================================== //
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
-        });
-        
-        feather.replace();
+// INICIANDO LIBRERIAS
+// ============================================================== //
+AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true
+});
 
-        // ============================================================== //
-        // VARIABLES GLOBALES Y DATA
-        // ============================================================== //
-        let newsData = {
-            1: {
-                title: "Bruno Mini y Luigia Crespi de Mini",
-                date: "02 Oct 2025",
-                image: "img_ref/webp/subheader_news.webp",
-                author: {
-                    name: "Gabriella Mini Arreaza",
-                    role: "Nieta de los Fundadores / Junta Directiva",
-                    avatar: "https://placehold.co/100x100/667eea/ffffff?text=GM"
-                },
-                content: `
+feather.replace();
+
+// ============================================================== //
+// VARIABLES GLOBALES Y DATA
+// ============================================================== //
+let newsData = {
+    1: {
+        title: "Bruno Mini y Luigia Crespi de Mini",
+        date: "02 Oct 2025",
+        image: "img_ref/webp/subheader_news.webp",
+        author: {
+            name: "Gabriella Mini Arreaza",
+            role: "Nieta de los Fundadores / Junta Directiva",
+            avatar: "https://placehold.co/100x100/667eea/ffffff?text=GM"
+        },
+        content: `
                 <p style="text-align: center; margin-bottom: 1rem;"><strong>Capitulo 1: Recuerdos de Familia.</strong></p>
                 <p style="text-align: justify; margin-bottom: 1rem;">
                 A medida que transcurre el tiempo mi memoria no es la misma, pero la vida es tan asombrosa que 
@@ -201,19 +201,19 @@
                 guiaron a mis abuelos y a mis padres por muchos años más.
                 </p>
                 `,
-                tags:["Reseñas", "Entrevistas"],
-                category: "entrevistas"
-            },
-            2: {
-                title: "Dia Mundial del Lavado de Manos",
-                date: "15 Oct 2025",
-                image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+2",
-                author: {
-                    name: "Yosmary Nieves",
-                    role: "Comunicaciones MBS",
-                    avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
-                },
-                content: `
+        tags: ["Reseñas", "Entrevistas"],
+        category: "entrevistas"
+    },
+    2: {
+        title: "Dia Mundial del Lavado de Manos",
+        date: "15 Oct 2025",
+        image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+2",
+        author: {
+            name: "Yosmary Nieves",
+            role: "Comunicaciones MBS",
+            avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
+        },
+        content: `
                 <p style="text-align: center; margin-bottom: 1rem;"><strong>Dia Mundial del Lavado de Manos.</strong></p>
                 <p style="text-align: justify; margin-bottom: 1rem;">
                 Hoy 15 de Octubre, celebramos el Dia Mundial del Lavado de Manos.
@@ -253,19 +253,19 @@
                 de calidad y seguridad en todo lo que hacemos.
                 </p>
                 `,
-                tags: ["Reseña", "Seguridad", "Historia"],
-                category: "seguridad"
-            },
-            3: {
-                title: "El Amor Propio",
-                date: "17 Oct 2025",
-                image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+3",
-                author: {
-                    name: "Yosmary Nieves",
-                    role: "Comunicaciones MBS",
-                    avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
-                },
-                content: `
+        tags: ["Reseña", "Seguridad", "Historia"],
+        category: "seguridad"
+    },
+    3: {
+        title: "El Amor Propio",
+        date: "17 Oct 2025",
+        image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+3",
+        author: {
+            name: "Yosmary Nieves",
+            role: "Comunicaciones MBS",
+            avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
+        },
+        content: `
                 <p style="text-align: center; margin-bottom: 1rem;"><strong>El Amor Propio.</strong></p>
                 <p style="text-align: justify; margin-bottom: 1rem;">
                 En este mes de la sensibilización, nos detenemos para honrar la vida,
@@ -307,19 +307,19 @@
                 amor propio, un regalo que das a ti y atu familia
                 ¡No lo Olvides!</strong>
                 `,
-                tags: ["Reseña", "Seguridad", "Historia"],
-                category: "seguridad"
-            },
-            4: {
-                title: "¡Un Puesto Limpio, un Trabajo Seguro!",
-                date: "21 Oct 2025",
-                image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+4",
-                author: {
-                    name: "Yosmary Nieves",
-                    role: "Comunicaciones MBS",
-                    avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
-                },
-                content: `
+        tags: ["Reseña", "Seguridad", "Historia"],
+        category: "seguridad"
+    },
+    4: {
+        title: "¡Un Puesto Limpio, un Trabajo Seguro!",
+        date: "21 Oct 2025",
+        image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+4",
+        author: {
+            name: "Yosmary Nieves",
+            role: "Comunicaciones MBS",
+            avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
+        },
+        content: `
                 <p style="text-align: center; margin-bottom: 1rem;"><strong>Un Puesto Limpio, un Trabajo Seguro.</strong></p>
                 <p style="text-align: justify; margin-bottom: 1rem;">
                 Buen Dia equipo Minibrunero,
@@ -353,19 +353,19 @@
                 hacemos. La limpieza es un compromiso de todos.
                 </p>
                 `,
-                tags: ["Reseña", "Seguridad", "Higiene"],
-                category: "seguridad"
-            },
-            5: {
-                title: "¡Un Puesto Limpio, un Trabajo Seguro!",
-                date: "23 Oct 2025",
-                image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+5",
-                author: {
-                    name: "Yosmary Nieves",
-                    role: "Comunicaciones MBS",
-                    avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
-                },
-                content: `
+        tags: ["Reseña", "Seguridad", "Higiene"],
+        category: "seguridad"
+    },
+    5: {
+        title: "El plan SOL: Seguridad, Orden y Limpieza",
+        date: "23 Oct 2025",
+        image: "https://placehold.co/800x400/16213e/0f3460?text=Noticia+5",
+        author: {
+            name: "Yosmary Nieves",
+            role: "Comunicaciones MBS",
+            avatar: "https://placehold.co/100x100/f093fb/ffffff?text=MG"
+        },
+        content: `
                 <p style="text-align: center; margin-bottom: 1rem;"><strong>El Plan SOL.</strong></p>
                 <p style="text-align: justify; margin-bottom: 1rem;">
                 <strong>Supongo que te preguntarás... ¿Qué es el Plan SOL?</strong> Es una
@@ -448,355 +448,367 @@
                 más seguro y eficiente!
                 </p>
                 `,
-                tags: ["Reseña", "Seguridad", "Higiene"],
-                category: "seguridad"
-                
+        tags: ["Reseña", "Seguridad", "Higiene"],
+        category: "seguridad"
+
+    }
+};
+
+let tagsList = [];
+
+// ============================================================== //
+// FUNCIONES (MODAL NEWS)
+// ============================================================== //
+// Función para abrir el modal de detalles de noticia
+function openNewsModal(newsId) {
+    const news = newsData[newsId];
+    if (!news) return;
+
+    document.getElementById('modalTitle').textContent = news.title;
+    document.getElementById('modalPublishDate').textContent = news.date;
+    document.getElementById('modalFeaturedImage').src = news.image;
+    document.getElementById('modalFeaturedImage').alt = news.title;
+    document.getElementById('authorName').textContent = news.author.name;
+    document.getElementById('authorRole').textContent = news.author.role;
+    document.getElementById('authorAvatarImg').src = news.author.avatar;
+    document.getElementById('authorAvatarImg').alt = news.author.name;
+    document.getElementById('modalBody').innerHTML = news.content;
+
+    // Limpiar y agregar etiquetas
+    const tagsContainer = document.getElementById('modalTags');
+    tagsContainer.innerHTML = '';
+    news.tags.forEach(tag => {
+        const tagElement = document.createElement('div');
+        tagElement.className = 'modal-tag';
+        tagElement.textContent = tag;
+        tagsContainer.appendChild(tagElement);
+    });
+
+    // Mostrar modal
+    document.getElementById('newsModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Función para cerrar el modal
+function closeNewsModal() {
+    document.getElementById('newsModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Event listeners para el modal
+document.getElementById('closeModal').addEventListener('click', closeNewsModal);
+document.getElementById('newsModal').addEventListener('click', function (e) {
+    if (e.target === this) {
+        closeNewsModal();
+    }
+});
+
+// ============================================================== //
+// BUSCA Y FILTRA FUNCIONES
+// ============================================================== //
+// Funcionalidad de búsqueda (INTEGRADO CON PAGINACIÓN)
+document.getElementById('newsSearch').addEventListener('input', function (e) {
+    const searchTerm = e.target.value.toLowerCase();
+
+    // Usar la función de paginación si está disponible
+    if (window.newsPagination && window.newsPagination.filterBySearch) {
+        window.newsPagination.filterBySearch(searchTerm);
+    } else {
+        // Fallback a la búsqueda original
+        const newsCards = document.querySelectorAll('.news-card');
+
+        newsCards.forEach(card => {
+            const title = card.querySelector('.news-title').textContent.toLowerCase();
+            const summary = card.querySelector('.news-summary').textContent.toLowerCase();
+
+            if (title.includes(searchTerm) || summary.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
             }
+        });
+    }
+});
+
+// Funcionalidad de filtrado por categoría (INTEGRADO CON PAGINACIÓN)
+document.querySelectorAll('.category-item').forEach(item => {
+    item.addEventListener('click', function () {
+        // Remover clase activa de todos los elementos
+        document.querySelectorAll('.category-item').forEach(el => {
+            el.classList.remove('active');
+        });
+
+        // Agregar clase activa al elemento seleccionado
+        this.classList.add('active');
+
+        const category = this.getAttribute('data-category');
+
+        // Usar la función de paginación si está disponible
+        if (window.newsPagination && window.newsPagination.filterByCategory) {
+            window.newsPagination.filterByCategory(category);
+        } else {
+            // Fallback a la función original
+            filterNewsByCategory(category);
+        }
+    });
+});
+
+// Función para filtrar noticias por categoría (SOLO FALLBACK)
+function filterNewsByCategory(category) {
+    const newsCards = document.querySelectorAll('.news-card');
+
+    if (category === 'todas') {
+        newsCards.forEach(card => {
+            card.style.display = 'block';
+        });
+        return;
+    }
+
+    newsCards.forEach(card => {
+        const newsId = card.getAttribute('data-news-id');
+        const news = newsData[newsId];
+
+        if (news && news.category === category) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// ============================================================== //
+// FUNCIONES DE PAGINACION
+// ============================================================== //
+// Funcionalidad de paginación
+document.querySelectorAll('.page-item').forEach(item => {
+    item.addEventListener('click', function () {
+        if (!this.classList.contains('disabled')) {
+            // Remover clase activa de todos los elementos
+            document.querySelectorAll('.page-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Agregar clase activa al elemento seleccionado
+            this.classList.add('active');
+
+            const page = this.getAttribute('data-page');
+
+            // Aquí iría la lógica para cargar la página seleccionada
+            console.log('Cargando página:', page);
+        }
+    });
+});
+
+// Funcionalidad de navegación entre páginas
+document.getElementById('prevPage').addEventListener('click', function () {
+    const currentPage = document.querySelector('.page-item.active');
+    const prevPage = currentPage.previousElementSibling;
+    if (prevPage && !prevPage.classList.contains('disabled')) {
+        currentPage.classList.remove('active');
+        prevPage.classList.add('active');
+        const page = prevPage.getAttribute('data-page');
+        console.log('Cargando página:', page);
+    }
+});
+
+document.getElementById('nextPage').addEventListener('click', function () {
+    const currentPage = document.querySelector('.page-item.active');
+    const nextPage = currentPage.nextElementSibling;
+    if (nextPage && !nextPage.classList.contains('disabled')) {
+        currentPage.classList.remove('active');
+        nextPage.classList.add('active');
+        const page = nextPage.getAttribute('data-page');
+        console.log('Cargando página:', page);
+    }
+});
+
+// ============================================================== //
+// UI - FUNCIONES DE INTERACCION
+// ============================================================== //
+// Efecto de hover para las tarjetas de noticias
+document.querySelectorAll('.news-card').forEach(card => {
+    card.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateY(-5px)';
+    });
+
+    card.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateY(0)';
+    });
+});
+
+// Funcionalidad de leer más
+document.querySelectorAll('.read-more-btn').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const card = this.closest('.news-card');
+        const newsId = card.getAttribute('data-news-id');
+        openNewsModal(newsId);
+    });
+});
+
+// Función para ir al inicio de la página (header)
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Función para contar el número de noticias presentes
+function countNews() {
+    const newsCards = document.querySelectorAll('.news-card');
+    const visibleCards = Array.from(newsCards).filter(card => card.style.display !== 'none');
+    const resultsInfo = document.getElementById('resultsInfo');
+    resultsInfo.innerHTML = `<p>Mostrando ${visibleCards.length} de ${newsCards.length} noticias</p>`;
+}
+
+// ============================================================== //
+// FORM HANDLING FUNCTIONS
+// ============================================================== //
+// Funcionalidad para crear noticias y guardar en localStorage
+document.addEventListener('DOMContentLoaded', function () {
+    countNews();
+
+    const toggleCreateFormBtn = document.getElementById('toggleCreateForm');
+    if (toggleCreateFormBtn) {
+        toggleCreateFormBtn.addEventListener('click', function () {
+            const form = document.getElementById('createNewsForm');
+            if (form) form.classList.toggle('active');
+        });
+    }
+
+    const cancelFormBtn = document.getElementById('cancelForm');
+    if (cancelFormBtn) {
+        cancelFormBtn.addEventListener('click', function () {
+            const createNewsForm = document.getElementById('createNewsForm');
+            const newsForm = document.getElementById('newsForm');
+            if (createNewsForm) createNewsForm.classList.remove('active');
+            if (newsForm) newsForm.reset();
+            tagsList = [];
+            updateTagsDisplay();
+            const imagePreview = document.getElementById('imagePreview');
+            const avatarPreview = document.getElementById('avatarPreview');
+            if (imagePreview) imagePreview.classList.remove('show');
+            if (avatarPreview) avatarPreview.classList.remove('show');
+        });
+    }
+});
+
+// Previsualización de imágenes
+document.getElementById('newsImage').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const preview = document.getElementById('imagePreview');
+            preview.src = e.target.result;
+            preview.classList.add('show');
         };
+        reader.readAsDataURL(file);
+    }
+});
 
-        let tagsList = [];
+document.getElementById('authorAvatarInput').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const preview = document.getElementById('avatarPreview');
+            preview.src = e.target.result;
+            preview.classList.add('show');
+        };
+        reader.readAsDataURL(file);
+    }
+});
 
-        // ============================================================== //
-        // FUNCIONES (MODAL NEWS)
-        // ============================================================== //
-        // Función para abrir el modal de detalles de noticia
-        function openNewsModal(newsId) {
-            const news = newsData[newsId];
-            if (!news) return;
-            
-            document.getElementById('modalTitle').textContent = news.title;
-            document.getElementById('modalPublishDate').textContent = news.date;
-            document.getElementById('modalFeaturedImage').src = news.image;
-            document.getElementById('modalFeaturedImage').alt = news.title;
-            document.getElementById('authorName').textContent = news.author.name;
-            document.getElementById('authorRole').textContent = news.author.role;
-            document.getElementById('authorAvatarImg').src = news.author.avatar;
-            document.getElementById('authorAvatarImg').alt = news.author.name;
-            document.getElementById('modalBody').innerHTML = news.content;
-            
-            // Limpiar y agregar etiquetas
-            const tagsContainer = document.getElementById('modalTags');
-            tagsContainer.innerHTML = '';
-            news.tags.forEach(tag => {
-                const tagElement = document.createElement('div');
-                tagElement.className = 'modal-tag';
-                tagElement.textContent = tag;
-                tagsContainer.appendChild(tagElement);
-            });
-            
-            // Mostrar modal
-            document.getElementById('newsModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+// Manejo de etiquetas
+document.getElementById('addTagBtn').addEventListener('click', function () {
+    const tagInput = document.getElementById('tagInput');
+    const tag = tagInput.value.trim();
+    if (tag && !tagsList.includes(tag)) {
+        tagsList.push(tag);
+        updateTagsDisplay();
+        tagInput.value = '';
+    }
+});
 
-        // Función para cerrar el modal
-        function closeNewsModal() {
-            document.getElementById('newsModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
+document.getElementById('tagInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('addTagBtn').click();
+    }
+});
 
-        // Event listeners para el modal
-        document.getElementById('closeModal').addEventListener('click', closeNewsModal);
-        document.getElementById('newsModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeNewsModal();
-            }
-        });
-
-        // ============================================================== //
-        // BUSCA Y FILTRA FUNCIONES
-        // ============================================================== //
-        // Funcionalidad de búsqueda
-        document.getElementById('newsSearch').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const newsCards = document.querySelectorAll('.news-card');
-            
-            newsCards.forEach(card => {
-                const title = card.querySelector('.news-title').textContent.toLowerCase();
-                const summary = card.querySelector('.news-summary').textContent.toLowerCase();
-                
-                if (title.includes(searchTerm) || summary.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Funcionalidad de filtrado por categoría
-        document.querySelectorAll('.category-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // Remover clase activa de todos los elementos
-                document.querySelectorAll('.category-item').forEach(el => {
-                    el.classList.remove('active');
-                });
-                
-                // Agregar clase activa al elemento seleccionado
-                this.classList.add('active');
-                
-                const category = this.getAttribute('data-category');
-                
-                // Filtrar noticias por categoría
-                filterNewsByCategory(category);
-            });
-        });
-
-        // Función para filtrar noticias por categoría
-        function filterNewsByCategory(category) {
-            const newsCards = document.querySelectorAll('.news-card');
-            
-            if (category === 'todas') {
-                newsCards.forEach(card => {
-                    card.style.display = 'block';
-                });
-                return;
-            }
-            
-            newsCards.forEach(card => {
-                const newsId = card.getAttribute('data-news-id');
-                const news = newsData[newsId];
-                
-                if (news && news.category === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // ============================================================== //
-        // FUNCIONES DE PAGINACION
-        // ============================================================== //
-        // Funcionalidad de paginación
-        document.querySelectorAll('.page-item').forEach(item => {
-            item.addEventListener('click', function() {
-                if (!this.classList.contains('disabled')) {
-                    // Remover clase activa de todos los elementos
-                    document.querySelectorAll('.page-item').forEach(el => {
-                        el.classList.remove('active');
-                    });
-                    
-                    // Agregar clase activa al elemento seleccionado
-                    this.classList.add('active');
-                    
-                    const page = this.getAttribute('data-page');
-                    
-                    // Aquí iría la lógica para cargar la página seleccionada
-                    console.log('Cargando página:', page);
-                }
-            });
-        });
-
-        // Funcionalidad de navegación entre páginas
-        document.getElementById('prevPage').addEventListener('click', function() {
-            const currentPage = document.querySelector('.page-item.active');
-            const prevPage = currentPage.previousElementSibling;
-            if (prevPage && !prevPage.classList.contains('disabled')) {
-                currentPage.classList.remove('active');
-                prevPage.classList.add('active');
-                const page = prevPage.getAttribute('data-page');
-                console.log('Cargando página:', page);
-            }
-        });
-
-        document.getElementById('nextPage').addEventListener('click', function() {
-            const currentPage = document.querySelector('.page-item.active');
-            const nextPage = currentPage.nextElementSibling;
-            if (nextPage && !nextPage.classList.contains('disabled')) {
-                currentPage.classList.remove('active');
-                nextPage.classList.add('active');
-                const page = nextPage.getAttribute('data-page');
-                console.log('Cargando página:', page);
-            }
-        });
-
-        // ============================================================== //
-        // UI - FUNCIONES DE INTERACCION
-        // ============================================================== //
-        // Efecto de hover para las tarjetas de noticias
-        document.querySelectorAll('.news-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Funcionalidad de leer más
-        document.querySelectorAll('.read-more-btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const card = this.closest('.news-card');
-                const newsId = card.getAttribute('data-news-id');
-                openNewsModal(newsId);
-            });
-        });
-
-        // Función para ir al inicio de la página (header)
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Función para contar el número de noticias presentes
-        function countNews() {
-            const newsCards = document.querySelectorAll('.news-card');
-            const visibleCards = Array.from(newsCards).filter(card => card.style.display !== 'none');
-            const resultsInfo = document.getElementById('resultsInfo');
-            resultsInfo.innerHTML = `<p>Mostrando ${visibleCards.length} de ${newsCards.length} noticias</p>`;
-        }
-
-        // ============================================================== //
-        // FORM HANDLING FUNCTIONS
-        // ============================================================== //
-        // Funcionalidad para crear noticias y guardar en localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            countNews();
-
-            const toggleCreateFormBtn = document.getElementById('toggleCreateForm');
-            if (toggleCreateFormBtn) {
-                toggleCreateFormBtn.addEventListener('click', function() {
-                    const form = document.getElementById('createNewsForm');
-                    if (form) form.classList.toggle('active');
-                });
-            }
-
-            const cancelFormBtn = document.getElementById('cancelForm');
-            if (cancelFormBtn) {
-                cancelFormBtn.addEventListener('click', function() {
-                    const createNewsForm = document.getElementById('createNewsForm');
-                    const newsForm = document.getElementById('newsForm');
-                    if (createNewsForm) createNewsForm.classList.remove('active');
-                    if (newsForm) newsForm.reset();
-                    tagsList = [];
-                    updateTagsDisplay();
-                    const imagePreview = document.getElementById('imagePreview');
-                    const avatarPreview = document.getElementById('avatarPreview');
-                    if (imagePreview) imagePreview.classList.remove('show');
-                    if (avatarPreview) avatarPreview.classList.remove('show');
-                });
-            }
-        });
-
-        // Previsualización de imágenes
-        document.getElementById('newsImage').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('imagePreview');
-                    preview.src = e.target.result;
-                    preview.classList.add('show');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('authorAvatarInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('avatarPreview');
-                    preview.src = e.target.result;
-                    preview.classList.add('show');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Manejo de etiquetas
-        document.getElementById('addTagBtn').addEventListener('click', function() {
-            const tagInput = document.getElementById('tagInput');
-            const tag = tagInput.value.trim();
-            if (tag && !tagsList.includes(tag)) {
-                tagsList.push(tag);
-                updateTagsDisplay();
-                tagInput.value = '';
-            }
-        });
-
-        document.getElementById('tagInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('addTagBtn').click();
-            }
-        });
-
-        function updateTagsDisplay() {
-            const container = document.getElementById('tagsContainer');
-            container.innerHTML = '';
-            tagsList.forEach((tag, index) => {
-                const tagElement = document.createElement('div');
-                tagElement.className = 'tag-chip';
-                tagElement.innerHTML = `
+function updateTagsDisplay() {
+    const container = document.getElementById('tagsContainer');
+    container.innerHTML = '';
+    tagsList.forEach((tag, index) => {
+        const tagElement = document.createElement('div');
+        tagElement.className = 'tag-chip';
+        tagElement.innerHTML = `
                     ${tag}
                     <span class="remove-tag" data-index="${index}">×</span>
                 `;
-                container.appendChild(tagElement);
-            });
-            
-            // Agregar event listeners a los botones de eliminar
-            document.querySelectorAll('.remove-tag').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    tagsList.splice(index, 1);
-                    updateTagsDisplay();
-                });
-            });
-        }
+        container.appendChild(tagElement);
+    });
 
-        // Manejo del formulario de creación de noticias
-        document.getElementById('newsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const newsId = Date.now(); // ID único basado en timestamp
-            
-            // Obtener datos del formulario
-            const newsDataItem = {
-                title: document.getElementById('newsTitle').value,
-                date: document.getElementById('newsDate').value,
-                image: document.getElementById('newsImage').files[0] ? URL.createObjectURL(document.getElementById('newsImage').files[0]) : 'https://placehold.co/400x200/16213e/0f3460?text=Nueva+Noticia',
-                author: {
-                    name: document.getElementById('newsAuthor').value,
-                    role: document.getElementById('authorRole').value,
-                    avatar: document.getElementById('authorAvatarInput').files[0] ? URL.createObjectURL(document.getElementById('authorAvatarInput').files[0]) : 'https://placehold.co/100x100/667eea/ffffff?text=' + document.getElementById('newsAuthor').value.charAt(0)
-                },
-                content: document.getElementById('newsContent').value,
-                summary: document.getElementById('newsSummary').value,
-                tags: [...tagsList],
-                category: document.getElementById('newsCategory').value
-            };
-            
-            // Guardar en el objeto global
-            newsData[newsId] = newsDataItem;
-            
-            // Crear y agregar la nueva noticia al DOM
-            createNewsCard(newsId, newsDataItem);
-            
-            // Resetear formulario
-            this.reset();
-            tagsList = [];
+    // Agregar event listeners a los botones de eliminar
+    document.querySelectorAll('.remove-tag').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const index = parseInt(this.getAttribute('data-index'));
+            tagsList.splice(index, 1);
             updateTagsDisplay();
-            document.getElementById('imagePreview').classList.remove('show');
-            document.getElementById('avatarPreview').classList.remove('show');
-            document.getElementById('createNewsForm').classList.remove('active');
-            
-            alert('¡Noticia creada exitosamente!');
         });
+    });
+}
 
-        // Función para crear una tarjeta de noticia
-        function createNewsCard(id, news) {
-            const newsGrid = document.getElementById('newsGrid');
-            const card = document.createElement('div');
-            card.className = 'news-card rounded-xl p-6 cursor-pointer slide-in';
-            card.setAttribute('data-aos', 'fade-up');
-            card.setAttribute('data-aos-delay', '100');
-            card.setAttribute('data-news-id', id);
-            
-            card.innerHTML = `
+// Manejo del formulario de creación de noticias
+document.getElementById('newsForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const newsId = Date.now(); // ID único basado en timestamp
+
+    // Obtener datos del formulario
+    const newsDataItem = {
+        title: document.getElementById('newsTitle').value,
+        date: document.getElementById('newsDate').value,
+        image: document.getElementById('newsImage').files[0] ? URL.createObjectURL(document.getElementById('newsImage').files[0]) : 'https://placehold.co/400x200/16213e/0f3460?text=Nueva+Noticia',
+        author: {
+            name: document.getElementById('newsAuthor').value,
+            role: document.getElementById('authorRole').value,
+            avatar: document.getElementById('authorAvatarInput').files[0] ? URL.createObjectURL(document.getElementById('authorAvatarInput').files[0]) : 'https://placehold.co/100x100/667eea/ffffff?text=' + document.getElementById('newsAuthor').value.charAt(0)
+        },
+        content: document.getElementById('newsContent').value,
+        summary: document.getElementById('newsSummary').value,
+        tags: [...tagsList],
+        category: document.getElementById('newsCategory').value
+    };
+
+    // Guardar en el objeto global
+    newsData[newsId] = newsDataItem;
+
+    // Crear y agregar la nueva noticia al DOM
+    createNewsCard(newsId, newsDataItem);
+
+    // Resetear formulario
+    this.reset();
+    tagsList = [];
+    updateTagsDisplay();
+    document.getElementById('imagePreview').classList.remove('show');
+    document.getElementById('avatarPreview').classList.remove('show');
+    document.getElementById('createNewsForm').classList.remove('active');
+
+    alert('¡Noticia creada exitosamente!');
+});
+
+// Función para crear una tarjeta de noticia
+function createNewsCard(id, news) {
+    const newsGrid = document.getElementById('newsGrid');
+    const card = document.createElement('div');
+    card.className = 'news-card rounded-xl p-6 cursor-pointer slide-in';
+    card.setAttribute('data-aos', 'fade-up');
+    card.setAttribute('data-aos-delay', '100');
+    card.setAttribute('data-news-id', id);
+
+    card.innerHTML = `
                 <div class="publish-date">${formatDate(news.date)}</div>
                 <img src="${news.image}" alt="${news.title}" class="featured-image">
                 <h3 class="news-title font-tech">${news.title}</h3>
@@ -817,70 +829,44 @@
                     </button>
                 </div>
             `;
-            
-            // Insertar al principio del grid
-            newsGrid.insertBefore(card, newsGrid.firstChild);
-            
-            // Inicializar feather icons
-            feather.replace();
-            
-            // Agregar eventos
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-            
-            card.querySelector('.read-more-btn').addEventListener('click', function(e) {
-                e.stopPropagation();
-                openNewsModal(id);
-            });
-        }
 
-        // Función para formatear la fecha
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = date.toLocaleDateString('es-ES', { month: 'short' }).charAt(0).toUpperCase() + date.toLocaleDateString('es-ES', { month: 'short' }).slice(1);
-            const year = date.getFullYear();
-            return `${day} ${month} ${year}`;
-        }
+    // Insertar al principio del grid
+    newsGrid.insertBefore(card, newsGrid.firstChild);
 
-        // Inicializar la fecha actual en el campo de fecha
-        document.getElementById('newsDate').valueAsDate = new Date();
-    
-document.getElementById('sortFilter').addEventListener('change', function() {
-    const sortValue = this.value;
-    const newsGrid = document.getElementById('newsGrid');
-    const cards = Array.from(newsGrid.querySelectorAll('.news-card'));
+    // Inicializar feather icons
+    feather.replace();
 
-    let sortedCards = [];
+    // Agregar eventos
+    card.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateY(-5px)';
+    });
 
-    if (sortValue === 'fecha') {
-        sortedCards = cards.sort((a, b) => {
-            const dateA = new Date(newsData[a.getAttribute('data-news-id')].date);
-            const dateB = new Date(newsData[b.getAttribute('data-news-id')].date);
-            return dateB - dateA;
-        });
-    } else if (sortValue === 'titulo') {
-        sortedCards = cards.sort((a, b) => {
-            const titleA = newsData[a.getAttribute('data-news-id')].title.toLowerCase();
-            const titleB = newsData[b.getAttribute('data-news-id')].title.toLowerCase();
-            return titleA.localeCompare(titleB);
-        });
-    }
+    card.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateY(0)';
+    });
 
-    sortedCards.forEach(card => newsGrid.appendChild(card));
-});
+    card.querySelector('.read-more-btn').addEventListener('click', function (e) {
+        e.stopPropagation();
+        openNewsModal(id);
+    });
+}
+
+// Función para formatear la fecha
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = date.toLocaleDateString('es-ES', { month: 'short' }).charAt(0).toUpperCase() + date.toLocaleDateString('es-ES', { month: 'short' }).slice(1);
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+}
+
+// Inicializar la fecha actual en el campo de fecha
+document.getElementById('newsDate').valueAsDate = new Date();
+
+// Nota: El ordenamiento ahora se maneja con los botones premium en news-premium-final.js
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    const sortFilter = document.getElementById('sortFilter');
-    if (sortFilter) {
-        sortFilter.value = 'fecha';
-        const event = new Event('change');
-        sortFilter.dispatchEvent(event);
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    // El sortFilter fue eliminado y reemplazado por botones premium
+    // La funcionalidad ahora está en news-premium-final.js
 });

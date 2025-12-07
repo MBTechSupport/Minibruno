@@ -1,233 +1,679 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-tertiary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --neon-blue: 0 0 20px rgba(102, 126, 234, 0.6);
-            --neon-purple: 0 0 20px rgba(240, 147, 251, 0.6);
-        }
-        
-        body {
-            font-family: 'Exo 2', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            overflow-x: hidden;
-        }
-        
-        .font-tech {
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.05);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        
-        .neon-glow {
-            box-shadow: var(--neon-blue);
-            transition: all 0.3s ease;
-        }
-        
-        .neon-glow:hover {
-            box-shadow: var(--neon-blue), 0 0 30px rgba(102, 126, 234, 0.8);
-            transform: translateY(-2px);
-        }
-        
-        .gradient-text {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .matrix-bg {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .matrix-bg::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        
-        .floating-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .scan-line {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .scan-line::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #667eea, transparent);
-            animation: scan 3s linear infinite;
-        }
-        
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-        
-        .cyber-grid {
-            background-image: 
-                linear-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-        
-        .rgb-divider {
-            height: 4px;
-            width: 100%;
-            background: linear-gradient(
-                to right,
-                #ff0000,
-                #ff7f00,
-                #ffff00,
-                #00ff00,
-                #0000ff,
-                #4b0082,
-                #8b00ff,
-                #ff0000
-            );
-            background-size: 600% 100%;
-            border-radius: 2px;
-            animation: rainbow 6s linear infinite;
-        }
-        
-        @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .login-card {
-            background: rgba(15, 12, 41, 0.9);
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-        }
-        
-        .input-field {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .input-field:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-        }
-        
-        .input-field::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .neon-button {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border: none;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .neon-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .neon-button:hover::before {
-            left: 100%;
-        }
-        
-        .neon-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-        
-        .hologram-text {
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        .error-message {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid #ef44444d;
-            color: #fecaca;
-        }
-        
-        .success-message {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #a7f3d0;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
-        }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        .glow {
-            color: #fecaca;
-            text-shadow: 0 0 5px #fecaca, 0 0 10px #fecaca, 0 0 20px #fecaca;
-        }
 
-        .glow:hover {
-            text-shadow: 0 0 5px #ffffff56, 0 0 10px #ffffff, 0 0 20px #ffffff;
-            text-decoration: underline;
-        }
-        
-        .google-login-btn {
-            background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
-            border: none;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .google-login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4);
-        }
+/* =====================================================
+   VARIABLES CSS GLOBALES - SISTEMA DE AUTENTICACIÓN
+   ===================================================== */
+:root {
+    /* Colores principales - Paleta coherente con el proyecto */
+    --primary-dark: #213379;
+    --primary-light: #428ce2;
+    --accent-red: #ef4444;
+    --background-dark: #0a0e27;
+    --background-darker: #050813;
+
+    /* Gradientes espectaculares coherentes */
+    --gradient-primary: linear-gradient(135deg, #213379 0%, #428ce2 100%);
+    --gradient-secondary: linear-gradient(135deg, #428ce2 0%, #ef4444 100%);
+    --gradient-accent: linear-gradient(135deg, #213379 0%, #428ce2 50%, #ef4444 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+    /* Sombras 3D y efectos de profundidad */
+    --shadow-3d: 0 30px 60px rgba(0, 0, 0, 0.5),
+        0 15px 30px rgba(33, 51, 121, 0.3);
+    --neon-blue: 0 0 20px rgba(66, 140, 226, 0.6),
+        0 0 40px rgba(66, 140, 226, 0.4);
+    --neon-red: 0 0 20px rgba(239, 68, 68, 0.6),
+        0 0 40px rgba(239, 68, 68, 0.4);
+}
+
+/* =====================================================
+   CONFIGURACIÓN BASE Y RESET
+   ===================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    background: linear-gradient(135deg, var(--background-darker) 0%, var(--background-dark) 50%, #1a1f3a 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: relative;
+}
+
+/* Efecto de partículas energéticas de fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(66, 140, 226, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(239, 68, 68, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(33, 51, 121, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    animation: energyPulse 12s ease-in-out infinite;
+}
+
+@keyframes energyPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* =====================================================
+   TIPOGRAFÍA
+   ===================================================== */
+.font-tech {
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 15px rgba(66, 140, 226, 0.4);
+    transition: all 0.4s ease;
+    letter-spacing: 1px;
+}
+
+.font-tech:hover {
+    text-shadow: 0 0 25px rgba(66, 140, 226, 0.7);
+}
+
+.gradient-text {
+    background: var(--gradient-primary);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.hologram-text {
+    background: var(--gradient-accent);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 5s ease infinite;
+}
+
+/* =====================================================
+   GRID DE FONDO ANIMADO
+   ===================================================== */
+.cyber-grid {
+    background-image:
+        linear-gradient(rgba(66, 140, 226, 0.08) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(66, 140, 226, 0.08) 1.5px, transparent 1.5px);
+    background-size: 40px 40px;
+    animation: gridFloat 60s linear infinite, gridPulse 4s ease-in-out infinite;
+}
+
+@keyframes gridFloat {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+
+    100% {
+        background-position: 400px 400px, 0 0;
+    }
+}
+
+@keyframes gridPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* =====================================================
+   RGB DIVIDER ANIMADO
+   ===================================================== */
+.rgb-divider {
+    height: 4px;
+    width: 100%;
+    background: var(--gradient-accent);
+    background-size: 300% 300%;
+    border-radius: 2px;
+    animation: rgbShift 8s ease infinite;
+    box-shadow: 0 0 10px rgba(66, 140, 226, 0.5);
+}
+
+@keyframes rgbShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* =====================================================
+   NEON GLOW EFFECT
+   ===================================================== */
+.neon-glow {
+    box-shadow: var(--neon-blue);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.neon-glow:hover {
+    box-shadow:
+        0 0 30px rgba(66, 140, 226, 0.8),
+        0 0 60px rgba(66, 140, 226, 0.5);
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* =====================================================
+   SCAN LINE ANIMATION
+   ===================================================== */
+.scan-line {
+    position: relative;
+    overflow: hidden;
+}
+
+.scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
+    animation: scan 4s linear infinite;
+    box-shadow: 0 0 15px rgba(66, 140, 226, 0.6);
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 100%));
+        opacity: 0;
+    }
+}
+
+/* =====================================================
+   FLOATING ANIMATION
+   ===================================================== */
+.floating-animation {
+    animation: float3D 8s ease-in-out infinite;
+}
+
+@keyframes float3D {
+
+    0%,
+    100% {
+        transform: translateY(0px) translateZ(0px) rotateX(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) translateZ(20px) rotateX(5deg);
+    }
+}
+
+/* =====================================================
+   PULSE ANIMATION
+   ===================================================== */
+.pulse-animation {
+    animation: pulse3D 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse3D {
+
+    0%,
+    100% {
+        box-shadow: var(--neon-blue);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 40px rgba(66, 140, 226, 0.9),
+            0 0 80px rgba(66, 140, 226, 0.6);
+        transform: scale(1.02);
+    }
+}
+
+/* =====================================================
+   LOGIN/REGISTER CARD - GLASSMORPHISM AVANZADO
+   ===================================================== */
+.login-card,
+.register-card {
+    background: rgba(10, 14, 39, 0.7);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(66, 140, 226, 0.3);
+    border-radius: 30px;
+    box-shadow:
+        var(--shadow-3d),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    padding: 3rem 2.5rem;
+    max-width: 450px;
+    width: 90%;
+    position: relative;
+    z-index: 10;
+    animation: cardAppear 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.login-card:hover,
+.register-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.6),
+        0 20px 40px rgba(66, 140, 226, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Efecto holográfico en el borde */
+.login-card::before,
+.register-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 30px;
+    padding: 2px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.3;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* =====================================================
+   INPUT FIELDS - FUTURISTAS
+   ===================================================== */
+.input-field {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(66, 140, 226, 0.3);
+    border-radius: 15px;
+    color: white;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 0 3px rgba(66, 140, 226, 0.2),
+        0 0 20px rgba(66, 140, 226, 0.3),
+        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.input-field::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+}
+
+/* Efecto de brillo en input al escribir */
+.input-field:not(:placeholder-shown) {
+    border-color: var(--primary-light);
+    box-shadow:
+        0 0 15px rgba(66, 140, 226, 0.2),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* =====================================================
+   BOTONES - DISEÑO HOLOGRÁFICO
+   ===================================================== */
+.neon-button {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        var(--neon-blue),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-style: preserve-3d;
+}
+
+/* Brillo deslizante */
+.neon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.neon-button:hover::before {
+    left: 200%;
+}
+
+.neon-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+        0 0 40px rgba(66, 140, 226, 0.9),
+        0 0 80px rgba(66, 140, 226, 0.6),
+        0 20px 40px rgba(33, 51, 121, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.neon-button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* =====================================================
+   GOOGLE BUTTON
+   ===================================================== */
+.google-login-btn {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
+}
+
+.google-login-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+        0 10px 30px rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* =====================================================
+   MENSAJES DE ERROR Y ÉXITO
+   ===================================================== */
+.message {
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    animation: messageSlide 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1.5px solid rgba(239, 68, 68, 0.4);
+    color: #fecaca;
+    box-shadow:
+        0 0 20px rgba(239, 68, 68, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.success-message {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1.5px solid rgba(34, 197, 94, 0.4);
+    color: #bbf7d0;
+    box-shadow:
+        0 0 20px rgba(34, 197, 94, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+/* =====================================================
+   ENLACES Y TEXTOS
+   ===================================================== */
+a {
+    color: var(--primary-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #6bb4ff;
+    text-shadow: 0 0 10px rgba(66, 140, 226, 0.5);
+}
+
+.glow {
+    color: var(--primary-light);
+    text-shadow: 0 0 10px rgba(66, 140, 226, 0.6);
+    transition: all 0.3s ease;
+}
+
+.glow:hover {
+    text-shadow: 0 0 20px rgba(66, 140, 226, 0.9);
+    color: #6bb4ff;
+}
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+.container {
+    position: relative;
+    z-index: 10;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+
+    .login-card,
+    .register-card {
+        padding: 2.5rem 2rem;
+        max-width: 400px;
+    }
+
+    .font-tech {
+        font-size: 1.5rem;
+    }
+
+    .neon-button,
+    .google-login-btn {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    body {
+        padding: 1rem;
+    }
+
+    .login-card,
+    .register-card {
+        padding: 2rem 1.5rem;
+        width: 95%;
+        border-radius: 20px;
+    }
+
+    .font-tech {
+        font-size: 1.3rem;
+    }
+
+    .neon-button,
+    .google-login-btn {
+        padding: 0.85rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .input-field {
+        padding: 0.8rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    h1,
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Ultra mobile */
+@media (max-width: 400px) {
+
+    .login-card,
+    .register-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .font-tech {
+        font-size: 1.1rem;
+    }
+
+    h1,
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* =====================================================
+   OPTIMIZACIÓN DE RENDIMIENTO
+   ===================================================== */
+.neon-button,
+.google-login-btn,
+.input-field,
+.login-card,
+.register-card {
+    will-change: transform;
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+a {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+label {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+    z-index: 10;
+}

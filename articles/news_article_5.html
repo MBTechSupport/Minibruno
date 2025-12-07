@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Plan SOL! | MiniBruno TechSupport</title>
+
+    <link rel="stylesheet" href="../css/news.css" />
+    <link rel="stylesheet" href="../css/news-premium.css" />
+    <link rel="stylesheet" href="../css/news-extras.css" />
+    <link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <style>
+        .article-hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+        }
+
+        .article-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .article-hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+        }
+
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-content p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: justify;
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: #213379;
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            color: #428ce2;
+        }
+
+        .quote-box {
+            border-left: 4px solid #428ce2;
+            background: rgba(66, 140, 226, 0.05);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #213379;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            z-index: 100;
+            background: linear-gradient(135deg, #213379, #428ce2);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(33, 51, 121, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(33, 51, 121, 0.5);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-900">
+    <!-- Back Button -->
+    <a href="../news.html" class="back-button" data-aos="fade-right">
+        <i data-feather="arrow-left" class="w-5 h-5"></i>
+        Volver a Noticias
+    </a>
+
+    <!-- Article Hero -->
+    <div class="article-hero" data-aos="fade-down">
+        <img src="../img_ref/webp/news_article5.webp" alt="Plan SOL">
+        <div class="article-hero-content">
+            <div class="publish-date text-white opacity-80">23 de Octubre, 2025</div>
+            <h1 class="text-5xl font-bold font-tech mt-2 mb-4">¡Plan SOL! ☀️</h1>
+            <div class="flex items-center gap-4 text-white">
+                <div class="flex items-center gap-2">
+                    <i data-feather="user" class="w-5 h-5"></i>
+                    <span>Yosmary Nieves</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">Higiene</span>
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">Seguridad</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="article-content scroll-animate">
+        <div class="tech-card rounded-2xl p-8" data-aos="fade-up">
+            <h2>¿Qué es el Plan SOL?</h2>
+            <p>
+                El programa se basa en tres pilares fundamentales: <strong>Seguridad, Orden y Limpieza</strong>. Estos
+                pilares son esenciales para crear un entorno de trabajo seguro y eficiente. Juntos, estos elementos
+                crean un entorno de trabajo más seguro, eficiente y agradable para todos en Mini Bruno Sucesores.
+            </p>
+
+            <div class="quote-box" data-aos="fade-right">
+                "SOL no es solo un programa, es una filosofía de trabajo que ilumina cada aspecto de nuestra operación
+                diaria."
+            </div>
+
+            <h2>Los Tres Pilares del Plan SOL</h2>
+
+            <div class="space-y-8 my-8">
+                <!-- Pilar 1: Seguridad -->
+                <div class="relative pl-8 border-l-4 border-blue-500" data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="absolute -left-6 top-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                        S
+                    </div>
+                    <h3 class="text-2xl mb-4">Seguridad 🛡️</h3>
+                    <p>
+                        La seguridad es nuestro primer compromiso. Un ambiente seguro no solo protege a nuestros
+                        colaboradores de accidentes y lesiones, sino que también garantiza la continuidad operativa y la
+                        calidad de nuestros productos.
+                    </p>
+
+                    <div class="bg-blue-50 p-6 rounded-xl mt-4">
+                        <h4 class="font-bold text-blue-600 mb-3">Elementos Clave de la Seguridad:</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">▸</span>
+                                <span><strong>Identificación de riesgos:</strong> Evaluación constante de peligros
+                                    potenciales en el área de trabajo</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">▸</span>
+                                <span><strong>Uso de EPP:</strong> Equipo de protección personal adecuado para cada
+                                    tarea</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">▸</span>
+                                <span><strong>Señalización clara:</strong> Indicadores visibles de zonas de riesgo y
+                                    procedimientos</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">▸</span>
+                                <span><strong>Mantenimiento preventivo:</strong> Revisión regular de equipos y
+                                    maquinaria</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">▸</span>
+                                <span><strong>Capacitación continua:</strong> Entrenamiento en procedimientos seguros
+                                    de trabajo</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-blue-500">▸</span>
+                                <span><strong>Reportes de incidentes:</strong>Sistema abierto para comunicar situaciones
+                                    de riesgo</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pilar 2: Orden -->
+                <div class="relative pl-8 border-l-4 border-purple-500" data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="absolute -left-6 top-0 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                        O
+                    </div>
+                    <h3 class="text-2xl mb-4">Orden 📋</h3>
+                    <p>
+                        El orden es la base de la eficiencia. Un espacio de trabajo organizado reduce tiempos de
+                        búsqueda, minimiza errores y facilita el flujo de trabajo. Además, un ambiente ordenado
+                        contribuye al bienestar mental y reduce el estrés laboral.
+                    </p>
+
+                    <div class="bg-purple-50 p-6 rounded-xl mt-4">
+                        <h4 class="font-bold text-purple-600 mb-3">Prácticas de Orden:</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500">▸</span>
+                                <span><strong>Clasificación:</strong> Separar elementos necesarios de los innecesarios
+                                </span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500">▸</span>
+                                <span><strong>Ubicación definida:</strong> Un lugar específico para cada herramienta o
+                                    material</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500">▸</span>
+                                <span><strong>Etiquetado:</strong> Identificación clara de contenidos y ubicaciones
+                                </span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500">▸</span>
+                                <span><strong>Zonas demarcadas:</strong> Áreas claramente definidas para cada actividad
+                                </span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500">▸</span>
+                                <span><strong>Gestión de inventario:</strong> Control eficiente de materiales y
+                                    suministros</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-purple-500">▸</span>
+                                <span><strong>Pasillos despejados:</strong> Rutas de tránsito libres de obstáculos
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pilar 3: Limpieza -->
+                <div class="relative pl-8 border-l-4 border-green-500" data-aos="fade-up" data-aos-delay="300">
+                    <div
+                        class="absolute -left-6 top-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                        L
+                    </div>
+                    <h3 class="text-2xl mb-4">Limpieza 🧹</h3>
+                    <p>
+                        La limpieza va más allá de la estética. Es fundamental para prevenir contaminación, mantener la
+                        calidad del producto y crear un ambiente saludable. Un espacio limpio también refleja nuestro
+                        compromiso con la excelencia y el respeto mutuo.
+                    </p>
+
+                    <div class="bg-green-50 p-6 rounded-xl mt-4">
+                        <h4 class="font-bold text-green-600 mb-3">Estándares de Limpieza:</h4>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">▸</span>
+                                <span><strong>Limpieza diaria:</strong> Rutinas establecidas de limpieza al inicio y
+                                    fin de turno</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">▸</span>
+                                <span><strong>Desinfección regular:</strong> Protocolos de sanitización según
+                                    normativas</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">▸</span>
+                                <span><strong>Gestión de residuos:</strong> Separación y disposición adecuada de
+                                    desechos</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">▸</span>
+                                <span><strong>Limpieza de equipos:</strong> Mantenimiento higiénico de maquinaria y
+                                    herramientas</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">▸</span>
+                                <span><strong>Áreas sanitarias:</strong> Especial atención a baños y áreas de
+                                    consumo</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">▸</span>
+                                <span><strong>Control de plagas:</strong> Prevención y monitoreo constante</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Beneficios del Plan SOL</h2>
+            <p>
+                La implementación efectiva del Plan SOL genera múltiples beneficios tangibles e intangibles para toda
+                la organización:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                <div class="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl text-center" data-aos="flip-up"
+                    data-aos-delay="100">
+                    <div class="text-4xl mb-2">📊</div>
+                    <h4 class="font-bold text-blue-600 mb-2">Mayor Productividad</h4>
+                    <p class="text-sm text-gray-600">Reducción de tiempos muertos y optimización de procesos</p>
+                </div>
+                <div class="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl text-center"
+                    data-aos="flip-up" data-aos-delay="200">
+                    <div class="text-4xl mb-2">💰</div>
+                    <h4 class="font-bold text-purple-600 mb-2">Reducción de Costos</h4>
+                    <p class="text-sm text-gray-600">Menos accidentes, menos desperdicios, mejor uso de recursos</p>
+                </div>
+                <div class="p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-xl text-center" data-aos="flip-up"
+                    data-aos-delay="300">
+                    <div class="text-4xl mb-2">⭐</div>
+                    <h4 class="font-bold text-green-600 mb-2">Mejor Calidad</h4>
+                    <p class="text-sm text-gray-600">Productos más consistentes y confiables</p>
+                </div>
+                <div class="p-4 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl text-center"
+                    data-aos="flip-up" data-aos-delay="400">
+                    <div class="text-4xl mb-2">😊</div>
+                    <h4 class="font-bold text-yellow-600 mb-2">Bienestar Laboral</h4>
+                    <p class="text-sm text-gray-600">Ambiente más agradable y motivador</p>
+                </div>
+                <div class="p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl text-center" data-aos="flip-up"
+                    data-aos-delay="500">
+                    <div class="text-4xl mb-2">🏆</div>
+                    <h4 class="font-bold text-pink-600 mb-2">Imagen Corporativa</h4>
+                    <p class="text-sm text-gray-600">Mejor percepción de clientes y visitantes</p>
+                </div>
+                <div class="p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl text-center" data-aos="flip-up"
+                    data-aos-delay="600">
+                    <div class="text-4xl mb-2">📜</div>
+                    <h4 class="font-bold text-cyan-600 mb-2">Cumplimiento Normativo</h4>
+                    <p class="text-sm text-gray-600">Alineación con estándares de calidad e higiene</p>
+                </div>
+            </div>
+
+            <div class="quote-box" data-aos="fade-left">
+                "El Plan SOL es responsabilidad de todos. Cada pequeña acción cuenta y suma al éxito colectivo."
+            </div>
+
+            <h2>Cómo Participar en el Plan SOL</h2>
+            <p>
+                Todos somos parte activa del Plan SOL. Aquí te mostramos cómo puedes contribuir:
+            </p>
+
+            <div class="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 p-6 rounded-xl my-6" data-aos="fade-up">
+                <h4 class="font-bold text-gray-800 mb-4 text-xl">Tu Compromiso Diario:</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <span class="text-gray-700">Reporta condiciones inseguras inmediatamente</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <span class="text-gray-700">Mantén tu área de trabajo ordenada</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <span class="text-gray-700">Limpia después de cada tarea</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <span class="text-gray-700">Usa el EPP correcto siempre</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 bg-pink-500 text-white rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <span class="text-gray-700">Guarda herramientas en su lugar</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="flex-shrink-0 w-8 h-8 bg-cyan-500 text-white rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <span class="text-gray-700">Participa activamente en capacitaciones</span>
+                    </div>
+                </div>
+            </div>
+
+            <p>
+                El Plan SOL es más que un programa; es un estilo de vida laboral que nos permite brillar como equipo.
+                Cuando aplicamos Seguridad, Orden y Limpieza en nuestra rutina diaria, no solo mejoramos nuestro
+                entorno de trabajo, sino que también demostramos nuestro compromiso con la excelencia y el bienestar
+                colectivo.
+            </p>
+
+            <p>
+                ¡Hagamos que el sol brille en cada rincón de Mini Bruno Sucesores! 🌟
+            </p>
+
+            <div class="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl" data-aos="fade-up">
+                <h4 class="font-tech text-xl mb-3 text-gray-800">Sobre la autora</h4>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                        YN
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg text-gray-800">Yosmary Nieves</div>
+                        <div class="text-gray-600">Comunicaciones MBS</div>
+                        <p class="text-sm text-gray-500 mt-1">
+                            Implementando programas de mejora continua en seguridad y calidad.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="../news.html"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                    <i data-feather="arrow-left" class="w-5 h-5"></i>
+                    Volver a Noticias
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        feather.replace();
+    </script>
+    <script src="../js/news-animations.js"></script>
+        <script type="module" src="js/auth_guard.js"></script>
+</body>
+
+</html>

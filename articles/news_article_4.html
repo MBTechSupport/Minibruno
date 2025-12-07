@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Un Puesto Limpio, un Trabajo Seguro! | MiniBruno TechSupport</title>
+
+    <link rel="stylesheet" href="../css/news.css" />
+    <link rel="stylesheet" href="../css/news-premium.css" />
+    <link rel="stylesheet" href="../css/news-extras.css" />
+    <link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <style>
+        .article-hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 3rem;
+        }
+
+        .article-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .article-hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 3rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+        }
+
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .article-content p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: justify;
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: #213379;
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            color: #428ce2;
+        }
+
+        .quote-box {
+            border-left: 4px solid #428ce2;
+            background: rgba(66, 140, 226, 0.05);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #213379;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            z-index: 100;
+            background: linear-gradient(135deg, #213379, #428ce2);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(33, 51, 121, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(33, 51, 121, 0.5);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-gray-900">
+    <!-- Back Button -->
+    <a href="../news.html" class="back-button" data-aos="fade-right">
+        <i data-feather="arrow-left" class="w-5 h-5"></i>
+        Volver a Noticias
+    </a>
+
+    <!-- Article Hero -->
+    <div class="article-hero" data-aos="fade-down">
+        <img src="../img_ref/webp/news_article4.webp" alt="Un Puesto Limpio, un Trabajo Seguro">
+        <div class="article-hero-content">
+            <div class="publish-date text-white opacity-80">21 de Octubre, 2025</div>
+            <h1 class="text-5xl font-bold font-tech mt-2 mb-4">¡Un Puesto Limpio, un Trabajo Seguro! 🧹</h1>
+            <div class="flex items-center gap-4 text-white">
+                <div class="flex items-center gap-2">
+                    <i data-feather="user" class="w-5 h-5"></i>
+                    <span>Yosmary Nieves</span>
+                </div>
+                <div class="flex gap-2">
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">Higiene</span>
+                    <span class="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm">Seguridad</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <div class="article-content scroll-animate">
+        <div class="tech-card rounded-2xl p-8" data-aos="fade-up">
+            <h2>La Importancia de un Entorno Limpio</h2>
+            <p>
+                Un entorno limpio evita la contaminación cruzada, reduce la propagación de enfermedades y crea un
+                ambiente seguro para todos. En Mini Bruno Sucesores, nos comprometemos a mantener los más altos
+                estándares de limpieza e higiene, protegiendo la salud de nuestros empleados y clientes. Juntos,
+                construimos un entorno saludable y seguro para todos.
+            </p>
+
+            <div class="quote-box" data-aos="fade-right">
+                "La limpieza no es un lujo, es una inversión en salud, seguridad y calidad."
+            </div>
+
+            <h3>Más Allá de las Apariencias</h3>
+            <p>
+                La limpieza en el lugar de trabajo va mucho más allá de la estética. Es un componente crítico de la
+                seguridad laboral y la calidad del producto. Un puesto de trabajo limpio y ordenado no solo refleja
+                profesionalismo, sino que también previene accidentes, reduce riesgos de contaminación y mejora la
+                eficiencia operativa.
+            </p>
+
+            <h2>Beneficios de Mantener un Puesto Limpio</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div class="p-6 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <h4 class="font-bold text-blue-600 mb-3 flex items-center gap-2">
+                        <span class="text-2xl">🛡️</span> Seguridad
+                    </h4>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Prevención de caídas y tropiezos</li>
+                        <li>• Reducción de riesgos de incendio</li>
+                        <li>• Identificación rápida de peligros</li>
+                        <li>• Mejor visibilidad del área de trabajo</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <h4 class="font-bold text-green-600 mb-3 flex items-center gap-2">
+                        <span class="text-2xl">💚</span> Salud
+                    </h4>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Prevención de enfermedades</li>
+                        <li>• Control de alergenos</li>
+                        <li>• Reducción de estrés laboral</li>
+                        <li>• Ambiente más saludable</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <h4 class="font-bold text-purple-600 mb-3 flex items-center gap-2">
+                        <span class="text-2xl">⚙️</span> Productividad
+                    </h4>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Menos tiempo buscando herramientas</li>
+                        <li>• Flujo de trabajo optimizado</li>
+                        <li>• Menor tiempo de inactividad</li>
+                        <li>• Mayor eficiencia operativa</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl" data-aos="fade-up"
+                    data-aos-delay="400">
+                    <h4 class="font-bold text-yellow-600 mb-3 flex items-center gap-2">
+                        <span class="text-2xl">✨</span> Calidad
+                    </h4>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Prevención de contaminación</li>
+                        <li>• Productos más seguros</li>
+                        <li>• Cumplimiento de normativas</li>
+                        <li>• Reputación mejorada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Principios de un Puesto Limpio</h3>
+            <p>
+                Mantener un puesto limpio requiere la aplicación de principios básicos que deben convertirse en hábitos
+                diarios:
+            </p>
+
+            <div class="bg-white p-6 rounded-xl border-2 border-blue-200 my-6" data-aos="fade-up">
+                <h4 class="font-bold text-blue-600 mb-4 text-xl">Las 5S de la Organización:</h4>
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">
+                            1
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-800">Seiri (Clasificar)</h5>
+                            <p class="text-sm text-gray-600">Separar lo necesario de lo innecesario. Eliminar lo que no
+                                se usa.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold">
+                            2
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-800">Seiton (Ordenar)</h5>
+                            <p class="text-sm text-gray-600">Un lugar para cada cosa y cada cosa en su lugar.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold">
+                            3
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-800">Seiso (Limpiar)</h5>
+                            <p class="text-sm text-gray-600">Mantener todo limpio: equipos, herramientas y área de
+                                trabajo.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold">
+                            4
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-800">Seiketsu (Estandarizar)</h5>
+                            <p class="text-sm text-gray-600">Crear procedimientos estándar para mantiene la limpieza.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center font-bold">
+                            5
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-gray-800">Shitsuke (Disciplina)</h5>
+                            <p class="text-sm text-gray-600">Hacer de la limpieza un hábito, no una tarea ocasional.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Responsabilidad Compartida</h2>
+            <p>
+                La limpieza del lugar de trabajo no es responsabilidad exclusiva del personal de limpieza. Cada
+                colaborador es responsable de mantener su área de trabajo limpia y ordenada. Esta responsabilidad
+                compartida crea una cultura de respeto mutuo y profesionalismo.
+            </p>
+
+            <div class="quote-box" data-aos="fade-left">
+                "Un puesto limpio no solo habla de tu profesionalismo, refleja el respeto que tienes por ti mismo, tus
+                compañeros y tu trabajo."
+            </div>
+
+            <h3>Hábitos Diarios de Limpieza</h3>
+            <ul class="list-disc list-inside mb-6 space-y-2 text-gray-700">
+                <li>Limpiar el área de trabajo al inicio y al final de cada turno</li>
+                <li>Desechar residuos en contenedores apropiados inmediatamente</li>
+                <li>Limpiar derrames tan pronto ocurran</li>
+                <li>Guardar herramientas y materiales después de usarlos</li>
+                <li>Reportar áreas que requieran limpieza profunda</li>
+                <li>Mantener pasillos y salidas despejadas en todo momento</li>
+            </ul>
+
+            <h2>Compromiso de Mini Bruno Sucesores</h2>
+            <p>
+                Nuestra empresa está comprometida en proporcionar los recursos necesarios para mantener un ambiente
+                limpio y seguro:
+            </p>
+            <ul class="list-disc list-inside mb-6 space-y-2 text-gray-700">
+                <li>Suministros de limpieza adecuados y suficientes</li>
+                <li>Capacitación en prácticas de limpieza e higiene</li>
+                <li>Protocolos claros de limpieza y desinfección</li>
+                <li>Personal de limpieza profesional</li>
+                <li>Inspecciones regulares de limpieza</li>
+                <li>Reconocimiento a áreas y equipos destacados</li>
+            </ul>
+
+            <p>
+                Recordemos que un puesto limpio no es solo una cuestión de apariencia, es un componente esencial de
+                nuestra seguridad, nuestra salud y la calidad de nuestro trabajo. Al mantener nuestros espacios limpios
+                y ordenados, estamos demostrando nuestro compromiso con la excelencia y el respeto mutuo.
+            </p>
+
+            <div class="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl" data-aos="fade-up">
+                <h4 class="font-tech text-xl mb-3 text-gray-800">Sobre la autora</h4>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                        YN
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg text-gray-800">Yosmary Nieves</div>
+                        <div class="text-gray-600">Comunicaciones MBS</div>
+                        <p class="text-sm text-gray-500 mt-1">
+                            Promoviendo ambientes de trabajo seguros y saludables.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <a href="../news.html"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-semibold hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                    <i data-feather="arrow-left" class="w-5 h-5"></i>
+                    Volver a Noticias
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        feather.replace();
+    </script>
+    <script src="../js/news-animations.js"></script>
+        <script type="module" src="js/auth_guard.js"></script>
+</body>
+
+</html>
