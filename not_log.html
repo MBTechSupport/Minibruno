@@ -1,157 +1,221 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <title>No estás logueado</title>
-  <!-- Importar fuentes Orbitron y Exo 2 -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css"> <!-- tu CSS base -->
-  <style>
-    body {
-      font-family: 'Exo 2', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-      transition: background 0.5s ease, color 0.5s ease;
-    }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso Denegado | MiniBruno TechSupport</title>
 
-    /* Tema oscuro cyberpunk */
+  <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+  <link rel="stylesheet" href="css/shared.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ============================
+           LÓGICA DE TEMAS (Dark/Light)
+           ============================ */
+
+    /* --- TEMA OSCURO (Activo cuando body tiene clase 'dark') --- */
     body.dark {
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e) !important;
       color: #cbd5e1;
     }
 
-    /* Tema claro futurista */
+    body.dark .login-card {
+      background: rgba(15, 12, 41, 0.95);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Ocultar el fondo "energyPulse" de shared.css en modo oscuro para evitar conflictos visuales */
+    body.dark::before {
+      opacity: 0.2;
+    }
+
+    /* Ajustes de texto para modo oscuro */
+    body.dark .text-gray {
+      color: #e2e8f0;
+      /* Gray 200 */
+    }
+
+    body.dark .text-gray-500 {
+      color: #9ca3af;
+      /* Gray 400 */
+    }
+
+    body.dark .text-gray-400 {
+      color: #cbd5e1;
+      /* Gray 300 */
+    }
+
+
+    /* --- TEMA CLARO (Activo cuando body tiene clase 'light') --- */
     body.light {
-      background: linear-gradient(135deg, #f0f4ff, #ffffff, #e6e9f0);
+      background: linear-gradient(135deg, #f0f4ff, #ffffff, #e6e9f0) !important;
       color: #333;
     }
 
-    .card {
-      max-width: 600px;
-      width: 90%;
-      padding: 2rem;
-      text-align: center;
-      border-radius: 1rem;
-      transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
+    body.light .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(66, 140, 226, 0.2);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     }
 
-    body.dark .card {
-      background: rgba(15, 12, 41, 0.9);
-      border: 1px solid rgba(102, 126, 234, 0.3);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    /* Ajustes de texto para modo claro para mejor contraste */
+    body.light .text-gray-400 {
+      color: #4b5563;
+      /* Gray 600 - más oscuro para fondo claro */
     }
 
-    body.light .card {
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(102, 126, 234, 0.2);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    body.light .text-gray {
+      color: #1f2937;
+      /* Gray 800 */
     }
 
-    .emoji {
-      font-size: 80px;
+    body.light .font-tech {
+      color: #111827;
+      /* Gray 900 */
+    }
+
+    body.light .emoji-icon {
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+    }
+
+    /* --- ESTILOS COMUNES --- */
+    .emoji-icon {
+      font-size: 60px;
       margin-bottom: 1rem;
       animation: float 6s ease-in-out infinite;
+      display: inline-block;
     }
 
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-
-    .rgb-divider {
-      height: 4px;
-      width: 100%;
-      background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff, #ff0000);
-      background-size: 600% 100%;
-      border-radius: 2px;
-      animation: rainbow 6s linear infinite;
-      margin: 1rem 0;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
-    }
-
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .neon-button {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.2rem;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      color: #fff;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border: none;
-      box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-      margin: 0.5rem;
-    }
-
-    .neon-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(102, 126, 234, 0.8);
-    }
-
-    /* Botón de alternancia */
     .toggle-btn {
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      color: #000;
-      font-weight: bold;
+      background: transparent;
+      border: 1px solid var(--primary-light);
+      color: var(--primary-light);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
+    .toggle-btn:hover {
+      background: var(--primary-light);
+      color: white;
+      box-shadow: 0 0 15px rgba(66, 140, 226, 0.4);
+    }
+
+    /* Ajuste específico para el botón de toggle en dark mode */
     body.dark .toggle-btn {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: #fff;
+      border-color: #764ba2;
+      color: #c4b5fd;
+    }
+
+    body.dark .toggle-btn:hover {
+      background: #764ba2;
+      color: white;
+    }
+
+    /* FIX: Force button interaction */
+    .toggle-btn {
+      position: relative;
+      z-index: 100 !important;
+      pointer-events: auto !important;
+      cursor: pointer !important;
     }
   </style>
 </head>
-<body>
-  <div class="card">
-    <div class="emoji">⚡</div>
-    <h1 class="gradient-text">¡Acceso denegado!</h1>
-    <p class="hologram-text">
-      No estás logueado…  
-      Esto es como intentar hackear la Matrix sin credenciales 
-      Conéctate para entrar al sistema.
-    </p>
-    <div class="rgb-divider"></div>
-    <button class="neon-button" onclick="window.location.href='/index.html'">
-    Volver al inicio
-    </button>
-    <button class="neon-button toggle-btn" id="toggleTheme">
-    Cambiar tema
-    </button>
+
+<body class="cyber-grid">
+  <!-- Not Logged Card -->
+  <div class="login-card floating-animation rounded-2xl p-8 scan-line" data-aos="fade-up" data-aos-delay="200">
+    <!-- Logo Header -->
+    <div class="text-center mb-6" data-aos="fade-down">
+      <div class="flex items-center justify-center space-x-3 mb-4">
+        <div
+          class="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center neon-glow pulse-animation">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+            </path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-gray font-tech">MiniBruno TechSupport</h1>
+      </div>
+      <div class="rgb-divider rounded-full mx-auto w-32"></div>
+    </div>
+
+    <div class="text-center mb-6">
+      <div class="emoji-icon">⚡</div>
+      <h2 class="text-3xl font-bold text-white mb-4 font-tech gradient-text">¡Acceso Denegado!</h2>
+      <p class="text-gray-400 text-lg mb-6">
+        No estás logueado…<br>
+        Esto es como intentar hackear la Matrix sin credenciales. Conéctate para entrar al sistema.
+      </p>
+    </div>
+
+    <div class="flex flex-col items-center gap-4">
+      <a href="login.html" class="home-button-wrapper">
+        <div class="neon-glow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="#428ce2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+            <polyline points="10 17 15 12 10 7"></polyline>
+            <line x1="15" y1="12" x2="3" y2="12"></line>
+          </svg>
+        </div>
+        <span class="home-arrow-icon">←</span>
+        <span class="home-button-text">Volver al Login</span>
+      </a>
+
+      <button class="toggle-btn font-tech" id="toggleTheme" onclick="toggleTheme()">
+        <i data-feather="sun" class="inline w-4 h-4 mr-1"></i> Cambiar Tema
+      </button>
+    </div>
+
+    <!-- Footer Info -->
+    <div class="text-center mt-8 pt-6 border-t border-gray-700/30">
+      <p class="text-gray-500 text-sm">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
+    </div>
   </div>
 
+  <!-- Inicializar animaciones y lógica -->
   <script>
-    const toggleBtn = document.getElementById("toggleTheme");
-    const body = document.body;
+    AOS.init();
+    feather.replace();
+  </script>
 
-    // Al cargar la página, aplicar el tema guardado en localStorage
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      body.classList.add(savedTheme);
-    } else {
-      body.classList.add("dark"); // tema por defecto
-    }
+  <script>
+    // Inicialización segura del tema
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const savedTheme = localStorage.getItem("theme");
 
-    toggleBtn.addEventListener("click", () => {
+      if (savedTheme) {
+        body.classList.add(savedTheme);
+      } else {
+        body.classList.add("dark");
+      }
+    });
+
+    // Función global para el botón
+    window.toggleTheme = function () {
+      const body = document.body;
+      console.log('Toggle theme pressed. Current classes:', body.className);
+
       if (body.classList.contains("dark")) {
         body.classList.remove("dark");
         body.classList.add("light");
@@ -161,7 +225,8 @@
         body.classList.add("dark");
         localStorage.setItem("theme", "dark");
       }
-    });
+    };
   </script>
 </body>
+
 </html>

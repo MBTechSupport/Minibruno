@@ -1,111 +1,129 @@
-import { 
-  auth, 
-  googleProvider, 
-  signInWithPopup, 
-  signOut 
-} from "./firebase-init.js";
-
-import { 
-  signInWithEmailAndPassword, 
-  onAuthStateChanged 
+// Importar las funciones necesarias de Firebase desde los SDKs
+import { auth } from './firebase-init.js';
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 // Elementos del DOM
-const loginBtn = document.getElementById("login-btn");
-const logoutBtn = document.getElementById("logout-btn");
-const loginForm = document.getElementById("login-form");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const userInfo = document.getElementById("user-info");
-const errorMessage = document.getElementById("error-message");
-const successMessage = document.getElementById("success-message");
+const loginForm = document.getElementById('login-form');
+const googleLoginBtn = document.getElementById('login-btn');
+const authSection = document.getElementById('auth-section');
+const userSection = document.getElementById('user-section');
+const userInfoDiv = document.getElementById('user-info');
+const logoutBtn = document.getElementById('logout-btn');
+const errorMessageDiv = document.getElementById('error-message');
+const successMessageDiv = document.getElementById('success-message');
 
-// Escuchar cambios en el estado de autenticación
+// Función para mostrar errores con Timeout de 2 segundos
+function showError(message) {
+  if (errorMessageDiv) {
+    errorMessageDiv.textContent = message;
+    errorMessageDiv.classList.remove('hidden');
+    errorMessageDiv.style.display = 'block';
+    setTimeout(() => {
+      errorMessageDiv.classList.add('hidden');
+      errorMessageDiv.style.display = 'none';
+    }, 2000);
+  } else {
+    console.error(message);
+  }
+}
+
+// Función para mostrar éxito con Timeout de 2 segundos
+function showSuccess(message) {
+  if (successMessageDiv) {
+    successMessageDiv.textContent = message;
+    successMessageDiv.classList.remove('hidden');
+    successMessageDiv.style.display = 'block';
+    setTimeout(() => {
+      successMessageDiv.classList.add('hidden');
+      successMessageDiv.style.display = 'none';
+    }, 2000);
+  } else {
+    console.log(message);
+  }
+}
+
+// Manejar estado de autenticación
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // Usuario autenticado
-    document.getElementById("auth-section").classList.add("hidden");
-    document.getElementById("user-section").classList.remove("hidden");
+    // Usuario logueado
+    console.log("Usuario autenticado:", user.email);
 
-    userInfo.innerHTML = `
-      <div class="flex items-center space-x-4">
-        <img src="${user.photoURL || 'https://placehold.co/50'}" 
-             alt="Foto de perfil" 
-             class="w-12 h-12 rounded-full border-2 border-blue-500">
-        <div>
-          <p class="text-white font-semibold">${user.displayName || user.email}</p>
-          <p class="text-gray-400 text-sm">Sesión activa</p>
-        </div>
-      </div>
-    `;
+    if (authSection) authSection.classList.add('hidden');
+    if (userSection) {
+      userSection.classList.remove('hidden');
+      // Mostrar info del usuario
+      if (userInfoDiv) {
+        userInfoDiv.innerHTML = `
+                    <div class="flex flex-col items-center">
+                        <img src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + user.email}" alt="Profile" class="w-16 h-16 rounded-full mb-4 border-2 border-blue-500 shadow-lg glow-active">
+                        <p class="text-white font-medium text-lg">${user.displayName || 'Usuario'}</p>
+                        <p class="text-gray-400 text-sm">${user.email}</p>
+                    </div>
+                `;
+      }
+    }
   } else {
-    // No hay usuario autenticado
-    document.getElementById("auth-section").classList.remove("hidden");
-    document.getElementById("user-section").classList.add("hidden");
+    // Usuario no logueado
+    console.log("No hay usuario autenticado");
+    if (authSection) authSection.classList.remove('hidden');
+    if (userSection) userSection.classList.add('hidden');
   }
 });
 
-// Inicio de sesión con Google
-loginBtn.addEventListener("click", () => {
-  signInWithPopup(auth, googleProvider)
-    .then((result) => {
-      showSuccess("Inicio de sesión con Google exitoso");
-    })
-    .catch((error) => {
-      showError("Error al iniciar sesión con Google: " + error.message);
-    });
-});
+// Login con Email/Password
+if (loginForm) {
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
 
-// Cierre de sesión
-logoutBtn.addEventListener("click", () => {
-  signOut(auth)
-    .then(() => {
-      showSuccess("Sesión cerrada correctamente");
-    })
-    .catch((error) => {
-      showError("Error al cerrar sesión: " + error.message);
-    });
-});
-
-// Inicio de sesión con correo y contraseña
-loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const email = emailInput.value;
-  const password = passwordInput.value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      showSuccess("Inicio de sesión exitoso");
-      // Ejemplo: redirigir al dashboard
-      // window.location.href = "dashboard.html";
-    })
-    .catch((error) => {
-      if (error.code === "auth/user-not-found") {
-        showError("El usuario no existe");
-      } else if (error.code === "auth/wrong-password") {
-        showError("Contraseña incorrecta");
-      } else {
-        showError("Error: " + error.message);
-      }
-    });
-});
-
-// Funciones para mostrar mensajes
-function showError(message) {
-  errorMessage.textContent = message;
-  errorMessage.classList.remove("hidden");
-  successMessage.classList.add("hidden");
-  setTimeout(() => {
-    errorMessage.classList.add("hidden");
-  }, 5000);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      showSuccess('¡Inicio de sesión exitoso!');
+      // La redirección o cambio de UI lo maneja onAuthStateChanged
+    } catch (error) {
+      console.error(error);
+      let msg = "Error al iniciar sesión.";
+      if (error.code === 'auth/invalid-credential') msg = "Credenciales incorrectas.";
+      else if (error.code === 'auth/user-not-found') msg = "Usuario no encontrado.";
+      else if (error.code === 'auth/wrong-password') msg = "Contraseña incorrecta.";
+      showError(msg);
+    }
+  });
 }
 
-function showSuccess(message) {
-  successMessage.textContent = message;
-  successMessage.classList.remove("hidden");
-  errorMessage.classList.add("hidden");
-  setTimeout(() => {
-    successMessage.classList.add("hidden");
-  }, 5000);
+// Login con Google
+if (googleLoginBtn) {
+  googleLoginBtn.addEventListener('click', async () => {
+    console.log("Iniciando login con Google...");
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      showSuccess(`¡Bienvenido, ${user.displayName}!`);
+    } catch (error) {
+      console.error("Error Google Login:", error);
+      showError("No se pudo iniciar sesión con Google. Intenta nuevamente.");
+    }
+  });
+}
+
+// Cerrar Sesión
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', async () => {
+    try {
+      await signOut(auth);
+      showSuccess('Sesión cerrada correctamente.');
+    } catch (error) {
+      console.error("Error logout:", error);
+      showError("Error al cerrar sesión.");
+    }
+  });
 }

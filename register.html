@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,123 +12,119 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
 
 </head>
+
 <body class="cyber-grid">
-    <div class="container mx-auto px-4">
-        <div class="max-w-md mx-auto">
-            <!-- Logo Header -->
-            <div class="text-center mb-8" data-aos="fade-down" data-aos-delay="100">
-                <div class="flex items-center justify-center space-x-3 mb-4" >
-                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center neon-glow pulse-animation">
-                        <img src="img_ref\bd_brunito\logo_glow.svg" alt="Logo MiniBruno" class="w-full h-full object-contain" />
-                    </div>
-                    <h1 class="text-2xl font-bold text-black font-tech">MiniBruno TechSupport</h1>
+    <!-- Register Card (Unified) -->
+    <div class="register-card floating-animation rounded-2xl p-8 scan-line" data-aos="fade-up" data-aos-delay="200">
+        <!-- Logo Header (Moved Inside) -->
+        <div class="text-center mb-8" data-aos="fade-down" data-aos-delay="100">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div
+                    class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center neon-glow pulse-animation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="text-white">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
                 </div>
-                <div class="rgb-divider rounded-full mx-auto w-32"></div>
+                <h1 class="text-2xl font-bold text-gray font-tech">MiniBruno TechSupport</h1>
             </div>
+            <div class="rgb-divider rounded-full mx-auto w-32"></div>
+        </div>
 
-            <!-- Register Card -->
-            <div class="register-card rounded-2xl p-8 scan-line" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-white mb-2 font-tech gradient-text">Registro de Usuario</h2>
-                    <p class="text-gray-400">Crea tu cuenta para acceder al sistema</p>
-                </div>
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-white mb-2 font-tech gradient-text">Registro de Usuario</h2>
+            <p class="text-gray-400">Crea tu cuenta para acceder al sistema</p>
+        </div>
 
-                <form id="registerForm" class="space-y-6">
-                    <div>
-                        <label for="nombre" class="block text-gray-300 mb-2 font-tech text-sm">Nombre Completo</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i data-feather="user" class="h-5 w-5 text-gray-400"></i>
-                            </div>
-                            <input 
-                                type="text" 
-                                name="nombre" 
-                                id="nombre"
-                                placeholder="Tu nombre completo"
-                                required
-                                class="input-field w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all"
-                            >
-                        </div>
+        <!-- Mensajes de Estado (Nuevos) -->
+        <div id="error-message" class="error-message hidden mb-4"></div>
+        <div id="success-message" class="success-message hidden mb-4"></div>
+
+        <form id="registerForm" class="space-y-6">
+            <div>
+                <label for="nombre" class="block text-gray-300 mb-2 font-tech text-sm">Nombre Completo</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-feather="user" class="h-5 w-5 text-gray-400"></i>
                     </div>
-
-                    <div>
-                        <label for="email" class="block text-gray-300 mb-2 font-tech text-sm">Correo Electrónico</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i data-feather="mail" class="h-5 w-5 text-gray-400"></i>
-                            </div>
-                            <input 
-                                type="email" 
-                                name="email" 
-                                id="email"
-                                placeholder="tu@empresa.com"
-                                required
-                                class="input-field w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all"
-                            >
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="password" class="block text-gray-300 mb-2 font-tech text-sm">Contraseña</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <i data-feather="lock" class="h-5 w-5 text-gray-400"></i>
-                            </div>
-                            <input 
-                                type="password" 
-                                name="password" 
-                                id="password"
-                                placeholder="••••••••"
-                                required
-                                class="input-field w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all"
-                            >
-                        </div>
-                    </div>
-
-                    <div class="flex items-center">
-                        <input 
-                            type="checkbox" 
-                            id="terms" 
-                            required
-                            class="rounded border-gray-300 text-green-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
-                        >
-                        <label for="terms" class="ml-2 text-sm text-gray-400">
-                            Acepto los <a href="#" class="text-green-400 hover:text-green-300">términos y condiciones</a>
-                        </label>
-                    </div>
-
-                    <button type="submit" class="neon-button text-white py-3 px-6 rounded-lg font-medium font-tech w-full transition-all">
-                        <i data-feather="user-plus" class="inline mr-2"></i> Registrarse
-                    </button>
-                    
-                    <!-- Boton de Google Sign-Up -->
-                    <button type="button" id="googleBtn" class="neon-button text-white py-3 px-6 rounded-lg font-medium font-tech w-full transition-all mt-4">
-                        <i data-feather="google" class="inline mr-2"></i> Registrarse con Google
-                    </button>
-                </form>
-
-                <div class="mt-6 text-center">
-                    <p class="text-gray-400">
-                        ¿Ya tienes una cuenta? 
-                        <a href="login.html" class="text-green-400 hover:text-green-300 font-medium transition-colors">
-                            Inicia sesión aquí
-                        </a>
-                    </p>
+                    <input type="text" name="nombre" id="nombre" placeholder="Tu nombre completo" required
+                        class="input-field w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
                 </div>
             </div>
 
-            <!-- Footer Info -->
-            <div class="text-center mt-8" data-aos="fade-up" data-aos-delay="400">
-                <div class="flex justify-center space-x-6 text-gray-500 text-sm">
-                    <a href="terminos.html" class="hover:text-gray-300 transition-colors">Términos</a>
-                    <a href="privacidad.html" class="hover:text-gray-300 transition-colors">Privacidad</a>
-                    <a href="ayuda.html" class="hover:text-gray-300 transition-colors">Ayuda</a>
+            <div>
+                <label for="email" class="block text-gray-300 mb-2 font-tech text-sm">Correo Electrónico</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-feather="mail" class="h-5 w-5 text-gray-400"></i>
+                    </div>
+                    <input type="email" name="email" id="email" placeholder="tu@empresa.com" required
+                        class="input-field w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
                 </div>
-                <p class="text-gray-600 text-xs mt-4">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
             </div>
+
+            <div>
+                <label for="password" class="block text-gray-300 mb-2 font-tech text-sm">Contraseña</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-feather="lock" class="h-5 w-5 text-gray-400"></i>
+                    </div>
+                    <input type="password" name="password" id="password" placeholder="••••••••" required
+                        class="input-field w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                </div>
+            </div>
+
+            <div class="flex items-center">
+                <input type="checkbox" id="terms" required
+                    class="rounded border-gray-300 text-green-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
+                <label for="terms" class="ml-2 text-sm text-gray-400">
+                    Acepto los <a href="#" class="text-green-400 hover:text-green-300">términos y condiciones</a>
+                </label>
+            </div>
+
+            <button type="submit"
+                class="neon-button text-white py-3 px-6 rounded-lg font-medium font-tech w-full transition-all">
+                <i data-feather="user-plus" class="inline mr-2"></i> Registrarse
+            </button>
+
+            <!-- Boton de Google Sign-Up -->
+            <button type="button" id="googleBtn"
+                class="neon-button text-white py-3 px-6 rounded-lg font-medium font-tech w-full transition-all mt-4">
+                <i data-feather="google" class="inline mr-2"></i> Registrarse con Google
+            </button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <p class="text-gray-400 mb-4">¿Ya tienes una cuenta?</p>
+            <a href="login.html" class="home-button-wrapper">
+                <div class="neon-glow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="#428ce2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
+                </div>
+                <span class="home-arrow-icon">←</span>
+                <span class="home-button-text">Volver al Login</span>
+            </a>
+        </div>
+
+        <!-- Footer Info (Moved Inside) -->
+        <div class="text-center mt-8 pt-6 border-t border-gray-700/30">
+            <div class="flex justify-center space-x-6 text-gray-500 text-sm">
+                <a href="terminos.html" class="hover:text-gray-300 transition-colors">Términos</a>
+                <a href="privacidad.html" class="hover:text-gray-300 transition-colors">Privacidad</a>
+                <a href="ayuda.html" class="hover:text-gray-300 transition-colors">Ayuda</a>
+            </div>
+            <p class="text-gray-600 text-xs mt-4">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
         </div>
     </div>
 
@@ -145,5 +142,6 @@
     <!-- Firebase -->
     <script type="module" src="js/firebase-init.js"></script>
     <script type="module" src="js/register.js"></script>
-    </body>
+</body>
+
 </html>
