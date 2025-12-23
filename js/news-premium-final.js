@@ -43,36 +43,18 @@
     // BOTONES DE ORDENAMIENTO PREMIUM
     // ====================================================================== //
 
-    function initSortButtons() {
-        const sortButtons = document.querySelectorAll('.sort-btn-premium');
-
-        sortButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                // Remover active de todos los botones
-                sortButtons.forEach(btn => btn.classList.remove('active'));
-
-                // Añadir active al botón clickeado
-                this.classList.add('active');
-
-                // Obtener valor de ordenamiento
-                const sortValue = this.getAttribute('data-sort');
-
-                // Usar el sistema de paginación para ordenar
-                if (window.newsPagination && window.newsPagination.sortNews) {
-                    window.newsPagination.sortNews(sortValue);
-                } else {
-                    console.warn('Sistema de paginación no disponible');
-                }
-            });
-        });
-    }
+    // ====================================================================== //
+    // BOTONES DE ORDENAMIENTO (ELIMINADO)
+    // ====================================================================== //
+    // La función initSortSelect ha sido removida por solicitud.
 
     // ====================================================================== //
     // CATEGORÍAS PREMIUM REDISEÑADAS
     // ====================================================================== //
 
     function initCategoryButtons() {
-        const categoryButtons = document.querySelectorAll('.category-item-premium');
+        // [MODIFICADO] Selector para los nuevos pills del nav
+        const categoryButtons = document.querySelectorAll('.category-pill');
 
         categoryButtons.forEach(button => {
             button.addEventListener('click', function () {
@@ -110,8 +92,8 @@
             // Inicializar carousel
             initHeroCarousel();
 
-            // Inicializar botones de ordenamiento
-            initSortButtons();
+            // [REMOVIDO] Inicializar select de ordenamiento
+            // initSortSelect();
 
             // Inicializar botones de categorías
             initCategoryButtons();

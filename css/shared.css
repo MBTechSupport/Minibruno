@@ -551,14 +551,20 @@ p.text-gray-400 {
     background-clip: padding-box;
     position: relative;
     z-index: 60;
-    /* FIX: Ensure button is above card content overlays */
     transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    /* var(--ease-out-expo) approx */
     cursor: pointer;
     text-decoration: none;
-    /* Ensure no underline */
     width: fit-content;
-    margin: 2rem auto 0;
+    margin: 1rem auto;
+}
+
+/* Responsive: ajustar en móviles */
+@media (max-width: 639px) {
+    .home-button-wrapper {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+    }
 }
 
 .home-button-wrapper::before {
@@ -654,7 +660,18 @@ p.text-gray-400 {
     opacity: 0;
     transform: translateX(10px);
     margin-right: 5px;
-    color: #428ce2;
+    color: var(--primary-light);
+}
+
+/* Responsive: ocultar flecha en móviles para ahorrar espacio */
+@media (max-width: 639px) {
+    .home-arrow-icon {
+        display: none;
+    }
+
+    .home-button-text {
+        font-size: 0.85rem;
+    }
 }
 
 .home-button-wrapper:hover .home-arrow-icon {
@@ -673,4 +690,73 @@ p.text-gray-400 {
     50% {
         transform: translateX(-4px);
     }
+}
+
+/* =====================================================
+   DARK THEME OVERRIDES FOR HOME BUTTON
+   ===================================================== */
+
+/* Aplicar estilos cuando body tiene la clase 'dark' */
+body.dark .home-button-wrapper {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(147, 51, 234, 0.15));
+}
+
+body.dark .home-button-wrapper::before {
+    background: linear-gradient(135deg, #667eea, #9333ea);
+}
+
+body.dark .home-button-wrapper:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.25), rgba(147, 51, 234, 0.25));
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4),
+        0 0 60px rgba(147, 51, 234, 0.3);
+}
+
+body.dark .home-button-text {
+    background: linear-gradient(90deg, #e2e8f0, #667eea, #9333ea, #e2e8f0);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.dark .home-arrow-icon {
+    color: #667eea;
+}
+
+body.dark .neon-glow svg {
+    stroke: #667eea;
+}
+
+/* Ajustar animación de pulse en modo oscuro */
+body.dark .home-button-wrapper .neon-glow {
+    animation: logoPulseDark 3s ease-in-out infinite;
+}
+
+@keyframes logoPulseDark {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 15px rgba(102, 126, 234, 0);
+        transform: scale(1.05);
+    }
+}
+
+/* =====================================================
+   LIGHT THEME OVERRIDES FOR HOME BUTTON
+   ===================================================== */
+
+/* Aplicar estilos cuando body tiene la clase 'light' */
+body.light .home-button-wrapper {
+    background: linear-gradient(135deg, rgba(66, 140, 226, 0.08), rgba(147, 51, 234, 0.08));
+}
+
+body.light .home-button-wrapper:hover {
+    background: linear-gradient(135deg, rgba(66, 140, 226, 0.15), rgba(147, 51, 234, 0.15));
+    box-shadow: 0 10px 40px rgba(66, 140, 226, 0.25),
+        0 0 60px rgba(147, 51, 234, 0.15);
 }

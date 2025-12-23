@@ -535,6 +535,28 @@ body {
     transform: translateX(5px);
 }
 
+/* [NUEVO] Estilos para el botón de enlace (separado del modal) */
+.news-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(33, 51, 121, 0.1);
+    border: 1px solid rgba(33, 51, 121, 0.3);
+    border-radius: 4px;
+    color: #213379;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    /* Asegurar que no tenga subrayado por ser enlace */
+}
+
+.news-link-btn:hover {
+    background: rgba(33, 51, 121, 0.2);
+    transform: translateX(5px);
+}
+
 /* Estilos para el contenedor principal de noticias */
 .news-grid {
     display: grid;

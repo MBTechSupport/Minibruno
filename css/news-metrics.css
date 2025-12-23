@@ -1,0 +1,134 @@
+/* ====================================================================== */
+/*  ESTILOS CLEAN & PREMIUM PARA MÉTRICAS (GLASS SUTIL + INTERACTIVIDAD) */
+/* ====================================================================== */
+
+.impact-metrics-wrapper {
+    background: rgba(33, 51, 121, 0.03);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(33, 51, 121, 0.05);
+    border-bottom: 1px solid rgba(33, 51, 121, 0.05);
+}
+
+.impact-metrics {
+    position: relative;
+    overflow: hidden;
+    /* El fondo ahora lo maneja el wrapper */
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 3rem 0;
+    width: 100%;
+}
+
+/* El contenedor principal */
+.metrics-glass-container {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    z-index: 2;
+}
+
+/* ====================================================================== */
+/*  EFECTO INTERACTIVO PARA EL TÍTULO                                    */
+/* ====================================================================== */
+
+.impact-metrics h2 {
+    transition: all 0.3s ease;
+    cursor: default;
+    background: linear-gradient(90deg, #1e3a8a, #2563eb, #1e3a8a);
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #1e3a8a;
+    /* Color base */
+}
+
+.impact-metrics h2:hover {
+    /* Animación de gradiente al pasar el mouse */
+    animation: shine 2s linear infinite;
+    -webkit-text-fill-color: transparent;
+    transform: scale(1.02);
+    text-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* ====================================================================== */
+/*  TARJETAS DE MÉTRICAS (ANIMACIONES RESTAURADAS)                       */
+/* ====================================================================== */
+
+.metric-card {
+    position: relative;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+    border-radius: 1rem;
+}
+
+.metric-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(33, 51, 121, 0.06);
+    backdrop-filter: blur(4px);
+}
+
+/* Texto de Números Gigantes */
+.count-up {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    color: #1e3a8a;
+    background: none;
+    -webkit-text-fill-color: initial;
+    text-shadow: 0 2px 4px rgba(30, 58, 138, 0.1);
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover .count-up {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Etiquetas */
+.metric-label {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #4b5563;
+    margin-top: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.metric-card:hover .metric-label {
+    color: #2563eb;
+}
+
+/* Divisores verticales */
+.divider-vertical {
+    position: absolute;
+    right: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(30, 58, 138, 0.1), transparent);
+}
+
+@media (max-width: 768px) {
+    .divider-vertical {
+        display: none;
+    }
+}

@@ -17,9 +17,394 @@
 
 
     <!-- Firebase imports handled via module at bottom -->
+
+    <style>
+        /* =====================================================
+           BOTÓN 3D PREMIUM - ULTRA ESTILIZADO
+           ===================================================== */
+
+        .premium-3d-home-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            perspective: 1500px;
+            transform-style: preserve-3d;
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        .premium-3d-home-button:hover,
+        .premium-3d-home-button:focus,
+        .premium-3d-home-button:active {
+            text-decoration: none !important;
+        }
+
+        .button-3d-container {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: levitate-3d 4s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .button-3d-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.75rem;
+            background: linear-gradient(135deg,
+                    rgba(66, 140, 226, 0.25),
+                    rgba(147, 51, 234, 0.25));
+            backdrop-filter: blur(30px) saturate(150%);
+            -webkit-backdrop-filter: blur(30px) saturate(150%);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 16px 64px rgba(66, 140, 226, 0.3),
+                0 24px 96px rgba(147, 51, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+            transform: translateZ(60px);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Capa de brillo de fondo */
+        .button-3d-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.1),
+                    rgba(255, 255, 255, 0.05));
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Reflejo inferior (simula superficie) */
+        .button-3d-container::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 10%;
+            right: 10%;
+            height: 20px;
+            background: radial-gradient(ellipse,
+                    rgba(66, 140, 226, 0.3) 0%,
+                    transparent 70%);
+            filter: blur(10px);
+            opacity: 0.6;
+            transform: rotateX(90deg) translateZ(-30px);
+        }
+
+        /* Partículas flotantes */
+        .particle-effect {
+            position: absolute;
+            inset: -20px;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle-effect::before,
+        .particle-effect::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(66, 140, 226, 0.8);
+            animation: float-particles 3s ease-in-out infinite;
+        }
+
+        .particle-effect::before {
+            left: 20%;
+            top: 50%;
+            animation-delay: 0s;
+        }
+
+        .particle-effect::after {
+            right: 20%;
+            top: 30%;
+            animation-delay: 1.5s;
+        }
+
+        /* Capa de resplandor */
+        .glow-layer {
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(135deg, #428ce2, #9333ea);
+            border-radius: 22px;
+            opacity: 0;
+            filter: blur(20px);
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        /* Icono animado */
+        .trigger-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #213379, #428ce2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            animation: pulse-icon 2s ease-in-out infinite;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 0 0 rgba(66, 140, 226, 0.7);
+        }
+
+        @keyframes pulse-icon {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(66, 140, 226, 0.7);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(66, 140, 226, 0);
+            }
+        }
+
+        /* Texto del botón */
+        .button-3d-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #213379;
+            white-space: nowrap;
+            transition: all 0.4s ease;
+            text-decoration: none !important;
+        }
+
+        /* Efecto de brillo que cruza */
+        .shine-effect {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.4),
+                    transparent);
+            transform: skewX(-20deg);
+            animation: shine-sweep 3s ease-in-out infinite;
+        }
+
+        /* HOVER EFFECTS */
+        .premium-3d-home-button:hover .button-3d-container {
+            transform: rotateY(12deg) rotateX(-8deg) translateY(-15px);
+            animation-play-state: paused;
+        }
+
+        .premium-3d-home-button:hover .button-3d-inner {
+            background: linear-gradient(135deg,
+                    rgba(66, 140, 226, 0.4),
+                    rgba(147, 51, 234, 0.4));
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.5),
+                0 20px 80px rgba(66, 140, 226, 0.5),
+                0 28px 120px rgba(147, 51, 234, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+            transform: translateZ(80px);
+        }
+
+        .premium-3d-home-button:hover .button-3d-inner::before {
+            opacity: 1;
+        }
+
+        .premium-3d-home-button:hover .glow-layer {
+            opacity: 0.9;
+        }
+
+        .premium-3d-home-button:hover .home-icon-3d {
+            transform: scale(1.2) rotateY(15deg);
+            filter: drop-shadow(0 4px 8px rgba(66, 140, 226, 0.6));
+        }
+
+        .premium-3d-home-button:hover .button-3d-text {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light), #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: shimmer-text-login 1.5s linear infinite;
+            text-decoration: none !important;
+        }
+
+        @keyframes shimmer-text-login {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        /* ACTIVE STATE */
+        .premium-3d-home-button:active .button-3d-container {
+            transform: rotateY(8deg) rotateX(-5deg) translateY(-8px);
+        }
+
+        .premium-3d-home-button:active .button-3d-inner {
+            transform: translateZ(40px);
+        }
+
+        /* ANIMACIONES */
+        @keyframes levitate-3d {
+
+            0%,
+            100% {
+                transform: translateY(0) rotateZ(0deg);
+            }
+
+            25% {
+                transform: translateY(-8px) rotateZ(1deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotateZ(0deg);
+            }
+
+            75% {
+                transform: translateY(-8px) rotateZ(-1deg);
+            }
+        }
+
+        @keyframes float-particles {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.3;
+            }
+
+            25% {
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: translateY(-25px) translateX(10px) rotate(180deg);
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes shine-sweep {
+            0% {
+                left: -100%;
+            }
+
+            20% {
+                left: 100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        @keyframes shimmer-text {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .premium-3d-home-button {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .button-3d-inner {
+                padding: 0.75rem 1.25rem;
+                gap: 0.5rem;
+            }
+
+            .button-3d-text {
+                font-size: 0.875rem;
+            }
+
+            .home-icon-3d {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-3d-text {
+                display: none;
+            }
+
+            .button-3d-inner {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Pulso de borde animado */
+        @keyframes border-pulse {
+
+            0%,
+            100% {
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            50% {
+                border-color: rgba(66, 140, 226, 0.6);
+            }
+        }
+
+        .button-3d-inner {
+            animation: border-pulse 3s ease-in-out infinite;
+        }
+    </style>
 </head>
 
 <body class="cyber-grid">
+    <!-- Botón Premium de Retorno al Inicio (estilo trigger horizontal) -->
+    <a href="index.html" class="premium-3d-home-button">
+        <div class="button-3d-container">
+            <div class="button-3d-inner">
+                <!-- Partículas flotantes -->
+                <div class="particle-effect"></div>
+
+                <!-- Capa de resplandor -->
+                <div class="glow-layer"></div>
+
+                <!-- Icono animado -->
+                <div class="trigger-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+
+                <!-- Texto del botón -->
+                <span class="button-3d-text">¿Quieres volver al Inicio? Clickea acá</span>
+
+                <!-- Efecto de brillo -->
+                <div class="shine-effect"></div>
+            </div>
+        </div>
+    </a>
+
     <!-- Sección de Autenticación -->
     <div id="auth-section">
         <!-- Login Card -->

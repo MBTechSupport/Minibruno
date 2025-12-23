@@ -134,6 +134,86 @@
       pointer-events: auto !important;
       cursor: pointer !important;
     }
+
+    /* =====================================================
+       CONTENEDOR DE BOTONES - RESPONSIVE DESIGN
+       ===================================================== */
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    /* Desktop: mostrar botones en fila */
+    @media (min-width: 640px) {
+      .buttons-container {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .buttons-container .toggle-btn {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
+
+    /* =====================================================
+       AJUSTES DE TEMA PARA BOTÓN HOME
+       ===================================================== */
+    /* Modo oscuro: ajustar colores del botón home */
+    body.dark .home-button-wrapper {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(147, 51, 234, 0.15));
+    }
+
+    body.dark .home-button-wrapper:hover {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.25), rgba(147, 51, 234, 0.25));
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4),
+        0 0 60px rgba(147, 51, 234, 0.3);
+    }
+
+    body.dark .home-button-text {
+      background: linear-gradient(90deg, #e2e8f0, #667eea, #9333ea, #e2e8f0);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    body.dark .home-arrow-icon {
+      color: #667eea;
+    }
+
+    body.dark .neon-glow svg {
+      stroke: #667eea;
+    }
+
+    /* Modo claro: mantener colores originales pero más suaves */
+    body.light .home-button-wrapper {
+      background: linear-gradient(135deg, rgba(66, 140, 226, 0.08), rgba(147, 51, 234, 0.08));
+    }
+
+    body.light .home-button-wrapper:hover {
+      background: linear-gradient(135deg, rgba(66, 140, 226, 0.15), rgba(147, 51, 234, 0.15));
+      box-shadow: 0 10px 40px rgba(66, 140, 226, 0.25),
+        0 0 60px rgba(147, 51, 234, 0.15);
+    }
+
+    /* Responsive: ajustar tamaño en móviles */
+    @media (max-width: 639px) {
+      .home-button-wrapper {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+      }
+
+      .home-button-text {
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 
@@ -167,7 +247,21 @@
       </p>
     </div>
 
-    <div class="flex flex-col items-center gap-4">
+    <div class="buttons-container">
+      <!-- Botón para ir al Inicio -->
+      <a href="index.html" class="home-button-wrapper">
+        <div class="neon-glow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="#428ce2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </div>
+        <span class="home-arrow-icon">←</span>
+        <span class="home-button-text">Ir al Inicio</span>
+      </a>
+
+      <!-- Botón para volver al Login -->
       <a href="login.html" class="home-button-wrapper">
         <div class="neon-glow">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -181,6 +275,7 @@
         <span class="home-button-text">Volver al Login</span>
       </a>
 
+      <!-- Botón de cambio de tema -->
       <button class="toggle-btn font-tech" id="toggleTheme" onclick="toggleTheme()">
         <i data-feather="sun" class="inline w-4 h-4 mr-1"></i> Cambiar Tema
       </button>

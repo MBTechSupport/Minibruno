@@ -322,7 +322,7 @@ body::before {
 }
 
 .hero-content {
-    background: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.9));
     border-radius: 1.5rem;
     -webkit-backdrop-filter: blur(30px) saturate(180%);
     backdrop-filter: blur(30px) saturate(180%);

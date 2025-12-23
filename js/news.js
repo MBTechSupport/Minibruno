@@ -1,4 +1,4 @@
-        // ============================================================== //
+// ============================================================== //
 // INICIANDO LIBRERIAS
 // ============================================================== //
 AOS.init({
@@ -12,7 +12,7 @@ feather.replace();
 // ============================================================== //
 // VARIABLES GLOBALES Y DATA
 // ============================================================== //
-let newsData = {
+window.newsData = {
     1: {
         title: "Bruno Mini y Luigia Crespi de Mini",
         date: "02 Oct 2025",
@@ -254,7 +254,7 @@ let newsData = {
                 </p>
                 `,
         tags: ["Reseña", "Seguridad", "Historia"],
-        category: "seguridad"
+        category: "tecnologia"
     },
     3: {
         title: "El Amor Propio",
@@ -308,7 +308,7 @@ let newsData = {
                 ¡No lo Olvides!</strong>
                 `,
         tags: ["Reseña", "Seguridad", "Historia"],
-        category: "seguridad"
+        category: "internet"
     },
     4: {
         title: "¡Un Puesto Limpio, un Trabajo Seguro!",
@@ -354,7 +354,7 @@ let newsData = {
                 </p>
                 `,
         tags: ["Reseña", "Seguridad", "Higiene"],
-        category: "seguridad"
+        category: "innovacion"
     },
     5: {
         title: "El plan SOL: Seguridad, Orden y Limpieza",
@@ -530,98 +530,6 @@ document.getElementById('newsSearch').addEventListener('input', function (e) {
     }
 });
 
-// Funcionalidad de filtrado por categoría (INTEGRADO CON PAGINACIÓN)
-document.querySelectorAll('.category-item').forEach(item => {
-    item.addEventListener('click', function () {
-        // Remover clase activa de todos los elementos
-        document.querySelectorAll('.category-item').forEach(el => {
-            el.classList.remove('active');
-        });
-
-        // Agregar clase activa al elemento seleccionado
-        this.classList.add('active');
-
-        const category = this.getAttribute('data-category');
-
-        // Usar la función de paginación si está disponible
-        if (window.newsPagination && window.newsPagination.filterByCategory) {
-            window.newsPagination.filterByCategory(category);
-        } else {
-            // Fallback a la función original
-            filterNewsByCategory(category);
-        }
-    });
-});
-
-// Función para filtrar noticias por categoría (SOLO FALLBACK)
-function filterNewsByCategory(category) {
-    const newsCards = document.querySelectorAll('.news-card');
-
-    if (category === 'todas') {
-        newsCards.forEach(card => {
-            card.style.display = 'block';
-        });
-        return;
-    }
-
-    newsCards.forEach(card => {
-        const newsId = card.getAttribute('data-news-id');
-        const news = newsData[newsId];
-
-        if (news && news.category === category) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-
-// ============================================================== //
-// FUNCIONES DE PAGINACION
-// ============================================================== //
-// Funcionalidad de paginación
-document.querySelectorAll('.page-item').forEach(item => {
-    item.addEventListener('click', function () {
-        if (!this.classList.contains('disabled')) {
-            // Remover clase activa de todos los elementos
-            document.querySelectorAll('.page-item').forEach(el => {
-                el.classList.remove('active');
-            });
-
-            // Agregar clase activa al elemento seleccionado
-            this.classList.add('active');
-
-            const page = this.getAttribute('data-page');
-
-            // Aquí iría la lógica para cargar la página seleccionada
-            console.log('Cargando página:', page);
-        }
-    });
-});
-
-// Funcionalidad de navegación entre páginas
-document.getElementById('prevPage').addEventListener('click', function () {
-    const currentPage = document.querySelector('.page-item.active');
-    const prevPage = currentPage.previousElementSibling;
-    if (prevPage && !prevPage.classList.contains('disabled')) {
-        currentPage.classList.remove('active');
-        prevPage.classList.add('active');
-        const page = prevPage.getAttribute('data-page');
-        console.log('Cargando página:', page);
-    }
-});
-
-document.getElementById('nextPage').addEventListener('click', function () {
-    const currentPage = document.querySelector('.page-item.active');
-    const nextPage = currentPage.nextElementSibling;
-    if (nextPage && !nextPage.classList.contains('disabled')) {
-        currentPage.classList.remove('active');
-        nextPage.classList.add('active');
-        const page = nextPage.getAttribute('data-page');
-        console.log('Cargando página:', page);
-    }
-});
-
 // ============================================================== //
 // UI - FUNCIONES DE INTERACCION
 // ============================================================== //
@@ -783,7 +691,7 @@ document.getElementById('newsForm').addEventListener('submit', function (e) {
     };
 
     // Guardar en el objeto global
-    newsData[newsId] = newsDataItem;
+    window.newsData[newsId] = newsDataItem;
 
     // Crear y agregar la nueva noticia al DOM
     createNewsCard(newsId, newsDataItem);
@@ -807,6 +715,9 @@ function createNewsCard(id, news) {
     card.setAttribute('data-aos', 'fade-up');
     card.setAttribute('data-aos-delay', '100');
     card.setAttribute('data-news-id', id);
+    // [NUEVO] Agregar timestamp para ordenamiento
+    const timestamp = new Date(news.date).getTime();
+    card.setAttribute('data-timestamp', timestamp);
 
     card.innerHTML = `
                 <div class="publish-date">${formatDate(news.date)}</div>

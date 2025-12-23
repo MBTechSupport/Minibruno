@@ -39,6 +39,9 @@ function initPaginationSystem() {
 
     // Actualizar contador
     updateResultsCount();
+
+    // [MODIFICADO] Ocultar categorías vacías al iniciar
+    // hideEmptyCategories(); // Comentado por solicitud del usuario: quiere poder seleccionar aunque esté vacía
 }
 
 // ====================================================================== //
@@ -198,13 +201,26 @@ function updateNavigationButtons() {
  */
 function updateResultsCount() {
     const resultsCount = document.getElementById('resultsCount');
-    const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
-    const endItem = Math.min(currentPage * ITEMS_PER_PAGE, filteredNewsCards.length);
+    const total = filteredNewsCards.length;
 
-    if (filteredNewsCards.length === 0) {
-        resultsCount.textContent = 'No se encontraron noticias';
+    // Si no hay noticias
+    if (total === 0) {
+        resultsCount.textContent = 'No se encontraron noticias para esta selección.';
+        return;
+    }
+    const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+    const endItem = Math.min(currentPage * ITEMS_PER_PAGE, total);
+
+    // Formato inteligente: Singular vs Plural
+    if (total === 1) {
+        resultsCount.innerHTML = `Viendo <strong>1</strong> noticia`;
     } else {
-        resultsCount.textContent = `Mostrando ${startItem}-${endItem} de ${filteredNewsCards.length} noticias (Página ${currentPage} de ${totalPages})`;
+        resultsCount.innerHTML = `Mostrando <strong>${startItem}-${endItem}</strong> de <strong>${total}</strong> noticias`;
+    }
+
+    // Añadir contexto de página si hay más de una
+    if (totalPages > 1) {
+        resultsCount.innerHTML += ` (Página ${currentPage} de ${totalPages})`;
     }
 }
 
@@ -253,6 +269,22 @@ function updateAfterFilter() {
     totalPages = Math.ceil(filteredNewsCards.length / ITEMS_PER_PAGE);
     currentPage = 1; // Volver a la primera página después de filtrar
 
+    // Caso especial: No hay resultados
+    if (filteredNewsCards.length === 0) {
+        // Ocultar todas las cards
+        allNewsCards.forEach(card => card.style.display = 'none');
+
+        // Actualizar paginación (vacía o deshabilitada)
+        generatePagination();
+
+        // Actualizar contador
+        updateResultsCount();
+
+        // Actualizar botones de navegación
+        updateNavigationButtons();
+        return;
+    }
+
     // Regenerar paginación
     generatePagination();
 
@@ -269,7 +301,8 @@ function filterNewsByCategory(category) {
     } else {
         filteredNewsCards = allNewsCards.filter(card => {
             const newsId = card.getAttribute('data-news-id');
-            const news = newsData[newsId];
+            // [CORREGIDO] Usar window.newsData explícitamente y con seguridad
+            const news = window.newsData && window.newsData[newsId];
             return news && news.category === category;
         });
     }
@@ -303,20 +336,35 @@ function filterNewsBySearch(searchTerm) {
 /**
  * Filtra noticias por ordenamiento
  */
+
 function sortNews(sortType) {
-    if (sortType === 'fecha') {
-        // Ordenar por fecha (más reciente primero)
+    if (sortType === 'date-desc' || sortType === 'fecha') {
+        // Ordenar por fecha (más reciente primero - usando timestamp)
         filteredNewsCards.sort((a, b) => {
-            const dateA = a.querySelector('.publish-date')?.textContent || '';
-            const dateB = b.querySelector('.publish-date')?.textContent || '';
-            return dateB.localeCompare(dateA);
+            const timeA = parseInt(a.getAttribute('data-timestamp')) || 0;
+            const timeB = parseInt(b.getAttribute('data-timestamp')) || 0;
+            return timeB - timeA; // Descendente
         });
-    } else if (sortType === 'titulo') {
-        // Ordenar alfabéticamente por título
+    } else if (sortType === 'date-asc') {
+        // Ordenar por fecha (más antigua primero - usando timestamp)
         filteredNewsCards.sort((a, b) => {
-            const titleA = a.querySelector('.news-title')?.textContent || '';
-            const titleB = b.querySelector('.news-title')?.textContent || '';
+            const timeA = parseInt(a.getAttribute('data-timestamp')) || 0;
+            const timeB = parseInt(b.getAttribute('data-timestamp')) || 0;
+            return timeA - timeB; // Ascendente
+        });
+    } else if (sortType === 'title-asc' || sortType === 'titulo') {
+        // Ordenar alfabéticamente A-Z
+        filteredNewsCards.sort((a, b) => {
+            const titleA = a.querySelector('.news-title')?.textContent.trim().toLowerCase() || '';
+            const titleB = b.querySelector('.news-title')?.textContent.trim().toLowerCase() || '';
             return titleA.localeCompare(titleB);
+        });
+    } else if (sortType === 'title-desc') {
+        // Ordenar alfabéticamente Z-A
+        filteredNewsCards.sort((a, b) => {
+            const titleA = a.querySelector('.news-title')?.textContent.trim().toLowerCase() || '';
+            const titleB = b.querySelector('.news-title')?.textContent.trim().toLowerCase() || '';
+            return titleB.localeCompare(titleA);
         });
     }
 
@@ -343,7 +391,7 @@ function addNewsToSystem(newsCard) {
         filteredNewsCards.push(newsCard);
     } else {
         const newsId = newsCard.getAttribute('data-news-id');
-        const news = newsData[newsId];
+        const news = window.newsData && window.newsData[newsId];
         if (news && news.category === category) {
             filteredNewsCards.push(newsCard);
         }
@@ -365,6 +413,61 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 500);
 });
 
+/**
+ * [NUEVO] Oculta categorías que no tienen noticias
+ */
+function hideEmptyCategories() {
+    const categories = document.querySelectorAll('.category-item');
+    categories.forEach(cat => {
+        const categoryName = cat.getAttribute('data-category');
+        if (categoryName === 'todas') return;
+
+        // Contar noticias de esta categoría
+        const count = allNewsCards.filter(card => {
+            const newsId = card.getAttribute('data-news-id');
+            const news = window.newsData && window.newsData[newsId];
+            return news && news.category === categoryName;
+        }).length;
+
+        if (count === 0) {
+            cat.style.display = 'none';
+        } else {
+            cat.style.display = 'flex';
+        }
+    });
+}
+
+/**
+ * [NUEVO] Parsea fechas en formato español (ej: "02 Oct 2025")
+ */
+function parseSpanishDate(dateStr) {
+    if (!dateStr) return 0;
+
+    // Limpiar string: eliminar espacios extra y convertir a minúsculas
+    dateStr = dateStr.trim().toLowerCase();
+
+    const months = {
+        'ene': 0, 'feb': 1, 'mar': 2, 'abr': 3, 'may': 4, 'jun': 5,
+        'jul': 6, 'ago': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dic': 11
+    };
+
+    // Separar por espacios o guiones si es necesario
+    const parts = dateStr.split(' ');
+    if (parts.length < 3) return 0;
+
+    const day = parseInt(parts[0]);
+    const monthStr = parts[1].substring(0, 3);
+    const month = months[monthStr];
+    const year = parseInt(parts[2]);
+
+    if (isNaN(day) || month === undefined || isNaN(year)) {
+        console.warn('Fecha inválida:', dateStr);
+        return 0;
+    }
+
+    return new Date(year, month, day).getTime();
+}
+
 // ====================================================================== //
 // EXPORT (para uso en news.js)
 // ====================================================================== //
@@ -375,5 +478,6 @@ window.newsPagination = {
     filterBySearch: filterNewsBySearch,
     sortNews: sortNews,
     addNews: addNewsToSystem,
-    refresh: updateAfterFilter
+    refresh: updateAfterFilter,
+    recheckCategories: hideEmptyCategories // [NUEVO] Exponer para llamar al crear nuevas noticias
 };
