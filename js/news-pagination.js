@@ -53,12 +53,16 @@ function initPaginationSystem() {
  */
 function generatePagination() {
     const pageNumbers = document.getElementById('pageNumbers');
+    if (!pageNumbers) return;
     pageNumbers.innerHTML = '';
+
+    const prevPage = document.getElementById('prevPage');
+    const nextPage = document.getElementById('nextPage');
 
     if (totalPages <= 1) {
         pageNumbers.innerHTML = '<div class="page-item active" data-page="1">1</div>';
-        document.getElementById('prevPage').classList.add('disabled');
-        document.getElementById('nextPage').classList.add('disabled');
+        if (prevPage) prevPage.classList.add('disabled');
+        if (nextPage) nextPage.classList.add('disabled');
         return;
     }
 
@@ -99,6 +103,7 @@ function generatePagination() {
  */
 function addPageButton(pageNum) {
     const pageNumbers = document.getElementById('pageNumbers');
+    if (!pageNumbers) return;
     const pageItem = document.createElement('div');
     pageItem.className = `page-item${pageNum === currentPage ? ' active' : ''}`;
     pageItem.setAttribute('data-page', pageNum);
@@ -111,6 +116,7 @@ function addPageButton(pageNum) {
  */
 function addEllipsis() {
     const pageNumbers = document.getElementById('pageNumbers');
+    if (!pageNumbers) return;
     const ellipsis = document.createElement('div');
     ellipsis.className = 'page-item disabled';
     ellipsis.textContent = '...';
@@ -172,6 +178,7 @@ function showPage(pageNumber) {
 function updateNavigationButtons() {
     const prevBtn = document.getElementById('prevPage');
     const nextBtn = document.getElementById('nextPage');
+    if (!prevBtn || !nextBtn) return;
 
     // Botón Anterior
     if (currentPage <= 1) {
@@ -201,6 +208,7 @@ function updateNavigationButtons() {
  */
 function updateResultsCount() {
     const resultsCount = document.getElementById('resultsCount');
+    if (!resultsCount) return;
     const total = filteredNewsCards.length;
 
     // Si no hay noticias
@@ -233,21 +241,21 @@ function updateResultsCount() {
  */
 function setupPaginationEvents() {
     // Botón Anterior
-    document.getElementById('prevPage').addEventListener('click', () => {
+    document.getElementById('prevPage')?.addEventListener('click', () => {
         if (currentPage > 1) {
             showPage(currentPage - 1);
         }
     });
 
     // Botón Siguiente
-    document.getElementById('nextPage').addEventListener('click', () => {
+    document.getElementById('nextPage')?.addEventListener('click', () => {
         if (currentPage < totalPages) {
             showPage(currentPage + 1);
         }
     });
 
     // Delegación de eventos para botones de página
-    document.getElementById('pageNumbers').addEventListener('click', (e) => {
+    document.getElementById('pageNumbers')?.addEventListener('click', (e) => {
         if (e.target.classList.contains('page-item') && !e.target.classList.contains('disabled')) {
             const pageNum = parseInt(e.target.getAttribute('data-page'));
             if (pageNum && !isNaN(pageNum)) {

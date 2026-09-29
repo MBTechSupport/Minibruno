@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAuthorizedEmail() {
+      return isSignedIn() && request.auth.token.email in [
+        'lruiz@minibruno.com',
+        'lguevara@minibruno.com',
+        'mrodriguez@minibruno.com',
+        'jnanez@minibruno.com',
+        'dnavarro@minibruno.com',
+        'darwin.navarro@minibruno.com',
+        'bmontilla@minibruno.com',
+        'alves.neri@minibruno.com',
+        'jruiz@minibruno.com',
+        'rcoronado@minibruno.com',
+        'ruca.luijo@gmail.com'
+      ];
+    }
+    
+    function isValidTicket(data) {
+      return data.keys().hasAll(['ticketCode', 'userId', 'userEmail', 'department', 'category', 'priority', 'subject', 'description', 'status', 'createdAt']) &&
+        data.userId == request.auth.uid &&
+        data.ticketCode is string &&
+        data.subject is string && data.subject.size() >= 3 && data.subject.size() <= 150 &&
+        data.description is string && data.description.size() >= 5 && data.description.size() <= 4000 &&
+        data.status in ['Abierto', 'En revisión', 'Resuelto'];
+    }
+
+    match /tickets/{ticketId} {
+      // Regla de lectura: El usuario creador o cualquier correo autorizado puede leer
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAuthorizedEmail());
+      
+      // Regla de creación: Usuario autenticado registrando su propio ticket
+      allow create: if isSignedIn() && isValidTicket(request.resource.data);
+      
+      // Regla de actualización: El usuario puede editar sus propios campos o el correo autorizado puede actualizar cualquier ticket (incluyendo estatus y notas)
+      allow update: if isSignedIn() && (
+        (resource.data.userId == request.auth.uid && request.resource.data.userId == resource.data.userId && request.resource.data.ticketCode == resource.data.ticketCode) ||
+        isAuthorizedEmail()
+      );
+      
+      // Eliminación solo por administradores autorizados
+      allow delete: if isAuthorizedEmail();
+    }
+
+    match /deleted_tickets/{logId} {
+      // Registro de auditoría de tickets eliminados
+      allow read, create: if isAuthorizedEmail();
+    }
+
+    match /news/{newsId} {
+      // Lectura pública de noticias para toda la empresa
+      allow read: if true;
+      // Solo administradores autorizados pueden crear, modificar o eliminar noticias
+      allow create, update, delete: if isAuthorizedEmail();
+    }
+    
+    match /test/{docId} {
+      allow read: if true;
+    }
+  }
+}

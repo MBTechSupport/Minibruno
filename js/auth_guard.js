@@ -10,6 +10,10 @@
   });
 
   window.addEventListener("DOMContentLoaded", async () => {
+    // Si estamos en soporte.html, soporte.js gestiona la sesión y el modal de autenticación de forma nativa
+    if (window.location.pathname.includes("soporte")) {
+      return;
+    }
     try {
       const user = await authReady;
       // Si no hay usuario, redirige (ruta relativa para Netlify)

@@ -1,0 +1,11 @@
+{
+  "name": "Mini Bruno Sucesores C.A.",
+  "description": "Líderes en subproductos cárnicos y soluciones agroindustriales sostenibles.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

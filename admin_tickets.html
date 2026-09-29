@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración Global | TechSupport Mini Bruno</title>
+    <meta name="description" content="Panel exclusivo de administración global de tickets de soporte técnico para personal autorizado de Mini Bruno Sucesores C.A.">
+    <meta property="og:title" content="Panel de Administración Global | TechSupport Mini Bruno">
+    <meta property="og:description" content="Supervisión y gestión global de tickets de soporte técnico para personal autorizado.">
+
+    <link rel="stylesheet" href="css/soporte.css">
+    <link rel="stylesheet" href="css/soporte-premium.css">
+    <link rel="stylesheet" href="css/soporte-extras.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        .font-tech {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .admin-glass {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .admin-glass-dark {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .cyber-badge {
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.35);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen text-slate-800 flex flex-col font-sans selection:bg-blue-600 selection:text-white">
+
+    <!-- PANTALLA 1: ESTADO DE CARGA Y VERIFICACIÓN -->
+    <div id="auth-loading-screen" class="fixed inset-0 z-50 bg-slate-900 flex flex-col items-center justify-center p-4">
+        <div class="relative w-20 h-20 mb-6">
+            <div class="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
+            <div class="absolute inset-0 rounded-full border-4 border-cyan-400 border-t-transparent animate-spin"></div>
+            <div class="absolute inset-2 rounded-full border-4 border-purple-500/30 border-b-transparent animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+            <div class="absolute inset-0 flex items-center justify-center text-cyan-400">
+                <i data-feather="shield" class="w-8 h-8"></i>
+            </div>
+        </div>
+        <h3 class="text-xl font-bold font-tech text-white mb-2 tracking-wider">Mini Bruno Security Gateway</h3>
+        <p class="text-sm font-tech text-cyan-400/80 animate-pulse">Verificando credenciales en correos_Autorizados.json...</p>
+    </div>
+
+    <!-- PANTALLA 2: ACCESO DENEGADO (NO AUTORIZADO) -->
+    <div id="access-denied-screen" class="fixed inset-0 z-40 bg-slate-900 flex items-center justify-center p-4 hidden">
+        <div class="max-w-md w-full bg-slate-800 border border-red-500/40 rounded-2xl p-8 text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-red-500/10 rounded-full blur-2xl"></div>
+            <div class="w-16 h-16 bg-red-500/20 text-red-400 border border-red-500/30 rounded-2xl flex items-center justify-center mx-auto mb-5">
+                <i data-feather="shield-off" class="w-8 h-8"></i>
+            </div>
+            <span class="inline-block px-3 py-1 bg-red-500/20 text-red-400 text-xs font-mono font-bold rounded-full mb-3 border border-red-500/30">
+                ERROR 403 - ACCESO RESTRINGIDO
+            </span>
+            <h2 class="text-2xl font-bold font-tech text-white mb-2">Área Exclusiva de Administración</h2>
+            <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                Tu cuenta <strong id="denied-user-email" class="text-slate-200 font-mono">--</strong> no figura en la lista corporativa de <code class="text-cyan-400">correos_Autorizados.json</code>.
+            </p>
+            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700/60 text-xs text-slate-400 mb-6 text-left">
+                <p class="font-bold text-slate-300 mb-1">¿Necesitas acceso técnico?</p>
+                <p>Contacta con la Gerencia de Sistemas / TI para solicitar la autorización de tu correo institucional.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <a href="soporte.html" class="flex-1 py-3 px-4 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-tech font-bold transition-colors">
+                    Ir a Soporte Usuario
+                </a>
+                <button id="denied-logout-btn" type="button" class="py-3 px-4 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-tech font-bold transition-colors">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA 3: PANEL DE ADMINISTRACIÓN GLOBAL (AUTORIZADOS) -->
+    <div id="admin-main-panel" class="hidden flex-1 flex flex-col">
+        <!-- Barra Superior de Navegación del Administrador -->
+        <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-30 shadow-lg">
+            <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 rounded-xl flex items-center justify-center cyber-badge">
+                        <i data-feather="sliders" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-lg font-bold font-tech text-white">MiniBruno</span>
+                            <span class="px-2 py-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-[10px] font-bold font-mono tracking-wider rounded-md uppercase border border-blue-400/30 text-cyan-300">
+                                Panel Global Staff
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-slate-400">Supervisión Corporativa de Requerimientos Técnicos</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Datos del Administrador Activo -->
+                    <div class="flex items-center space-x-3 bg-slate-800/90 border border-slate-700 px-3.5 py-1.5 rounded-full shadow-inner">
+                        <img id="admin-avatar" src="" alt="Admin Avatar" class="w-8 h-8 rounded-full border border-cyan-400 object-cover" />
+                        <div class="text-left hidden md:block leading-tight">
+                            <p id="admin-name" class="text-xs font-bold font-tech text-white truncate max-w-[150px]">Admin</p>
+                            <p id="admin-email" class="text-[10px] text-cyan-400 font-mono truncate max-w-[150px]">admin@minibruno.com</p>
+                        </div>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" title="Sesión Autorizada"></span>
+                    </div>
+
+                    <a href="soporte.html" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-tech font-semibold transition-colors flex items-center space-x-1.5 border border-slate-700">
+                        <i data-feather="user" class="w-4 h-4 text-cyan-400"></i>
+                        <span class="hidden sm:inline">Vista de Usuario</span>
+                    </a>
+
+                    <button id="admin-logout-btn" title="Cerrar Sesión" class="p-2 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white rounded-xl transition-colors border border-red-500/30">
+                        <i data-feather="log-out" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Subheader con Banner de Seguridad -->
+        <div class="bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 text-white py-6 border-b border-blue-900/50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2 text-cyan-400 text-xs font-tech font-bold uppercase mb-1">
+                            <i data-feather="shield-check" class="w-4 h-4"></i>
+                            <span>Seguridad Nivel 3 • Sincronización en Tiempo Real</span>
+                        </div>
+                        <h1 class="text-2xl md:text-3xl font-bold font-tech text-white">Centro de Gestión de Tickets Global</h1>
+                        <p class="text-xs md:text-sm text-slate-300 mt-1">
+                            Supervisa, atiende y actualiza en tiempo real los incidentes reportados por los colaboradores de todas las plantas y departamentos.
+                        </p>
+                    </div>
+
+                    <!-- Botón de Exportación -->
+                    <div class="flex items-center space-x-3">
+                        <button id="export-csv-btn" class="px-4 py-2.5 bg-slate-800/80 hover:bg-slate-800 text-slate-200 border border-slate-700 rounded-xl text-xs font-tech font-semibold transition-colors flex items-center space-x-2 shadow-sm">
+                            <i data-feather="download" class="w-4 h-4 text-cyan-400"></i>
+                            <span>Exportar Reporte (CSV)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor Principal -->
+        <main class="container mx-auto px-4 py-8 flex-1">
+            <!-- NOTIFICACIÓN GLOBAL TOAST / BANNER DE ACCIÓN -->
+            <div id="admin-global-toast" class="hidden mb-6 p-4 rounded-2xl flex items-center justify-between shadow-lg transition-all animate__animated animate__fadeInDown">
+                <div class="flex items-center space-x-3">
+                    <div id="toast-icon-box" class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald-100 text-emerald-600">
+                        <i id="toast-icon" data-feather="check-circle" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h4 id="toast-title" class="font-tech text-xs font-bold uppercase tracking-wider text-slate-900">Operación Exitosa</h4>
+                        <p id="toast-message" class="text-xs mt-0.5 text-slate-600"></p>
+                    </div>
+                </div>
+                <button type="button" id="toast-dismiss-btn" class="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg">
+                    <i data-feather="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- TARJETAS DE MÉTRICAS GLOBALES -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+                <!-- Total -->
+                <div class="admin-glass p-5 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden group hover:border-blue-400 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold font-tech uppercase text-slate-500">Tickets Empresa</p>
+                            <h3 id="stat-total" class="text-3xl font-extrabold font-tech text-slate-900 mt-1">0</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600">
+                            <i data-feather="inbox" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center text-[11px] text-slate-500 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-blue-500 mr-1.5"></span>
+                        Colección completa
+                    </div>
+                </div>
+
+                <!-- Abiertos -->
+                <div class="admin-glass p-5 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden group hover:border-sky-400 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold font-tech uppercase text-sky-600">Pendientes (Abiertos)</p>
+                            <h3 id="stat-abiertos" class="text-3xl font-extrabold font-tech text-sky-900 mt-1">0</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600">
+                            <i data-feather="alert-circle" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center text-[11px] text-sky-600 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-sky-500 mr-1.5 animate-pulse"></span>
+                        Requieren asignación técnica
+                    </div>
+                </div>
+
+                <!-- En Revisión -->
+                <div class="admin-glass p-5 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden group hover:border-amber-400 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold font-tech uppercase text-amber-600">En Atención</p>
+                            <h3 id="stat-revision" class="text-3xl font-extrabold font-tech text-amber-900 mt-1">0</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600">
+                            <i data-feather="clock" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center text-[11px] text-amber-600 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 mr-1.5"></span>
+                        Diagnóstico / Ejecución en curso
+                    </div>
+                </div>
+
+                <!-- Resueltos -->
+                <div class="admin-glass p-5 rounded-2xl shadow-sm border border-slate-200 relative overflow-hidden group hover:border-emerald-400 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold font-tech uppercase text-emerald-600">Casos Resueltos</p>
+                            <h3 id="stat-resueltos" class="text-3xl font-extrabold font-tech text-emerald-900 mt-1">0</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600">
+                            <i data-feather="check-circle" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3 flex items-center text-[11px] text-emerald-600 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5"></span>
+                        Solución aplicada con éxito
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTROS AVANZADOS Y BARRA DE CONTROL -->
+            <div class="admin-glass p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <div class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
+                    <!-- Buscador Predictivo -->
+                    <div class="relative flex-1 max-w-lg">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i data-feather="search" class="w-4 h-4"></i>
+                        </div>
+                        <input type="text" id="admin-search-input"
+                            placeholder="Buscar por código (#TK...), correo, solicitante, asunto..."
+                            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-800 focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none transition-all" />
+                    </div>
+
+                    <!-- Selectores de Filtro -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <!-- Filtro Estatus -->
+                        <div class="flex items-center space-x-1.5 bg-slate-100 p-1 rounded-xl">
+                            <button type="button" data-filter-status="all" class="admin-status-chip active px-3 py-1.5 rounded-lg text-xs font-tech font-bold bg-blue-600 text-white transition-colors">
+                                Todos
+                            </button>
+                            <button type="button" data-filter-status="Abierto" class="admin-status-chip px-3 py-1.5 rounded-lg text-xs font-tech font-semibold text-slate-600 hover:text-sky-700 hover:bg-sky-50 transition-colors">
+                                Abiertos
+                            </button>
+                            <button type="button" data-filter-status="En revisión" class="admin-status-chip px-3 py-1.5 rounded-lg text-xs font-tech font-semibold text-slate-600 hover:text-amber-700 hover:bg-amber-50 transition-colors">
+                                En Revisión
+                            </button>
+                            <button type="button" data-filter-status="Resuelto" class="admin-status-chip px-3 py-1.5 rounded-lg text-xs font-tech font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 transition-colors">
+                                Resueltos
+                            </button>
+                        </div>
+
+                        <!-- Filtro Departamento -->
+                        <select id="admin-dept-filter" class="px-3 py-2 bg-slate-100 border-0 rounded-xl text-xs font-semibold text-slate-700 focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none">
+                            <option value="all">Todos los Departamentos</option>
+                            <option value="Sistemas / TI">Sistemas / TI</option>
+                            <option value="Planta / Operaciones">Planta / Operaciones</option>
+                            <option value="Logística y Transporte">Logística y Transporte</option>
+                            <option value="Ventas / Comercial">Ventas / Comercial</option>
+                            <option value="Administración / RRHH">Administración / RRHH</option>
+                            <option value="Control de Calidad">Control de Calidad</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+
+                        <!-- Filtro Prioridad -->
+                        <select id="admin-prio-filter" class="px-3 py-2 bg-slate-100 border-0 rounded-xl text-xs font-semibold text-slate-700 focus:ring-2 focus:ring-blue-500 focus:bg-white focus:outline-none">
+                            <option value="all">Todas las Prioridades</option>
+                            <option value="Crítica">Crítica (Urgente)</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Media</option>
+                            <option value="Baja">Baja</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLA Y LISTADO DE TICKETS GLOBALES -->
+            <div class="admin-glass rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <div class="p-5 border-b border-slate-200 flex flex-wrap justify-between items-center gap-3 bg-white">
+                    <div>
+                        <h3 class="font-tech font-bold text-base text-slate-900">Listado General de Tickets de Mini Bruno</h3>
+                        <p class="text-xs text-slate-500">Mostrando <span id="filtered-count" class="font-bold text-blue-600">0</span> tickets filtrados</p>
+                    </div>
+                    <div class="flex items-center space-x-2 text-xs font-mono text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping mr-1"></span>
+                        Live Conectado
+                    </div>
+                </div>
+
+                <!-- Contenedor Responsivo de Tabla -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100/80 border-b border-slate-200 text-[11px] font-tech font-bold uppercase text-slate-500 tracking-wider">
+                                <th class="py-3.5 px-4">Código</th>
+                                <th class="py-3.5 px-4">Solicitante</th>
+                                <th class="py-3.5 px-4">Área / Categoría</th>
+                                <th class="py-3.5 px-4">Asunto</th>
+                                <th class="py-3.5 px-4">Prioridad</th>
+                                <th class="py-3.5 px-4">Fecha</th>
+                                <th class="py-3.5 px-4">Estatus (Acción Rápida)</th>
+                                <th class="py-3.5 px-4 text-right">Gestión</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-tickets-tbody" class="divide-y divide-slate-100 text-xs">
+                            <tr>
+                                <td colspan="8" class="text-center py-12 text-slate-400 font-tech">
+                                    <div class="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                                    Cargando registros globales de tickets...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 text-center text-xs">
+            <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+                <p>© 2026 Mini Bruno Sucesores C.A. • Panel de Control Exclusivo para Personal Autorizado.</p>
+                <div class="flex items-center space-x-2 font-mono text-[11px]">
+                    <span class="px-2 py-0.5 bg-blue-500/10 text-cyan-400 rounded">RBAC Validated</span>
+                    <span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded">Zero-Trust Rules</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MODAL DE GESTIÓN Y RESOLUCIÓN DE TICKET (ADMIN) -->
+    <div id="admin-manage-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-start border-b border-slate-100 pb-4 mb-4">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span id="modal-manage-code" class="text-2xl font-mono font-black text-blue-900">#TK-2026-0000</span>
+                        <span id="modal-manage-prio-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold font-tech border">--</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">Radicado por: <strong id="modal-manage-author" class="text-slate-700">--</strong> (<span id="modal-manage-email" class="font-mono text-blue-600">--</span>)</p>
+                </div>
+                <button id="close-manage-modal-btn" class="p-1 text-slate-400 hover:text-slate-600 rounded-lg">
+                    <i data-feather="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Estatus Actual y Control de Cambio -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-6">
+                <label class="block text-xs font-tech font-bold uppercase text-slate-600 mb-2">
+                    Actualizar Estatus del Ticket (Sync)
+                </label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button type="button" data-target-status="Abierto" class="btn-change-status py-2.5 px-3 rounded-xl font-tech text-xs font-bold border transition-all text-center flex items-center justify-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+                        <span>Abierto</span>
+                    </button>
+                    <button type="button" data-target-status="En revisión" class="btn-change-status py-2.5 px-3 rounded-xl font-tech text-xs font-bold border transition-all text-center flex items-center justify-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span>En revisión</span>
+                    </button>
+                    <button type="button" data-target-status="Resuelto" class="btn-change-status py-2.5 px-3 rounded-xl font-tech text-xs font-bold border transition-all text-center flex items-center justify-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span>Resuelto</span>
+                    </button>
+                </div>
+                <p id="status-update-feedback" class="text-[11px] font-semibold text-emerald-600 mt-2 hidden text-center">
+                    ✓ Estatus actualizado correctamente
+                </p>
+            </div>
+
+            <!-- Detalles del Requerimiento -->
+            <div class="space-y-4 mb-6">
+                <div>
+                    <h4 class="text-xs font-tech font-bold text-slate-400 uppercase tracking-wider mb-1">Asunto</h4>
+                    <p id="modal-manage-subject" class="text-base font-bold text-slate-900"></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-3 rounded-xl text-xs">
+                    <div>
+                        <span class="text-slate-400 font-tech">Departamento:</span>
+                        <p id="modal-manage-dept" class="font-bold text-slate-800">--</p>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 font-tech">Categoría:</span>
+                        <p id="modal-manage-category" class="font-bold text-slate-800">--</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-tech font-bold text-slate-400 uppercase tracking-wider mb-1">Descripción del Incidente</h4>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm text-slate-700 whitespace-pre-line leading-relaxed" id="modal-manage-desc">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 text-[11px] text-slate-400 font-mono pt-2 border-t border-slate-100">
+                    <div>
+                        <span>Creado: </span><span id="modal-manage-created" class="text-slate-700">--</span>
+                    </div>
+                    <div>
+                        <span>Última Actualización: </span><span id="modal-manage-updated" class="text-slate-700">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+                <button id="modal-delete-ticket-btn" type="button" class="py-2.5 px-4 bg-red-50 hover:bg-red-600 hover:text-white text-red-600 rounded-xl font-tech text-xs font-bold transition-all flex items-center space-x-1.5 border border-red-200 hover:border-red-600">
+                    <i data-feather="trash-2" class="w-3.5 h-3.5"></i>
+                    <span>Eliminar Ticket</span>
+                </button>
+                <div class="flex space-x-3">
+                    <button id="modal-close-action-btn" type="button" class="py-2.5 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-tech text-xs font-bold transition-colors">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN DE ELIMINACIÓN CON REGISTRO DE AUDITORÍA -->
+    <div id="admin-delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate__animated animate__fadeIn">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-red-200">
+            <div class="flex items-center space-x-3 text-red-600 mb-4 pb-3 border-b border-red-100">
+                <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <i data-feather="alert-triangle" class="w-5 h-5 text-red-600"></i>
+                </div>
+                <div>
+                    <h3 class="font-tech text-base font-bold text-slate-900">Confirmar Eliminación de Ticket</h3>
+                    <p class="text-xs text-red-500 font-medium">Esta acción eliminará el ticket de la base de datos</p>
+                </div>
+            </div>
+
+            <!-- Datos del ticket a eliminar -->
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 text-xs space-y-1.5">
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-400 font-tech">Código:</span>
+                    <span id="del-modal-code" class="font-mono font-bold text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">#TK-XXXX</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-400 font-tech">Asunto:</span>
+                    <span id="del-modal-subject" class="font-bold text-slate-800 truncate max-w-[260px]">--</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-slate-400 font-tech">Solicitante:</span>
+                    <span id="del-modal-author" class="text-slate-600">--</span>
+                </div>
+            </div>
+
+            <!-- Formulario de Motivo de Eliminación (Auditoría) -->
+            <form id="admin-delete-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Motivo de la Eliminación <span class="text-red-500">*</span>
+                    </label>
+                    <select id="del-modal-reason-preset" required class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-tech text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <option value="Ticket de prueba / Test">🧪 Ticket de prueba / Test</option>
+                        <option value="Ticket duplicado">📑 Ticket duplicado</option>
+                        <option value="Solicitud cancelada por el usuario">❌ Solicitud cancelada por el usuario</option>
+                        <option value="Resuelto por otro canal / No procede">✓ Resuelto por otro canal / No procede</option>
+                        <option value="Error en la descripción o datos">⚠️ Error en la descripción o datos</option>
+                        <option value="Otro motivo">📝 Otro motivo (especificar abajo)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Detalle / Justificación de Auditoría <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="del-modal-notes" required rows="2" placeholder="Explica detalladamente por qué se elimina este ticket..." class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                </div>
+
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 flex items-start space-x-2 text-[11px] text-amber-800">
+                    <i data-feather="shield" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                    <span>Se guardará un registro de auditoría en la colección <strong>deleted_tickets</strong> con tu correo, fecha, hora y motivo especificado antes de borrar el documento.</span>
+                </div>
+
+                <div class="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
+                    <button id="del-modal-cancel-btn" type="button" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-tech text-xs font-bold transition-colors">
+                        Cancelar
+                    </button>
+                    <button id="del-modal-confirm-btn" type="submit" class="py-2.5 px-5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-tech text-xs font-bold transition-all shadow-md flex items-center space-x-2">
+                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                        <span id="del-btn-text">Confirmar y Eliminar</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts de la Aplicación -->
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/admin_tickets.js"></script>
+</body>
+
+</html>

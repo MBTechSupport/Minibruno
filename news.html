@@ -33,6 +33,16 @@
                 </div>
                 <span class="text-xl font-bold text-gray-800 font-tech">MiniBruno TechSupport</span>
             </div>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="index_log.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Inicio</a>
+                <a href="servicio.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Servicios</a>
+                <a href="contactos.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Contacto</a>
+                <a href="soporte.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Soporte</a>
+                <a href="news.html" class="text-blue-600 font-bold font-tech text-sm neon-glow px-3 py-1 rounded-lg bg-blue-50">Noticias</a>
+                <div id="header-user-status" class="flex items-center space-x-3 pl-4 border-l border-gray-200">
+                </div>
+            </nav>
+        </div>
     </header>
 
 
@@ -62,6 +72,26 @@
                     <i data-feather="search" class="w-5 h-5 text-gray-600 mr-3"></i>
                     <input class="search-input flex-1" id="newsSearch" placeholder="Buscar noticias..." type="text" />
                 </div>
+            </div>
+
+            <!-- BANNER ADMINISTRATIVO (Visible solo para Staff TI) -->
+            <div id="admin-news-bar" class="hidden max-w-4xl mx-auto mt-8 p-4 bg-gradient-to-r from-blue-900/90 via-indigo-950/90 to-slate-900/90 border border-blue-500/40 rounded-2xl shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-3 text-white">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0">
+                        <i data-feather="file-text" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-tech text-sm font-bold text-white flex items-center space-x-2">
+                            <span>Gestión de Noticias y Comunicados</span>
+                            <span class="px-2 py-0.5 bg-blue-500/20 text-cyan-300 text-[10px] rounded font-mono uppercase border border-cyan-400/30">Staff Autorizado</span>
+                        </h4>
+                        <p class="text-xs text-slate-300 mt-0.5">Publica y gestiona comunicados almacenados directamente a una BD.</p>
+                    </div>
+                </div>
+                <button id="btn-open-create-news" type="button" class="py-2.5 px-5 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white rounded-xl font-tech text-xs font-bold transition-all shadow-md flex items-center space-x-2 flex-shrink-0 border border-cyan-400/30">
+                    <i data-feather="plus-circle" class="w-4 h-4"></i>
+                    <span>+ Redactar Noticia</span>
+                </button>
             </div>
         </div>
 
@@ -187,227 +217,40 @@
 
         <div class="container mx-auto px-4">
 
-            <!-- Resultados de búsqueda -->
-            <div class="results-info" data-aos="fade-up" data-aos-delay="600" id="resultsInfo">
-                <span id="resultsCount">Cargando noticias...</span>
-                <span class="ml-4" id="currentFilters">Filtros activos: <strong>Ninguno</strong></span>
+            <!-- Resultados de búsqueda y filtros -->
+            <div class="results-info flex flex-wrap items-center justify-between gap-3 mb-6 bg-slate-50/80 p-4 rounded-xl border border-slate-200 backdrop-blur-sm" data-aos="fade-up" id="resultsInfo">
+                <span id="resultsCount" class="font-tech text-sm text-slate-700 font-semibold">Cargando noticias desde Firestore...</span>
+                <span id="currentFilters" class="text-xs font-tech text-slate-500">Filtros activos: <strong>Todas las categorías</strong></span>
             </div>
-            <!-- Cuadrícula de Noticias -->
+
+            <!-- Cuadrícula Dinámica de Noticias -->
             <div class="scroll-animate">
-                <div class="news-grid" data-aos="fade-up" data-aos-delay="600" id="newsGrid">
-                    <!-- Noticia 1 -->
-                    <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up"
-                        data-aos-delay="100" data-news-id="1" data-timestamp="1759363200000">
-                        <div class="publish-date">02 Oct 2025</div>
-                        <img alt="Noticia 1" class="featured-image object-contain" src="assets/webp/news_card2.webp" />
-                        <h3 class="news-title font-tech">Bruno Mini y Luigia Crespi de Mini</h3>
-                        <div style="text-align: justify;">
-                            <p class="news-summary">Esta historia narra el legado de Bruno Mini y Luigia Crespi de Mini,
-                                fundadores de Mini
-                                Bruno Sucesores, desde la perspectiva de su nieta Gabriella Mini Arreaza. Es un homenaje
-                                a
-                                la
-                                tenacidad,
-                                justicia y espíritu emprendedor que guiaron a esta familia desde sus orígenes en Italia
-                                hasta
-                                consolidarse
-                                como líderes en Venezuela. Ideal para lectores interesados en historias de inmigración,
-                                emprendimiento y
-                                legado familiar.</p>
-                        </div>
-                        <div class="news-author">
-                            <i class="w-4 h-4" data-feather="user"></i>
-                            <span>Gabriella Mini Arreaza</span>
-                        </div>
-                        <div class="news-tags">
-                            <span class="news-tag">Reseñas</span>
-                            <span class="news-tag">Entrevistas</span>
-                        </div>
-                        <div class="mt-4 flex gap-2">
-                            <button class="read-more-btn" onclick="openNewsModal(1)">
-                                Leer más
-                                <i class="w-4 h-4" data-feather="arrow-right"></i>
-                            </button>
-                            <a href="../articles/news_article_1.html" class="news-link-btn"
-                                style="background: linear-gradient(135deg, #213379, #428ce2); color: white; text-decoration: none;">
-                                <!-- [MODIFICADO] Clase separada para evitar conflicto -->
-                                Noticia Completa
-                                <i class="w-4 h-4" data-feather="external-link"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Noticia 2 -->
-                    <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up"
-                        data-aos-delay="200" data-news-id="2" data-timestamp="1760486400000">
-                        <div class="publish-date">15 Oct 2025</div>
-                        <img alt="Noticia 2" class="featured-image object-contain" src="img_ref/webp/news_card1.webp" />
-                        <h3 class="news-title font-tech">Lavate las manos</h3>
-                        <div style="text-align: justify;">
-                            <p class="news-summary">Estimado equipo de Mini Bruno Sucesores, Hoy, 15 de octubre,
-                                celebramos
-                                el
-                                Día Mundial
-                                del Lavado de Manos 🌍. Es el momento perfecto para reafirmar nuestro compromiso con la
-                                salud
-                                🩺, la inocuidad
-                                🛡️ y la prevención 🛑, pilares fundamentales para garantizar la calidad de todo lo que
-                                hacemos.
-                            </p>
-                        </div>
-                        <div class="news-author">
-                            <i class="w-4 h-4" data-feather="user"></i>
-                            <span>Yosmary Nieves</span>
-                        </div>
-                        <div class="news-tags">
-                            <span class="news-tag">Reseñas</span>
-                            <span class="news-tag">Seguridad</span>
-                        </div>
-                        <div class="mt-4 flex gap-2">
-                            <button class="read-more-btn" onclick="openNewsModal(2)">
-                                Leer más
-                                <i class="w-4 h-4" data-feather="arrow-right"></i>
-                            </button>
-                            <a href="../img_ref/news_article_2.html" class="news-link-btn"
-                                style="background: linear-gradient(135deg, #213379, #428ce2); color: white; text-decoration: none;">
-                                <!-- [MODIFICADO] Clase separada para evitar conflicto -->
-                                Noticia Completa
-                                <i class="w-4 h-4" data-feather="external-link"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Noticia 3 -->
-                    <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up"
-                        data-aos-delay="200" data-news-id="3" data-timestamp="1760659200000">
-                        <div class="publish-date">17 Oct 2025</div>
-                        <img alt="Noticia 3" class="featured-image object-contain" src="assets/webp/news_card3.webp" />
-                        <h3 class="news-title font-tech">El Amor Propio Comienza con la Prevención</h3>
-                        <div style="text-align: justify;">
-                            <p class="news-summary">En este mes de la sensibilización, nos detenemos
-                                para honrar la vida, el bien más preciado que poseemos. Recordamos
-                                que el cuidado personal es el primer y más grande acto de amor propio.
-                                Al priorizar nuestra salud y bienestar, no solo nos protegemos a
-                                nosotros mismos, sino que también cuidamos de quienes nos rodean.
-                                Este acto de amor propio se traduce en un compromiso con la prevención
-                                y el autocuidado, pilares fundamentales para una vida plena y saludable.
-                                Al cuidar de nosotros mismos, también estamos en la mejor posición para
-                                cuidar de los demás, creando un círculo virtuoso de bienestar y amor.
-                            </p>
-                        </div>
-                        <div class="news-author">
-                            <i class="w-4 h-4" data-feather="user"></i>
-                            <span>Yosmary Nieves</span>
-                        </div>
-                        <div class="news-tags">
-                            <span class="news-tag">Reseñas</span>
-                            <span class="news-tag">Seguridad</span>
-                        </div>
-                        <div class="mt-4 flex gap-2">
-                            <button class="read-more-btn" onclick="openNewsModal(3)">
-                                Leer más
-                                <i class="w-4 h-4" data-feather="arrow-right"></i>
-                            </button>
-                            <a href="../articles/news_article_3.html" class="news-link-btn"
-                                style="background: linear-gradient(135deg, #213379, #428ce2); color: white; text-decoration: none;">
-                                <!-- [MODIFICADO] Clase separada para evitar conflicto -->
-                                Noticia Completa
-                                <i class="w-4 h-4" data-feather="external-link"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Noticia 4 -->
-                    <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up"
-                        data-aos-delay="200" data-news-id="4" data-timestamp="1761004800000">
-                        <div class="publish-date">21 Oct 2025</div>
-                        <img alt="Noticia 4" class="featured-image object-contain" src="img_ref/webp/news_card4.webp" />
-                        <h3 class="news-title font-tech">¡Un Puesto Limpio, un Trabajo Seguro!</h3>
-                        <div style="text-align: justify;">
-                            <p class="news-summary">Un Entorno limpio evita la contaminación cruzada,
-                                reduce la propagación de enfermedades y crea un ambiente seguro
-                                para todos. En Mini Bruno Sucesores, nos comprometemos a mantener
-                                los más altos estándares de limpieza e higiene, protegiendo la salud
-                                de nuestros empleados y clientes. Juntos, construimos un entorno
-                                saludable y seguro para todos.
-                            </p>
-                        </div>
-                        <div class="news-author">
-                            <i class="w-4 h-4" data-feather="user"></i>
-                            <span>Yosmary Nieves</span>
-                        </div>
-                        <div class="news-tags">
-                            <span class="news-tag">Higiene</span>
-                            <span class="news-tag">Seguridad</span>
-                        </div>
-                        <div class="mt-4 flex gap-2">
-                            <button class="read-more-btn" onclick="openNewsModal(4)">
-                                Leer más
-                                <i class="w-4 h-4" data-feather="arrow-right"></i>
-                            </button>
-                            <a href="../articles/news_article_4.html" class="news-link-btn"
-                                style="background: linear-gradient(135deg, #213379, #428ce2); color: white; text-decoration: none;">
-                                <!-- [MODIFICADO] Clase separada para evitar conflicto -->
-                                Noticia Completa
-                                <i class="w-4 h-4" data-feather="external-link"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Noticia 5 -->
-                    <!--  Just to remember to hold this stacks until ive found someway better than this -->
-                    <div class="news-card rounded-xl p-6 cursor-pointer slide-in" data-aos="fade-up"
-                        data-aos-delay="200" data-news-id="5" data-timestamp="1761177600000">
-                        <div class="publish-date">23 Oct 2025</div>
-                        <img alt="Noticia 5" class="featured-image object-contain" src="img_ref/webp/news_card5.webp" />
-                        <h3 class="news-title font-tech">¡Plan Sol!</h3>
-                        <div style="text-align: justify;">
-                            <p class="news-summary">¿EN QUÉ CONSISTE? El programa se basa en tres pilares fundamentales:
-                                Seguridad, Orden y Limpieza. Estos pilares son esenciales para crear un entorno de
-                                trabajo
-                                seguro y eficiente.
-                                Juntos, estos elementos crean un entorno de trabajo más seguro, eficiente y agradable
-                                para
-                                todos
-                                en Mini Bruno Sucesores.
-                            </p>
-                        </div>
-                        <div class="news-author">
-                            <i class="w-4 h-4" data-feather="user"></i>
-                            <span>Yosmary Nieves</span>
-                        </div>
-                        <div class="news-tags">
-                            <span class="news-tag">Higiene</span>
-                            <span class="news-tag">Seguridad</span>
-                        </div>
-                        <div class="mt-4 flex gap-2">
-                            <button class="read-more-btn" onclick="openNewsModal(5)">
-                                Leer más
-                                <i class="w-4 h-4" data-feather="arrow-right"></i>
-                            </button>
-                            <a href="../articles/news_article_5.html" class="news-link-btn"
-                                style="background: linear-gradient(135deg, #213379, #428ce2); color: white; text-decoration: none;">
-                                <!-- [MODIFICADO] Clase separada para evitar conflicto -->
-                                Noticia Completa
-                                <i class="w-4 h-4" data-feather="external-link"></i>
-                            </a>
-                        </div>
+                <div class="news-grid" id="newsGrid">
+                    <!-- Las tarjetas se generan dinámicamente desde Firestore vía js/news.js -->
+                    <div class="col-span-full py-16 text-center text-slate-400 font-tech">
+                        <i data-feather="loader" class="w-8 h-8 animate-spin mx-auto text-blue-500 mb-3"></i>
+                        <p>Cargando comunicados y noticias corporativas...</p>
                     </div>
                 </div>
-                <!-- Paginación horizontal -->
-                <div class="pagination-container" data-aos="fade-up" data-aos-delay="1300">
+
+                <!-- Paginación dinámica -->
+                <div class="pagination-container mt-12" id="paginationContainer">
                     <button class="nav-button" id="prevPage">
                         <i class="w-5 h-5" data-feather="chevron-left"></i>
                         Anterior
                     </button>
                     <div class="horizontal-pagination" id="pageNumbers">
-                        <!-- Las páginas se generarán dinámicamente -->
+                        <!-- Las páginas se generan dinámicamente -->
                     </div>
                     <button class="nav-button" id="nextPage">
                         Siguiente
                         <i class="w-5 h-5" data-feather="chevron-right"></i>
                     </button>
                 </div>
-                <!-- Indicador de página -->
-                <div class="text-center mt-4 mb-32" data-aos="fade-up" data-aos-delay="1400">
-                    <div class="page-indicator inline-block px-4 py-2 bg-gray-200 rounded-lg">
-                        Página 1 de 8
+                <!-- Indicador de página dinámico -->
+                <div class="text-center mt-4 mb-24">
+                    <div id="pageIndicator" class="page-indicator inline-block px-4 py-2 bg-slate-100 text-slate-700 text-xs font-tech rounded-lg border border-slate-200">
+                        Página 1 de 1
                     </div>
                 </div>
             </div>
@@ -452,41 +295,194 @@
 
 
     <!-- ============================================================== -->
-    <!-- NEWS MODAL -->
+    <!-- NEWS MODAL (LECTURA) -->
     <!-- ============================================================== -->
     <div class="news-modal" id="newsModal">
-        <div class="news-modal-content rounded-2xl p-6 relative">
+        <div class="news-modal-content rounded-2xl p-6 relative max-w-3xl">
             <button class="close-modal" id="closeModal" title="Cerrar">
                 <i class="w-6 h-6" data-feather="x"></i>
             </button>
-            <img alt="" class="modal-featured-image" id="modalFeaturedImage" src="" />
-            <div class="modal-content">
-                <div class="modal-publish-date text-gray-500" id="modalPublishDate"></div>
-                <h2 class="modal-title font-tech text-xl font-bold" id="modalTitle"></h2>
-                <div class="modal-author mb-6 p-4 bg-blue-100 rounded-lg flex items-center gap-4">
-                    <img alt="" class="author-avatar" id="authorAvatarImg" src="" />
-                    <div class="author-info">
-                        <div class="author-name" id="authorName"></div>
-                        <div class="author-role" id="authorRole"></div>
+            
+            <!-- Banner temático de categoría para noticias sin foto -->
+            <div id="modalCategoryBanner" class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-blue-700 via-indigo-800 to-slate-900 text-white mb-6 flex items-center justify-between shadow-md">
+                <div class="flex items-center space-x-3">
+                    <div id="modalCategoryIconBox" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-cyan-300">
+                        <i id="modalCategoryIcon" data-feather="bookmark" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <span id="modalCategoryLabel" class="text-xs font-tech font-bold uppercase tracking-wider text-cyan-300">Noticias Mini Bruno</span>
+                        <p class="text-[11px] text-slate-300">Comunicado Oficial y Técnico</p>
                     </div>
                 </div>
-                <div class="modal-body" id="modalBody">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                        mollit anim id est laborum.</p>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-                        dicta sunt explicabo.</p>
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                        magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                <span id="modalPublishDate" class="text-xs font-mono text-slate-300 bg-white/10 px-3 py-1 rounded-full"></span>
+            </div>
+
+            <!-- Imagen destacada opcional -->
+            <img alt="" class="modal-featured-image hidden mb-4 rounded-xl max-h-64 w-full object-cover" id="modalFeaturedImage" src="" />
+
+            <div class="modal-content">
+                <h2 class="modal-title font-tech text-2xl font-bold text-slate-900 mb-4" id="modalTitle"></h2>
+                
+                <div class="modal-author mb-6 p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-tech font-bold text-sm" id="modalAuthorInitials">
+                            MB
+                        </div>
+                        <div class="author-info">
+                            <div class="author-name font-tech font-bold text-slate-800 text-sm" id="authorName"></div>
+                            <div class="author-role text-xs text-slate-500 font-tech" id="authorRole"></div>
+                        </div>
+                    </div>
+                    <div id="modalAdminActionsInModal" class="hidden flex space-x-2">
+                        <!-- Botones de admin dentro del modal de lectura si aplica -->
+                    </div>
                 </div>
-                <div class="modal-tags" id="modalTags"></div>
+
+                <div class="modal-body text-slate-700 text-sm leading-relaxed space-y-4" id="modalBody">
+                </div>
+
+                <div class="modal-tags mt-6 pt-4 border-t border-slate-100 flex flex-wrap gap-2" id="modalTags"></div>
             </div>
         </div>
     </div>
+
+    <!-- MODAL DE REDACCIÓN / EDICIÓN DE NOTICIAS (FIRESTORE) -->
+    <div id="news-editor-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate__animated animate__fadeIn">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-blue-200 max-h-[92vh] flex flex-col">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0">
+                        <i id="editor-modal-icon" data-feather="edit-3" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 id="editor-modal-title" class="font-tech text-base font-bold text-slate-900">Redactar Nueva Noticia</h3>
+                        <p class="text-xs text-slate-500 font-medium">Almacenamiento directo en base de datos Firestore</p>
+                    </div>
+                </div>
+                <button type="button" id="close-editor-modal-btn" class="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100">
+                    <i data-feather="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form id="news-editor-form" class="space-y-4 pt-4 overflow-y-auto pr-1 flex-1">
+                <input type="hidden" id="editor-news-id" value="" />
+                
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1">
+                        Título de la Noticia <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="editor-title" required placeholder="Ej: Mantenimiento Programado de Servidores Centrales" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-tech text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1">
+                            Categoría <span class="text-red-500">*</span>
+                        </label>
+                        <select id="editor-category" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-tech text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white">
+                            <option value="innovacion">⚡ Innovación</option>
+                            <option value="seguridad">🛡️ Seguridad y Salud</option>
+                            <option value="tecnologia">🔬 Tecnología</option>
+                            <option value="software">💻 Software</option>
+                            <option value="hardware">🔧 Hardware y Redes</option>
+                            <option value="internet">🌐 Internet y Conectividad</option>
+                            <option value="gaming">🎮 Juegos y Dinámicas</option>
+                            <option value="moviles">📱 Móviles y Dispositivos</option>
+                            <option value="reviews">⭐ Reseñas</option>
+                            <option value="entrevistas">🎙️ Entrevistas y Fundadores</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1">
+                            Etiquetas (Separadas por comas)
+                        </label>
+                        <input type="text" id="editor-tags" placeholder="Ej: Sistemas, Redes, Comunicado" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-tech text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1">
+                            Nombre del Autor / Remitente <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="editor-author-name" required placeholder="Ej: Depto. de Sistemas / TI" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-tech text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                    </div>
+                    <div>
+                        <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1">
+                            Cargo o Rol del Autor
+                        </label>
+                        <input type="text" id="editor-author-role" placeholder="Ej: Gerencia de Sistemas" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-tech text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1">
+                        Resumen Corto (Tarjeta) <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="editor-summary" required rows="2" placeholder="Breve introducción de 2 a 3 líneas visible en el listado..." class="w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-tech font-bold text-slate-700 uppercase tracking-wider mb-1">
+                        Cuerpo y Contenido Completo <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="editor-content" required rows="7" placeholder="Escribe el texto completo de la noticia o comunicado..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"></textarea>
+                    <p class="text-[11px] text-slate-400 mt-1">Los saltos de línea se formatearán automáticamente como párrafos legibles.</p>
+                </div>
+
+                <div class="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
+                    <button type="button" id="cancel-editor-btn" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-tech text-xs font-bold transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit" id="save-news-btn" class="py-2.5 px-6 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-tech text-xs font-bold transition-all shadow-md flex items-center space-x-2">
+                        <i data-feather="check" class="w-4 h-4"></i>
+                        <span id="save-news-btn-text">Guardar en Base de Datos</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN DE BORRADO DE NOTICIA -->
+    <div id="news-delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate__animated animate__fadeIn">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-red-200">
+            <div class="flex items-center space-x-3 text-red-600 mb-4 pb-3 border-b border-red-100">
+                <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                    <i data-feather="trash-2" class="w-5 h-5 text-red-600"></i>
+                </div>
+                <div>
+                    <h3 class="font-tech text-base font-bold text-slate-900">Eliminar Noticia</h3>
+                    <p class="text-xs text-red-500 font-medium">Esta acción eliminará el registro de Firestore</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                ¿Estás seguro de que deseas eliminar permanentemente la noticia: <strong id="delete-news-title" class="text-slate-800">--</strong>?
+            </p>
+
+            <div class="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
+                <button type="button" id="cancel-delete-news-btn" class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-tech text-xs font-bold transition-colors">
+                    Cancelar
+                </button>
+                <button type="button" id="confirm-delete-news-btn" class="py-2.5 px-5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-tech text-xs font-bold transition-all shadow-md flex items-center space-x-1.5">
+                    <i data-feather="trash-2" class="w-4 h-4"></i>
+                    <span id="confirm-del-btn-text">Confirmar y Eliminar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICACIÓN -->
+    <div id="news-toast" class="hidden fixed bottom-6 right-6 z-50 p-4 rounded-2xl flex items-center space-x-3 shadow-2xl border max-w-md transition-all animate__animated animate__fadeInUp bg-white">
+        <div id="news-toast-icon-box" class="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald-100 text-emerald-600">
+            <i id="news-toast-icon" data-feather="check" class="w-4 h-4"></i>
+        </div>
+        <div>
+            <h5 id="news-toast-title" class="font-tech text-xs font-bold text-slate-900"></h5>
+            <p id="news-toast-desc" class="text-xs mt-0.5 text-slate-600"></p>
+        </div>
+    </div>
+
     <!-- ============================================================== -->
     <!-- FOOTER SECTION -->
     <!-- ============================================================== -->
@@ -680,10 +676,9 @@
         </div>
     </footer>
     <!-- Fin Footer -->
-    <!-- Sistema de Paginación Dinámica -->
-    <script src="js/news-pagination.js"></script>
-    <script src="js/news.js"></script>
-    <script type="module" src="js/login.js"></script>
+    <!-- Scripts de la Aplicación -->
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/news.js"></script>
     <script type="module" src="js/auth_guard.js"></script>
     <!-- Script de Animaciones Premium -->
     <script src="js/news-animations.js"></script>

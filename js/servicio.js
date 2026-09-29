@@ -1,5 +1,8 @@
- const client = filestack.init('ACKCh5lRvQHSz37JsBl6Az');
-        document.getElementById('upload-btn').addEventListener('click', () => {
+document.addEventListener("DOMContentLoaded", () => {
+    const uploadBtn = document.getElementById('upload-btn');
+    if (uploadBtn && typeof filestack !== 'undefined') {
+        const client = filestack.init('ACKCh5lRvQHSz37JsBl6Az');
+        uploadBtn.addEventListener('click', () => {
             client.picker({
                 fromSources: ['local_file_system', 'url', 'imagesearch', 'facebook', 'instagram', 'googledrive', 'dropbox'],
                 accept: ['image/*', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint'],
@@ -27,8 +30,10 @@
                 }
             }).open();
         });
+    }
+});
 
-        // Función para ir al inicio de la página (header)
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+// Función para ir al inicio de la página (header)
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}

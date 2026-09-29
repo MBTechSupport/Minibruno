@@ -1,0 +1,184 @@
+{
+  "entities": {
+    "Ticket": {
+      "title": "Ticket",
+      "description": "Ticket de soporte técnico generado por usuarios de Mini Bruno",
+      "type": "object",
+      "properties": {
+        "ticketCode": {
+          "type": "string",
+          "description": "Código corporativo único del ticket, ej: #TK-2026-0412"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID del usuario en Firebase Auth"
+        },
+        "userEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo corporativo del usuario creador"
+        },
+        "userName": {
+          "type": "string",
+          "description": "Nombre del usuario creador"
+        },
+        "department": {
+          "type": "string",
+          "description": "Departamento interno de Mini Bruno",
+          "enum": [
+            "Sistemas / TI",
+            "Planta / Operaciones",
+            "Logística y Transporte",
+            "Ventas / Comercial",
+            "Administración / RRHH",
+            "Control de Calidad",
+            "Otro"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "description": "Categoría de la incidencia",
+          "enum": [
+            "Incidencia Técnica",
+            "Acceso a Sistemas / Cuentas",
+            "Falla de Equipos / Red",
+            "Consulta Operativa",
+            "Solicitud General"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Nivel de urgencia del ticket",
+          "enum": ["Baja", "Media", "Alta", "Crítica"]
+        },
+        "subject": {
+          "type": "string",
+          "description": "Asunto resumido del problema",
+          "minLength": 3,
+          "maxLength": 150
+        },
+        "description": {
+          "type": "string",
+          "description": "Detalles completos de la solicitud o falla técnica",
+          "minLength": 5,
+          "maxLength": 4000
+        },
+        "status": {
+          "type": "string",
+          "description": "Estado operativo del ticket",
+          "enum": ["Abierto", "En revisión", "Resuelto"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha ISO de creación"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha ISO de última actualización"
+        }
+      },
+      "required": [
+        "ticketCode",
+        "userId",
+        "userEmail",
+        "department",
+        "category",
+        "priority",
+        "subject",
+        "description",
+        "status",
+        "createdAt"
+      ]
+    },
+    "News": {
+      "title": "News",
+      "description": "Noticia o comunicado corporativo/tecnológico de Mini Bruno",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Título de la noticia",
+          "minLength": 3,
+          "maxLength": 200
+        },
+        "summary": {
+          "type": "string",
+          "description": "Resumen corto de la noticia",
+          "minLength": 5,
+          "maxLength": 600
+        },
+        "content": {
+          "type": "string",
+          "description": "Cuerpo completo de la noticia (HTML/texto)",
+          "minLength": 10,
+          "maxLength": 25000
+        },
+        "category": {
+          "type": "string",
+          "description": "Categoría de la noticia",
+          "enum": [
+            "innovacion",
+            "seguridad",
+            "software",
+            "hardware",
+            "gaming",
+            "moviles",
+            "internet",
+            "reviews",
+            "entrevistas"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Etiquetas de la noticia",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Nombre del autor o redactor"
+        },
+        "authorRole": {
+          "type": "string",
+          "description": "Cargo o rol del autor"
+        },
+        "createdByEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo del administrador que publicó la noticia"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha ISO de publicación"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha ISO de última actualización"
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "content",
+        "category",
+        "authorName",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/tickets/{ticketId}": {
+      "schema": "#/entities/Ticket",
+      "description": "Colección de tickets de soporte técnico"
+    },
+    "/news/{newsId}": {
+      "schema": "#/entities/News",
+      "description": "Colección de noticias corporativas y tecnológicas"
+    }
+  }
+}

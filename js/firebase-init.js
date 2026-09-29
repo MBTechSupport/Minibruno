@@ -1,19 +1,62 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDocFromServer,
+  collection,
+  addDoc,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD2of0l0Iwj8twelEnOxYt0OhXJ8sAoKac",
-  authDomain: "mb-proyect.firebaseapp.com",
-  projectId: "mb-proyect",
-  storageBucket: "mb-proyect.firebasestorage.app",
-  messagingSenderId: "1071734753776",
-  appId: "1:1071734753776:web:0c20ff31ee993419d77535"
+export const firebaseConfig = {
+  projectId: "dotted-safeguard-d83d0",
+  appId: "1:712615414744:web:f1ef8261fb99dc53d540ad",
+  apiKey: "AIzaSyDLUoy3fksNB4EIEv6EHwSl-GTuNxapfL0",
+  authDomain: "dotted-safeguard-d83d0.firebaseapp.com",
+  firestoreDatabaseId: "ai-studio-minibruno-6b594dc8-641a-4e2d-bcf3-03be4a063412",
+  storageBucket: "dotted-safeguard-d83d0.firebasestorage.app",
+  messagingSenderId: "712615414744",
+  oAuthClientId: "712615414744-nde01gkvjlcjlfvr63qpqdncdckbaous.apps.googleusercontent.com"
 };
 
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
+// Inicializar Firebase con la base de datos provisionada
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const googleProvider = new GoogleAuthProvider();
-export { signInWithPopup, signOut };
+
+export {
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  doc,
+  getDocFromServer,
+  collection,
+  addDoc,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp
+};
