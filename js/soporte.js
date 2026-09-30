@@ -833,6 +833,10 @@ function initUIEvents() {
       await signInWithPopup(auth, googleProvider);
       closeAuthModal();
     } catch (err) {
+      if (err.code === "auth/popup-closed-by-user") {
+        console.warn("Inicio de sesión con Google cancelado por el usuario.");
+        return;
+      }
       console.error("Error login con Google:", err);
       const errBox = document.getElementById("modal-auth-error");
       if (errBox) {

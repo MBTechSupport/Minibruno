@@ -109,6 +109,10 @@ if (googleLoginBtn) {
       const user = result.user;
       showSuccess(`¡Bienvenido, ${user.displayName}!`);
     } catch (error) {
+      if (error.code === 'auth/popup-closed-by-user') {
+        console.warn("Inicio de sesión con Google cancelado por el usuario.");
+        return;
+      }
       console.error("Error Google Login:", error);
       showError("No se pudo iniciar sesión con Google. Intenta nuevamente.");
     }

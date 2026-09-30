@@ -149,7 +149,7 @@ export async function registrarConGoogle() {
 
   } catch (error) {
     if (error.code === "auth/popup-closed-by-user") {
-      showError("El popup de Google se cerró antes de completar.");
+      console.warn("Inicio de sesión con Google cancelado por el usuario.");
     } else {
       showError("Error Google: " + error.message);
     }
