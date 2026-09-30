@@ -438,6 +438,178 @@ class BrunoBotWidget {
     }
   }
 
+  getClientRAGResponse(query) {
+    const q = (query || "").toLowerCase();
+
+    // 1. Falla de conexión a Internet / Red
+    if (
+      q.includes("internet") ||
+      q.includes("conexion") ||
+      q.includes("conexión") ||
+      q.includes("red") ||
+      q.includes("wifi") ||
+      q.includes("enlace") ||
+      q.includes("cable") ||
+      q.includes("desconectado") ||
+      q.includes("sin senal") ||
+      q.includes("sin señal") ||
+      q.includes("no navega") ||
+      q.includes("sin red") ||
+      q.includes("lentitud")
+    ) {
+      const proposal = JSON.stringify({
+        subject: "Falla de conexión a Internet / Red en puesto de trabajo",
+        department: "Sistemas / TI",
+        category: "Falla de Equipos / Red",
+        priority: "Alta",
+        description: `Reporte de conectividad a Internet/Red:\n- Detalle del usuario: "${query.trim()}"\n- Diagnóstico preliminar: Sin acceso o lentitud en el enlace de red.\n- Se solicita revisión de cableado estructurado / punto de red / switch por técnico de Sistemas.`
+      });
+
+      return `Entiendo el inconveniente con la conexión a Internet / Red. Para ayudarte a resolverlo lo más rápido posible, te sugiero estas comprobaciones iniciales:\n\n1. **Verificar cable de red (RJ45):** Comprueba que el cable de red esté bien encajado en la parte posterior de la computadora y en la toma de pared (debe encender o parpadear una luz verde/ámbar).\n2. **Si usas red inalámbrica:** Asegúrate de estar conectado a la red WiFi corporativa interna y no a la de invitados.\n3. **Probar reinicio de red:** Desconectar y volver a conectar el cable durante 5 segundos.\n\nSi la conexión sigue sin restablecerse, he preparado la propuesta de ticket para que el equipo de **Sistemas / TI** acuda a inspeccionar tu punto de red:\n\n<<<TICKET_PROPOSAL:${proposal}>>>`;
+    }
+
+    // 2. Solicitud y Cambio de Tóner / Impresora
+    if (
+      q.includes("toner") ||
+      q.includes("tóner") ||
+      q.includes("tinta") ||
+      q.includes("impresora") ||
+      q.includes("imprimir") ||
+      q.includes("impresion") ||
+      q.includes("impresión") ||
+      q.includes("atasco") ||
+      q.includes("cartucho") ||
+      q.includes("copiadora")
+    ) {
+      const proposal = JSON.stringify({
+        subject: "Solicitud de cambio de tóner / Soporte de impresora",
+        department: "Sistemas / TI",
+        category: "Incidencia Técnica",
+        priority: "Media",
+        description: `Solicitud de consumibles / impresora:\n- Detalle reportado: "${query.trim()}"\n- Requerimiento: Reemplazo de cartucho de tóner o calibración de equipo de impresión.\n- Asignar consumible compatible y coordinar instalación.`
+      });
+
+      return `He registrado tu solicitud referente a **impresora / cambio de tóner**.\n\nPara agilizar la entrega e instalación:\n- El personal de Sistemas acudirá con el cartucho consumible compatible con tu modelo de impresora.\n- Te recomendamos no forzar el cartucho agotado para cuidar los engranajes del tambor.\n\nPuedes generar de inmediato el requerimiento con los datos que he preparado a continuación:\n\n<<<TICKET_PROPOSAL:${proposal}>>>`;
+    }
+
+    // 3. Restablecimiento de Contraseñas y Accesos
+    if (
+      q.includes("clave") ||
+      q.includes("contraseña") ||
+      q.includes("password") ||
+      q.includes("correo") ||
+      q.includes("acceso") ||
+      q.includes("usuario") ||
+      q.includes("desbloquear") ||
+      q.includes("bloqueada") ||
+      q.includes("login")
+    ) {
+      const proposal = JSON.stringify({
+        subject: "Restablecimiento de credenciales / Acceso a sistemas",
+        department: "Sistemas / TI",
+        category: "Acceso a Sistemas / Cuentas",
+        priority: "Media",
+        description: `Solicitud de acceso:\n- Detalle del usuario: "${query.trim()}"\n- Requerimiento: Restablecimiento de contraseña corporativa o desbloqueo de cuenta.\n- Verificar identidad del colaborador según política de seguridad.`
+      });
+
+      return `Para gestionar el **restablecimiento de tu contraseña o desbloqueo de cuenta** corporativa de forma segura:\n\n- El equipo de **Sistemas / TI** validará tu identidad corporativa.\n- Se te asignará una contraseña temporal para que ingreses y configures tu nueva clave personalizada.\n\nAquí tienes la propuesta lista para generar tu ticket:\n\n<<<TICKET_PROPOSAL:${proposal}>>>`;
+    }
+
+    // 4. Fallas en Computadoras, Monitores o Hardware
+    if (
+      q.includes("computadora") ||
+      q.includes("pc") ||
+      q.includes("laptop") ||
+      q.includes("monitor") ||
+      q.includes("pantalla") ||
+      q.includes("teclado") ||
+      q.includes("mouse") ||
+      q.includes("disco") ||
+      q.includes("formatear") ||
+      q.includes("windows") ||
+      q.includes("no enciende") ||
+      q.includes("pantalla azul") ||
+      q.includes("lento") ||
+      q.includes("lenta")
+    ) {
+      const proposal = JSON.stringify({
+        subject: "Falla de hardware o rendimiento en computadora",
+        department: "Sistemas / TI",
+        category: "Falla de Equipos / Red",
+        priority: "Media",
+        description: `Reporte técnico de equipo:\n- Detalle: "${query.trim()}"\n- Se solicita diagnóstico presencial o remoto por el área de Sistemas.`
+      });
+
+      return `Lamento el inconveniente con tu equipo de cómputo. Si la máquina no enciende o presenta lentitud extrema, el personal de soporte técnico puede realizar un diagnóstico presencial o vía remota.\n\nHe organizado tu solicitud para emitir el ticket de asistencia técnica:\n\n<<<TICKET_PROPOSAL:${proposal}>>>`;
+    }
+
+    // 5. Básculas y Balanzas de Planta
+    if (
+      q.includes("bascula") ||
+      q.includes("báscula") ||
+      q.includes("pesaje") ||
+      q.includes("balanza") ||
+      q.includes("celda") ||
+      q.includes("camiones")
+    ) {
+      const proposal = JSON.stringify({
+        subject: "Incidencia técnica en báscula electrónica de planta",
+        department: "Sistemas / TI",
+        category: "Falla de Equipos / Red",
+        priority: "Alta",
+        description: `Avería en báscula de pesaje:\n- Incidencia: "${query.trim()}"\n- Atención prioritaria requerida para evitar retrasos en el despacho y pesaje de camiones.`
+      });
+
+      return `Las básculas de pesaje son críticas para la continuidad de despacho en planta. He catalogado esta incidencia con **Prioridad Alta** para inmediata atención de los técnicos de Sistemas y Mantenimiento:\n\n<<<TICKET_PROPOSAL:${proposal}>>>`;
+    }
+
+    // 6. Solicitudes generales de tickets o soporte
+    if (
+      q.includes("ticket") ||
+      q.includes("soporte") ||
+      q.includes("ayuda") ||
+      q.includes("falla") ||
+      q.includes("problema") ||
+      q.includes("averia") ||
+      q.includes("avería") ||
+      q.includes("urgente") ||
+      q.includes("reparar") ||
+      q.includes("incidente")
+    ) {
+      const proposal = JSON.stringify({
+        subject: "Requerimiento de soporte técnico a Sistemas",
+        department: "Sistemas / TI",
+        category: "Incidencia Técnica",
+        priority: "Media",
+        description: `Requerimiento registrado vía BrunoBot:\n- Descripción: "${query.trim()}"\n- Radicación para revisión del equipo de Sistemas.`
+      });
+
+      return `He tomado nota de tu solicitud de soporte técnico. Para que el equipo de **Sistemas / TI** asigne un especialista y le dé seguimiento formal, puedes confirmar este ticket:\n\n<<<TICKET_PROPOSAL:${proposal}>>>`;
+    }
+
+    // 7. Saludo por defecto con listado claro de Preguntas y Solicitudes Frecuentes
+    return `¡Hola! Soy **BrunoBot**, el asistente oficial de **Soporte Técnico y Sistemas** de **Mini Bruno Sucesores C.A.**\n\nEstoy aquí para orientarte y canalizar tus requerimientos informáticos y operativos.\n\n📌 **Solicitudes y Servicios Frecuentes:**\n- 🌐 **Falla de conexión a Internet / Red:** Caídas de enlace, lentitud o problemas con cable RJ45/WiFi.\n- 🖨️ **Cambio de tóner o impresoras:** Solicitud de consumibles, atascos o fallas de impresión.\n- 🔑 **Restablecimiento de contraseñas:** Recuperación de cuentas y accesos corporativos.\n- 💻 **Fallas de equipo (PC / Laptop):** Problemas de arranque, periféricos, monitores o lentitud.\n- ⚖️ **Básculas y sistemas de planta:** Incidencias en balanzas o terminales de pesaje de camiones.\n\n¿En qué podemos ayudarte hoy? Escribe los detalles de tu problema para asistirte o preparar tu ticket de inmediato.`;
+  }
+
+  async streamClientRAG(botMsgId, prompt) {
+    const fullText = this.getClientRAGResponse(prompt);
+    let streamedText = "";
+    const words = fullText.split(" ");
+
+    for (let i = 0; i < words.length; i += 2) {
+      if (this.abortController?.signal?.aborted) break;
+      const piece = words.slice(i, i + 2).join(" ") + " ";
+      streamedText += piece;
+      this.updateBotMessage(botMsgId, streamedText);
+      await new Promise((r) => setTimeout(r, 18));
+    }
+
+    this.removeStreamCursor(botMsgId);
+    if (this.messages.length > 0) {
+      this.messages[this.messages.length - 1].text = streamedText.replace(/<<<TICKET_PROPOSAL:.*?>>>/gs, "").trim();
+    }
+  }
+
   async handleUserMessage(prompt) {
     this.addUserMessage(prompt);
 
@@ -449,72 +621,86 @@ class BrunoBotWidget {
 
     try {
       this.abortController = new AbortController();
+      let streamSucceeded = false;
 
-      const response = await fetch("/api/chat/stream", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        signal: this.abortController.signal,
-        body: JSON.stringify({
-          message: prompt,
-          history: this.messages.slice(0, -2) // omitir el último mensaje user y el bot vacío
-        })
-      });
+      // Intentar streaming con el backend (activo en dev / server con Node)
+      try {
+        const response = await fetch("/api/chat/stream", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          signal: this.abortController.signal,
+          body: JSON.stringify({
+            message: prompt,
+            history: this.messages.slice(0, -2) // omitir el último mensaje user y el bot vacío
+          })
+        });
 
-      if (!response.ok) {
-        throw new Error("HTTP error " + response.status);
-      }
+        if (response.ok) {
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder("utf-8");
+          let buffer = "";
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let buffer = "";
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const events = buffer.split("\n\n");
+            buffer = events.pop();
 
-        buffer += decoder.decode(value, { stream: true });
-        const events = buffer.split("\n\n");
-        buffer = events.pop(); // guardar fragmento restante
-
-        for (const event of events) {
-          const trimmed = event.trim();
-          if (trimmed.startsWith("data: ")) {
-            const dataStr = trimmed.slice(6);
-            try {
-              const data = JSON.parse(dataStr);
-              if (data.text) {
-                streamedText += data.text;
-                this.updateBotMessage(botMsgId, streamedText);
+            for (const event of events) {
+              const trimmed = event.trim();
+              if (trimmed.startsWith("data: ")) {
+                const dataStr = trimmed.slice(6);
+                try {
+                  const data = JSON.parse(dataStr);
+                  if (data.text) {
+                    streamedText += data.text;
+                    this.updateBotMessage(botMsgId, streamedText);
+                  }
+                  if (data.error) {
+                    streamedText = data.error;
+                    this.updateBotMessage(botMsgId, streamedText);
+                  }
+                  if (data.done) {
+                    streamSucceeded = true;
+                    break;
+                  }
+                } catch (err) {
+                  console.warn("Parse SSE JSON warning:", err);
+                }
               }
-              if (data.error) {
-                streamedText = data.error;
-                this.updateBotMessage(botMsgId, streamedText);
-              }
-              if (data.done) {
-                break;
-              }
-            } catch (err) {
-              console.warn("Parse SSE JSON warning:", err);
             }
           }
+          if (streamedText.length > 0) {
+            streamSucceeded = true;
+          }
         }
+      } catch (fetchErr) {
+        // En entornos de hosting estático como Netlify o sin conexión al endpoint Express,
+        // se activa sin interrupciones el motor local
+        console.warn("Endpoint /api/chat/stream no disponible en este host. Activando motor RAG local...", fetchErr);
       }
 
-      // Finalizar respuesta
-      this.removeStreamCursor(botMsgId);
-      // Actualizar registro en historial
-      if (this.messages.length > 0) {
-        this.messages[this.messages.length - 1].text = streamedText.replace(/<<<TICKET_PROPOSAL:.*?>>>/gs, "").trim();
+      // Si el streaming remoto no emitió texto (Netlify estático, error 404, etc.),
+      // responder de inmediato mediante el motor RAG local
+      if (!streamSucceeded || streamedText.trim().length === 0) {
+        await this.streamClientRAG(botMsgId, prompt);
+      } else {
+        this.removeStreamCursor(botMsgId);
+        if (this.messages.length > 0) {
+          this.messages[this.messages.length - 1].text = streamedText.replace(/<<<TICKET_PROPOSAL:.*?>>>/gs, "").trim();
+        }
       }
     } catch (err) {
       if (err.name === "AbortError") {
         streamedText += " *(Generación detenida)*";
+        this.updateBotMessage(botMsgId, streamedText);
+        this.removeStreamCursor(botMsgId);
       } else {
-        console.error("Chat Stream Error:", err);
-        streamedText = "⚠️ No se pudo conectar con el asistente. Por favor formula tu consulta nuevamente.";
+        console.error("Chat Fallback Error:", err);
+        await this.streamClientRAG(botMsgId, prompt);
       }
-      this.updateBotMessage(botMsgId, streamedText);
-      this.removeStreamCursor(botMsgId);
     } finally {
       this.setStreamingState(false);
       this.abortController = null;
