@@ -1,12 +1,12 @@
 {
   "projectId": "mb-proyect",
-  "appId": "1:712615414744:web:f1ef8261fb99dc53d540ad",
-  "apiKey": "AIzaSyDLUoy3fksNB4EIEv6EHwSl-GTuNxapfL0",
+  "appId": "1:1071734753776:web:0c20ff31ee993419d77535",
+  "apiKey": "AIzaSyD2of0l0Iwj8twelEnOxYt0OhXJ8sAoKac",
   "authDomain": "mb-proyect.firebaseapp.com",
   "firestoreDatabaseId": "(default)",
   "storageBucket": "mb-proyect.firebasestorage.app",
-  "messagingSenderId": "712615414744",
+  "messagingSenderId": "1071734753776",
   "measurementId": "",
-  "oAuthClientId": "712615414744-nde01gkvjlcjlfvr63qpqdncdckbaous.apps.googleusercontent.com",
+  "oAuthClientId": "",
   "recaptchaSiteKey": ""
 }

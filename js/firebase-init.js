@@ -25,14 +25,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 export const firebaseConfig = {
-  projectId: "mb-proyect",
-  appId: "1:712615414744:web:f1ef8261fb99dc53d540ad",
-  apiKey: "AIzaSyDLUoy3fksNB4EIEv6EHwSl-GTuNxapfL0",
+  apiKey: "AIzaSyD2of0l0Iwj8twelEnOxYt0OhXJ8sAoKac",
   authDomain: "mb-proyect.firebaseapp.com",
-  firestoreDatabaseId: "(default)",
+  projectId: "mb-proyect",
   storageBucket: "mb-proyect.firebasestorage.app",
-  messagingSenderId: "712615414744",
-  oAuthClientId: "712615414744-nde01gkvjlcjlfvr63qpqdncdckbaous.apps.googleusercontent.com"
+  messagingSenderId: "1071734753776",
+  appId: "1:1071734753776:web:0c20ff31ee993419d77535",
+  firestoreDatabaseId: "(default)"
 };
 
 // Inicializar Firebase con el proyecto mb-proyect y base de datos (default) en plan Spark
