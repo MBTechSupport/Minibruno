@@ -89,45 +89,48 @@
 
     <!-- PANTALLA 3: PANEL DE ADMINISTRACIÓN GLOBAL (AUTORIZADOS) -->
     <div id="admin-main-panel" class="hidden flex-1 flex flex-col">
-        <!-- Barra Superior de Navegación del Administrador -->
-        <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-30 shadow-lg">
-            <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 rounded-xl flex items-center justify-center cyber-badge">
-                        <i data-feather="sliders" class="w-5 h-5 text-white"></i>
+        <!-- Barra Superior de Navegación del Administrador (Unificada con Header Principal) -->
+        <header class="glass-morphism sticky top-0 z-40 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="100">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <!-- Logo e Identidad MiniBruno con glow -->
+                <a href="index_log.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow group-hover:scale-105 transition-transform">
+                        <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno"
+                            class="w-full h-full object-contain" />
                     </div>
-                    <div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-lg font-bold font-tech text-white">MiniBruno</span>
-                            <span class="px-2 py-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-[10px] font-bold font-mono tracking-wider rounded-md uppercase border border-blue-400/30 text-cyan-300">
-                                Panel Global Staff
-                            </span>
-                        </div>
-                        <p class="text-[11px] text-slate-400">Supervisión Corporativa de Requerimientos Técnicos</p>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl font-bold text-dark font-tech">MiniBruno</span>
+                        <span class="px-2 py-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-[10px] font-bold font-mono tracking-wider rounded-md uppercase border border-blue-400/30 text-white shadow-sm">
+                            Panel Global Staff
+                        </span>
                     </div>
-                </div>
+                </a>
 
-                <div class="flex items-center space-x-4">
+                <!-- Controles Exclusivos del Administrador (Manteniendo funcionalidad original) -->
+                <div class="flex items-center space-x-3 sm:space-x-4">
                     <!-- Datos del Administrador Activo -->
-                    <div class="flex items-center space-x-3 bg-slate-800/90 border border-slate-700 px-3.5 py-1.5 rounded-full shadow-inner">
-                        <img id="admin-avatar" src="" alt="Admin Avatar" class="w-8 h-8 rounded-full border border-cyan-400 object-cover" />
+                    <div class="flex items-center space-x-2.5 bg-white/80 border border-gray-200/90 px-3 py-1.5 rounded-full shadow-sm">
+                        <img id="admin-avatar" src="" alt="Admin Avatar" class="w-7 h-7 rounded-full border border-blue-500 object-cover" />
                         <div class="text-left hidden md:block leading-tight">
-                            <p id="admin-name" class="text-xs font-bold font-tech text-white truncate max-w-[150px]">Admin</p>
-                            <p id="admin-email" class="text-[10px] text-cyan-400 font-mono truncate max-w-[150px]">admin@minibruno.com</p>
+                            <p id="admin-name" class="text-xs font-bold font-tech text-gray-800 truncate max-w-[140px]">Admin</p>
+                            <p id="admin-email" class="text-[10px] text-blue-600 font-mono truncate max-w-[140px]">admin@minibruno.com</p>
                         </div>
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" title="Sesión Autorizada"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" title="Sesión Autorizada en correos_Autorizados.json"></span>
                     </div>
 
-                    <a href="soporte.html" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-tech font-semibold transition-colors flex items-center space-x-1.5 border border-slate-700">
-                        <i data-feather="user" class="w-4 h-4 text-cyan-400"></i>
+                    <!-- Botón Vista de Usuario -->
+                    <a href="soporte.html" class="px-3.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-xs font-tech font-bold transition-colors flex items-center space-x-1.5 border border-blue-200 shadow-sm">
+                        <i data-feather="user" class="w-3.5 h-3.5 text-blue-600"></i>
                         <span class="hidden sm:inline">Vista de Usuario</span>
                     </a>
 
-                    <button id="admin-logout-btn" title="Cerrar Sesión" class="p-2 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white rounded-xl transition-colors border border-red-500/30">
+                    <!-- Botón Cerrar Sesión -->
+                    <button id="admin-logout-btn" title="Cerrar Sesión" class="p-2 bg-red-50 hover:bg-red-500 text-red-500 hover:text-white rounded-xl transition-colors border border-red-200 shadow-sm">
                         <i data-feather="log-out" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
+            <div class="rgb-divider"></div>
         </header>
 
         <!-- Subheader con Banner de Seguridad -->
@@ -158,6 +161,40 @@
 
         <!-- Contenedor Principal -->
         <main class="container mx-auto px-4 py-8 flex-1">
+
+            <!-- Hero Banner con Imagen Alusiva y Burbuja Flotante Interactiva -->
+            <div class="contenedor matrix-bg mb-8" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                    alt="CyberNOC_Banner" class="imagen">
+
+                <!-- Mensaje flotante tipo burbuja -->
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4">
+                    <div onclick="document.getElementById('admin-tickets-table-card')?.scrollIntoView({ behavior: 'smooth' })"
+                        class="bg-white/90 backdrop-blur-md rounded-2xl p-6 max-w-lg mx-auto shadow-2xl border border-blue-500/30 floating-animation hover:scale-105 hover:border-blue-500 hover:shadow-blue-500/20 transition-all cursor-pointer group"
+                        title="Haz clic para ir a la gestión de tickets">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 rounded-full flex items-center justify-center neon-glow group-hover:rotate-12 transition-transform">
+                                    <i data-feather="shield" class="w-6 h-6 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <div class="flex items-center space-x-2">
+                                    <p class="text-xl font-bold text-dark font-tech">Centro de Operaciones TI</p>
+                                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-700">En Vivo</span>
+                                </div>
+                                <p class="text-gray-700 mt-2 text-sm leading-relaxed">
+                                    Supervisión en tiempo real, gestión de incidencias y control centralizado de soporte técnico corporativo.
+                                </p>
+                                <span class="inline-flex items-center text-xs font-bold text-blue-600 mt-2 group-hover:translate-x-1 transition-transform">
+                                    Ver tickets e incidentes activos <i data-feather="arrow-down" class="w-3.5 h-3.5 ml-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- NOTIFICACIÓN GLOBAL TOAST / BANNER DE ACCIÓN -->
             <div id="admin-global-toast" class="hidden mb-6 p-4 rounded-2xl flex items-center justify-between shadow-lg transition-all animate__animated animate__fadeInDown">
                 <div class="flex items-center space-x-3">
@@ -246,7 +283,7 @@
             </div>
 
             <!-- FILTROS AVANZADOS Y BARRA DE CONTROL -->
-            <div class="admin-glass p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+            <div id="admin-tickets-table-card" class="admin-glass p-6 rounded-2xl shadow-sm border border-slate-200 mb-8 scroll-mt-24" data-aos="fade-up" data-aos-delay="150">
                 <div class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
                     <!-- Buscador Predictivo -->
                     <div class="relative flex-1 max-w-lg">
@@ -341,16 +378,192 @@
             </div>
         </main>
 
-        <!-- Footer -->
-        <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 text-center text-xs">
-            <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
-                <p>© 2026 Mini Bruno Sucesores C.A. • Panel de Control Exclusivo para Personal Autorizado.</p>
-                <div class="flex items-center space-x-2 font-mono text-[11px]">
-                    <span class="px-2 py-0.5 bg-blue-500/10 text-cyan-400 rounded">RBAC Validated</span>
-                    <span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded">Zero-Trust Rules</span>
+        <!-- Inicio Footer Canónico Oficial -->
+        <footer class="relative overflow-hidden mt-16" data-aos="fade-up" data-aos-delay="200">
+            <style>
+                /* Animated Wave styling exactly matching index_log and contactos */
+                .footer-wave {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    overflow: hidden;
+                    transform: translateZ(0);
+                    z-index: -1;
+                }
+
+                .footer-wave svg {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                }
+
+                .footer-wave .wave-layer {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 200%;
+                    height: 100%;
+                }
+
+                .footer-wave .wave-front {
+                    opacity: 0.65;
+                    animation: waveMove 6s linear infinite;
+                    transform: translateX(0);
+                }
+
+                .footer-wave .wave-back {
+                    opacity: 0.38;
+                    animation: waveMove 10s linear infinite reverse;
+                    transform: translateX(0);
+                    filter: blur(6px);
+                }
+
+                @keyframes waveMove {
+                    0% {
+                        transform: translateX(0);
+                    }
+
+                    100% {
+                        transform: translateX(-50%);
+                    }
+                }
+
+                footer>.container {
+                    position: relative;
+                    z-index: 10;
+                    padding: 2rem 1rem;
+                }
+
+                .footer-content-bg {
+                    background-color: rgba(243, 244, 246, 0.45);
+                    -webkit-backdrop-filter: blur(10px);
+                    backdrop-filter: blur(10px);
+                }
+            </style>
+
+            <!-- Animated Wave (two layered SVGs for parallax effect) -->
+            <div class="footer-wave" aria-hidden="true">
+                <div class="wave-layer wave-back">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="waveBackGradAdmin" x1="0" x2="1">
+                                <stop offset="0%" stop-color="#e6f0ff" />
+                                <stop offset="100%" stop-color="#f8fbff" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M0,30 C150,90 350,0 600,30 C850,60 1050,10 1200,40 L1200,120 L0,120 Z"
+                            fill="url(#waveBackGradAdmin)"></path>
+                    </svg>
+                </div>
+                <div class="wave-layer wave-front">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="waveFrontGradAdmin" x1="0" x2="1">
+                                <stop offset="0%" stop-color="#cfe6ff" />
+                                <stop offset="100%" stop-color="#dfeeff" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M0,50 C200,10 350,90 600,50 C850,10 1000,80 1200,50 L1200,120 L0,120 Z"
+                            fill="url(#waveFrontGradAdmin)"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 py-12 footer-content-bg rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <div data-aos="fade-up" data-aos-delay="0">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                                <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno"
+                                    class="w-full h-full object-contain" />
+                            </div>
+                            <span class="text-xl font-bold text-dark font-tech">MB TechSupport</span>
+                        </div>
+                        <p class="text-gray-600">Panel Global Staff.</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="50">
+                        <h4 class="text-lg font-semibold text-dark font-tech mb-4">Secciones</h4>
+                        <ul class="space-y-2">
+                            <li><a href="about_Us.html"
+                                    class="text-gray-600 hover:text-dark transition-colors flex items-center"><i
+                                        data-feather="monitor" class="w-4 h-4 mr-2"></i> Nosotros</a></li>
+                            <li><a href="news.html"
+                                    class="text-gray-600 hover:text-dark transition-colors flex items-center"><i
+                                        data-feather="tool" class="w-4 h-4 mr-2"></i> Noticias</a></li>
+                            <li><a href="https://www.brunopetgourmet.com/"
+                                    class="text-gray-600 hover:text-dark transition-colors flex items-center"><i
+                                        data-feather="refresh-cw" class="w-4 h-4 mr-2"></i> Mini Bruno - Pet Gourmet</a>
+                            </li>
+                            <li><a href="faqs.html"
+                                    class="text-gray-600 hover:text-dark transition-colors flex items-center"><i
+                                        data-feather="hard-drive" class="w-4 h-4 mr-2"></i> FAQs</a></li>
+                        </ul>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <h4 class="text-lg font-semibold text-dark font-tech mb-4">Contacto</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start text-gray-600">
+                                <i data-feather="globe" class="mr-3 w-4 h-4 mt-1 text-blue-600"></i>
+                                <span>https://www.minibruno.com</span>
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <i data-feather="phone" class="mr-3 w-4 h-4 text-green-600"></i>
+                                <span>+58-243-200-2300</span>
+                            </li>
+                            <li class="flex items-start text-gray-600">
+                                <i data-feather="map-pin" class="mr-3 w-4 h-4 mt-1 text-red-600"></i>
+                                <span>Carretera Vieja Caracas-Los Teques, Caracas, D.C., VE</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="300">
+                        <h4 class="text-lg font-semibold text-dark font-tech mb-4">Síguenos</h4>
+                        <div class="flex space-x-4 mb-6">
+                            <a href="https://www.facebook.com/profile.php?id=100081592345336&mibextid=ZbWKwL"
+                                class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors neon-glow">
+                                <i data-feather="facebook" class="w-5 h-5 text-white"></i>
+                            </a>
+                            <a href="https://twitter.com/minibrunosucrs"
+                                class="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors neon-glow">
+                                <i data-feather="twitter" class="w-5 h-5 text-white"></i>
+                            </a>
+                            <a href="https://www.instagram.com/mini_bruno_sucesores.ca?utm_source=qr&igsh=cWtrbng4dDY5MTU2"
+                                class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:from-purple-600 hover:to-pink-600 transition-colors neon-glow">
+                                <i data-feather="instagram" class="w-5 h-5 text-white"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mini-bruno-sucesores-c-a-1b4413246?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B6%2FAwlu9iQW2Q9LsuVukWow%3D%3D"
+                                class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors neon-glow">
+                                <i data-feather="linkedin" class="w-5 h-5 text-white"></i>
+                            </a>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-4 border border-gray-200">
+                            <p class="text-cyan-600 font-tech text-sm">Sistema 24/7</p>
+                            <p class="text-gray-600 text-xs mt-1">Soporte técnico disponible las 24 horas</p>
+                            <!-- Volver arriba de la página -->
+                            <div class="mt-4">
+                                <button onclick="scrollToTop()"
+                                    class="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-tech text-sm flex items-center justify-center neon-glow">
+                                    <i data-feather="arrow-up" class="w-4 h-4 mr-2"></i>Ir arriba
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-300 mt-8 pt-8 text-center">
+                    <p class="text-gray-500 text-sm">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
+                    <div class="mt-4 flex justify-center space-x-2">
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-600 rounded-full text-xs font-tech">v3.1</span>
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-600 rounded-full text-xs font-tech">BETA</span>
+                        <span class="px-3 py-1 bg-green-500/20 text-green-600 rounded-full text-xs font-tech">ONLINE</span>
+                    </div>
                 </div>
             </div>
         </footer>
+        <!-- Fin Footer Canónico -->
     </div>
 
     <!-- MODAL DE GESTIÓN Y RESOLUCIÓN DE TICKET (ADMIN) -->
@@ -514,6 +727,19 @@
     <!-- Scripts de la Aplicación -->
     <script type="module" src="js/firebase-init.js"></script>
     <script type="module" src="js/admin_tickets.js"></script>
+    <script>
+        if (window.AOS) {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: false,
+                offset: 80
+            });
+        }
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 
 </html>

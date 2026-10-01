@@ -112,6 +112,18 @@ function initAuthObserver() {
       deniedScreen.classList.add("hidden");
       mainPanel.classList.remove("hidden");
 
+      setTimeout(() => {
+        if (window.AOS) {
+          window.AOS.init({
+            duration: 800,
+            easing: "ease-out-cubic",
+            once: false,
+            offset: 80
+          });
+          window.AOS.refreshHard();
+        }
+      }, 120);
+
       // Poblar perfil del administrador en la barra superior
       const displayName = user.displayName || user.email.split("@")[0];
       const avatarUrl =

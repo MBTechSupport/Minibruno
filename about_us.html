@@ -25,25 +25,20 @@
 <div class="scan-line"> </div>
 
 <body class="font-sans text-gray-900 leading-relaxed min-h-screen relative" data-aos="fade-up" data-aos-duration="800">
-    <!-- Header Distinguido (con botón grande y estilizado de volver al inicio) -->
-    <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="100">
+    <!-- Header -->
+    <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="200">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index_log.html" class="flex items-center space-x-3 group">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow group-hover:scale-105 transition-transform">
-                    <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno"
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+                    <img src="img_ref\bd_brunito\logo_glow.svg" alt="Logo MiniBruno"
                         class="w-full h-full object-contain">
+                    <a href="index_log.html" class="absolute inset-0" title="Ir al inicio"
+                        aria-label="Ir al inicio"><span class="sr-only">Ir al inicio</span></a>
                 </div>
                 <span class="text-xl font-bold text-gray-800 font-tech">MiniBruno TechSupport</span>
-            </a>
-
-            <!-- Botón Grande y Estilizado de Volver al Inicio -->
-            <a href="index_log.html"
-                class="inline-flex items-center space-x-2.5 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-tech text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 neon-glow group">
-                <i data-feather="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-                <span>Volver al Inicio</span>
-            </a>
+            </div>
         </div>
-        <div class="rgb-divider"></div>
     </header>
 
     <!-- Contenido Principal -->
@@ -543,7 +538,7 @@
                 <div data-aos="fade-up" data-aos-delay="50">
                     <h4 class="text-lg font-semibold text-dark font-tech mb-4">Secciones </h4>
                     <ul class="space-y-2">
-                        <li><a href="about_Us.html"
+                        <li><a href="about_us.html"
                                 class="text-gray-600 hover:text-dark transition-colors flex items-center"><i
                                     data-feather="monitor" class="w-4 h-4 mr-2"></i> Nosotros</a></li>
                         <li><a href="news.html"
