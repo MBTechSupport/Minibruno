@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initRippleEffect();
     initSmoothScroll();
     initScrollProgressBar();
-    initHomeButtonEnhancement();
+    // initHomeButtonEnhancement desactivado para evitar duplicar el botón de inicio
     initAOSEnhancement();
 });
 

@@ -31,9 +31,9 @@
                 <span class="text-xl font-bold text-gray-800 font-tech">MiniBruno TechSupport</span>
             </a>
 
-            <!-- Botón Grande y Estilizado de Volver al Inicio -->
+            <!-- Botón Grande y Estilizado de Volver al Inicio (Tamaño Estándar Unificado) -->
             <a href="index_log.html"
-                class="inline-flex items-center space-x-2.5 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-tech text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 neon-glow group">
+                class="inline-flex items-center space-x-2.5 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-tech text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 neon-glow group">
                 <i data-feather="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
                 <span>Volver al Inicio</span>
             </a>
@@ -41,26 +41,34 @@
         <div class="rgb-divider"></div>
     </header>
 
-    <!-- Hero Banner -->
-    <div class="contenedor matrix-bg" data-aos="fade-up" data-aos-delay="100">
+    <!-- Hero Banner con Imagen Alusiva y Burbuja Flotante Interactiva -->
+    <div class="contenedor matrix-bg mb-8" data-aos="fade-up" data-aos-delay="100">
         <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
             alt="FAQs Banner" class="imagen">
 
         <!-- Mensaje flotante tipo burbuja de ayuda -->
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full px-4">
-            <div
-                class="bg-black/70 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto shadow-2xl border border-blue-500/30 floating-animation">
+            <div onclick="scrollToFAQ()"
+                class="bg-white/85 backdrop-blur-md rounded-2xl p-6 max-w-lg mx-auto shadow-2xl border border-blue-500/30 floating-animation hover:scale-105 hover:border-blue-500 hover:shadow-blue-500/20 transition-all cursor-pointer group"
+                title="Haz clic para consultar las preguntas frecuentes">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
                         <div
-                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center neon-glow">
+                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center neon-glow group-hover:rotate-12 transition-transform">
                             <i data-feather="help-circle" class="w-6 h-6 text-white"></i>
                         </div>
                     </div>
                     <div class="ml-4">
-                        <p class="text-xl font-bold text-white font-tech">Preguntas Frecuentes</p>
-                        <p class="text-gray-300 mt-2">Encuentra respuestas a las consultas más comunes sobre seguridad y
-                            operaciones en la planta.</p>
+                        <div class="flex items-center space-x-2">
+                            <p class="text-xl font-bold text-dark font-tech">Preguntas Frecuentes</p>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-100 text-blue-700">FAQ Hub</span>
+                        </div>
+                        <p class="text-gray-700 mt-2 text-sm leading-relaxed">
+                            Encuentra respuestas inmediatas a las consultas más comunes sobre soporte, sistemas y operaciones técnicas.
+                        </p>
+                        <span class="inline-flex items-center text-xs font-bold text-blue-600 mt-2 group-hover:translate-x-1 transition-transform">
+                            Explorar temas y respuestas <i data-feather="arrow-down" class="w-3.5 h-3.5 ml-1"></i>
+                        </span>
                     </div>
                 </div>
             </div>
