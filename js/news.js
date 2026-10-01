@@ -839,12 +839,12 @@ function showNewsToast(title, message, isError = false) {
   descEl.textContent = message;
 
   if (isError) {
-    iconBox.className = "w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 text-red-600";
-    icon.setAttribute("data-feather", "alert-circle");
+    if (iconBox) iconBox.className = "w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 text-red-600";
+    if (icon && icon.setAttribute) icon.setAttribute("data-feather", "alert-circle");
     toast.className = "fixed bottom-6 right-6 z-50 p-4 rounded-2xl flex items-center space-x-3 shadow-2xl border border-red-200 max-w-md transition-all animate__animated animate__fadeInUp bg-red-50";
   } else {
-    iconBox.className = "w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald-100 text-emerald-600";
-    icon.setAttribute("data-feather", "check");
+    if (iconBox) iconBox.className = "w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald-100 text-emerald-600";
+    if (icon && icon.setAttribute) icon.setAttribute("data-feather", "check");
     toast.className = "fixed bottom-6 right-6 z-50 p-4 rounded-2xl flex items-center space-x-3 shadow-2xl border border-emerald-200 max-w-md transition-all animate__animated animate__fadeInUp bg-emerald-50";
   }
 

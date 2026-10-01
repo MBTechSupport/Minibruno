@@ -509,16 +509,16 @@ function showAdminToast(title, message, isError = false) {
 
   if (isError) {
     toast.className = "mb-6 p-4 rounded-2xl flex items-center justify-between shadow-lg transition-all animate__animated animate__fadeInDown bg-red-50 border border-red-200";
-    iconBox.className = "w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 text-red-600";
-    icon.setAttribute("data-feather", "alert-circle");
-    titleEl.className = "font-tech text-xs font-bold uppercase tracking-wider text-red-900";
-    msgEl.className = "text-xs mt-0.5 text-red-700";
+    if (iconBox) iconBox.className = "w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-red-100 text-red-600";
+    if (icon && icon.setAttribute) icon.setAttribute("data-feather", "alert-circle");
+    if (titleEl) titleEl.className = "font-tech text-xs font-bold uppercase tracking-wider text-red-900";
+    if (msgEl) msgEl.className = "text-xs mt-0.5 text-red-700";
   } else {
     toast.className = "mb-6 p-4 rounded-2xl flex items-center justify-between shadow-lg transition-all animate__animated animate__fadeInDown bg-emerald-50 border border-emerald-200";
-    iconBox.className = "w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald-100 text-emerald-600";
-    icon.setAttribute("data-feather", "check-circle");
-    titleEl.className = "font-tech text-xs font-bold uppercase tracking-wider text-emerald-900";
-    msgEl.className = "text-xs mt-0.5 text-emerald-700";
+    if (iconBox) iconBox.className = "w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 bg-emerald-100 text-emerald-600";
+    if (icon && icon.setAttribute) icon.setAttribute("data-feather", "check-circle");
+    if (titleEl) titleEl.className = "font-tech text-xs font-bold uppercase tracking-wider text-emerald-900";
+    if (msgEl) msgEl.className = "text-xs mt-0.5 text-emerald-700";
   }
 
   if (window.feather) window.feather.replace();

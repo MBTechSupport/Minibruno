@@ -21,6 +21,10 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- Tailwind CSS y Feather Icons para armonización de componentes y footer -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
     <style>
         /* Estilos adicionales para la landing */
         * {
@@ -119,67 +123,147 @@
             min-height: 100vh;
             position: relative;
             display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 12vh;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(33, 51, 121, 0.05), rgba(66, 140, 226, 0.05));
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: -15%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            z-index: 10;
-            pointer-events: none;
-            overflow: visible;
-            perspective: 1000px;
-            display: flex;
             align-items: center;
             justify-content: center;
+            padding-top: 7rem;
+            padding-bottom: 5rem;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 25%, rgba(66, 140, 226, 0.08) 0%, transparent 65%), linear-gradient(135deg, rgba(33, 51, 121, 0.04), rgba(66, 140, 226, 0.04));
         }
 
-        .hero-bg img {
-            width: 70%;
-            height: 70%;
+        .hero-glow-orb {
+            position: absolute;
+            top: 28%;
+            left: 50%;
+            transform: translate(-50%, -20%);
+            width: 650px;
+            height: 380px;
+            background: radial-gradient(ellipse at center, rgba(66, 140, 226, 0.28) 0%, rgba(147, 51, 234, 0.15) 45%, transparent 70%);
+            filter: blur(50px);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: heroGlowPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlowPulse {
+            0% { transform: translate(-50%, -20%) scale(0.92); opacity: 0.6; }
+            100% { transform: translate(-50%, -20%) scale(1.12); opacity: 0.95; }
+        }
+
+        .hero-logo-container {
+            width: 100%;
+            max-width: 920px;
+            margin: 1.5rem auto 2.5rem;
+            perspective: 1200px;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-logo-img {
+            width: 90%;
+            max-width: 860px;
+            height: auto;
+            max-height: 440px;
             object-fit: contain;
-            object-position: center center;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 15px rgba(66, 140, 226, 0.4));
+            filter: drop-shadow(0 0 25px rgba(66, 140, 226, 0.5)) drop-shadow(0 15px 35px rgba(33, 51, 121, 0.35));
             animation: hero3DMotion 12s ease-in-out infinite;
             will-change: transform, filter;
+            transition: all 0.5s ease;
+        }
+
+        .hero-logo-img:hover {
+            filter: drop-shadow(0 0 45px rgba(66, 140, 226, 0.75)) drop-shadow(0 20px 45px rgba(147, 51, 234, 0.45));
         }
 
         @keyframes hero3DMotion {
             0% {
                 transform: rotateX(0deg) rotateY(0deg) scale(1) translateY(0);
-                filter: drop-shadow(0 0 15px rgba(66, 140, 226, 0.4));
+                filter: drop-shadow(0 0 20px rgba(66, 140, 226, 0.4)) drop-shadow(0 12px 25px rgba(33, 51, 121, 0.3));
             }
 
             33% {
-                transform: rotateX(5deg) rotateY(5deg) scale(1.05) translateY(-20px);
-                filter: drop-shadow(0 0 40px rgba(66, 140, 226, 0.6));
+                transform: rotateX(4deg) rotateY(4deg) scale(1.03) translateY(-14px);
+                filter: drop-shadow(0 0 45px rgba(66, 140, 226, 0.65)) drop-shadow(0 20px 40px rgba(147, 51, 234, 0.35));
             }
 
             66% {
-                transform: rotateX(-5deg) rotateY(-5deg) scale(1.02) translateY(10px);
-                filter: drop-shadow(0 0 25px rgba(147, 51, 234, 0.5));
+                transform: rotateX(-4deg) rotateY(-4deg) scale(1.01) translateY(8px);
+                filter: drop-shadow(0 0 30px rgba(147, 51, 234, 0.55)) drop-shadow(0 16px 30px rgba(66, 140, 226, 0.4));
             }
 
             100% {
                 transform: rotateX(0deg) rotateY(0deg) scale(1) translateY(0);
-                filter: drop-shadow(0 0 15px rgba(66, 140, 226, 0.4));
+                filter: drop-shadow(0 0 20px rgba(66, 140, 226, 0.4)) drop-shadow(0 12px 25px rgba(33, 51, 121, 0.3));
             }
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 10;
             text-align: center;
-            max-width: 900px;
+            max-width: 1000px;
             padding: 1.5rem;
+            margin: 0 auto;
+        }
+
+        /* Wave Footer Styles */
+        .footer-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            transform: translateZ(0);
+            z-index: 0;
+        }
+
+        .footer-wave svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .footer-wave .wave-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+        }
+
+        .footer-wave .wave-front {
+            opacity: 0.65;
+            animation: waveMove 6s linear infinite;
+            transform: translateX(0);
+        }
+
+        .footer-wave .wave-back {
+            opacity: 0.38;
+            animation: waveMove 10s linear infinite reverse;
+            transform: translateX(0);
+            filter: blur(6px);
+        }
+
+        @keyframes waveMove {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .footer-content-bg {
+            background-color: rgba(243, 244, 246, 0.6);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
         }
 
         .hero-content h1 {
@@ -726,19 +810,28 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
-        <div class="hero-bg">
-            <img src="img_ref/webp/floating_img.webp" alt="Background">
-        </div>
-        <div class="hero-content font-tech text-center"
-            style="font-family: 'Orbitron', sans-serif; font-size: 2rem; line-height: 1.6; color: var(--text-light);">
-            <h1 data-aos="fade-up">Nuestra Familia</h1>
+        <div class="hero-glow-orb" aria-hidden="true"></div>
 
-            <br><br><br><br>
-            <br><br><br><br>
+        <div class="hero-content font-tech text-center">
+            <!-- Badge Superior Corporativo -->
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 text-blue-800 text-xs md:text-sm font-semibold mb-4 shadow-sm backdrop-blur-sm" data-aos="fade-down">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                <span>Mini Bruno Sucesores C.A. • Excelencia e Innovación desde 1967</span>
+            </div>
 
-            <p data-aos="fade-up" data-aos-delay="200">
-                Desde 1967, Mini Bruno Sucesores C.A. ha sido pionera en la transformación de subproductos cárnicos en
-                productos de alta calidad para la industria alimentaria.
+            <h1 class="text-3xl md:text-5xl font-bold gradient-text tracking-wide mb-3" data-aos="fade-up">Nuestra Familia</h1>
+
+            <!-- Logo Grande 3D Oficial Reemplazado con Efectos de Órbita, Luces y Transición -->
+            <div class="hero-logo-container" data-aos="zoom-in" data-aos-duration="1200">
+                <img src="img_ref/svgs/bg_Mb3.svg" 
+                     alt="Logo Oficial 3D Mini Bruno Sucesores C.A." 
+                     class="hero-logo-img"
+                     onerror="this.onerror=null; this.src='img_ref/webp/bg_mb3.webp';" />
+            </div>
+
+            <p class="max-w-3xl mx-auto text-base md:text-lg text-gray-700 leading-relaxed font-normal mb-8" data-aos="fade-up" data-aos-delay="200">
+                Desde 1967, <strong>Mini Bruno Sucesores C.A.</strong> ha sido pionera en la transformación sustentable de subproductos cárnicos en
+                soluciones proteicas y energéticas de la más alta calidad para la industria alimentaria, acuícola y de nutrición animal.
             </p>
 
             <div class="hero-stats">
@@ -953,6 +1046,145 @@
         </div>
     </section>
 
+    <!-- Footer con Efecto Wave Animado (Armonizado con index_log sin listas de selección internas) -->
+    <footer id="footer-landing" class="relative overflow-hidden mt-16 pt-12" data-aos="fade-up" data-aos-delay="200">
+        <!-- Animated Wave (Doble capa interactiva con gradientes continuos) -->
+        <div class="footer-wave" aria-hidden="true">
+            <div class="wave-layer wave-back">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="waveBackGradIndex" x1="0" x2="1">
+                            <stop offset="0%" stop-color="#e6f0ff" />
+                            <stop offset="100%" stop-color="#f8fbff" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M0,30 C150,90 350,0 600,30 C850,60 1050,10 1200,40 L1200,120 L0,120 Z"
+                        fill="url(#waveBackGradIndex)"></path>
+                </svg>
+            </div>
+            <div class="wave-layer wave-front">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="waveFrontGradIndex" x1="0" x2="1">
+                            <stop offset="0%" stop-color="#cfe6ff" />
+                            <stop offset="100%" stop-color="#dfeeff" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M0,50 C200,10 350,90 600,50 C850,10 1000,80 1200,50 L1200,120 L0,120 Z"
+                        fill="url(#waveFrontGradIndex)"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 py-12 relative z-10 footer-content-bg rounded-3xl shadow-xl border border-white/70 max-w-7xl backdrop-blur-md mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <!-- Columna 1: Identidad Corporativa -->
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center neon-glow shadow-md">
+                            <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno" class="w-8 h-8 object-contain" />
+                        </div>
+                        <div>
+                            <span class="text-xl font-bold text-gray-900 font-tech">Mini Bruno</span>
+                            <span class="block text-xs text-blue-600 font-semibold tracking-wider uppercase font-tech">Sucesores C.A.</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4 font-normal">
+                        Líderes indiscutibles en la transformación sustentable de subproductos cárnicos con los más altos estándares de calidad, bio-seguridad y tecnología de punta desde 1967.
+                    </p>
+                    <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold font-tech">
+                        <i data-feather="shield" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i> RIF: J-00055639-3
+                    </div>
+                </div>
+
+                <!-- Columna 2: Contacto Corporativo -->
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="text-lg font-semibold text-gray-900 font-tech mb-4 flex items-center">
+                        <i data-feather="map-pin" class="w-4 h-4 mr-2 text-blue-600"></i> Sede & Contacto
+                    </h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start text-gray-600">
+                            <i data-feather="globe" class="mr-3 w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0"></i>
+                            <a href="https://www.minibruno.com" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition-colors font-medium">
+                                https://www.minibruno.com
+                            </a>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i data-feather="phone" class="mr-3 w-4 h-4 text-emerald-600 flex-shrink-0"></i>
+                            <a href="tel:+582432002300" class="hover:text-emerald-600 transition-colors font-medium">
+                                +58-243-200-2300
+                            </a>
+                        </li>
+                        <li class="flex items-start text-gray-600">
+                            <i data-feather="map" class="mr-3 w-4 h-4 mt-0.5 text-rose-500 flex-shrink-0"></i>
+                            <span>Carretera Vieja Caracas-Los Teques, Km 12, Caracas, D.C., Venezuela</span>
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <i data-feather="clock" class="mr-3 w-4 h-4 text-amber-500 flex-shrink-0"></i>
+                            <span>Operaciones Continuas: 24 Horas / 7 Días</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Redes Sociales & Botón Ir Arriba -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="text-lg font-semibold text-gray-900 font-tech mb-4">Síguenos</h4>
+                    <div class="flex space-x-3 mb-6">
+                        <a href="https://www.facebook.com/profile.php?id=100081592345336&mibextid=ZbWKwL"
+                            target="_blank" rel="noopener noreferrer" aria-label="Facebook Mini Bruno"
+                            class="w-10 h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-md neon-glow">
+                            <i data-feather="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://twitter.com/minibrunosucrs"
+                            target="_blank" rel="noopener noreferrer" aria-label="Twitter Mini Bruno"
+                            class="w-10 h-10 bg-sky-500 hover:bg-sky-600 text-white rounded-full flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-md neon-glow">
+                            <i data-feather="twitter" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.instagram.com/mini_bruno_sucesores.ca?utm_source=qr&igsh=cWtrbng4dDY5MTU2"
+                            target="_blank" rel="noopener noreferrer" aria-label="Instagram Mini Bruno"
+                            class="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-amber-500 hover:opacity-90 text-white rounded-full flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-md neon-glow">
+                            <i data-feather="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/mini-bruno-sucesores-c-a-1b4413246"
+                            target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Mini Bruno"
+                            class="w-10 h-10 bg-blue-700 hover:bg-blue-800 text-white rounded-full flex items-center justify-center transition-all transform hover:-translate-y-1 shadow-md neon-glow">
+                            <i data-feather="linkedin" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-white/80 rounded-2xl p-4 border border-blue-100 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-blue-700 font-tech uppercase tracking-wider">Atención Corporativa</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        </div>
+                        <p class="text-gray-600 text-xs mb-3">Soporte agroindustrial y mesa de ayuda operativa.</p>
+                        <button onclick="scrollToTop()"
+                            class="w-full py-2.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-tech text-xs font-bold flex items-center justify-center shadow-md transition-all transform hover:-translate-y-0.5 cursor-pointer">
+                            <i data-feather="arrow-up" class="w-4 h-4 mr-2"></i> Ir arriba
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divisor y Copyright -->
+            <div class="border-t border-gray-200/90 pt-6 text-center">
+                <p class="text-gray-600 text-sm mb-1">
+                    Desarrollado por <strong class="text-blue-600">Luis Ruiz</strong>
+                </p>
+                <p class="text-gray-500 text-xs mb-3">
+                    © 2025 Mini Bruno Sucesores C.A. Todos los derechos reservados.
+                </p>
+                <div class="flex justify-center space-x-2">
+                    <span class="px-2.5 py-0.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-full text-[11px] font-tech font-semibold">v3.1</span>
+                    <span class="px-2.5 py-0.5 bg-purple-50 text-purple-700 border border-purple-200 rounded-full text-[11px] font-tech font-semibold">BETA</span>
+                    <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-[11px] font-tech font-semibold flex items-center">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-ping"></span> ONLINE
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Login Trigger Button con Efectos Premium -->
     <div id="loginTrigger" class="login-trigger" onclick="toggleLoginAlert()">
         <div class="login-trigger-container">
@@ -1016,6 +1248,21 @@
             // Redirigir a la página de login
             window.location.href = 'login.html'; // Cambia esta ruta por tu página de login real
         }
+
+        // Función para scroll suave hacia arriba (usada en el footer wave)
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Inicializar iconos Feather al cargar el DOM
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.feather) {
+                window.feather.replace();
+            }
+        });
 
         // Cerrar alert si se hace click fuera de él
         document.addEventListener('click', function (event) {

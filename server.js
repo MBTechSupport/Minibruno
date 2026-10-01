@@ -4,7 +4,7 @@ const { GoogleGenAI } = require('@google/genai');
 const { MINI_BRUNO_KNOWLEDGE_BASE, getRAGFallbackResponse } = require('./knowledge_base');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Validar formato de clave API de Gemini (debe iniciar con AIzaSy)
 const rawKey = process.env.GEMINI_API_KEY || '';
