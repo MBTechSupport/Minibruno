@@ -39,39 +39,47 @@
 
 </head>
 
-<body class="font-sans text-gray-900 leading-normal tracking-normal"
-    onload="feather.replace(); AOS.init(); initSlider();">
-    <!-- Header (encabezado) -->
+<body class="font-sans text-gray-900 leading-normal tracking-normal">
+    <!-- Header (encabezado moderno unificado) -->
     <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="100">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center flex-wrap">
-            <div class="flex items-center space-x-3 mb-2 md:mb-0">
-                <div
-                    class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
-                    <img src="img_ref\bd_brunito\logo_glow.svg" alt="Logo MiniBruno"
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index_log.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow group-hover:scale-105 transition-transform">
+                    <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno"
                         class="w-full h-full object-contain" />
                 </div>
                 <span class="text-xl font-bold text-dark font-tech">MiniBruno TechSupport</span>
-            </div>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#" class="text-dark font-tech text-sm neon-glow rounded-lg">Inicio</a>
-                <a href="servicio.html"
-                    class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Servicios</a>
-                <a href="contactos.html"
-                    class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Contacto</a>
-                <a href="soporte.html"
-                    class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Soporte</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <div id="userInfo"
-                    class="welcome-message bg-blue-500/20 px-4 py-2 rounded-lg border border-blue-500/30 flex items-center space-x-4 text-sm text-dark font-tech transition-all duration-300 hover:from-blue-500/30 hover:to-purple-500/30 hover:shadow-lg hover:border-blue-500/50 backdrop-blur-sm"
-                    style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <!-- Aquí se inyecta dinámicamente el correo y el botón -->
+            </a>
+
+            <!-- Navegación de Escritorio Unificada -->
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="index_log.html" class="text-blue-600 font-bold font-tech text-sm neon-glow px-3 py-1 rounded-lg bg-blue-50">Inicio</a>
+                <a href="servicio.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Servicios</a>
+                <a href="contactos.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Contacto</a>
+                <a href="soporte.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Soporte</a>
+                <a href="news.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Noticias</a>
+                
+                <!-- Badge Dinámico de Sesión -->
+                <div id="header-user-status" class="flex items-center space-x-3 pl-4 border-l border-gray-200">
+                    <!-- Inyectado por js/header-session.js -->
                 </div>
-                <button type="button" title="Abrir menú" aria-label="Abrir menú"
-                    class="md:hidden text-gray-600 hover:text-dark focus:outline-none ml-4">
-                    <i data-feather="menu"></i>
-                </button>
-            </div>
+            </nav>
+
+            <!-- Botón Hamburguesa Móvil -->
+            <button id="mobile-menu-btn" type="button" title="Abrir menú" aria-label="Abrir menú"
+                class="md:hidden text-gray-700 hover:text-dark focus:outline-none p-2 rounded-lg hover:bg-gray-100">
+                <i data-feather="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-4 space-y-3 shadow-lg">
+            <a href="index_log.html" class="block font-tech text-sm py-1.5 text-blue-600 font-bold">Inicio</a>
+            <a href="servicio.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Servicios</a>
+            <a href="contactos.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Contacto</a>
+            <a href="soporte.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Soporte</a>
+            <a href="news.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Noticias</a>
+            <div id="mobile-user-status"></div>
         </div>
         <div class="rgb-divider"></div>
     </header>
@@ -731,6 +739,7 @@
     <script src="js/index.js"></script>
     <script type="module" src="js/auth.js"></script>
     <script type="module" src="js/auth_guard.js"></script>
+    <script type="module" src="js/header-session.js"></script>
     <!-- Asistente IA BrunoBot (Gemini Flash & RAG) -->
     <script type="module" src="js/chat-widget.js"></script>
 </body>

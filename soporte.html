@@ -43,12 +43,29 @@
                 <a href="contactos.html"
                     class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Contacto</a>
                 <a href="soporte.html" class="text-blue-600 font-bold font-tech text-sm neon-glow px-3 py-1 rounded-lg bg-blue-50">Soporte</a>
+                <a href="news.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Noticias</a>
                 
                 <!-- Badge de Sesión en Header -->
                 <div id="header-user-status" class="flex items-center space-x-3 pl-4 border-l border-gray-200">
                     <!-- Dinámico vía JS -->
                 </div>
             </nav>
+
+            <!-- Botón Hamburguesa Móvil -->
+            <button id="mobile-menu-btn" type="button" title="Abrir menú" aria-label="Abrir menú"
+                class="md:hidden text-gray-700 hover:text-dark focus:outline-none p-2 rounded-lg hover:bg-gray-100">
+                <i data-feather="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-4 space-y-3 shadow-lg">
+            <a href="index_log.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Inicio</a>
+            <a href="servicio.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Servicios</a>
+            <a href="contactos.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Contacto</a>
+            <a href="soporte.html" class="block font-tech text-sm py-1.5 text-blue-600 font-bold">Soporte</a>
+            <a href="news.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Noticias</a>
+            <div id="mobile-user-status"></div>
         </div>
     </header>
 
@@ -862,6 +879,7 @@
     </div>
     <script type="module" src="js/firebase-init.js"></script>
     <script type="module" src="js/soporte.js"></script>
+    <script type="module" src="js/header-session.js"></script>
     <!-- Script de Animaciones Premium -->
     <script src="js/soporte-animations.js"></script>
         <script type="module" src="js/auth_guard.js"></script>

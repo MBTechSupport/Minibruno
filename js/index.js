@@ -34,14 +34,16 @@
         // Fin Swiper
 
         // Inicio Slider (nuevo)--------------------------------------------------------------------
-        document.addEventListener('DOMContentLoaded', () => {
-            feather.replace();
+        function initSlider() {
+            if (window.feather) feather.replace();
             
             const track = document.querySelector('.slider-track');
             const slides = document.querySelectorAll('.slider-slide');
             const dots = document.querySelectorAll('.slider-dot');
             const prevBtn = document.querySelector('.slider-prev');
             const nextBtn = document.querySelector('.slider-next');
+            
+            if (!track || slides.length === 0) return;
             
             let currentIndex = 0;
             const slideCount = slides.length;
@@ -67,25 +69,35 @@
             
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
-                    currentIndex = parseInt(dot.dataset.index);
+                    currentIndex = parseInt(dot.dataset.index, 10) || 0;
                     updateSlider();
                 });
             });
             
-            prevBtn.addEventListener('click', prevSlide);
-            nextBtn.addEventListener('click', nextSlide);
+            if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+            if (nextBtn) nextBtn.addEventListener('click', nextSlide);
             
             // Automatiza el slide cada 4 segundos (4000 ms)
             let slideInterval = setInterval(nextSlide, 4000);
             
             // Pausa el auto slide al pasar el mouse sobre el slider
             const sliderContainer = document.querySelector('.slider-container');
-            sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
-            sliderContainer.addEventListener('mouseleave', () => {
-                clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, 4000);
-            });
-        });
+            if (sliderContainer) {
+                sliderContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+                sliderContainer.addEventListener('mouseleave', () => {
+                    clearInterval(slideInterval);
+                    slideInterval = setInterval(nextSlide, 4000);
+                });
+            }
+        }
+
+        window.initSlider = initSlider;
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSlider);
+        } else {
+            initSlider();
+        }
         // FIN Slider (nuevo)--------------------------------------------------------------------
         
         // Función para ir al inicio de la página (header)

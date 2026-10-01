@@ -4,323 +4,237 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso Denegado | MiniBruno TechSupport</title>
+  <title>Acceso Restringido 403 | Mini Bruno Sucesores C.A.</title>
+  <meta name="description" content="Acceso restringido. Autenticación requerida para acceder al portal corporativo de Mini Bruno Sucesores C.A.">
 
   <link rel="icon" type="image/x-icon" href="static/favicon.ico">
-  <link rel="stylesheet" href="css/shared.css">
-
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Exo+2:wght@400;600;700&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ============================
-           LÓGICA DE TEMAS (Dark/Light)
-           ============================ */
-
-    /* --- TEMA OSCURO (Activo cuando body tiene clase 'dark') --- */
-    body.dark {
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e) !important;
-      color: #cbd5e1;
+    .font-tech {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .font-mono {
+      font-family: 'Roboto Mono', monospace;
+    }
+    body {
+      font-family: 'Exo 2', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    body.dark .login-card {
-      background: rgba(15, 12, 41, 0.95);
-      border: 1px solid rgba(102, 126, 234, 0.3);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+    /* Fondo dinámico estilo Cyber Grid */
+    .cyber-bg {
+      background-color: #0b0f19;
+      background-image: 
+        radial-gradient(at 10% 20%, rgba(239, 68, 68, 0.08) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
     }
 
-    /* Ocultar el fondo "energyPulse" de shared.css en modo oscuro para evitar conflictos visuales */
-    body.dark::before {
-      opacity: 0.2;
-    }
-
-    /* Ajustes de texto para modo oscuro */
-    body.dark .text-gray {
-      color: #e2e8f0;
-      /* Gray 200 */
-    }
-
-    body.dark .text-gray-500 {
-      color: #9ca3af;
-      /* Gray 400 */
-    }
-
-    body.dark .text-gray-400 {
-      color: #cbd5e1;
-      /* Gray 300 */
-    }
-
-
-    /* --- TEMA CLARO (Activo cuando body tiene clase 'light') --- */
     body.light {
-      background: linear-gradient(135deg, #f0f4ff, #ffffff, #e6e9f0) !important;
-      color: #333;
+      background-color: #f1f5f9;
+      background-image: 
+        radial-gradient(at 10% 20%, rgba(239, 68, 68, 0.05) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+      color: #1e293b;
     }
 
-    body.light .login-card {
+    body.light .card-403 {
       background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(66, 140, 226, 0.2);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+      box-shadow: 0 20px 40px -15px rgba(239, 68, 68, 0.15), 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+    }
+    body.light .text-main-title {
+      color: #0f172a;
+    }
+    body.light .text-main-desc {
+      color: #475569;
+    }
+    body.light .info-box {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      color: #334155;
     }
 
-    /* Ajustes de texto para modo claro para mejor contraste */
-    body.light .text-gray-400 {
-      color: #4b5563;
-      /* Gray 600 - más oscuro para fondo claro */
+    /* Pulso suave */
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.04); opacity: 0.9; }
     }
-
-    body.light .text-gray {
-      color: #1f2937;
-      /* Gray 800 */
-    }
-
-    body.light .font-tech {
-      color: #111827;
-      /* Gray 900 */
-    }
-
-    body.light .emoji-icon {
-      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
-    }
-
-    /* --- ESTILOS COMUNES --- */
-    .emoji-icon {
-      font-size: 60px;
-      margin-bottom: 1rem;
-      animation: float 6s ease-in-out infinite;
-      display: inline-block;
-    }
-
-    .toggle-btn {
-      background: transparent;
-      border: 1px solid var(--primary-light);
-      color: var(--primary-light);
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
-      margin-top: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .toggle-btn:hover {
-      background: var(--primary-light);
-      color: white;
-      box-shadow: 0 0 15px rgba(66, 140, 226, 0.4);
-    }
-
-    /* Ajuste específico para el botón de toggle en dark mode */
-    body.dark .toggle-btn {
-      border-color: #764ba2;
-      color: #c4b5fd;
-    }
-
-    body.dark .toggle-btn:hover {
-      background: #764ba2;
-      color: white;
-    }
-
-    /* FIX: Force button interaction */
-    .toggle-btn {
-      position: relative;
-      z-index: 100 !important;
-      pointer-events: auto !important;
-      cursor: pointer !important;
-    }
-
-    /* =====================================================
-       CONTENEDOR DE BOTONES - RESPONSIVE DESIGN
-       ===================================================== */
-    .buttons-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.25rem;
-      width: 100%;
-    }
-
-    /* Desktop: mostrar botones en fila */
-    @media (min-width: 640px) {
-      .buttons-container {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .buttons-container .toggle-btn {
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-    }
-
-    /* =====================================================
-       AJUSTES DE TEMA PARA BOTÓN HOME
-       ===================================================== */
-    /* Modo oscuro: ajustar colores del botón home */
-    body.dark .home-button-wrapper {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(147, 51, 234, 0.15));
-    }
-
-    body.dark .home-button-wrapper:hover {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.25), rgba(147, 51, 234, 0.25));
-      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4),
-        0 0 60px rgba(147, 51, 234, 0.3);
-    }
-
-    body.dark .home-button-text {
-      background: linear-gradient(90deg, #e2e8f0, #667eea, #9333ea, #e2e8f0);
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    body.dark .home-arrow-icon {
-      color: #667eea;
-    }
-
-    body.dark .neon-glow svg {
-      stroke: #667eea;
-    }
-
-    /* Modo claro: mantener colores originales pero más suaves */
-    body.light .home-button-wrapper {
-      background: linear-gradient(135deg, rgba(66, 140, 226, 0.08), rgba(147, 51, 234, 0.08));
-    }
-
-    body.light .home-button-wrapper:hover {
-      background: linear-gradient(135deg, rgba(66, 140, 226, 0.15), rgba(147, 51, 234, 0.15));
-      box-shadow: 0 10px 40px rgba(66, 140, 226, 0.25),
-        0 0 60px rgba(147, 51, 234, 0.15);
-    }
-
-    /* Responsive: ajustar tamaño en móviles */
-    @media (max-width: 639px) {
-      .home-button-wrapper {
-        width: 100%;
-        justify-content: center;
-        padding: 0.75rem 1.5rem;
-      }
-
-      .home-button-text {
-        font-size: 0.85rem;
-      }
+    .badge-pulse {
+      animation: pulse-soft 3s infinite ease-in-out;
     }
   </style>
 </head>
 
-<body class="cyber-grid">
-  <!-- Not Logged Card -->
-  <div class="login-card floating-animation rounded-2xl p-8 scan-line" data-aos="fade-up" data-aos-delay="200">
-    <!-- Logo Header -->
-    <div class="text-center mb-6" data-aos="fade-down">
-      <div class="flex items-center justify-center space-x-3 mb-4">
-        <div
-          class="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg flex items-center justify-center neon-glow pulse-animation">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
-            </path>
-            <line x1="12" y1="9" x2="12" y2="13"></line>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-        </div>
-        <h1 class="text-2xl font-bold text-gray font-tech">MiniBruno TechSupport</h1>
-      </div>
-      <div class="rgb-divider rounded-full mx-auto w-32"></div>
-    </div>
+<body class="cyber-bg text-slate-200 min-h-screen flex flex-col justify-between p-4 sm:p-6 relative overflow-x-hidden selection:bg-red-500 selection:text-white">
 
-    <div class="text-center mb-6">
-      <div class="emoji-icon">⚡</div>
-      <h2 class="text-3xl font-bold text-white mb-4 font-tech gradient-text">¡Acceso Denegado!</h2>
-      <p class="text-gray-400 text-lg mb-6">
-        No estás logueado…<br>
-        Esto es como intentar hackear la Matrix sin credenciales. Conéctate para entrar al sistema.
-      </p>
-    </div>
-
-    <div class="buttons-container">
-      <!-- Botón para ir al Inicio -->
-      <a href="index.html" class="home-button-wrapper">
-        <div class="neon-glow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="#428ce2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-          </svg>
-        </div>
-        <span class="home-arrow-icon">←</span>
-        <span class="home-button-text">Ir al Inicio</span>
-      </a>
-
-      <!-- Botón para volver al Login -->
-      <a href="login.html" class="home-button-wrapper">
-        <div class="neon-glow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="#428ce2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-            <polyline points="10 17 15 12 10 7"></polyline>
-            <line x1="15" y1="12" x2="3" y2="12"></line>
-          </svg>
-        </div>
-        <span class="home-arrow-icon">←</span>
-        <span class="home-button-text">Volver al Login</span>
-      </a>
-
-      <!-- Botón de cambio de tema -->
-      <button class="toggle-btn font-tech" id="toggleTheme" onclick="toggleTheme()">
-        <i data-feather="sun" class="inline w-4 h-4 mr-1"></i> Cambiar Tema
-      </button>
-    </div>
-
-    <!-- Footer Info -->
-    <div class="text-center mt-8 pt-6 border-t border-gray-700/30">
-      <p class="text-gray-500 text-sm">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
-    </div>
+  <!-- Resplandores ambientales de fondo -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-32 -left-32 w-80 h-80 bg-red-600/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
   </div>
 
-  <!-- Inicializar animaciones y lógica -->
-  <script>
-    AOS.init();
+  <!-- Barra Superior: Identidad MiniBruno y Selector de Tema -->
+  <header class="w-full max-w-5xl mx-auto flex justify-between items-center z-10 py-2">
+    <a href="index.html" class="flex items-center space-x-3 group">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+        <i data-feather="shield" class="w-4 h-4"></i>
+      </div>
+      <div>
+        <span class="font-tech font-bold text-sm tracking-wide text-main-title text-white">Mini Bruno</span>
+        <span class="text-[10px] block font-mono text-cyan-400">TechSupport Gateway</span>
+      </div>
+    </a>
+
+    <!-- Botón Toggle de Tema -->
+    <button id="themeToggleBtn" type="button" class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-mono text-slate-300 transition-colors shadow-sm" title="Alternar tema claro / oscuro">
+      <i id="themeIcon" data-feather="sun" class="w-3.5 h-3.5 text-amber-400"></i>
+      <span id="themeLabel" class="hidden sm:inline">Tema Claro</span>
+    </button>
+  </header>
+
+  <!-- Contenedor Central: Tarjeta 403 Unificada -->
+  <main class="flex-1 flex items-center justify-center my-6 z-10 w-full">
+    <div class="card-403 max-w-lg w-full bg-slate-800/95 border border-red-500/40 rounded-3xl p-6 sm:p-8 text-center shadow-2xl relative overflow-hidden backdrop-blur-md">
+      
+      <!-- Detalle decorativo interno -->
+      <div class="absolute -top-12 -right-12 w-36 h-36 bg-red-500/15 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-10 -left-10 w-28 h-28 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+      <!-- Icono Central de Seguridad -->
+      <div class="w-16 h-16 sm:w-20 sm:h-20 bg-red-500/15 text-red-400 border border-red-500/30 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-red-500/10 badge-pulse">
+        <i data-feather="shield-off" class="w-8 h-8 sm:w-10 sm:h-10"></i>
+      </div>
+
+      <!-- Badge de Estado -->
+      <div class="mb-3">
+        <span class="inline-flex items-center space-x-1.5 px-3.5 py-1 bg-red-500/20 text-red-400 text-xs font-mono font-bold rounded-full border border-red-500/30 tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-red-400 animate-ping mr-1"></span>
+          ERROR 403 - ACCESO RESTRINGIDO
+        </span>
+      </div>
+
+      <!-- Título Principal -->
+      <h1 class="text-2xl sm:text-3xl font-bold font-tech text-white text-main-title mb-2 tracking-wide">
+        Autenticación Requerida
+      </h1>
+
+      <!-- Descripción -->
+      <p class="text-sm text-slate-400 text-main-desc mb-6 leading-relaxed">
+        El recurso al que intentas acceder requiere una sesión activa con credenciales autorizadas de <strong class="text-slate-200 font-semibold">Mini Bruno Sucesores C.A.</strong>
+      </p>
+
+      <!-- Caja de Información Técnica y Ayuda -->
+      <div class="info-box bg-slate-900/80 p-4 rounded-2xl border border-slate-700/60 text-xs text-slate-400 mb-6 text-left space-y-2">
+        <div class="flex items-center space-x-2 text-slate-200 font-semibold">
+          <i data-feather="lock" class="w-4 h-4 text-cyan-400"></i>
+          <span>Portal de Seguridad & Gestión TI</span>
+        </div>
+        <p class="text-[12px] leading-relaxed">
+          Inicia sesión con tu correo corporativo o cuenta autorizada de Google para verificar tus permisos y acceder a tus servicios.
+        </p>
+        <div id="sessionStatusBox" class="hidden pt-2 border-t border-slate-700/40 text-emerald-400 font-mono text-[11px] flex items-center space-x-1.5">
+          <i data-feather="check-circle" class="w-3.5 h-3.5"></i>
+          <span id="sessionStatusMsg">Sesión detectada</span>
+        </div>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <!-- Iniciar Sesión (Acción Primaria) -->
+        <a href="login.html" id="actionLoginBtn" class="flex-1 py-3 px-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-500 hover:to-indigo-600 text-white rounded-xl text-xs font-tech font-bold transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center space-x-2">
+          <i data-feather="log-in" class="w-4 h-4"></i>
+          <span>Iniciar Sesión</span>
+        </a>
+
+        <!-- Registrarse -->
+        <a href="register.html" class="py-3 px-4 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-tech font-bold transition-colors flex items-center justify-center space-x-2 border border-slate-600">
+          <i data-feather="user-plus" class="w-4 h-4 text-cyan-400"></i>
+          <span>Registrarse</span>
+        </a>
+
+        <!-- Volver al Inicio -->
+        <a href="index.html" class="py-3 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-tech font-semibold transition-colors flex items-center justify-center space-x-2 border border-slate-700">
+          <i data-feather="home" class="w-4 h-4"></i>
+          <span>Inicio</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página Institucional -->
+  <footer class="w-full max-w-5xl mx-auto text-center py-4 z-10 border-t border-slate-800/60 mt-4">
+    <p class="text-xs text-slate-500 font-mono">
+      © 2026 Mini Bruno Sucesores C.A. · División de Sistemas e Infraestructura
+    </p>
+  </footer>
+
+  <!-- Scripts: Iconos, Temas y Detección Automática de Sesión -->
+  <script type="module">
+    import { auth } from "./js/firebase-init.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // Inicializar iconos Feather
     feather.replace();
-  </script>
 
-  <script>
-    // Inicialización segura del tema
-    document.addEventListener('DOMContentLoaded', () => {
-      const body = document.body;
-      const savedTheme = localStorage.getItem("theme");
+    // 1. Gestión de Temas (Dark / Light) con persistencia en localStorage
+    const body = document.body;
+    const themeBtn = document.getElementById("themeToggleBtn");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeLabel = document.getElementById("themeLabel");
 
-      if (savedTheme) {
-        body.classList.add(savedTheme);
-      } else {
-        body.classList.add("dark");
-      }
-    });
-
-    // Función global para el botón
-    window.toggleTheme = function () {
-      const body = document.body;
-      console.log('Toggle theme pressed. Current classes:', body.className);
-
-      if (body.classList.contains("dark")) {
-        body.classList.remove("dark");
+    function applyTheme(theme) {
+      if (theme === "light") {
         body.classList.add("light");
-        localStorage.setItem("theme", "light");
+        themeLabel.textContent = "Tema Oscuro";
+        themeIcon.setAttribute("data-feather", "moon");
+        themeIcon.classList.remove("text-amber-400");
+        themeIcon.classList.add("text-indigo-400");
       } else {
         body.classList.remove("light");
-        body.classList.add("dark");
-        localStorage.setItem("theme", "dark");
+        themeLabel.textContent = "Tema Claro";
+        themeIcon.setAttribute("data-feather", "sun");
+        themeIcon.classList.remove("text-indigo-400");
+        themeIcon.classList.add("text-amber-400");
       }
-    };
+      feather.replace();
+    }
+
+    const savedTheme = localStorage.getItem("mb_theme") || "dark";
+    applyTheme(savedTheme);
+
+    themeBtn?.addEventListener("click", () => {
+      const isLight = body.classList.contains("light");
+      const nextTheme = isLight ? "dark" : "light";
+      localStorage.setItem("mb_theme", nextTheme);
+      applyTheme(nextTheme);
+    });
+
+    // 2. Detección Inteligente de Sesión en Firebase
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const box = document.getElementById("sessionStatusBox");
+        const msg = document.getElementById("sessionStatusMsg");
+        const loginBtn = document.getElementById("actionLoginBtn");
+
+        if (box && msg && loginBtn) {
+          box.classList.remove("hidden");
+          msg.textContent = `Sesión activa detectada: ${user.email}`;
+          loginBtn.innerHTML = '<i data-feather="check" class="w-4 h-4"></i><span>Ir a Soporte / Mis Tickets</span>';
+          loginBtn.href = "soporte.html";
+          feather.replace();
+        }
+      }
+    });
   </script>
 </body>
 
