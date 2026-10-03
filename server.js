@@ -140,6 +140,9 @@ app.get('/api/chat/status', (req, res) => {
   });
 });
 
+// Serve image assets seamlessly regardless of casing (/img_ref or /img_Ref)
+app.use(['/img_ref', '/img_Ref'], express.static(path.join(__dirname, 'img_Ref')));
+
 // Serve static assets and html files from project root
 app.use(express.static(path.join(__dirname), {
   extensions: ['html', 'htm'],

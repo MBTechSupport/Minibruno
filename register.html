@@ -15,9 +15,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="cyber-grid">
+    <!-- Botón Premium de Retorno al Inicio (estilo trigger horizontal) -->
+    <a href="index.html" class="premium-3d-home-button">
+        <div class="button-3d-container">
+            <div class="button-3d-inner">
+                <div class="particle-effect"></div>
+                <div class="glow-layer"></div>
+                <div class="trigger-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span class="button-3d-text">¿Quieres volver al Inicio? Clickea acá</span>
+                <div class="shine-effect"></div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Sección de Autenticación Unificada -->
+    <div id="auth-section">
     <!-- Register Card (Unified) -->
     <div class="register-card floating-animation rounded-2xl p-8 scan-line" data-aos="fade-up" data-aos-delay="200">
         <!-- Logo Header (Moved Inside) -->
@@ -25,13 +43,7 @@
             <div class="flex items-center justify-center space-x-3 mb-4">
                 <div
                     class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center neon-glow pulse-animation">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-white">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                        <path d="M2 17l10 5 10-5"></path>
-                        <path d="M2 12l10 5 10-5"></path>
-                    </svg>
+                    <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno" class="w-8 h-8 object-contain" />
                 </div>
                 <h1 class="text-2xl font-bold text-gray font-tech">MiniBruno TechSupport</h1>
             </div>
@@ -126,6 +138,8 @@
             </div>
             <p class="text-gray-600 text-xs mt-4">© 2025 MiniBruno TechSupport. Todos los derechos reservados.</p>
         </div>
+    </div>
+
     </div>
 
     <!-- AOS Animation Initialization -->
