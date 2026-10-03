@@ -28,21 +28,65 @@
     <!-- Header -->
     <header class="glass-morphism sticky top-0 z-50 backdrop-blur-lg" data-aos="fade-down" data-aos-delay="200">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div
-                    class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
-                    <img src="img_ref/bd_brunito\logo_glow.svg" alt="Logo MiniBruno"
+            <a href="index_log.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow group-hover:scale-105 transition-transform">
+                    <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno"
                         class="w-full h-full object-contain">
-                    <a href="index_log.html" class="absolute inset-0" title="Ir al inicio"
-                        aria-label="Ir al inicio"><span class="sr-only">Ir al inicio</span></a>
                 </div>
                 <span class="text-xl font-bold text-gray-800 font-tech">MiniBruno TechSupport</span>
-            </div>
+            </a>
+
+            <!-- Navegación de Escritorio con Botón Destacado de Volver al Inicio -->
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="index_log.html" class="text-gray-600 hover:text-blue-600 transition-colors font-tech text-sm flex items-center gap-1.5">
+                    <i data-feather="home" class="w-4 h-4"></i> Inicio
+                </a>
+                <a href="about_us.html" class="text-blue-600 font-bold font-tech text-sm neon-glow px-3 py-1 rounded-lg bg-blue-50">Nosotros</a>
+                <a href="servicio.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Servicios</a>
+                <a href="contactos.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Contacto</a>
+                <a href="soporte.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Soporte</a>
+                <a href="news.html" class="text-gray-600 hover:text-dark transition-colors font-tech text-sm">Noticias</a>
+
+                <!-- Botón Visible y Destacado de Volver al Inicio -->
+                <a href="index_log.html" class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl text-xs font-tech font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5" title="Volver al Portal de Inicio">
+                    <i data-feather="arrow-left" class="w-3.5 h-3.5"></i>
+                    <span>Volver al Inicio</span>
+                </a>
+
+                <div id="header-user-status" class="flex items-center space-x-3 pl-4 border-l border-gray-200"></div>
+            </nav>
+
+            <!-- Botón Hamburguesa Móvil -->
+            <button id="mobile-menu-btn" type="button" title="Abrir menú" aria-label="Abrir menú"
+                class="md:hidden text-gray-700 hover:text-dark focus:outline-none p-2 rounded-lg hover:bg-gray-100">
+                <i data-feather="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200 px-4 py-4 space-y-3 shadow-lg">
+            <a href="index_log.html" class="block font-tech text-sm py-2 px-3 bg-blue-600 text-white font-bold rounded-lg flex items-center gap-2">
+                <i data-feather="home" class="w-4 h-4"></i> Volver al Inicio
+            </a>
+            <a href="about_us.html" class="block font-tech text-sm py-1.5 text-blue-600 font-bold">Nosotros</a>
+            <a href="servicio.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Servicios</a>
+            <a href="contactos.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Contacto</a>
+            <a href="soporte.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Soporte</a>
+            <a href="news.html" class="block font-tech text-sm py-1.5 text-gray-700 hover:text-blue-600">Noticias</a>
+            <div id="mobile-user-status"></div>
         </div>
     </header>
 
     <!-- Contenido Principal -->
-    <main class="container mx-auto px-4 py-12 min-h-screen cyber-grid">
+    <main class="container mx-auto px-4 py-8 min-h-screen cyber-grid">
+        <!-- Barra de navegación rápida / Botón flotante -->
+        <div class="mb-6 flex items-center justify-between" data-aos="fade-down" data-aos-delay="100">
+            <a href="index_log.html" class="inline-flex items-center space-x-2 px-4 py-2 bg-white/90 hover:bg-white text-blue-600 hover:text-blue-800 border border-blue-200 rounded-xl font-tech text-sm font-semibold shadow-sm hover:shadow transition-all group">
+                <i data-feather="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+                <span>Volver al Inicio</span>
+            </a>
+            <span class="text-xs font-tech text-gray-500 uppercase tracking-wider">Mini Bruno Sucesores C.A.</span>
+        </div>
         <!-- Hero Section con imagen grande -->
         <div class="text-center mb-12" data-aos="fade-down">
             <h1 class="text-5xl font-bold text-gray-800 font-tech mb-4 gradient-text floating-animation">Sobre Nosotros
@@ -621,9 +665,21 @@
     <script src="js/about_us-animations.js"></script>
     <script>
         // Inicializar Feather Icons
-        feather.replace();
+        if (window.feather) {
+            feather.replace();
+        }
+
+        // Toggle Menú Móvil
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
     </script>
     <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/header-session.js"></script>
     <script type="module" src="js/auth_guard.js"></script>
 </body>
 

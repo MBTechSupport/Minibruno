@@ -6,37 +6,46 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { doc, setDoc, getDoc }
   from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import {
+  initPasswordToggle,
+  initPasswordStrength,
+  showFloatingToast,
+  setButtonLoading
+} from "./auth-ui.js";
+
+// Inicializar mejoras UX/UI Fase 3
+initPasswordToggle("password", "togglePasswordBtn");
+initPasswordStrength("password", "passwordStrengthContainer");
+
+const submitBtn = document.getElementById("submit-btn");
+const googleBtn = document.getElementById("googleBtn");
 
 // Funciones auxiliares UI
 function showError(msg) {
+  showFloatingToast(msg, "error", 4000);
   const errDiv = document.getElementById("error-message");
   if (errDiv) {
     errDiv.textContent = msg;
     errDiv.style.display = "block";
     errDiv.classList.remove("hidden");
-    // Ocultar después de 2 segundos
     setTimeout(() => {
       errDiv.classList.add("hidden");
       errDiv.style.display = "none";
-    }, 2000);
-  } else {
-    alert(msg);
+    }, 4000);
   }
 }
 
 function showSuccess(msg) {
+  showFloatingToast(msg, "success", 3500);
   const succDiv = document.getElementById("success-message");
   if (succDiv) {
     succDiv.textContent = msg;
     succDiv.style.display = "block";
     succDiv.classList.remove("hidden");
-    // Ocultar después de 2 segundos
     setTimeout(() => {
       succDiv.classList.add("hidden");
       succDiv.style.display = "none";
-    }, 2000);
-  } else {
-    alert(msg);
+    }, 3500);
   }
 }
 
@@ -166,14 +175,23 @@ if (form) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    await registrarUsuario(nombre, email, password);
+    setButtonLoading(submitBtn, true, "Registrando usuario...");
+    try {
+      await registrarUsuario(nombre, email, password);
+    } finally {
+      setButtonLoading(submitBtn, false);
+    }
   });
 }
 
 // Botón Google
-const googleBtn = document.getElementById("googleBtn");
 if (googleBtn) {
   googleBtn.addEventListener("click", async () => {
-    await registrarConGoogle();
+    setButtonLoading(googleBtn, true, "Conectando...");
+    try {
+      await registrarConGoogle();
+    } finally {
+      setButtonLoading(googleBtn, false);
+    }
   });
 }

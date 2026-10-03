@@ -70,26 +70,25 @@
                     </div>
                 </div>
 
-                <button type="submit"
-                    class="neon-button text-white py-3 px-6 rounded-lg font-medium font-tech w-full transition-all">
+                <button type="submit" id="submit-btn"
+                    class="neon-button text-white py-3.5 px-6 rounded-xl font-bold font-tech w-full transition-all shadow-md flex items-center justify-center">
                     <i data-feather="send" class="inline mr-2"></i> Enviar Enlace de Recuperación
                 </button>
             </form>
 
-            <div class="mt-8 text-center">
-                <p class="text-gray-400 mb-4">¿Recordaste tu contraseña?</p>
-                <a href="login.html" class="home-button-wrapper">
-                    <div class="neon-glow">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                            <polyline points="10 17 15 12 10 7"></polyline>
-                            <line x1="15" y1="12" x2="3" y2="12"></line>
-                        </svg>
-                    </div>
-                    <span class="home-arrow-icon">←</span>
-                    <span class="home-button-text">Volver al Login</span>
-                </a>
+            <!-- 3.2 Enlaces Cruzados Fluidos -->
+            <div class="mt-8 pt-6 border-t border-gray-700/20 text-center space-y-3">
+                <p class="text-gray-300 text-sm">
+                    ¿Recordaste tu contraseña?
+                    <a href="login.html" class="text-orange-400 hover:text-orange-300 font-bold transition-colors inline-flex items-center gap-1 ml-1">
+                        <i data-feather="arrow-left" class="w-3.5 h-3.5"></i>
+                        <span>Volver al inicio de sesión</span>
+                    </a>
+                </p>
+                <p class="text-xs text-gray-500">
+                    ¿No tienes una cuenta aún?
+                    <a href="register.html" class="text-gray-400 hover:text-gray-300 underline transition-colors ml-1">Regístrate aquí</a>
+                </p>
             </div>
 
             <!-- Footer Info -->

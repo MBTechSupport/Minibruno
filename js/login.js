@@ -7,9 +7,14 @@ import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { initPasswordToggle, showFloatingToast, setButtonLoading } from './auth-ui.js';
+
+// Inicializar 3.1 Toggle de contraseña
+initPasswordToggle('password', 'togglePasswordBtn');
 
 // Elementos del DOM
 const loginForm = document.getElementById('login-form');
+const submitBtn = document.getElementById('submit-btn');
 const googleLoginBtn = document.getElementById('login-btn');
 const authSection = document.getElementById('auth-section');
 const userSection = document.getElementById('user-section');
@@ -18,8 +23,9 @@ const logoutBtn = document.getElementById('logout-btn');
 const errorMessageDiv = document.getElementById('error-message');
 const successMessageDiv = document.getElementById('success-message');
 
-// Función para mostrar errores con Timeout de 2 segundos
+// Función para mostrar errores de forma armoniosa
 function showError(message) {
+  showFloatingToast(message, 'error', 4000);
   if (errorMessageDiv) {
     errorMessageDiv.textContent = message;
     errorMessageDiv.classList.remove('hidden');
@@ -27,14 +33,13 @@ function showError(message) {
     setTimeout(() => {
       errorMessageDiv.classList.add('hidden');
       errorMessageDiv.style.display = 'none';
-    }, 2000);
-  } else {
-    console.error(message);
+    }, 4000);
   }
 }
 
-// Función para mostrar éxito con Timeout de 2 segundos
+// Función para mostrar éxito
 function showSuccess(message) {
+  showFloatingToast(message, 'success', 3500);
   if (successMessageDiv) {
     successMessageDiv.textContent = message;
     successMessageDiv.classList.remove('hidden');
@@ -42,9 +47,7 @@ function showSuccess(message) {
     setTimeout(() => {
       successMessageDiv.classList.add('hidden');
       successMessageDiv.style.display = 'none';
-    }, 2000);
-  } else {
-    console.log(message);
+    }, 3500);
   }
 }
 
@@ -83,6 +86,8 @@ if (loginForm) {
     const email = loginForm.email.value;
     const password = loginForm.password.value;
 
+    setButtonLoading(submitBtn, true, 'Autenticando...');
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       showSuccess('¡Inicio de sesión exitoso!');
@@ -94,6 +99,8 @@ if (loginForm) {
       else if (error.code === 'auth/user-not-found') msg = "Usuario no encontrado.";
       else if (error.code === 'auth/wrong-password') msg = "Contraseña incorrecta.";
       showError(msg);
+    } finally {
+      setButtonLoading(submitBtn, false);
     }
   });
 }
@@ -103,6 +110,7 @@ if (googleLoginBtn) {
   googleLoginBtn.addEventListener('click', async () => {
     console.log("Iniciando login con Google...");
     const provider = new GoogleAuthProvider();
+    setButtonLoading(googleLoginBtn, true, 'Conectando con Google...');
 
     try {
       const result = await signInWithPopup(auth, provider);
@@ -115,6 +123,8 @@ if (googleLoginBtn) {
       }
       console.error("Error Google Login:", error);
       showError("No se pudo iniciar sesión con Google. Intenta nuevamente.");
+    } finally {
+      setButtonLoading(googleLoginBtn, false);
     }
   });
 }

@@ -89,44 +89,47 @@
                         <i data-feather="lock" class="h-5 w-5 text-gray-400"></i>
                     </div>
                     <input type="password" name="password" id="password" placeholder="••••••••" required
-                        class="input-field w-full pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                        class="input-field w-full pl-10 pr-12 py-3 rounded-lg focus:ring-2 focus:ring-green-500 transition-all">
+                    <button type="button" id="togglePasswordBtn" class="password-toggle-btn" title="Mostrar u ocultar contraseña" aria-label="Mostrar u ocultar contraseña">
+                        <i data-feather="eye" class="w-5 h-5 text-gray-400"></i>
+                    </button>
                 </div>
+                <!-- 3.3 Indicador de Fortaleza de Clave Corporativa -->
+                <div id="passwordStrengthContainer" class="password-strength-container"></div>
             </div>
 
             <div class="flex items-center">
                 <input type="checkbox" id="terms" required
                     class="rounded border-gray-300 text-green-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
                 <label for="terms" class="ml-2 text-sm text-gray-400">
-                    Acepto los <a href="#" class="text-green-400 hover:text-green-300">términos y condiciones</a>
+                    Acepto los <a href="terminos.html" class="text-green-400 hover:text-green-300">términos y condiciones</a> corporativas
                 </label>
             </div>
 
-            <button type="submit"
-                class="neon-button text-white py-3 px-6 rounded-lg font-medium font-tech w-full transition-all">
-                <i data-feather="user-plus" class="inline mr-2"></i> Registrarse
+            <button type="submit" id="submit-btn"
+                class="neon-button text-white py-3.5 px-6 rounded-xl font-bold font-tech w-full transition-all shadow-md flex items-center justify-center">
+                <i data-feather="user-plus" class="inline mr-2"></i> Crear Cuenta
             </button>
 
             <!-- Boton de Google Sign-Up -->
             <button type="button" id="googleBtn"
-                class="neon-button text-white py-3 px-6 rounded-lg font-medium font-tech w-full transition-all mt-4">
+                class="neon-button text-white py-3.5 px-6 rounded-xl font-bold font-tech w-full transition-all mt-4 flex items-center justify-center">
                 <i data-feather="google" class="inline mr-2"></i> Registrarse con Google
             </button>
         </form>
 
-        <div class="mt-8 text-center">
-            <p class="text-gray-400 mb-4">¿Ya tienes una cuenta?</p>
-            <a href="login.html" class="home-button-wrapper">
-                <div class="neon-glow">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="#428ce2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                        <polyline points="10 17 15 12 10 7"></polyline>
-                        <line x1="15" y1="12" x2="3" y2="12"></line>
-                    </svg>
-                </div>
-                <span class="home-arrow-icon">←</span>
-                <span class="home-button-text">Volver al Login</span>
-            </a>
+        <!-- 3.2 Enlaces Cruzados Fluidos -->
+        <div class="mt-8 pt-6 border-t border-gray-700/20 text-center space-y-3">
+            <p class="text-gray-300 text-sm">
+                ¿Ya tienes una cuenta corporativa?
+                <a href="login.html" class="text-green-400 hover:text-green-300 font-bold transition-colors inline-flex items-center gap-1 ml-1">
+                    <span>Inicia sesión aquí</span>
+                    <i data-feather="arrow-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </p>
+            <p class="text-xs text-gray-500">
+                <a href="reset.html" class="hover:text-gray-400 transition-colors">¿Olvidaste tu contraseña? Restablécela aquí</a>
+            </p>
         </div>
 
         <!-- Footer Info (Moved Inside) -->
