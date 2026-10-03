@@ -17,6 +17,7 @@ import {
   query,
   orderBy
 } from "./firebase-init.js";
+import { getUserRole, ROLES, canCreateNews, getRoleBadgeInfo } from "./auth-roles.js";
 
 // Metadatos y estilos visuales por categoría
 const CATEGORY_META = {
@@ -137,31 +138,22 @@ window.newsData = {};
 // 1. INICIALIZACIÓN
 // ============================================================== //
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadAuthorizedEmails();
   initAuthListener();
   initDOMEvents();
   initFirestoreNewsListener();
 });
 
-// Cargar correos autorizados
-async function loadAuthorizedEmails() {
-  try {
-    const res = await fetch("js/correos_Autorizados.json");
-    if (res.ok) {
-      const data = await res.json();
-      authorizedEmails = (data.autorizados || []).map((e) => e.toLowerCase().trim());
-    }
-  } catch (err) {
-    console.warn("No se pudo cargar correos_Autorizados.json:", err);
-  }
-}
-
-// Escuchar estado de sesión
+// Escuchar estado de sesión con validación de roles RBAC
 function initAuthListener() {
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     currentUser = user;
-    const email = (user?.email || "").toLowerCase().trim();
-    isAuthorizedAdmin = authorizedEmails.includes(email);
+    if (user) {
+      const email = (user.email || "").toLowerCase().trim();
+      const role = await getUserRole(email);
+      isAuthorizedAdmin = canCreateNews(role);
+    } else {
+      isAuthorizedAdmin = false;
+    }
 
     updateHeaderSessionUI(user);
     updateAdminControlsUI();
@@ -170,11 +162,13 @@ function initAuthListener() {
 }
 
 // Actualizar barra de sesión en el Header
-function updateHeaderSessionUI(user) {
+async function updateHeaderSessionUI(user) {
   const container = document.getElementById("header-user-status");
   if (!container) return;
 
   if (user) {
+    const role = await getUserRole(user.email);
+    const badge = getRoleBadgeInfo(role);
     const displayName = user.displayName || user.email.split("@")[0];
     const avatarUrl = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=2563eb&color=fff&size=64`;
 
@@ -188,12 +182,21 @@ function updateHeaderSessionUI(user) {
             <span>Staff</span>
           </a>
         `
-            : ""
+            : `
+          <a href="soporte.html" class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300/80 rounded-lg text-xs font-tech font-bold transition-all flex items-center space-x-1" title="Ver mis tickets y soporte">
+            <i data-feather="life-buoy" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Mis Tickets</span>
+          </a>
+        `
         }
         <div class="flex items-center space-x-2 bg-white/80 border border-blue-200/80 px-2.5 py-1 rounded-full shadow-sm">
           <img src="${avatarUrl}" alt="Avatar" class="w-6 h-6 rounded-full border border-blue-400 object-cover" />
           <div class="text-left hidden lg:block leading-tight">
-            <p class="text-xs font-bold text-gray-800 font-tech truncate max-w-[110px]">${displayName}</p>
+            <div class="flex items-center gap-1.5">
+              <p class="text-xs font-bold text-gray-800 font-tech truncate max-w-[100px]">${displayName}</p>
+              <span class="text-[9px] font-tech font-bold px-1.5 py-0.2 rounded ${badge.cssClass}">${badge.label}</span>
+            </div>
+            <p class="text-[10px] text-gray-500 font-mono truncate max-w-[110px]">${user.email}</p>
           </div>
           <button id="header-logout-btn" title="Cerrar Sesión" class="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50 transition-colors ml-0.5">
             <i data-feather="log-out" class="w-3.5 h-3.5"></i>
@@ -204,6 +207,7 @@ function updateHeaderSessionUI(user) {
 
     document.getElementById("header-logout-btn")?.addEventListener("click", async () => {
       try {
+        sessionStorage.removeItem("mb_user_role");
         await signOut(auth);
         window.location.reload();
       } catch (e) {
@@ -667,6 +671,11 @@ function closeNewsReaderModal() {
 // 5. GESTIÓN: CREACIÓN Y EDICIÓN DE NOTICIAS (FIRESTORE)
 // ============================================================== //
 function openNewsEditorModal(newsId = null) {
+  if (!isAuthorizedAdmin) {
+    showNewsToast("Acceso denegado: Solo el personal de administración puede redactar o modificar noticias.", "error");
+    return;
+  }
+
   const modal = document.getElementById("news-editor-modal");
   if (!modal) return;
 
@@ -725,6 +734,12 @@ function closeNewsEditorModal() {
 // Guardar noticia (Crear o Actualizar en Firestore)
 async function handleNewsFormSubmit(e) {
   e.preventDefault();
+
+  if (!isAuthorizedAdmin) {
+    showNewsToast("Acceso denegado: No tienes permisos para publicar noticias.", "error");
+    return;
+  }
+
   const id = document.getElementById("editor-news-id").value;
   const title = document.getElementById("editor-title").value.trim();
   const category = document.getElementById("editor-category").value;
@@ -802,6 +817,10 @@ function closeNewsDeleteModal() {
 }
 
 async function confirmDeleteNews() {
+  if (!isAuthorizedAdmin) {
+    showNewsToast("Acceso Denegado", "Solo los administradores pueden eliminar noticias.", true);
+    return;
+  }
   if (!newsIdToDelete) return;
 
   const confirmBtn = document.getElementById("confirm-delete-news-btn");

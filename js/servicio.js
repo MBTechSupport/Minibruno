@@ -6,15 +6,13 @@
  */
 
 import { auth, onAuthStateChanged, signOut } from "./firebase-init.js";
-
-let authorizedEmails = [];
+import { getUserRole, ROLES, canAccessServices } from "./auth-roles.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     // Inicializar Iconos Feather
     if (window.feather) window.feather.replace();
 
-    // 0. Cargar lista de correos autorizados y validar acceso
-    await loadAuthorizedEmails();
+    // 0. Validar acceso RBAC
     initServiceAuthGuard();
 
     // 1. GESTOR DE PESTAÑAS (TABS)
@@ -38,39 +36,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ==========================================================================
 // 0. CONTROL DE ACCESO (SECURITY GATEWAY PARA SERVICIO.HTML)
 // ==========================================================================
-async function loadAuthorizedEmails() {
-    try {
-        const res = await fetch("/js/correos_Autorizados.json");
-        if (res.ok) {
-            const data = await res.json();
-            authorizedEmails = (data.autorizados || []).map((e) => e.toLowerCase().trim());
-        } else {
-            authorizedEmails = [
-                "lruiz@minibruno.com",
-                "lguevara@minibruno.com",
-                "mrodriguez@minibruno.com",
-                "jnanez@minibruno.com",
-                "dnavarro@minibruno.com",
-                "darwin.navarro@minibruno.com",
-                "bmontilla@minibruno.com",
-                "alves.neri@minibruno.com",
-                "jruiz@minibruno.com",
-                "rcoronado@minibruno.com",
-                "ruca.luijo@gmail.com"
-            ];
-        }
-    } catch (err) {
-        console.error("Error al cargar lista de correos autorizados:", err);
-    }
-}
-
 function initServiceAuthGuard() {
     const loadingScreen = document.getElementById("auth-loading-screen");
     const deniedScreen = document.getElementById("access-denied-screen");
     const authorizedContent = document.getElementById("authorized-content");
     const deniedStatusText = document.getElementById("denied-status-text");
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
         if (loadingScreen) loadingScreen.classList.add("hidden");
 
         if (!user) {
@@ -82,10 +54,11 @@ function initServiceAuthGuard() {
             }
         } else {
             const email = (user.email || "").toLowerCase().trim();
-            const isAuthorized = authorizedEmails.includes(email);
+            const role = await getUserRole(email);
+            const isAuthorized = canAccessServices(role);
 
             if (isAuthorized) {
-                // Usuario AUTORIZADO: Desbloquear suite completa
+                // Usuario AUTORIZADO (ADMIN): Desbloquear suite completa
                 if (deniedScreen) deniedScreen.classList.add("hidden");
                 if (authorizedContent) {
                     authorizedContent.classList.remove("hidden");
@@ -102,12 +75,17 @@ function initServiceAuthGuard() {
                     }, 120);
                 }
             } else {
-                // Usuario autenticado pero NO está en correos_Autorizados.json
+                // Usuario sin privilegios de administrador (ej: EMPLEADO)
                 if (authorizedContent) authorizedContent.classList.add("hidden");
                 if (deniedScreen) deniedScreen.classList.remove("hidden");
                 if (deniedStatusText) {
-                    deniedStatusText.textContent = `Sesión activa como: ${user.email} (Esta cuenta no tiene privilegios de Staff o TI).`;
+                    if (role === ROLES.EMPLEADO) {
+                        deniedStatusText.textContent = `Sesión activa: ${user.email} (Rol: Colaborador). La suite de herramientas de sistemas, ofimática y bases de datos está reservada exclusivamente para el Staff IT de Mini Bruno.`;
+                    } else {
+                        deniedStatusText.textContent = `Sesión activa como: ${user.email} (Esta cuenta no tiene privilegios de Staff o TI).`;
+                    }
                 }
+                console.warn(`[Security Alert] Acceso a servicio.html denegado para: ${user.email} (Rol: ${role})`);
             }
         }
 

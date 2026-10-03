@@ -16,6 +16,7 @@ import {
   signInWithEmailAndPassword,
   googleProvider
 } from "./firebase-init.js";
+import { getUserRole, ROLES, canAccessAdminTickets, getRoleBadgeInfo, canSubmitTickets } from "./auth-roles.js";
 
 // Variables globales de estado
 let currentUser = null;
@@ -23,24 +24,9 @@ let userTickets = [];
 let unsubscribeTickets = null;
 let currentFilter = "all";
 let searchQuery = "";
-let authorizedEmails = [];
-
-// Cargar lista de correos autorizados
-async function loadAuthorizedEmails() {
-  try {
-    const res = await fetch("/js/correos_Autorizados.json");
-    if (res.ok) {
-      const data = await res.json();
-      authorizedEmails = (data.autorizados || []).map((e) => e.toLowerCase().trim());
-    }
-  } catch (e) {
-    console.warn("No se pudo cargar correos_Autorizados.json en soporte.js:", e);
-  }
-}
 
 // Inicialización de librerías visuales
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadAuthorizedEmails();
   if (window.AOS) {
     window.AOS.init({ duration: 800, easing: "ease-in-out", once: true });
   }
@@ -54,12 +40,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 // 1. GESTIÓN DE SESIÓN CON FIREBASE AUTH
 // ==========================================================================
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   currentUser = user;
-  updateHeaderSession(user);
+  await updateHeaderSession(user);
   updateFormSession(user);
 
   if (user) {
+    const role = await getUserRole(user.email);
+    if (role === ROLES.DENEGADO) {
+      console.warn("Cuenta denegada intentando acceso a soporte:", user.email);
+      await signOut(auth);
+      window.location.href = "login.html";
+      return;
+    }
     // Escuchar tickets en tiempo real para el usuario autenticado
     listenToUserTickets(user.uid);
   } else {
@@ -73,33 +66,42 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-function updateHeaderSession(user) {
+async function updateHeaderSession(user) {
   const headerContainer = document.getElementById("header-user-status");
   if (!headerContainer) return;
 
   if (user) {
-    const email = (user.email || "").toLowerCase().trim();
-    const isAuthorized = authorizedEmails.includes(email);
+    const role = await getUserRole(user.email);
+    const badge = getRoleBadgeInfo(role);
+    const isAdmin = canAccessAdminTickets(role);
     const displayName = user.displayName || user.email.split("@")[0];
     const avatarUrl = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=2563eb&color=fff&size=64`;
     
     headerContainer.innerHTML = `
       <div class="flex items-center space-x-2">
         ${
-          isAuthorized
+          isAdmin
             ? `
           <a href="admin_tickets.html" class="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-xs font-tech font-bold transition-all shadow-sm flex items-center space-x-1 border border-blue-400/40 animate-pulse">
             <i data-feather="shield" class="w-3.5 h-3.5 text-cyan-300"></i>
             <span>Panel Staff</span>
           </a>
         `
-            : ""
+            : `
+          <button type="button" id="header-my-tickets-btn" class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300/80 rounded-lg text-xs font-tech font-bold transition-all flex items-center space-x-1" title="Ver mis tickets solicitados">
+            <i data-feather="life-buoy" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Mis Tickets</span>
+          </button>
+        `
         }
         <div class="flex items-center space-x-2 bg-white/80 border border-blue-200/80 px-2.5 py-1 rounded-full shadow-sm">
           <img src="${avatarUrl}" alt="Avatar" class="w-6 h-6 rounded-full border border-blue-400 object-cover" />
           <div class="text-left hidden lg:block leading-tight">
-            <p class="text-xs font-bold text-gray-800 font-tech truncate max-w-[120px]">${displayName}</p>
-            <p class="text-[10px] text-blue-600 font-mono truncate max-w-[120px]">${user.email}</p>
+            <div class="flex items-center gap-1.5">
+              <p class="text-xs font-bold text-gray-800 font-tech truncate max-w-[100px]">${displayName}</p>
+              <span class="text-[9px] font-tech font-bold px-1.5 py-0.2 rounded ${badge.cssClass}">${badge.label}</span>
+            </div>
+            <p class="text-[10px] text-gray-500 font-mono truncate max-w-[120px]">${user.email}</p>
           </div>
           <button id="header-logout-btn" title="Cerrar Sesión" class="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50 transition-colors ml-0.5">
             <i data-feather="log-out" class="w-3.5 h-3.5"></i>
@@ -108,8 +110,13 @@ function updateHeaderSession(user) {
       </div>
     `;
 
+    document.getElementById("header-my-tickets-btn")?.addEventListener("click", () => {
+      openTicketsDrawer();
+    });
+
     document.getElementById("header-logout-btn")?.addEventListener("click", async () => {
       try {
+        sessionStorage.removeItem("mb_user_role");
         await signOut(auth);
       } catch (err) {
         console.error("Error al cerrar sesión:", err);
@@ -230,6 +237,12 @@ async function handleTicketSubmit(e) {
     return;
   }
 
+  const role = await getUserRole(currentUser.email);
+  if (!canSubmitTickets(role)) {
+    alert("❌ Tu cuenta no está autorizada para generar tickets corporativos en Mini Bruno.");
+    return;
+  }
+
   const deptSelect = document.getElementById("ticket-department");
   const categorySelect = document.getElementById("ticket-category");
   const subjectInput = document.getElementById("ticket-subject");
@@ -258,6 +271,7 @@ async function handleTicketSubmit(e) {
     userId: currentUser.uid,
     userEmail: currentUser.email,
     userName: currentUser.displayName || currentUser.email.split("@")[0],
+    userRole: role === ROLES.ADMIN ? "admin" : "empleado",
     department,
     category,
     priority,

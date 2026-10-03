@@ -8,6 +8,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { initPasswordToggle, showFloatingToast, setButtonLoading } from './auth-ui.js';
+import { getUserRole, ROLES, getRoleBadgeInfo } from './auth-roles.js';
 
 // Inicializar 3.1 Toggle de contraseña
 initPasswordToggle('password', 'togglePasswordBtn');
@@ -51,29 +52,43 @@ function showSuccess(message) {
   }
 }
 
-// Manejar estado de autenticación
-onAuthStateChanged(auth, (user) => {
+// Manejar estado de autenticación con RBAC
+onAuthStateChanged(auth, async (user) => {
   if (user) {
-    // Usuario logueado
-    console.log("Usuario autenticado:", user.email);
+    // Validar autorización del usuario
+    const role = await getUserRole(user.email);
+
+    if (role === ROLES.DENEGADO) {
+      console.warn("Usuario denegado intentando sesión:", user.email);
+      showError(`Acceso Denegado: La cuenta ${user.email} no está autorizada en el sistema.`);
+      sessionStorage.removeItem('mb_user_role');
+      await signOut(auth);
+      return;
+    }
+
+    sessionStorage.setItem('mb_user_role', role);
+    const badge = getRoleBadgeInfo(role);
 
     if (authSection) authSection.classList.add('hidden');
     if (userSection) {
       userSection.classList.remove('hidden');
-      // Mostrar info del usuario
+      // Mostrar info del usuario con su rol corporativo
       if (userInfoDiv) {
         userInfoDiv.innerHTML = `
-                    <div class="flex flex-col items-center">
-                        <img src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + user.email}" alt="Profile" class="w-16 h-16 rounded-full mb-4 border-2 border-blue-500 shadow-lg glow-active">
-                        <p class="text-white font-medium text-lg">${user.displayName || 'Usuario'}</p>
-                        <p class="text-gray-400 text-sm">${user.email}</p>
-                    </div>
-                `;
+          <div class="flex flex-col items-center">
+            <img src="${user.photoURL || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName || user.email)}" alt="Profile" class="w-16 h-16 rounded-full mb-3 border-2 border-blue-500 shadow-lg glow-active">
+            <p class="text-white font-medium text-lg font-tech">${user.displayName || 'Usuario'}</p>
+            <p class="text-gray-400 text-sm mb-3">${user.email}</p>
+            <span class="px-3 py-1 text-xs font-tech font-bold uppercase rounded-full border ${badge.cssClass}">
+              ${badge.label}
+            </span>
+          </div>
+        `;
       }
     }
   } else {
     // Usuario no logueado
-    console.log("No hay usuario autenticado");
+    sessionStorage.removeItem('mb_user_role');
     if (authSection) authSection.classList.remove('hidden');
     if (userSection) userSection.classList.add('hidden');
   }
@@ -83,15 +98,22 @@ onAuthStateChanged(auth, (user) => {
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = loginForm.email.value;
+    const email = loginForm.email.value.trim().toLowerCase();
     const password = loginForm.password.value;
 
     setButtonLoading(submitBtn, true, 'Autenticando...');
 
     try {
+      // Pre-validar antes de login para feedback inmediato
+      const role = await getUserRole(email);
+      if (role === ROLES.DENEGADO) {
+        showError("Tu correo no figura en las listas autorizadas de Mini Bruno.");
+        return;
+      }
+
       await signInWithEmailAndPassword(auth, email, password);
-      showSuccess('¡Inicio de sesión exitoso!');
-      // La redirección o cambio de UI lo maneja onAuthStateChanged
+      const badge = getRoleBadgeInfo(role);
+      showSuccess(`¡Inicio de sesión exitoso! (${badge.label})`);
     } catch (error) {
       console.error(error);
       let msg = "Error al iniciar sesión.";
@@ -115,7 +137,16 @@ if (googleLoginBtn) {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      showSuccess(`¡Bienvenido, ${user.displayName}!`);
+      const role = await getUserRole(user.email);
+
+      if (role === ROLES.DENEGADO) {
+        showError(`Acceso Denegado: La cuenta ${user.email} no está autorizada en el sistema corporativo.`);
+        await signOut(auth);
+        return;
+      }
+
+      const badge = getRoleBadgeInfo(role);
+      showSuccess(`¡Bienvenido, ${user.displayName}! (${badge.label})`);
     } catch (error) {
       if (error.code === 'auth/popup-closed-by-user') {
         console.warn("Inicio de sesión con Google cancelado por el usuario.");
@@ -133,6 +164,7 @@ if (googleLoginBtn) {
 if (logoutBtn) {
   logoutBtn.addEventListener('click', async () => {
     try {
+      sessionStorage.removeItem('mb_user_role');
       await signOut(auth);
       showSuccess('Sesión cerrada correctamente.');
     } catch (error) {

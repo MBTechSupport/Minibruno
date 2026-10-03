@@ -14,10 +14,10 @@ import {
   addDoc,
   onSnapshot
 } from "./firebase-init.js";
+import { getUserRole, ROLES, canAccessAdminTickets } from "./auth-roles.js";
 
 // Variables globales del panel de administración
 let globalTickets = [];
-let authorizedEmails = [];
 let currentAdminUser = null;
 let unsubscribeGlobalTickets = null;
 let activeTicketForModal = null;
@@ -34,80 +34,60 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (window.AOS) window.AOS.init();
   if (window.feather) window.feather.replace();
 
-  // 1. Cargar lista de correos autorizados
-  await loadAuthorizedEmails();
-
-  // 2. Escuchar sesión de usuario y validar permisos
+  // 1. Escuchar sesión de usuario y validar permisos RBAC
   initAuthObserver();
 
-  // 3. Inicializar eventos de UI
+  // 2. Inicializar eventos de UI
   initAdminEvents();
 });
 
 // ==========================================================================
-// 1. CARGA DE CONFIGURACIÓN DE CORREOS AUTORIZADOS
-// ==========================================================================
-async function loadAuthorizedEmails() {
-  try {
-    const res = await fetch("/js/correos_Autorizados.json");
-    if (res.ok) {
-      const data = await res.json();
-      authorizedEmails = (data.autorizados || []).map((e) => e.toLowerCase().trim());
-      console.log(`[Admin Security] ${authorizedEmails.length} correos autorizados cargados.`);
-    } else {
-      console.warn("No se pudo cargar correos_Autorizados.json, usando lista fallback.");
-      authorizedEmails = [
-        "lruiz@minibruno.com",
-        "lguevara@minibruno.com",
-        "mrodriguez@minibruno.com",
-        "jnanez@minibruno.com",
-        "dnavarro@minibruno.com",
-        "darwin.navarro@minibruno.com",
-        "bmontilla@minibruno.com",
-        "alves.neri@minibruno.com",
-        "jruiz@minibruno.com",
-        "rcoronado@minibruno.com",
-        "ruca.luijo@gmail.com"
-      ];
-    }
-  } catch (err) {
-    console.error("Error al cargar correos autorizados:", err);
-  }
-}
-
-// ==========================================================================
-// 2. OBSERVADOR DE AUTENTICACIÓN Y VALIDACIÓN DE PERMISOS (GATEWAY)
+// 1. OBSERVADOR DE AUTENTICACIÓN Y VALIDACIÓN DE PERMISOS (GATEWAY)
 // ==========================================================================
 function initAuthObserver() {
   const loadingScreen = document.getElementById("auth-loading-screen");
   const deniedScreen = document.getElementById("access-denied-screen");
   const mainPanel = document.getElementById("admin-main-panel");
   const deniedEmailSpan = document.getElementById("denied-user-email");
+  const deniedDesc = document.getElementById("denied-desc-text");
 
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     loadingScreen.classList.add("hidden");
 
     if (!user) {
-      // No hay sesión activa: Redirigir a login o mostrar pantalla de acceso denegado
+      // No hay sesión activa
       currentAdminUser = null;
       deniedEmailSpan.textContent = "No autenticado (Sesión Anónima)";
+      if (deniedDesc) {
+        deniedDesc.innerHTML = "Debes iniciar sesión con una cuenta autorizada para acceder al panel.";
+      }
       deniedScreen.classList.remove("hidden");
       mainPanel.classList.add("hidden");
       return;
     }
 
     const email = (user.email || "").toLowerCase().trim();
-    const isAuthorized = authorizedEmails.includes(email);
+    const role = await getUserRole(email);
+    const isAuthorized = canAccessAdminTickets(role);
 
     if (!isAuthorized) {
-      // Usuario autenticado pero NO está en correos_Autorizados.json
+      // Usuario autenticado pero NO tiene rol de administrador
       currentAdminUser = null;
       deniedEmailSpan.textContent = user.email;
+      
+      if (deniedDesc) {
+        if (role === ROLES.EMPLEADO) {
+          deniedDesc.innerHTML = `Tu cuenta <strong class="text-emerald-400 font-mono">${user.email}</strong> tiene rol de <strong>Colaborador</strong>. El panel de gestión global está reservado para el Staff IT. Puedes consultar y generar incidencias en el <strong>Portal de Soporte</strong>.`;
+        } else {
+          deniedDesc.innerHTML = `Tu cuenta <strong class="text-slate-200 font-mono">${user.email}</strong> no figura en la lista corporativa de <code class="text-cyan-400">correos_Autorizados.json</code>.`;
+        }
+      }
+
       deniedScreen.classList.remove("hidden");
       mainPanel.classList.add("hidden");
-      console.warn(`[Security Alert] Acceso bloqueado para usuario no autorizado: ${user.email}`);
+      console.warn(`[Security Alert] Acceso bloqueado para usuario no autorizado en admin_tickets: ${user.email} (Rol: ${role})`);
     } else {
-      // Usuario AUTORIZADO: Desbloquear Panel Global
+      // Usuario AUTORIZADO (ADMIN): Desbloquear Panel Global
       currentAdminUser = user;
       deniedScreen.classList.add("hidden");
       mainPanel.classList.remove("hidden");

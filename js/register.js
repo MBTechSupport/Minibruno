@@ -12,6 +12,7 @@ import {
   showFloatingToast,
   setButtonLoading
 } from "./auth-ui.js";
+import { getUserRole, ROLES, getRoleBadgeInfo } from "./auth-roles.js";
 
 // Inicializar mejoras UX/UI Fase 3
 initPasswordToggle("password", "togglePasswordBtn");
@@ -50,30 +51,11 @@ function showSuccess(msg) {
 }
 
 /**
- * Valida si un correo está autorizado en Firestore
+ * Valida si un correo está autorizado (como ADMIN o EMPLEADO)
  */
 async function validarCorreo(email) {
-  const docRef = doc(db, "config", "correos_autorizados");
-  // Nota: Si la colección no existe o es pública, esto podría fallar si las reglas de seguridad lo impiden sin auth.
-  // Asumimos que es leíble.
-  try {
-    const docSnap = await getDoc(docRef);
-
-    if (!docSnap.exists()) {
-      // Si no existe configuración, permitir todo o bloquear? 
-      // El código original bloqueaba con alerta. Mantenemos lógica pero con showError.
-      showError("Error: No se encontró la lista de correos autorizados.");
-      return false;
-    }
-
-    const correosAutorizados = docSnap.data().autorizados || [];
-    return correosAutorizados.includes(email);
-  } catch (e) {
-    console.warn("Validación de correo falló (posible permiso denegado o red):", e);
-    // Fallback: Permitir o mostrar error? Originalmente mostraba alerta.
-    // Si es un error de permisos, tal vez no podamos validar.
-    return false;
-  }
+  const role = await getUserRole(email);
+  return role !== ROLES.DENEGADO;
 }
 
 /**
@@ -83,10 +65,10 @@ export async function registrarUsuario(nombre, email, password) {
   try {
     email = email.toLowerCase().trim();
 
-    // Validar lista de correos autorizados
-    const autorizado = await validarCorreo(email);
-    if (!autorizado) {
-      showError("Error: El correo no está autorizado para registrarse.");
+    // Validar autorización corporativa (ADMIN o EMPLEADO)
+    const role = await getUserRole(email);
+    if (role === ROLES.DENEGADO) {
+      showError("El correo no está autorizado en las listas corporativas de Mini Bruno.");
       return;
     }
 
@@ -94,17 +76,18 @@ export async function registrarUsuario(nombre, email, password) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Guardar perfil en Firestore
+    // Guardar perfil en Firestore con rol específico
+    const rolString = role === ROLES.ADMIN ? "admin" : "empleado";
     await setDoc(doc(db, "usuarios", user.uid), {
       nombre,
       email: user.email,
       creadoEn: new Date(),
-      rol: "usuario"
+      rol: rolString
     });
 
-    showSuccess("✅ Registro exitoso. Ahora puedes iniciar sesión.");
+    const badge = getRoleBadgeInfo(role);
+    showSuccess(`¡Registro exitoso como ${badge.label}! Redirigiendo...`);
 
-    // Redirigir después de unos segundos (un poco más que el mensaje para que se lea)
     setTimeout(() => {
       window.location.href = 'login.html';
     }, 2000);
@@ -128,11 +111,11 @@ export async function registrarConGoogle() {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
 
-    // Validar lista de correos autorizados
-    const autorizado = await validarCorreo(user.email);
-    if (!autorizado) {
-      showError("Error: El correo no está autorizado para registrarse.");
-      await signOut(auth); // Cerrar sesión si no está autorizado
+    // Validar rol corporativo
+    const role = await getUserRole(user.email);
+    if (role === ROLES.DENEGADO) {
+      showError("Tu cuenta de Google no está autorizada en el sistema corporativo Mini Bruno.");
+      await signOut(auth);
       return;
     }
 
@@ -140,18 +123,19 @@ export async function registrarConGoogle() {
     const userDoc = doc(db, "usuarios", user.uid);
     const docSnap = await getDoc(userDoc);
 
+    const rolString = role === ROLES.ADMIN ? "admin" : "empleado";
     if (!docSnap.exists()) {
-      // Crear perfil nuevo en Firestore
       await setDoc(userDoc, {
         nombre: user.displayName || "",
         email: user.email,
         foto: user.photoURL || "",
         creadoEn: new Date(),
-        rol: "usuario"
+        rol: rolString
       });
     }
 
-    showSuccess("✅ Inicio de sesión con Google exitoso.");
+    const badge = getRoleBadgeInfo(role);
+    showSuccess(`¡Bienvenido ${user.displayName || ""} (${badge.label})!`);
     setTimeout(() => {
       window.location.href = 'login.html';
     }, 2000);

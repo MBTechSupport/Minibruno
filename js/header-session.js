@@ -1,59 +1,36 @@
 /**
  * ==========================================================================
  * HEADER SESSION MANAGER - Mini Bruno TechSupport
- * Sincronización transversal del estado de autenticación en la barra superior
+ * Sincronización transversal del estado de autenticación y roles en la barra superior
  * ==========================================================================
  */
 
 import { auth, signOut } from "./firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-// Lista de correos autorizados por defecto como fallback seguro
-const DEFAULT_AUTHORIZED_EMAILS = [
-  "lruiz@minibruno.com",
-  "lguevara@minibruno.com",
-  "mrodriguez@minibruno.com",
-  "jnanez@minibruno.com",
-  "dnavarro@minibruno.com",
-  "darwin.navarro@minibruno.com",
-  "bmontilla@minibruno.com",
-  "alves.neri@minibruno.com",
-  "jruiz@minibruno.com",
-  "rcoronado@minibruno.com",
-  "ruca.luijo@gmail.com"
-];
-
-let authorizedEmails = [...DEFAULT_AUTHORIZED_EMAILS];
-
-// Cargar correos autorizados desde el archivo JSON corporativo
-async function loadAuthorizedEmails() {
-  try {
-    const res = await fetch("js/correos_Autorizados.json");
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data.autorizados)) {
-        authorizedEmails = data.autorizados.map((e) => e.toLowerCase().trim());
-      }
-    }
-  } catch (err) {
-    console.warn("HeaderSession: Usando lista autorizada de contingencia:", err);
-  }
-}
+import { getUserRole, ROLES, getRoleBadgeInfo, canAccessAdminTickets } from "./auth-roles.js";
 
 // Renderizar el estado de sesión del usuario en el Header
-function renderHeaderUserStatus(user) {
+async function renderHeaderUserStatus(user) {
   const desktopContainer = document.getElementById("header-user-status");
   const mobileContainer = document.getElementById("mobile-user-status");
   const legacyUserInfo = document.getElementById("userInfo");
 
-  // Si existe el legacy #userInfo (en index_log antiguo), lo ocultamos o vaciamos
   if (legacyUserInfo) {
     legacyUserInfo.style.display = "none";
   }
 
   if (user) {
-    const email = (user.email || "").toLowerCase().trim();
-    const isAuthorized = authorizedEmails.includes(email);
+    const role = await getUserRole(user.email);
+
+    // Si la cuenta fue denegada
+    if (role === ROLES.DENEGADO) {
+      await signOut(auth);
+      window.location.href = "login.html";
+      return;
+    }
+
+    const badge = getRoleBadgeInfo(role);
+    const isAdmin = canAccessAdminTickets(role);
     const displayName = user.displayName || user.email.split("@")[0];
     const avatarUrl =
       user.photoURL ||
@@ -62,20 +39,28 @@ function renderHeaderUserStatus(user) {
     const desktopHtml = `
       <div class="flex items-center space-x-2">
         ${
-          isAuthorized
+          isAdmin
             ? `
           <a href="admin_tickets.html" class="px-2.5 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-lg text-xs font-tech font-bold transition-all shadow-sm flex items-center space-x-1 border border-blue-400/40 animate-pulse" title="Panel de Administración Global Staff">
             <i data-feather="shield" class="w-3.5 h-3.5 text-cyan-300"></i>
             <span>Panel Staff</span>
           </a>
         `
-            : ""
+            : `
+          <a href="soporte.html" class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300/80 rounded-lg text-xs font-tech font-bold transition-all flex items-center space-x-1" title="Ver mis tickets y soporte">
+            <i data-feather="life-buoy" class="w-3.5 h-3.5 text-emerald-600"></i>
+            <span>Mis Tickets</span>
+          </a>
+        `
         }
         <div class="flex items-center space-x-2 bg-white/90 border border-blue-200/80 px-2.5 py-1 rounded-full shadow-sm">
           <img src="${avatarUrl}" alt="Avatar" class="w-6 h-6 rounded-full border border-blue-400 object-cover" />
           <div class="text-left hidden lg:block leading-tight">
-            <p class="text-xs font-bold text-gray-800 font-tech truncate max-w-[120px]">${displayName}</p>
-            <p class="text-[10px] text-blue-600 font-mono truncate max-w-[120px]">${user.email}</p>
+            <div class="flex items-center gap-1.5">
+              <p class="text-xs font-bold text-gray-800 font-tech truncate max-w-[100px]">${displayName}</p>
+              <span class="text-[9px] font-tech font-bold px-1.5 py-0.2 rounded ${badge.cssClass}">${badge.label}</span>
+            </div>
+            <p class="text-[10px] text-gray-500 font-mono truncate max-w-[120px]">${user.email}</p>
           </div>
           <button id="header-logout-btn" title="Cerrar Sesión" class="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50 transition-colors ml-0.5" aria-label="Cerrar Sesión">
             <i data-feather="log-out" class="w-3.5 h-3.5"></i>
@@ -89,20 +74,28 @@ function renderHeaderUserStatus(user) {
         <div class="flex items-center space-x-3 mb-2">
           <img src="${avatarUrl}" alt="Avatar" class="w-9 h-9 rounded-full border-2 border-blue-500 object-cover" />
           <div class="overflow-hidden">
-            <p class="text-xs font-bold text-gray-800 font-tech truncate">${displayName}</p>
+            <div class="flex items-center gap-1.5">
+              <p class="text-xs font-bold text-gray-800 font-tech truncate">${displayName}</p>
+              <span class="text-[9px] font-tech font-bold px-1.5 py-0.2 rounded ${badge.cssClass}">${badge.label}</span>
+            </div>
             <p class="text-[11px] text-blue-600 font-mono truncate">${user.email}</p>
           </div>
         </div>
         <div class="flex items-center gap-2 pt-2 border-t border-blue-100">
           ${
-            isAuthorized
+            isAdmin
               ? `
             <a href="admin_tickets.html" class="flex-1 py-1.5 px-2 bg-blue-600 text-white rounded-lg text-xs font-tech font-bold text-center flex items-center justify-center space-x-1">
               <i data-feather="shield" class="w-3 h-3 text-cyan-200"></i>
               <span>Panel Staff</span>
             </a>
           `
-              : ""
+              : `
+            <a href="soporte.html" class="flex-1 py-1.5 px-2 bg-emerald-600 text-white rounded-lg text-xs font-tech font-bold text-center flex items-center justify-center space-x-1">
+              <i data-feather="life-buoy" class="w-3 h-3"></i>
+              <span>Mis Tickets</span>
+            </a>
+          `
           }
           <button id="mobile-logout-btn" class="flex-1 py-1.5 px-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg text-xs font-tech font-bold text-center flex items-center justify-center space-x-1 transition-colors">
             <i data-feather="log-out" class="w-3 h-3"></i>
@@ -118,6 +111,7 @@ function renderHeaderUserStatus(user) {
     // Vincular botones de desconexión
     const handleLogout = async () => {
       try {
+        sessionStorage.removeItem("mb_user_role");
         await signOut(auth);
         window.location.href = "login.html";
       } catch (err) {
@@ -157,9 +151,7 @@ function renderHeaderUserStatus(user) {
 }
 
 // Inicializar el escuchador de estado de sesión
-async function initHeaderSession() {
-  await loadAuthorizedEmails();
-
+function initHeaderSession() {
   onAuthStateChanged(auth, (user) => {
     renderHeaderUserStatus(user);
   });
