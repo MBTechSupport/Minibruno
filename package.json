@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "node -e \"console.log('Build completed successfully')\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "node -c server.js knowledge_base.js"
   },
   "dependencies": {
     "@google/genai": "^2.24.0",

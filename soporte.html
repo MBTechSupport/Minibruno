@@ -12,10 +12,10 @@
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
@@ -30,7 +30,7 @@
             <div class="flex items-center space-x-3" data-aos="fade-down" data-aos-delay="100">
                 <div
                     class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
-                    <img src="img_ref/bd_brunito\logo_glow.svg" alt="Logo MiniBruno"
+                    <img src="img_ref/bd_brunito/logo_glow.svg" alt="Logo MiniBruno"
                         class="w-full h-full object-contain" />
                 </div>
                 <span class="text-xl font-bold text-dark font-tech">MiniBruno TechSupport</span>
@@ -423,10 +423,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Llamada a FreshChat -->
-    <script src="js/freshchat-init.js"></script>
-    <!-- Fin Freshchat Messenger -->
 
     <!-- Footer (Pie de Pagina)-->
     <footer class="relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
@@ -879,10 +875,9 @@
     </div>
     <script type="module" src="js/firebase-init.js"></script>
     <script type="module" src="js/soporte.js"></script>
-    <script type="module" src="js/header-session.js"></script>
     <!-- Script de Animaciones Premium -->
     <script src="js/soporte-animations.js"></script>
-        <script type="module" src="js/auth_guard.js"></script>
+    <script type="module" src="js/auth_guard.js"></script>
     <!-- Asistente IA BrunoBot (Gemini Flash & RAG) -->
     <script type="module" src="js/chat-widget.js"></script>
 </body>

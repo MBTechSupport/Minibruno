@@ -42,9 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 onAuthStateChanged(auth, async (user) => {
   currentUser = user;
-  await updateHeaderSession(user);
-  updateFormSession(user);
-
   if (user) {
     const role = await getUserRole(user.email);
     if (role === ROLES.DENEGADO) {
@@ -53,9 +50,13 @@ onAuthStateChanged(auth, async (user) => {
       window.location.href = "login.html";
       return;
     }
+    await updateHeaderSession(user, role);
+    updateFormSession(user, role);
     // Escuchar tickets en tiempo real para el usuario autenticado
     listenToUserTickets(user.uid);
   } else {
+    updateHeaderSession(null);
+    updateFormSession(null);
     if (unsubscribeTickets) {
       unsubscribeTickets();
       unsubscribeTickets = null;
@@ -66,12 +67,12 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-async function updateHeaderSession(user) {
+async function updateHeaderSession(user, precomputedRole = null) {
   const headerContainer = document.getElementById("header-user-status");
   if (!headerContainer) return;
 
   if (user) {
-    const role = await getUserRole(user.email);
+    const role = precomputedRole || (await getUserRole(user.email));
     const badge = getRoleBadgeInfo(role);
     const isAdmin = canAccessAdminTickets(role);
     const displayName = user.displayName || user.email.split("@")[0];
@@ -111,7 +112,7 @@ async function updateHeaderSession(user) {
     `;
 
     document.getElementById("header-my-tickets-btn")?.addEventListener("click", () => {
-      openTicketsDrawer();
+      openDrawer();
     });
 
     document.getElementById("header-logout-btn")?.addEventListener("click", async () => {
@@ -137,7 +138,7 @@ async function updateHeaderSession(user) {
   if (window.feather) window.feather.replace();
 }
 
-function updateFormSession(user) {
+function updateFormSession(user, precomputedRole = null) {
   const banner = document.getElementById("auth-state-banner");
   const nameInput = document.getElementById("ticket-user-name");
   const emailInput = document.getElementById("ticket-user-email");
@@ -145,8 +146,7 @@ function updateFormSession(user) {
   if (!banner || !nameInput || !emailInput) return;
 
   if (user) {
-    const email = (user.email || "").toLowerCase().trim();
-    const isAuthorized = authorizedEmails.includes(email);
+    const isAuthorized = precomputedRole ? canAccessAdminTickets(precomputedRole) : false;
     const displayName = user.displayName || user.email.split("@")[0];
     nameInput.value = displayName;
     emailInput.value = user.email;
@@ -163,7 +163,7 @@ function updateFormSession(user) {
             ${
               isAuthorized
                 ? `<span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-[10px] font-bold rounded-full border border-blue-300">Staff Autorizado</span>`
-                : ""
+                : `<span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-full border border-emerald-300">Colaborador Verificado</span>`
             }
           </div>
           <p class="text-xs text-gray-600">Usuario: <strong class="text-blue-700">${displayName}</strong> (${user.email})</p>
@@ -737,6 +737,12 @@ function openDrawer() {
     drawer.classList.remove("translate-x-full");
   }
 }
+
+function openTicketsDrawer() {
+  openDrawer();
+}
+window.openDrawer = openDrawer;
+window.openTicketsDrawer = openDrawer;
 
 function closeDrawer() {
   const drawer = document.getElementById("tickets-drawer");

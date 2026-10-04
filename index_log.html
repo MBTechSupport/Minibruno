@@ -10,32 +10,10 @@
     <link rel="stylesheet" href="css/index-premium.css">
     <link rel="stylesheet" href="css/index-extras.css">
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Partículas -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-    <script>
-        tsParticles.load("particles-js", {
-            fullScreen: { enable: false },
-            background: { color: "transparent" },
-            particles: {
-                number: { value: 40 },
-                color: { value: "#3b82f6" },
-                shape: { type: "circle" },
-                opacity: { value: 0.3 },
-                size: { value: 3 },
-                move: { enable: true, speed: 0.6 }
-            }
-        });
-    </script>
-    <!-- Fin Partículas -->
-
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="font-sans text-gray-900 leading-normal tracking-normal">
@@ -732,11 +710,39 @@
         </div>
     </div>
     <!-- Fin Modelo de Contacto de redireccionamiento -->
-    <!-- Script de Animaciones Premium -->
-    <script src="js/index-animations.js"></script>
 
+    <!-- Librerías de UI e Interactividad (Diferidas) -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+
+    <!-- Inicialización de Partículas Flotantes en Background -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.tsParticles) {
+                tsParticles.load("particles-js", {
+                    fullScreen: { enable: false },
+                    background: { color: "transparent" },
+                    particles: {
+                        number: { value: 35 },
+                        color: { value: "#3b82f6" },
+                        shape: { type: "circle" },
+                        opacity: { value: 0.25 },
+                        size: { value: 3 },
+                        move: { enable: true, speed: 0.6 }
+                    }
+                });
+            }
+            if (window.feather) {
+                feather.replace();
+            }
+        });
+    </script>
+
+    <!-- Script de Animaciones Premium y Lógica Principal -->
+    <script src="js/index-animations.js"></script>
     <script src="js/index.js"></script>
-    <script type="module" src="js/auth.js"></script>
     <script type="module" src="js/auth_guard.js"></script>
     <script type="module" src="js/header-session.js"></script>
     <!-- Asistente IA BrunoBot (Gemini Flash & RAG) -->
