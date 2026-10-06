@@ -6,6 +6,9 @@
  * 2. correos_empleados.json   -> Rol EMPLEADO (Colaborador con acceso limitado)
  * ==========================================================================
  */
+// Importando la conexion a Firestore
+import { db } from "./firebase-init.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 export const ROLES = {
   ADMIN: "ADMIN",
@@ -35,13 +38,6 @@ const FALLBACK_ADMINS = [
 const FALLBACK_EMPLOYEES = [
   "empleado.sistemas@minibruno.com",
   "empleado.planta@minibruno.com",
-  "colaborador@minibruno.com",
-  "operaciones@minibruno.com",
-  "ventas@minibruno.com",
-  "rrhh@minibruno.com",
-  "logistica@minibruno.com",
-  "calidad@minibruno.com",
-  "mantenimiento@minibruno.com",
   "usuario.prueba@minibruno.com",
   "empleado.test@gmail.com"
 ];
@@ -52,6 +48,17 @@ const FALLBACK_EMPLOYEES = [
 export async function getAdminEmails() {
   if (cachedAdmins) return cachedAdmins;
   try {
+    // Consulta directa a firestore: Coleccion 'config', documento 'correos_autorizados'
+    const docRef = doc(db, "config", "correos_autorizados");
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      cachedAdmins = (data.autorizados || []).map(e => e.toLowerCase().trim());
+      return cachedAdmins;
+    }
+
+    // Si el Documento no existe en firestore. Tirara para aca de forma que no tenga que consultar a firestore en caso de emergencia.
     const res = await fetch("/js/correos_Autorizados.json");
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
@@ -69,6 +76,17 @@ export async function getAdminEmails() {
 export async function getEmployeeEmails() {
   if (cachedEmployees) return cachedEmployees;
   try {
+    // Consulta directa a Firestore: colección 'config', documento 'correos_empleados'
+    const docRef = doc(db, "config", "correos_empleados");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      cachedEmployees = (data.empleados || []).map(e => e.toLowerCase().trim());
+      return cachedEmployees;
+    }
+
+    // Si el documento no existe en Firestore, intenta leer el JSON local
     const res = await fetch("/js/correos_empleados.json");
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
