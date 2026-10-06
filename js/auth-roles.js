@@ -20,6 +20,15 @@ export const ROLES = {
 let cachedAdmins = null;
 let cachedEmployees = null;
 
+/**
+ * Limpia la memoria caché de los roles para forzar una nueva lectura en Firestore
+ */
+export function clearRoleCache() {
+  cachedAdmins = null;
+  cachedEmployees = null;
+  sessionStorage.removeItem('mb_user_role');
+}
+
 // Fallback preventivo por si falla la red
 const FALLBACK_ADMINS = [
   "lruiz@minibruno.com",

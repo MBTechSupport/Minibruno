@@ -1,5 +1,6 @@
 import { auth, signOut } from "./firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { clearRoleCache } from './auth-roles.js';
 
 onAuthStateChanged(auth, (user) => {
   const userInfo = document.getElementById("userInfo");
@@ -26,6 +27,7 @@ onAuthStateChanged(auth, (user) => {
     // Listener para botón Logout
     document.getElementById("logoutBtn")?.addEventListener("click", async () => {
       try {
+        clearRoleCache(); // <-- Limpia la caché en memoria
         await signOut(auth);
         window.location.href = "login.html";
       } catch (error) {

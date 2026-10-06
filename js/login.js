@@ -8,7 +8,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { initPasswordToggle, showFloatingToast, setButtonLoading } from './auth-ui.js';
-import { getUserRole, ROLES, getRoleBadgeInfo } from './auth-roles.js';
+import { getUserRole, ROLES, getRoleBadgeInfo, clearRoleCache } from './auth-roles.js';
 
 // Inicializar 3.1 Toggle de contraseña
 initPasswordToggle('password', 'togglePasswordBtn');
@@ -61,7 +61,7 @@ onAuthStateChanged(auth, async (user) => {
     if (role === ROLES.DENEGADO) {
       console.warn("Usuario denegado intentando sesión:", user.email);
       showError(`Acceso Denegado: La cuenta ${user.email} no está autorizada en el sistema.`);
-      sessionStorage.removeItem('mb_user_role');
+      clearRoleCache(); // <-- Limpia la caché inmediatamente
       await signOut(auth);
       return;
     }
@@ -104,22 +104,28 @@ if (loginForm) {
     setButtonLoading(submitBtn, true, 'Autenticando...');
 
     try {
-      // Pre-validar antes de login para feedback inmediato
-      const role = await getUserRole(email);
+      // Autenticar primero directamente en Firebase Auth
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Verificar el rol una vez que la sesión está activa
+      const role = await getUserRole(user.email);
       if (role === ROLES.DENEGADO) {
         showError("Tu correo no figura en las listas autorizadas de Mini Bruno.");
+        await signOut(auth);
         return;
       }
 
-      await signInWithEmailAndPassword(auth, email, password);
       const badge = getRoleBadgeInfo(role);
       showSuccess(`¡Inicio de sesión exitoso! (${badge.label})`);
     } catch (error) {
       console.error(error);
       let msg = "Error al iniciar sesión.";
-      if (error.code === 'auth/invalid-credential') msg = "Credenciales incorrectas.";
-      else if (error.code === 'auth/user-not-found') msg = "Usuario no encontrado.";
-      else if (error.code === 'auth/wrong-password') msg = "Contraseña incorrecta.";
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+        msg = "Credenciales incorrectas.";
+      } else if (error.code === 'auth/user-not-found') {
+        msg = "Usuario no encontrado.";
+      }
       showError(msg);
     } finally {
       setButtonLoading(submitBtn, false);
@@ -164,7 +170,7 @@ if (googleLoginBtn) {
 if (logoutBtn) {
   logoutBtn.addEventListener('click', async () => {
     try {
-      sessionStorage.removeItem('mb_user_role');
+      clearRoleCache(); // <-- Limpia las variables globales en memoria y sessionStorage
       await signOut(auth);
       showSuccess('Sesión cerrada correctamente.');
     } catch (error) {

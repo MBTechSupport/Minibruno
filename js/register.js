@@ -62,21 +62,22 @@ async function validarCorreo(email) {
  * Registro con email y contraseña
  */
 export async function registrarUsuario(nombre, email, password) {
+  let userCredential = null;
   try {
     email = email.toLowerCase().trim();
 
-    // Validar autorización corporativa (ADMIN o EMPLEADO)
+    // 1. Validar autorización en listas corporativas ANTES de crear nada en Auth
     const role = await getUserRole(email);
     if (role === ROLES.DENEGADO) {
       showError("El correo no está autorizado en las listas corporativas de Mini Bruno.");
       return;
     }
 
-    // Crear usuario en Authentication
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    // 2. Crear usuario en Firebase Authentication
+    userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Guardar perfil en Firestore con rol específico
+    // 3. Determinar rol y guardar en Firestore
     const rolString = role === ROLES.ADMIN ? "admin" : "empleado";
     await setDoc(doc(db, "usuarios", user.uid), {
       nombre,
@@ -93,12 +94,25 @@ export async function registrarUsuario(nombre, email, password) {
     }, 2000);
 
   } catch (error) {
+    console.error("Error durante el registro:", error);
+
+    // ROLLBACK: Si la cuenta de Auth se creó pero falló la creación en Firestore, limpiamos la cuenta
+    if (userCredential && userCredential.user) {
+      try {
+        await userCredential.user.delete();
+        console.warn("Se revirtió la creación de usuario en Auth debido a un fallo en Firestore.");
+      } catch (deleteError) {
+        console.error("No se pudo limpiar la cuenta de Auth tras fallo:", deleteError);
+      }
+    }
+
+    // Mensajes amigables de error
     if (error.code === "auth/email-already-in-use") {
       showError("Ese correo ya está registrado en nuestra base de datos.");
     } else if (error.code === "auth/weak-password") {
-      showError("Error: La contraseña es demasiado débil.");
+      showError("Error: La contraseña es demasiado débil (mínimo 6 caracteres).");
     } else {
-      showError("Error: " + error.message);
+      showError("Error al completar el registro: " + error.message);
     }
   }
 }
@@ -127,7 +141,7 @@ export async function registrarConGoogle() {
     if (!docSnap.exists()) {
       await setDoc(userDoc, {
         nombre: user.displayName || "",
-        email: user.email,
+        email: user.email.toLowerCase().trim(),
         foto: user.photoURL || "",
         creadoEn: new Date(),
         rol: rolString
