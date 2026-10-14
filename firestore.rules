@@ -48,6 +48,31 @@ service cloud.firestore {
       allow delete: if isAuthorizedEmail();
     }
 
+    match /tickets/{ticketId}/internal_messages/{messageId} {
+      // Solo personal técnico con correo autorizado puede leer los mensajes internos
+      allow read: if isAuthorizedEmail();
+      
+      // Solo personal técnico autorizado puede crear mensajes, validando autor y datos
+      allow create: if isAuthorizedEmail() &&
+        request.resource.data.keys().hasAll(['ticketId', 'senderUid', 'senderEmail', 'senderName', 'text', 'createdAt']) &&
+        request.resource.data.senderUid == request.auth.uid &&
+        request.resource.data.senderEmail == request.auth.token.email &&
+        request.resource.data.ticketId == ticketId &&
+        request.resource.data.text is string &&
+        request.resource.data.text.size() >= 1 &&
+        request.resource.data.text.size() <= 3000;
+
+      // Inmutable: no se permite modificar ni borrar mensajes del historial técnico
+      allow update, delete: if false;
+    }
+
+    match /contacts/{contactId} {
+      // Lectura corporativa de vCards del directorio
+      allow read: if true;
+      // Solo administradores autorizados pueden crear, actualizar o eliminar información de contactos
+      allow create, update, delete: if isAuthorizedEmail();
+    }
+
     match /deleted_tickets/{logId} {
       // Registro de auditoría de tickets eliminados
       allow read, create: if isAuthorizedEmail();
@@ -65,3 +90,4 @@ service cloud.firestore {
     }
   }
 }
+

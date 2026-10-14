@@ -641,16 +641,91 @@
             </div>
 
             <div class="flex items-center justify-between pt-3 border-t border-slate-100">
-                <button id="modal-delete-ticket-btn" type="button" class="py-2.5 px-4 bg-red-50 hover:bg-red-600 hover:text-white text-red-600 rounded-xl font-tech text-xs font-bold transition-all flex items-center space-x-1.5 border border-red-200 hover:border-red-600">
-                    <i data-feather="trash-2" class="w-3.5 h-3.5"></i>
-                    <span>Eliminar Ticket</span>
-                </button>
+                <div class="flex items-center space-x-2">
+                    <button id="modal-delete-ticket-btn" type="button" class="py-2.5 px-4 bg-red-50 hover:bg-red-600 hover:text-white text-red-600 rounded-xl font-tech text-xs font-bold transition-all flex items-center space-x-1.5 border border-red-200 hover:border-red-600">
+                        <i data-feather="trash-2" class="w-3.5 h-3.5"></i>
+                        <span>Eliminar Ticket</span>
+                    </button>
+                    <button id="modal-open-chat-btn" type="button" class="py-2.5 px-4 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-700 rounded-xl font-tech text-xs font-bold transition-all flex items-center space-x-1.5 border border-blue-200 hover:border-blue-600" title="Abrir canal de discusión técnica interna">
+                        <i data-feather="message-square" class="w-3.5 h-3.5"></i>
+                        <span>Chat Interno</span>
+                    </button>
+                </div>
                 <div class="flex space-x-3">
                     <button id="modal-close-action-btn" type="button" class="py-2.5 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-tech text-xs font-bold transition-colors">
                         Cerrar
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CHAT INTERNO EN TIEMPO REAL POR TICKET (EXCLUSIVO STAFF IT) -->
+    <div id="admin-ticket-chat-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md hidden animate__animated animate__fadeIn">
+        <div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl border border-blue-400/30 flex flex-col h-[85vh] max-h-[700px] overflow-hidden">
+            <!-- Header del Chat -->
+            <div class="bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 text-white p-4 sm:p-5 flex-shrink-0 border-b border-blue-800/40">
+                <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-600/30 border border-blue-400/40 flex items-center justify-center text-cyan-300 flex-shrink-0 mt-0.5">
+                            <i data-feather="message-square" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+                                <span id="chat-modal-code" class="text-lg font-bold font-mono text-cyan-300">#TK-2026-0000</span>
+                                <span id="chat-modal-status-badge" class="px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border">--</span>
+                                <span id="chat-modal-prio-badge" class="px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border">--</span>
+                            </div>
+                            <h3 id="chat-modal-subject" class="text-sm font-semibold text-slate-100 truncate max-w-sm sm:max-w-md mt-0.5">--</h3>
+                            <p class="text-[11px] text-slate-300 flex items-center space-x-1.5 mt-1">
+                                <span>Solicitante: <strong id="chat-modal-requester" class="text-cyan-200">--</strong></span>
+                                <span>•</span>
+                                <span id="chat-modal-dept" class="text-slate-400">--</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button id="close-ticket-chat-btn" type="button" class="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors" title="Cerrar chat">
+                        <i data-feather="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <!-- Banner de Privacidad Staff IT -->
+                <div class="mt-3 py-1 px-2.5 bg-blue-950/60 rounded-lg border border-blue-500/20 flex items-center justify-between text-[10px] text-cyan-300 font-mono">
+                    <span class="flex items-center"><i data-feather="lock" class="w-3 h-3 mr-1 text-cyan-400"></i> Canal técnico confidencial (Solo Staff IT)</span>
+                    <span class="flex items-center text-emerald-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1"></span> Sincronización Live</span>
+                </div>
+            </div>
+
+            <!-- Cuerpo del Chat: Historial de Mensajes -->
+            <div id="ticket-chat-messages-container" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50/80">
+                <!-- Los mensajes se renderizan dinámicamente -->
+                <div id="ticket-chat-loading" class="text-center py-12 text-slate-400 font-tech text-xs">
+                    <div class="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                    Conectando canal de discusión técnica...
+                </div>
+            </div>
+
+            <!-- Error o Aviso en el Chat -->
+            <div id="ticket-chat-error" class="hidden px-4 py-2 bg-red-50 text-red-600 text-xs border-t border-red-200 flex items-center justify-between">
+                <span id="ticket-chat-error-text">Error al enviar mensaje</span>
+                <button type="button" id="ticket-chat-error-dismiss" class="text-red-400 hover:text-red-600"><i data-feather="x" class="w-3.5 h-3.5"></i></button>
+            </div>
+
+            <!-- Input del Chat -->
+            <form id="ticket-chat-form" class="p-3 sm:p-4 bg-white border-t border-slate-200 flex-shrink-0">
+                <div class="flex items-end space-x-2">
+                    <div class="flex-1 relative">
+                        <textarea id="ticket-chat-input" rows="2" maxlength="3000" required placeholder="Escribe un mensaje técnico, diagnóstico o nota interna..." class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white resize-none transition-all"></textarea>
+                        <div class="flex justify-between items-center text-[10px] text-slate-400 mt-1 px-1 font-mono">
+                            <span>Presiona <kbd class="px-1 py-0.5 bg-slate-200 rounded text-[9px]">Enter</kbd> para enviar (<kbd class="px-1 py-0.5 bg-slate-200 rounded text-[9px]">Shift+Enter</kbd> salto)</span>
+                            <span id="ticket-chat-char-count">0/3000</span>
+                        </div>
+                    </div>
+                    <button id="ticket-chat-send-btn" type="submit" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-xl font-tech text-xs font-bold transition-all flex items-center space-x-1.5 shadow-md self-start mt-0.5">
+                        <i data-feather="send" class="w-3.5 h-3.5"></i>
+                        <span class="hidden sm:inline">Enviar</span>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 

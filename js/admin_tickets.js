@@ -12,7 +12,9 @@ import {
   updateDoc,
   deleteDoc,
   addDoc,
-  onSnapshot
+  onSnapshot,
+  query,
+  orderBy
 } from "./firebase-init.js";
 import { getUserRole, ROLES, canAccessAdminTickets } from "./auth-roles.js";
 
@@ -23,6 +25,11 @@ let unsubscribeGlobalTickets = null;
 let activeTicketForModal = null;
 let ticketToDelete = null;
 let toastTimeout = null;
+
+// Variables de estado del Chat Interno por Ticket
+let activeChatTicket = null;
+let unsubscribeTicketChat = null;
+let isSendingChatMessage = false;
 
 // Filtros
 let filterStatus = "all";
@@ -311,6 +318,10 @@ function renderAdminTicketsTable() {
 
           <!-- Acciones -->
           <td class="py-3 px-4 whitespace-nowrap text-right space-x-1.5">
+            <button type="button" data-ticket-id="${t.id}" class="btn-chat-ticket px-2.5 py-1.5 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-700 rounded-lg font-tech text-xs font-semibold transition-all shadow-sm border border-blue-200" title="Abrir Chat Técnico Interno">
+              <i data-feather="message-square" class="w-3.5 h-3.5 inline mr-1"></i>
+              <span class="hidden sm:inline">Chat</span>
+            </button>
             <button type="button" data-ticket-id="${t.id}" class="btn-manage-ticket px-3 py-1.5 bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-700 rounded-lg font-tech text-xs font-semibold transition-all shadow-sm">
               Gestionar
             </button>
@@ -338,6 +349,15 @@ function renderAdminTicketsTable() {
       const ticketId = btn.dataset.ticketId;
       const ticket = globalTickets.find((x) => x.id === ticketId);
       if (ticket) openManageModal(ticket);
+    });
+  });
+
+  // Eventos para abrir chat interno de ticket desde la tabla
+  tbody.querySelectorAll(".btn-chat-ticket").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const ticketId = btn.dataset.ticketId;
+      const ticket = globalTickets.find((x) => x.id === ticketId);
+      if (ticket) openTicketChat(ticket);
     });
   });
 
@@ -730,6 +750,280 @@ function initAdminEvents() {
   };
   document.getElementById("admin-logout-btn")?.addEventListener("click", logoutAction);
   document.getElementById("denied-logout-btn")?.addEventListener("click", logoutAction);
+
+  // ========================================================================
+  // EVENTOS DEL CHAT INTERNO POR TICKET (STAFF IT)
+  // ========================================================================
+  // Abrir chat desde el modal de gestión del ticket
+  document.getElementById("modal-open-chat-btn")?.addEventListener("click", () => {
+    if (activeTicketForModal) {
+      openTicketChat(activeTicketForModal);
+    }
+  });
+
+  // Cerrar modal de chat
+  document.getElementById("close-ticket-chat-btn")?.addEventListener("click", closeTicketChat);
+
+  // Descartar banner de error en chat
+  document.getElementById("ticket-chat-error-dismiss")?.addEventListener("click", () => {
+    document.getElementById("ticket-chat-error")?.classList.add("hidden");
+  });
+
+  // Envío de mensaje en chat
+  const chatForm = document.getElementById("ticket-chat-form");
+  const chatInput = document.getElementById("ticket-chat-input");
+  const charCounter = document.getElementById("ticket-chat-char-count");
+
+  chatForm?.addEventListener("submit", handleSendTicketChatMessage);
+
+  chatInput?.addEventListener("input", () => {
+    if (charCounter) {
+      charCounter.textContent = `${chatInput.value.length}/3000`;
+    }
+  });
+
+  chatInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      chatForm?.dispatchEvent(new Event("submit", { cancelable: true }));
+    }
+  });
+}
+
+// ==========================================================================
+// 10. LÓGICA DE CHAT INTERNO EN TIEMPO REAL POR TICKET (EXCLUSIVO STAFF IT)
+// ==========================================================================
+function openTicketChat(ticket) {
+  if (!ticket) return;
+
+  // Si había una suscripción previa de otro ticket, limpiarla
+  if (unsubscribeTicketChat) {
+    unsubscribeTicketChat();
+    unsubscribeTicketChat = null;
+  }
+
+  activeChatTicket = ticket;
+  const modal = document.getElementById("admin-ticket-chat-modal");
+  const container = document.getElementById("ticket-chat-messages-container");
+  const chatInput = document.getElementById("ticket-chat-input");
+  const charCounter = document.getElementById("ticket-chat-char-count");
+  const errorBox = document.getElementById("ticket-chat-error");
+
+  if (!modal || !container) return;
+
+  // Poblar cabecera del chat con datos reales del ticket
+  document.getElementById("chat-modal-code").textContent = ticket.ticketCode || "--";
+  document.getElementById("chat-modal-subject").textContent = ticket.subject || "Sin asunto";
+  document.getElementById("chat-modal-requester").textContent = `${ticket.userName || "Colaborador"} (${ticket.userEmail || "--"})`;
+  document.getElementById("chat-modal-dept").textContent = `${ticket.department || "General"} • ${ticket.category || "Incidencia"}`;
+
+  // Badges de Estado y Prioridad
+  const statusBadge = document.getElementById("chat-modal-status-badge");
+  if (statusBadge) {
+    statusBadge.textContent = ticket.status || "Abierto";
+    if (ticket.status === "Resuelto") {
+      statusBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border bg-emerald-500/20 text-emerald-300 border-emerald-400/40";
+    } else if (ticket.status === "En revisión") {
+      statusBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border bg-amber-500/20 text-amber-300 border-amber-400/40";
+    } else {
+      statusBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border bg-sky-500/20 text-sky-300 border-sky-400/40";
+    }
+  }
+
+  const prioBadge = document.getElementById("chat-modal-prio-badge");
+  if (prioBadge) {
+    prioBadge.textContent = ticket.priority || "Media";
+    if (ticket.priority === "Crítica") {
+      prioBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border bg-red-500/20 text-red-300 border-red-400/40 animate-pulse";
+    } else if (ticket.priority === "Alta") {
+      prioBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border bg-amber-500/20 text-amber-300 border-amber-400/40";
+    } else {
+      prioBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-tech font-bold uppercase border bg-blue-500/20 text-cyan-300 border-blue-400/40";
+    }
+  }
+
+  // Limpiar campos y feedback previo
+  if (chatInput) chatInput.value = "";
+  if (charCounter) charCounter.textContent = "0/3000";
+  if (errorBox) errorBox.classList.add("hidden");
+
+  // Mostrar spinner de carga inicial
+  container.innerHTML = `
+    <div id="ticket-chat-loading" class="text-center py-12 text-slate-400 font-tech text-xs">
+      <div class="w-7 h-7 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+      Conectando canal de discusión técnica en tiempo real...
+    </div>
+  `;
+
+  // Abrir modal
+  modal.classList.remove("hidden");
+  if (window.feather) window.feather.replace();
+
+  // Suscribirse a la subcolección en tiempo real: /tickets/{ticketId}/internal_messages
+  const messagesRef = collection(db, "tickets", ticket.id, "internal_messages");
+  const q = query(messagesRef, orderBy("createdAt", "asc"));
+
+  unsubscribeTicketChat = onSnapshot(
+    q,
+    (snapshot) => {
+      renderTicketChatMessages(snapshot);
+    },
+    (error) => {
+      console.error("[Firestore Chat Error] Error al escuchar mensajes internos:", error);
+      container.innerHTML = `
+        <div class="p-6 bg-red-50 border border-red-200 rounded-xl text-center text-xs text-red-700">
+          <p class="font-bold font-tech text-red-800 mb-1">Acceso Denegado o Error de Conexión</p>
+          <p>${error.message || "Solo el personal Staff IT con correo autorizado puede consultar el chat interno."}</p>
+        </div>
+      `;
+    }
+  );
+}
+
+function closeTicketChat() {
+  const modal = document.getElementById("admin-ticket-chat-modal");
+  if (modal) modal.classList.add("hidden");
+
+  // Limpieza mandatoria del listener en tiempo real para liberar memoria y evitar suscripciones huérfanas
+  if (unsubscribeTicketChat) {
+    unsubscribeTicketChat();
+    unsubscribeTicketChat = null;
+  }
+  activeChatTicket = null;
+}
+
+function renderTicketChatMessages(snapshot) {
+  const container = document.getElementById("ticket-chat-messages-container");
+  if (!container) return;
+
+  if (snapshot.empty) {
+    container.innerHTML = `
+      <div class="text-center py-12 text-slate-400">
+        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3 border border-blue-100 shadow-sm">
+          <i data-feather="message-circle" class="w-6 h-6"></i>
+        </div>
+        <p class="font-tech text-xs font-bold text-slate-700 uppercase tracking-wider">Canal Técnico Iniciado</p>
+        <p class="text-xs text-slate-500 max-w-sm mx-auto mt-1 leading-relaxed">
+          No hay notas ni mensajes previos para el ticket <strong class="text-blue-900 font-mono">${activeChatTicket?.ticketCode || ""}</strong>.
+          Escribe abajo para coordinar diagnósticos, acciones o avances con los demás analistas de Sistemas.
+        </p>
+      </div>
+    `;
+    if (window.feather) window.feather.replace();
+    return;
+  }
+
+  const messagesHtml = [];
+
+  snapshot.forEach((docSnap) => {
+    const msg = docSnap.data();
+    const isMe = currentAdminUser && (msg.senderUid === currentAdminUser.uid || msg.senderEmail === currentAdminUser.email);
+
+    let timeStr = "--";
+    try {
+      const d = msg.createdAt ? new Date(msg.createdAt) : null;
+      if (d && !isNaN(d.getTime())) {
+        timeStr = d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) + " • " + d.toLocaleDateString("es-ES", { day: "2-digit", month: "short" });
+      }
+    } catch (e) {
+      timeStr = String(msg.createdAt || "--");
+    }
+
+    if (isMe) {
+      // Burbuja propia (alineada a la derecha, estilo azul corporativo Cyber-Tech)
+      messagesHtml.push(`
+        <div class="flex flex-col items-end group">
+          <div class="flex items-center space-x-1.5 text-[10px] text-slate-400 font-mono mb-1 pr-1">
+            <span class="font-bold text-blue-600">Tú (Staff IT)</span>
+            <span>•</span>
+            <span>${timeStr}</span>
+          </div>
+          <div class="max-w-[85%] sm:max-w-[75%] bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white rounded-2xl rounded-tr-none px-4 py-2.5 shadow-md shadow-blue-500/10 text-xs leading-relaxed whitespace-pre-wrap break-words border border-blue-500/40">
+            ${escapeHtml(msg.text || "")}
+          </div>
+        </div>
+      `);
+    } else {
+      // Burbuja de otro administrador (alineada a la izquierda, estilo card glass)
+      messagesHtml.push(`
+        <div class="flex flex-col items-start group">
+          <div class="flex items-center space-x-1.5 text-[10px] text-slate-500 font-mono mb-1 pl-1">
+            <span class="font-bold text-slate-800 font-tech">${escapeHtml(msg.senderName || "Analista IT")}</span>
+            <span class="px-1.5 py-0.2 rounded bg-blue-100 text-blue-700 font-bold text-[9px] border border-blue-200">Staff IT</span>
+            <span>•</span>
+            <span>${timeStr}</span>
+          </div>
+          <div class="max-w-[85%] sm:max-w-[75%] bg-white border border-slate-200/90 text-slate-800 rounded-2xl rounded-tl-none px-4 py-2.5 shadow-sm text-xs leading-relaxed whitespace-pre-wrap break-words">
+            ${escapeHtml(msg.text || "")}
+          </div>
+          <span class="text-[9px] text-slate-400 font-mono pl-1 mt-0.5 truncate max-w-[200px]">${escapeHtml(msg.senderEmail || "")}</span>
+        </div>
+      `);
+    }
+  });
+
+  container.innerHTML = messagesHtml.join("");
+  if (window.feather) window.feather.replace();
+
+  // Scroll suave hacia el mensaje más reciente
+  container.scrollTop = container.scrollHeight;
+}
+
+async function handleSendTicketChatMessage(e) {
+  e.preventDefault();
+  if (!activeChatTicket || !currentAdminUser || isSendingChatMessage) return;
+
+  const chatInput = document.getElementById("ticket-chat-input");
+  const sendBtn = document.getElementById("ticket-chat-send-btn");
+  const errorBox = document.getElementById("ticket-chat-error");
+  const errorText = document.getElementById("ticket-chat-error-text");
+
+  const text = (chatInput?.value || "").trim();
+  if (!text) return;
+
+  if (text.length > 3000) {
+    if (errorBox && errorText) {
+      errorText.textContent = "El mensaje excede el límite máximo permitido de 3000 caracteres.";
+      errorBox.classList.remove("hidden");
+    }
+    return;
+  }
+
+  try {
+    isSendingChatMessage = true;
+    if (sendBtn) sendBtn.disabled = true;
+    if (errorBox) errorBox.classList.add("hidden");
+
+    const messagePayload = {
+      ticketId: activeChatTicket.id,
+      senderUid: currentAdminUser.uid,
+      senderEmail: (currentAdminUser.email || "").toLowerCase().trim(),
+      senderName: currentAdminUser.displayName || currentAdminUser.email.split("@")[0],
+      text: text,
+      createdAt: new Date().toISOString()
+    };
+
+    const messagesCollectionRef = collection(db, "tickets", activeChatTicket.id, "internal_messages");
+    await addDoc(messagesCollectionRef, messagePayload);
+
+    // Limpiar input y reenfocar
+    if (chatInput) {
+      chatInput.value = "";
+      chatInput.focus();
+    }
+    const charCounter = document.getElementById("ticket-chat-char-count");
+    if (charCounter) charCounter.textContent = "0/3000";
+
+  } catch (error) {
+    console.error("[Firestore Chat Send Error]", error);
+    if (errorBox && errorText) {
+      errorText.textContent = `Error al registrar mensaje en Firestore: ${error.message}`;
+      errorBox.classList.remove("hidden");
+    }
+  } finally {
+    isSendingChatMessage = false;
+    if (sendBtn) sendBtn.disabled = false;
+  }
 }
 
 function escapeHtml(str) {

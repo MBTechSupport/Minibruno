@@ -169,6 +169,117 @@
         "authorName",
         "createdAt"
       ]
+    },
+    "InternalTicketMessage": {
+      "title": "InternalTicketMessage",
+      "description": "Mensaje en tiempo real del chat interno exclusivo para Staff IT sobre un ticket",
+      "type": "object",
+      "properties": {
+        "ticketId": {
+          "type": "string",
+          "description": "ID del ticket asociado"
+        },
+        "senderUid": {
+          "type": "string",
+          "description": "UID de Firebase Auth del remitente autorizado"
+        },
+        "senderEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo corporativo del remitente autorizado"
+        },
+        "senderName": {
+          "type": "string",
+          "description": "Nombre visible del remitente"
+        },
+        "text": {
+          "type": "string",
+          "description": "Contenido del mensaje de discusión técnica",
+          "minLength": 1,
+          "maxLength": 3000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha y hora ISO de emisión"
+        }
+      },
+      "required": [
+        "ticketId",
+        "senderUid",
+        "senderEmail",
+        "senderName",
+        "text",
+        "createdAt"
+      ]
+    },
+    "CorporateContact": {
+      "title": "CorporateContact",
+      "description": "Contacto del directorio corporativo y vCard administrable por Staff IT",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Identificador numérico ordenado del contacto"
+        },
+        "name": {
+          "type": "string",
+          "description": "Nombre y apellido del contacto"
+        },
+        "position": {
+          "type": "string",
+          "description": "Cargo en la organización"
+        },
+        "department": {
+          "type": "string",
+          "description": "Departamento o área corporativa"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo electrónico corporativo"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Número telefónico de contacto directo"
+        },
+        "ext": {
+          "type": "string",
+          "description": "Extensión telefónica interna"
+        },
+        "location": {
+          "type": "string",
+          "description": "Sede o planta de asignación (ej. Planta PRC, Planta PSC, Chuao)"
+        },
+        "hours": {
+          "type": "string",
+          "description": "Horario laboral de atención"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Descripción profesional o notas de funciones"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "Ruta relativa o URL/DataURI de la fotografía del contacto"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha y hora ISO de última actualización"
+        },
+        "updatedBy": {
+          "type": "string",
+          "format": "email",
+          "description": "Correo del administrador que realizó la última edición"
+        }
+      },
+      "required": [
+        "name",
+        "position",
+        "department",
+        "email"
+      ]
     }
   },
   "firestore": {
@@ -176,9 +287,17 @@
       "schema": "#/entities/Ticket",
       "description": "Colección de tickets de soporte técnico"
     },
+    "/tickets/{ticketId}/internal_messages/{messageId}": {
+      "schema": "#/entities/InternalTicketMessage",
+      "description": "Subcolección de mensajes del chat interno para personal autorizado"
+    },
     "/news/{newsId}": {
       "schema": "#/entities/News",
       "description": "Colección de noticias corporativas y tecnológicas"
+    },
+    "/contacts/{contactId}": {
+      "schema": "#/entities/CorporateContact",
+      "description": "Colección de contactos y vCards corporativas administrables"
     }
   }
 }
