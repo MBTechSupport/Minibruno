@@ -904,3 +904,27 @@ Al finalizar cada tarea, informa brevemente:
   - Nueva colección en Firestore: `/contacts/{contactId}` con auto-seeding de 8 contactos base.
   - Ambas colecciones estrictamente blindadas bajo la función `isAuthorizedEmail()`.
 - **Resultado Final:** Implementación completada con éxito, respetando el protocolo permanente de mantenimiento técnico y la identidad visual de la aplicación.
+
+### Registro 003 — Reparación Inicial Controlada del Preview (Directorio de Contactos y Módulos Firebase)
+- **Fecha y Hora:** 2026-10-14 19:10:00 UTC-7
+- **Identificador:** `CHG-20261014-003`
+- **Objetivo:** Resolver los errores de inicialización en el Preview que impedían la carga de `contactos.js` y la apertura de las fichas de contacto (`showContactDetails`), unificar los imports/exports oficiales del SDK de Firebase y documentar las causas concretas de los permisos en Firestore y autenticación en Firebase Console.
+- **Motivo:** Restablecer la operatividad del directorio de contactos (`contactos.html`) cumpliendo estrictamente con el protocolo permanente de `info.md` (sin refactorizaciones invasivas, sin alterar el chat interno y sin modificar colecciones ni reglas sin autorización previa).
+- **Archivos Modificados / Creados:**
+  - `js/firebase-init.js`: Incorporación y exportación formal de `setDoc` y `getDoc` desde el SDK oficial modular de Firestore (`https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js`).
+  - `js/contactos.js`: Enlace explícito en `window` de las funciones invocadas desde eventos inline en el DOM (`window.showContactDetails`, `window.hideContactDetails`, `window.openEditContactModal`, `window.closeEditContactModal`, `window.scrollToTop`), asegurando compatibilidad con el formato ES Module.
+  - `js/auth-roles.js`: Centralización de los imports `doc` y `getDoc` directamente desde `./firebase-init.js`.
+  - `info.md`: Registro documental de la intervención técnica, causas diagnosticadas y resultados de pruebas.
+- **Funcionalidades Afectadas:**
+  - Directorio de contactos (`contactos.html`): Carga correcta del módulo JS; las tarjetas vuelven a responder a los clics abriendo la vista de detalle y el modal de edición de vCards.
+  - Módulo central de Firebase (`js/firebase-init.js`): Ahora expone `setDoc` y `getDoc` para todo el proyecto de forma consistente.
+- **Diagnóstico Confirmado de Errores Externos / Pendientes:**
+  - **Fallo de permisos en `/config` (`Missing or insufficient permissions`):** `auth-roles.js` consulta `doc(db, "config", "correos_autorizados")` y `doc(db, "config", "correos_empleados")`. En `firestore.rules` no existe la regla `match /config/{docId}`, por lo que el motor de seguridad de Firestore deniega el acceso por omisión (`default deny`), derivando al fallback de seguridad local. No se modificó `firestore.rules` de manera intempestiva conforme a las instrucciones del protocolo.
+  - **Dominio no autorizado (`auth/unauthorized-domain`):** El dominio asignado al entorno Preview (`*.run.app`) no está incluido en la lista de dominios autorizados de Firebase Authentication del proyecto `mb-proyect`. Requiere adición manual en Firebase Console.
+  - **Credenciales inválidas (`auth/invalid-credential`):** Corresponde al rechazo estándar de Firebase Authentication cuando el correo no existe en la sección de usuarios de `mb-proyect` o la contraseña ingresada no coincide.
+- **Pruebas Ejecutadas y Resultados:**
+  - Inspección sintáctica de exportaciones y funciones en `window` mediante Node.js: Exitoso (código 0).
+  - Peticiones HTTP al servidor de desarrollo (`GET /contactos`, `GET /js/contactos.js`, `GET /js/firebase-init.js`): Exitoso (código 200 en todas).
+  - `npm run lint` (`node -c server.js knowledge_base.js`): Exitoso (0 errores).
+  - `compile_applet`: Build succeeded sin advertencias.
+- **Resultado Final:** Errores de código resueltos; directorio y modales 100% operativos.

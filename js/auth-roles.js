@@ -7,8 +7,7 @@
  * ==========================================================================
  */
 // Importando la conexion a Firestore
-import { db } from "./firebase-init.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { db, doc, getDoc } from "./firebase-init.js";
 
 export const ROLES = {
   ADMIN: "ADMIN",

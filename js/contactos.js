@@ -727,4 +727,5 @@ function escapeHtml(str) {
 window.showContactDetails = showContactDetails;
 window.hideContactDetails = hideContactDetails;
 window.openEditContactModal = openEditContactModal;
+window.closeEditContactModal = closeEditContactModal;
 window.scrollToTop = scrollToTop;
